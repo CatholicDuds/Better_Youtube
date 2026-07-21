@@ -68,7 +68,7 @@ export default function ReadingsPage() {
       <header className="library-topbar">
         <a className="brand" href={`${BASE_PATH}/`}><span className="brand-mark">C</span><strong>Clarity</strong><sup>LEITURAS</sup></a>
         <div className="search-box"><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Pesquisar título, autor, fonte ou tema" aria-label="Pesquisar leituras" /><button aria-label="Pesquisar">⌕</button></div>
-        <div className="header-actions"><a className="back-link" href={`${BASE_PATH}/`}>← Vídeos</a><button className="icon-button" onClick={() => setTheme(theme === "dark" ? "light" : "dark")} aria-label="Alternar tema">{theme === "dark" ? "☀" : "◐"}</button></div>
+        <div className="header-actions"><a className="back-link" href={`${BASE_PATH}/estudo/`}>⌘ Estudo</a><a className="back-link" href={`${BASE_PATH}/`}>← Vídeos</a><button className="icon-button" onClick={() => setTheme(theme === "dark" ? "light" : "dark")} aria-label="Alternar tema">{theme === "dark" ? "☀" : "◐"}</button></div>
       </header>
 
       <main className="library-content">

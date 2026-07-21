@@ -11,7 +11,7 @@ const TRUSTED_NEWS: Array<[RegExp, number]> = [
   [/The Economist/i, .97], [/Harvard Business Review/i, .97], [/MIT Technology Review/i, .97],
   [/Agência FAPESP/i, .97], [/BBC/i, .96], [/Scientific American/i, .96],
   [/Catholic News Agency|ACI Digital/i, .95], [/Deutsche Welle|DW Brasil|^dw\.com$/i, .94],
-  [/Valor Econômico/i, .94], [/Nexo Jornal/i, .94], [/Agência Brasil/i, .92],
+  [/Valor Econômico/i, .94], [/Nexo Jornal/i, .94], [/Agência Brasil/i, .92], [/The Guardian/i, .92],
 ];
 const ENGLISH_TERMS: Record<string, string> = {
   administracao: "management", astronomia: "astronomy", catolico: "catholic", catolica: "catholic",
@@ -66,6 +66,12 @@ function newsSourceQuality(source: string) {
   return TRUSTED_NEWS.find(([pattern]) => pattern.test(source))?.[1] || 0;
 }
 
+function newsSourceSpectrum(source: string) {
+  if (/Nexo Jornal|Folha de S\.Paulo|The Guardian/i.test(source)) return "Esquerda";
+  if (/Estadão|O Estado de S\. Paulo|The Economist|Catholic News Agency|ACI Digital|Crux/i.test(source)) return "Direita";
+  return "Centro";
+}
+
 function podcastSlug(url: string, fallback: string) {
   try {
     return new URL(url).pathname.split("/podcast/")[1]?.split("/id")[0] || fallback;
@@ -77,7 +83,7 @@ function podcastSlug(url: string, fallback: string) {
 async function searchYouTube(apiKey: string | undefined, query: string) {
   if (!apiKey) throw new Error("missing_api_key");
   const searchParams = new URLSearchParams({
-    part: "snippet", type: "video", maxResults: "25", order: "relevance", safeSearch: "moderate",
+    part: "snippet", type: "video", maxResults: "50", order: "relevance", safeSearch: "moderate",
     videoEmbeddable: "true", videoSyndicated: "true", relevanceLanguage: "pt", regionCode: "BR", q: query, key: apiKey,
   });
   const searchResponse = await fetch(`https://www.googleapis.com/youtube/v3/search?${searchParams}`);
@@ -109,7 +115,7 @@ async function fetchNewsFeed(query: string, locale: { hl: string; gl: string; ce
     if (title.endsWith(` - ${source}`)) title = title.slice(0, -source.length - 3);
     const publishedTime = Date.parse(xmlValue(block, "pubDate"));
     const publishedAt = new Date(Number.isFinite(publishedTime) ? publishedTime : Date.now()).toISOString();
-    return { id: `search-news-${locale.gl}-${index}-${Date.parse(publishedAt)}`, title, source, url: xmlValue(block, "link"), category: "Pesquisa", publishedAt, quality: newsSourceQuality(source) };
+    return { id: `search-news-${locale.gl}-${index}-${Date.parse(publishedAt)}`, title, source, url: xmlValue(block, "link"), category: "Pesquisa", publishedAt, quality: newsSourceQuality(source), spectrum: newsSourceSpectrum(source) };
   });
 }
 

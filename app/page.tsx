@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { seedVideos, type Video } from "../lib/videos";
 import { DEFAULT_PREFERENCES, rankVideos, type Preferences, type RankedVideo } from "../lib/recommender";
 import { readings } from "../lib/readings";
+import { studyFeedVideos } from "../lib/study";
 import { supabase } from "../lib/supabase";
 
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || "";
@@ -18,6 +19,7 @@ const defaultInterests = [
   { label: "Criação", icon: "✎" },
 ];
 const defaultInterestLabels = defaultInterests.map((item) => item.label);
+type PoliticalSpectrum = "Esquerda" | "Centro" | "Direita";
 
 type NewsItem = {
   id: string;
@@ -26,6 +28,7 @@ type NewsItem = {
   url: string;
   category: string;
   publishedAt: string;
+  spectrum?: PoliticalSpectrum;
 };
 
 type YouTubeSearchVideo = {
@@ -72,6 +75,8 @@ type SearchFunctionResponse = {
   warnings?: string[];
   error?: string;
 };
+
+type InterestFeed = { updatedAt: string; videos: Video[] };
 
 const podcasts: Podcast[] = [
   { id: "nova-acropole", appleId: "1347139874", slug: "nova-acropole-podcast-filosofia", title: "Nova Acrópole Podcast Filosofia", author: "Nova Acrópole do Brasil", category: "Ideias", description: "Filosofia clássica aplicada ao cotidiano, com linguagem progressiva e exemplos concretos.", depth: .9, clarity: .91, accent: "#8267e8" },
@@ -318,6 +323,7 @@ export default function Home() {
   const [liveVideos, setLiveVideos] = useState<Video[]>([]);
   const [discoveredVideos, setDiscoveredVideos] = useState<Video[]>([]);
   const [webVideos, setWebVideos] = useState<Video[]>([]);
+  const [interestFeeds, setInterestFeeds] = useState<Record<string, InterestFeed>>({});
   const [searchedNews, setSearchedNews] = useState<NewsItem[]>([]);
   const [searchedPodcasts, setSearchedPodcasts] = useState<Podcast[]>([]);
   const [completedSearch, setCompletedSearch] = useState("");
@@ -336,6 +342,7 @@ export default function Home() {
   const [news, setNews] = useState<NewsItem[]>([]);
   const [newsUpdatedAt, setNewsUpdatedAt] = useState<string | null>(null);
   const [newsPeriod, setNewsPeriod] = useState<"today" | "week">("today");
+  const [newsSpectrum, setNewsSpectrum] = useState<"Todos" | PoliticalSpectrum>("Todos");
   const [visibleCount, setVisibleCount] = useState(12);
   const [refreshSeed, setRefreshSeed] = useState(0);
   const [refreshing, setRefreshing] = useState(false);
@@ -358,12 +365,14 @@ export default function Home() {
       const storedVideos = localStorage.getItem("clarity-videos");
       const storedLevel = localStorage.getItem("clarity-language-level") as "Essencial" | "Intermediário" | "Avançado" | null;
       const storedInterests = localStorage.getItem("clarity-interests");
+      const storedInterestFeeds = localStorage.getItem("clarity-interest-feeds");
       queueMicrotask(() => {
         if (storedTheme) setTheme(storedTheme);
         if (storedPrefs) setPreferences({ ...DEFAULT_PREFERENCES, ...JSON.parse(storedPrefs) });
         if (storedVideos) setCustomVideos(JSON.parse(storedVideos));
         if (storedLevel) setLanguageLevel(storedLevel);
         if (storedInterests) setUserInterests(JSON.parse(storedInterests));
+        if (storedInterestFeeds) setInterestFeeds(JSON.parse(storedInterestFeeds));
         if (!localStorage.getItem("clarity-onboarding-complete")) setShowOnboarding(true);
       });
     } catch {}
@@ -401,9 +410,10 @@ export default function Home() {
   const contentSearchActive = Boolean(completedSearch && normalizeSearchText(query) === normalizeSearchText(completedSearch));
 
   const videos = useMemo(() => {
-    const all = [...customVideos, ...webVideos, ...discoveredVideos, ...liveVideos, ...seedVideos];
+    const personalized = Object.values(interestFeeds).flatMap((feed) => Array.isArray(feed?.videos) ? feed.videos : []);
+    const all = [...customVideos, ...webVideos, ...personalized, ...discoveredVideos, ...liveVideos, ...studyFeedVideos, ...seedVideos];
     return all.filter((video, index) => all.findIndex((item) => item.youtubeId === video.youtubeId) === index);
-  }, [customVideos, webVideos, discoveredVideos, liveVideos]);
+  }, [customVideos, webVideos, interestFeeds, discoveredVideos, liveVideos]);
 
   const ranked = useMemo(() => {
     return rankVideos(videos, preferences).filter((video) => {
@@ -433,6 +443,7 @@ export default function Home() {
     const cutoff = currentTime - (newsPeriod === "today" ? 30 : 7 * 24) * 3_600_000;
     const sourceNews = contentSearchActive ? searchedNews : news;
     const candidates = sourceNews.filter((item) => Date.parse(item.publishedAt) >= cutoff)
+      .filter((item) => newsSpectrum === "Todos" || (item.spectrum || "Centro") === newsSpectrum)
       .filter((item) => contentSearchActive || (category === "Todos" ? userInterests.includes(item.category) : item.category === category));
     const categoryCount: Record<string, number> = {};
     const sourceCount: Record<string, number> = {};
@@ -443,7 +454,7 @@ export default function Home() {
       sourceCount[item.source] = (sourceCount[item.source] || 0) + 1;
       return true;
     }).slice(0, 12);
-  }, [news, searchedNews, contentSearchActive, newsPeriod, category, userInterests, currentTime]);
+  }, [news, searchedNews, contentSearchActive, newsPeriod, newsSpectrum, category, userInterests, currentTime]);
 
   const newsPages = useMemo(() => paginate(visibleNews, 4), [visibleNews]);
   const podcastPages = useMemo(() => paginate(visiblePodcasts, 6), [visiblePodcasts]);
@@ -476,12 +487,13 @@ export default function Home() {
     setRefreshing(false);
   }
 
-  async function searchContent() {
-    const searchTerm = query.trim();
+  async function searchContent(searchOverride?: string, targetCategory?: string) {
+    const searchTerm = (searchOverride ?? query).trim();
     if (!searchTerm) { setWebSearchStatus("Digite um assunto antes de pesquisar."); return; }
     if (!supabase) { setWebSearchStatus("A pesquisa segura aguarda a conexão com o Supabase."); return; }
+    if (searchOverride) setQuery(searchTerm);
     setWebSearching(true);
-    setWebSearchStatus("Pesquisando e avaliando resultados…");
+    setWebSearchStatus(targetCategory ? `Preparando o campo “${targetCategory}” com aulas e vídeos relevantes…` : "Pesquisando e avaliando resultados…");
     try {
       const { data, error: functionError } = await supabase.functions.invoke<SearchFunctionResponse>("search-youtube", { body: { query: searchTerm } });
       if (functionError) {
@@ -496,7 +508,7 @@ export default function Home() {
       setSearchedPodcasts(resultPodcasts);
       setCompletedSearch(searchTerm);
       setNewsPeriod("week");
-      const selectedCategory = category === "Todos" || category === "Minha biblioteca" ? "Ideias" : category;
+      const selectedCategory = targetCategory || (category === "Todos" || category === "Minha biblioteca" ? "Ideias" : category);
       const candidates = Array.isArray(data?.items) ? data.items : [];
       const rejected = { duracao: 0, indisponivel: 0, distracao: 0, relevancia: 0, densidade: 0, repeticao: 0, excesso: 0 };
       const approved = candidates.map((item, index) => {
@@ -531,11 +543,18 @@ export default function Home() {
         channelCount.set(channelKey, count + 1);
         return true;
       });
-      rejected.excesso = Math.max(0, diverse.length - 12);
-      const found = diverse.slice(0, 12);
+      rejected.excesso = Math.max(0, diverse.length - 24);
+      const found = diverse.slice(0, 24);
       setWebVideos(found);
+      if (targetCategory && found.length) {
+        setInterestFeeds((current) => {
+          const next = { ...current, [targetCategory]: { updatedAt: new Date().toISOString(), videos: found } };
+          try { localStorage.setItem("clarity-interest-feeds", JSON.stringify(next)); } catch {}
+          return next;
+        });
+      }
       setRefreshSeed(Date.now());
-      setVisibleCount(20);
+      setVisibleCount(24);
       const removed = candidates.length - found.length;
       const removalSummary = [
         rejected.relevancia && `${rejected.relevancia} fora do assunto`,
@@ -579,6 +598,17 @@ export default function Home() {
     if (category !== "Todos" && category !== "Minha biblioteca" && !unique.includes(category)) setCategory("Todos");
   }
 
+  function openCategory(nextCategory: string) {
+    setCategory(nextCategory);
+    setVisibleCount(16);
+    setQuery("");
+    setCompletedSearch("");
+    if (nextCategory === "Todos" || nextCategory === "Minha biblioteca" || defaultInterestLabels.includes(nextCategory)) return;
+    const cached = interestFeeds[nextCategory];
+    const stale = !cached?.updatedAt || Date.now() - Date.parse(cached.updatedAt) >= 3_600_000;
+    if (stale && !webSearching) void searchContent(nextCategory, nextCategory);
+  }
+
   function completeOnboarding() {
     if (!userInterests.length) return;
     persistInterests(userInterests);
@@ -591,8 +621,10 @@ export default function Home() {
     if (!label) return;
     persistInterests([...userInterests, label]);
     setCategory(label);
-    setQuery(label);
+    setVisibleCount(24);
+    setCompletedSearch("");
     setShowInterestManager(false);
+    void searchContent(label, label);
   }
 
   function persistPreferences(next: Preferences) {
@@ -701,14 +733,15 @@ export default function Home() {
 
       <aside className="sidebar">
         <nav>
-          <button className={category === "Todos" ? "nav-item active" : "nav-item"} onClick={() => setCategory("Todos")}><span>⌂</span>Início</button>
+          <button className={category === "Todos" ? "nav-item active" : "nav-item"} onClick={() => openCategory("Todos")}><span>⌂</span>Início</button>
+          <a className="nav-item" href={`${BASE_PATH}/estudo/`}><span>⌘</span>Modo Estudo</a>
           <a className="nav-item" href={`${BASE_PATH}/leituras/`}><span>▤</span>Leituras</a>
           <button className="nav-item" onClick={() => document.getElementById("noticias")?.scrollIntoView()}><span>◫</span>Notícias</button>
-          <button className="nav-item" onClick={() => setCategory("Minha biblioteca")}><span>▱</span>Minha biblioteca</button>
+          <button className="nav-item" onClick={() => openCategory("Minha biblioteca")}><span>▱</span>Minha biblioteca</button>
         </nav>
         <div className="side-separator" />
         <p className="side-label">EXPLORAR</p>
-        {userInterests.map((item) => <button key={item} className={category === item ? "nav-item active" : "nav-item"} onClick={() => { setCategory(item); setVisibleCount(12); }}><span>{interestIcon(item)}</span>{item}</button>)}
+        {userInterests.map((item) => <button key={item} className={category === item ? "nav-item active" : "nav-item"} onClick={() => openCategory(item)}><span>{interestIcon(item)}</span>{item}{!defaultInterestLabels.includes(item) && <small className="interest-count">{interestFeeds[item]?.videos?.length || "⌕"}</small>}</button>)}
         <button className="nav-item manage-interests" onClick={() => setShowInterestManager(true)}><span>＋</span>Editar interesses</button>
         <div className="side-separator" />
         <div className="focus-card"><strong>Modo intencional</strong><p>Sem autoplay e sem feed infinito. A cada 2 vídeos, uma leitura.</p><span>{watchedBlock.length}/2 neste bloco</span></div>
@@ -716,13 +749,13 @@ export default function Home() {
 
       <main className="content" id="top">
         <div className="chip-row">
-          {categories.map((item) => <button key={item} className={category === item ? "chip active" : "chip"} onClick={() => { setCategory(item); setVisibleCount(12); }}>{item}</button>)}
+          {categories.map((item) => <button key={item} className={category === item ? "chip active" : "chip"} onClick={() => openCategory(item)}>{item}</button>)}
         </div>
 
         <section className="feed-heading">
           <div><p className="eyebrow">SELEÇÃO EXPLICÁVEL</p><h1>{category === "Todos" ? "Vídeos que valem seu tempo" : category}</h1><p>O algoritmo roda no seu dispositivo e prioriza profundidade, diversidade e valor formativo.</p></div>
           <div className="heading-actions">
-            {updatedAt && <span className="live-badge"><i /> atualizado {new Date(updatedAt).toLocaleDateString("pt-BR")}</span>}
+            {updatedAt && <span className="live-badge"><i /> atualizado {new Date(updatedAt).toLocaleString("pt-BR", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}</span>}
             <button className={refreshing ? "refresh-button loading" : "refresh-button"} onClick={refreshRecommendations} disabled={refreshing}><span>↻</span>{refreshing ? "Atualizando" : "Recarregar"}</button>
             <button className="tune-button" onClick={() => setShowControls(!showControls)}>⚙ Ajustar algoritmo</button>
           </div>
@@ -740,9 +773,9 @@ export default function Home() {
 
         <div className="top-discovery">
           <section className="news-section compact-news" id="noticias">
-            <div className="section-heading news-heading"><div><p className="eyebrow">{contentSearchActive ? "PESQUISA COM CONTEXTO" : "RADAR DO DIA"}</p><h2>{contentSearchActive ? `Notícias sobre “${completedSearch}”` : "Notícias com contexto"}</h2></div><div className="period-control"><button className={newsPeriod === "today" ? "active" : ""} onClick={() => setNewsPeriod("today")}>Hoje</button><button className={newsPeriod === "week" ? "active" : ""} onClick={() => setNewsPeriod("week")}>Semana</button></div></div>
-            {visibleNews.length ? <ContentCarousel key={`${newsPeriod}-${category}-${completedSearch}`} label="Notícias com contexto" pageClassName="news-grid" pages={newsPages.map((page, pageIndex) => page.map((item, index) => <article className="news-card" key={item.id}><div><span>{item.category}</span><time>{relativeDate(item.publishedAt)}</time></div><span className="news-number">{String(pageIndex * 4 + index + 1).padStart(2, "0")}</span><h3>{item.title}</h3><p>{item.source}</p><a href={item.url} target="_blank" rel="noreferrer">Ler notícia ↗</a></article>))} /> : <div className="news-empty"><strong>Nenhuma notícia passou pelo filtro.</strong><p>{newsPeriod === "today" ? "Veja a seleção da semana." : "Nenhuma fonte confiável publicou algo relevante sobre o tema neste período."}</p></div>}
-            {(contentSearchActive || newsUpdatedAt) && <small className="news-update">{contentSearchActive ? "Pesquisa filtrada agora" : `Atualizado ${new Date(newsUpdatedAt!).toLocaleDateString("pt-BR")}`}</small>}
+            <div className="section-heading news-heading"><div><p className="eyebrow">{contentSearchActive ? "PESQUISA COM CONTEXTO" : "RADAR DO DIA"}</p><h2>{contentSearchActive ? `Notícias sobre “${completedSearch}”` : "Notícias com contexto"}</h2></div><div className="news-controls"><div className="period-control"><button className={newsPeriod === "today" ? "active" : ""} onClick={() => setNewsPeriod("today")}>Hoje</button><button className={newsPeriod === "week" ? "active" : ""} onClick={() => setNewsPeriod("week")}>Semana</button></div><label>Fonte<select value={newsSpectrum} onChange={(event) => setNewsSpectrum(event.target.value as "Todos" | PoliticalSpectrum)}><option>Todos</option><option>Esquerda</option><option>Centro</option><option>Direita</option></select></label></div></div>
+            {visibleNews.length ? <ContentCarousel key={`${newsPeriod}-${newsSpectrum}-${category}-${completedSearch}`} label="Notícias com contexto" pageClassName="news-grid" pages={newsPages.map((page, pageIndex) => page.map((item, index) => <article className="news-card" key={item.id}><div><span>{item.category}</span><time>{relativeDate(item.publishedAt)}</time></div><span className="news-number">{String(pageIndex * 4 + index + 1).padStart(2, "0")}</span><h3>{item.title}</h3><p>{item.source}<span className={`spectrum-badge spectrum-${(item.spectrum || "Centro").toLowerCase()}`} title="Orientação editorial aproximada da fonte; não da matéria individual">{item.spectrum || "Centro"}</span></p><a href={item.url} target="_blank" rel="noreferrer">Ler notícia ↗</a></article>))} /> : <div className="news-empty"><strong>Nenhuma notícia passou pelo filtro.</strong><p>{newsPeriod === "today" ? "Veja a seleção da semana ou outro espectro." : "Nenhuma fonte confiável publicou algo relevante para esta combinação."}</p></div>}
+            <div className="news-meta">{(contentSearchActive || newsUpdatedAt) && <small className="news-update">{contentSearchActive ? "Pesquisa filtrada agora" : `Atualizado ${new Date(newsUpdatedAt!).toLocaleString("pt-BR", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}`}</small>}<small>Espectro = orientação aproximada da fonte, não da matéria.</small></div>
           </section>
 
           {(visiblePodcasts.length > 0 || contentSearchActive) && <section className="podcast-section compact-podcasts" aria-labelledby="podcasts-title">
@@ -791,7 +824,7 @@ export default function Home() {
 
       {showOnboarding && <div className="overlay onboarding-overlay"><section className="setup-modal" role="dialog" aria-modal="true" aria-label="Configurar o Clarity"><p className="eyebrow">PRIMEIRO ACESSO</p><h2>O que merece sua atenção?</h2><p>Escolha seus temas. O Clarity usará somente essas escolhas explícitas — você poderá alterá-las quando quiser.</p><div className="setup-interests">{defaultInterests.map((item) => <button key={item.label} className={userInterests.includes(item.label) ? "selected" : ""} onClick={() => persistInterests(userInterests.includes(item.label) ? userInterests.filter((interest) => interest !== item.label) : [...userInterests, item.label])}><span>{item.icon}</span>{item.label}<i>{userInterests.includes(item.label) ? "✓" : "+"}</i></button>)}</div><div className="setup-preferences"><div><label>Complexidade inicial</label><div className="setup-levels">{(["Essencial", "Intermediário", "Avançado"] as const).map((item) => <button key={item} className={languageLevel === item ? "active" : ""} onClick={() => changeLanguageLevel(item)}>{item}</button>)}</div></div><label>Profundidade <output>{preferences.depth}%</output><input type="range" min="20" max="100" value={preferences.depth} onChange={(event) => persistPreferences({ ...preferences, depth: Number(event.target.value) })} /></label></div><button className="setup-submit" disabled={!userInterests.length} onClick={completeOnboarding}>Criar meu Clarity</button><small>Sem autoplay, sem Shorts e sem perfil de publicidade.</small></section></div>}
 
-      {showInterestManager && <div className="overlay" onMouseDown={() => setShowInterestManager(false)}><section className="small-modal interest-modal" onMouseDown={(event) => event.stopPropagation()}><button className="close" onClick={() => setShowInterestManager(false)}>×</button><p className="eyebrow">SEUS INTERESSES</p><h2>Personalizar temas</h2><div className="interest-list">{userInterests.map((item) => <div key={item}><span>{interestIcon(item)}</span><strong>{item}</strong><button onClick={() => persistInterests(userInterests.filter((interest) => interest !== item))} aria-label={`Remover ${item}`}>×</button></div>)}</div><form action={addInterest}><label>Novo assunto<input name="interest" required maxLength={30} placeholder="Ex.: arquitetura, direito, música" /></label><button type="submit">＋ Adicionar interesse</button></form><p className="modal-note">Ao selecionar um tema novo, use a busca ⌕+ para descobrir vídeos na internet.</p></section></div>}
+      {showInterestManager && <div className="overlay" onMouseDown={() => setShowInterestManager(false)}><section className="small-modal interest-modal" onMouseDown={(event) => event.stopPropagation()}><button className="close" onClick={() => setShowInterestManager(false)}>×</button><p className="eyebrow">SEUS INTERESSES</p><h2>Personalizar temas</h2><div className="interest-list">{userInterests.map((item) => <div key={item}><span>{interestIcon(item)}</span><strong>{item}{!defaultInterestLabels.includes(item) && <small>{interestFeeds[item]?.videos?.length ? `${interestFeeds[item].videos.length} vídeos no campo` : "será preenchido ao abrir"}</small>}</strong><button onClick={() => persistInterests(userInterests.filter((interest) => interest !== item))} aria-label={`Remover ${item}`}>×</button></div>)}</div><form action={addInterest}><label>Novo assunto<input name="interest" required maxLength={30} placeholder="Ex.: arquitetura, direito, música" /></label><button type="submit">＋ Adicionar interesse</button></form><p className="modal-note">Novos campos são abertos e preenchidos automaticamente. Ao voltar depois de uma hora, o Clarity procura uma seleção renovada.</p></section></div>}
 
 
       {showAdd && <div className="overlay" onMouseDown={() => setShowAdd(false)}><section className="small-modal" onMouseDown={(event) => event.stopPropagation()}><button className="close" onClick={() => setShowAdd(false)}>×</button><p className="eyebrow">MINHA BIBLIOTECA</p><h2>Adicionar vídeo</h2><form action={addVideo}><label>Link do YouTube<input name="url" type="url" required placeholder="https://youtube.com/watch?v=…" /></label><label>Título<input name="title" required placeholder="Título do vídeo" /></label><label>Tema<input name="topic" required placeholder="Ex.: economia" /></label>{addError && <p className="form-error">{addError}</p>}<button type="submit">Guardar e assistir aqui</button></form></section></div>}

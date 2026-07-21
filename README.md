@@ -6,9 +6,9 @@ Uma biblioteca de formação guiada por intenção, não por tempo de tela. O fe
 
 O algoritmo roda inteiramente no navegador e combina qualidade editorial, profundidade, relevância atemporal, duração, descoberta e feedback explícito. Preferências e vídeos adicionados ficam no `localStorage`; nenhum perfil é enviado a um servidor.
 
-O feed público é renovado automaticamente a cada seis horas pelo GitHub Actions. O job lê os feeds oficiais dos canais selecionados, rejeita Shorts, gera `public/data/latest-videos.json` e publica a nova versão sem expor chaves de API. A interface oferece busca, filtros temáticos, thumbnails reais, player incorporado, podcasts selecionados com capas oficiais do catálogo Apple, atualização manual e temas claro/escuro.
+O feed público é renovado automaticamente a cada hora pelo GitHub Actions. O job lê os feeds oficiais dos canais selecionados, rejeita Shorts, gera `public/data/latest-videos.json` e publica a nova versão sem expor chaves de API. A interface oferece busca, filtros temáticos, thumbnails reais, player incorporado, podcasts selecionados com capas oficiais do catálogo Apple, atualização manual e temas claro/escuro.
 
-No primeiro acesso, cada pessoa escolhe interesses, complexidade e profundidade. Política faz parte dos temas iniciais, e novos assuntos podem ser criados em **Editar interesses**. As preferências ficam somente no navegador.
+No primeiro acesso, cada pessoa escolhe interesses, complexidade e profundidade. Política faz parte dos temas iniciais, e novos assuntos podem ser criados em **Editar interesses**. Cada assunto personalizado abre um feed próprio, pesquisa automaticamente vídeos aprovados e guarda a seleção no navegador; ao ser reaberto depois de uma hora, o campo procura uma seleção renovada.
 
 ## Pesquisa e notícias
 
@@ -20,7 +20,7 @@ Para ativar a descoberta autônoma no site público:
 2. No GitHub, abra **Settings → Secrets and variables → Actions**.
 3. Crie o segredo `YOUTUBE_API_KEY`.
 
-O workflow pesquisa os assuntos de `config/discovery-topics.json` a cada seis horas. Sem o segredo, essa etapa é ignorada e o restante do site continua funcionando.
+O workflow gira pelos assuntos de `config/discovery-topics.json` a cada hora, em lotes de duas pesquisas. Essa rotação mantém variedade ao longo do dia sem consumir a cota padrão do YouTube antes das pesquisas dos usuários. Sem o segredo, essa etapa é ignorada e o restante do site continua funcionando.
 
 Para ativar a pesquisa em tempo real sem expor a chave:
 
@@ -31,7 +31,11 @@ Para ativar a pesquisa em tempo real sem expor a chave:
 
 O segredo do GitHub atende às atualizações programadas; o segredo do Supabase atende às pesquisas feitas no site. A chave nunca deve ser adicionada ao código ou a uma variável `NEXT_PUBLIC_*`.
 
-O radar de notícias usa RSS, separa notícias de hoje e dos últimos sete dias e é atualizado no mesmo ciclo. Política, economia, mundo, ciência, tecnologia/criação e fé têm consultas próprias; as notícias sempre abrem na fonte para leitura e verificação. Notícias e podcasts aparecem em carrosséis de até três páginas, com navegação por setas, indicadores e gesto lateral em telas de toque.
+O radar de notícias usa RSS, separa notícias de hoje e dos últimos sete dias e é atualizado no mesmo ciclo. Política, economia, mundo, ciência, tecnologia/criação e fé têm consultas próprias; as notícias sempre abrem na fonte para leitura e verificação. O filtro de espectro permite comparar fontes classificadas em esquerda, centro e direita. Essa classificação é uma orientação editorial aproximada da fonte e não atribui posição política à matéria individual. Notícias e podcasts aparecem em carrosséis de até três páginas, com navegação por setas, indicadores e gesto lateral em telas de toque.
+
+## Modo Estudo
+
+A página `/estudo/` pode ser aberta a qualquer momento e também oferece uma agenda opcional salva no dispositivo. O usuário escolhe dias, horário, duração, trilha e idioma; lembretes do navegador funcionam enquanto o Clarity estiver aberto. As trilhas de Matemática, Inteligência Artificial, Ciência, Biologia, Pensamento Crítico, Neurociência e Economia avançam por fundamento, modelo e aplicação, com aulas selecionadas em português e inglês, exercícios, progresso local e sínteses em Markdown.
 
 ## Usuários, administrador e trial
 

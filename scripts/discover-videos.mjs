@@ -7,6 +7,12 @@ if (!apiKey) {
 }
 
 const topics = JSON.parse(await readFile(new URL("../config/discovery-topics.json", import.meta.url), "utf8"));
+const batchSize = Math.max(1, Math.min(4, Number(process.env.DISCOVERY_BATCH_SIZE || 2)));
+const startIndex = (new Date().getUTCHours() * batchSize) % topics.length;
+const activeTopics = Array.from({ length: Math.min(batchSize, topics.length) }, (_, offset) => {
+  const topicIndex = (startIndex + offset) % topics.length;
+  return { topic: topics[topicIndex], topicIndex };
+});
 const palettes = ["blue", "coral", "ink", "moss", "violet", "sand"];
 const shallowTitle = /#shorts|\bshorts?\b|cortes?\s+(do|de|podcast)|urgente|chocante|você não vai acreditar|treta/i;
 const learningTitle = /aula|curso|explic|fundamento|document|palestra|análise|história|lecture|explained|documentary|strategy|science/i;
@@ -40,7 +46,7 @@ async function youtube(endpoint, params) {
 
 async function discover(topic, topicIndex) {
   const search = await youtube("search", {
-    part: "snippet", type: "video", maxResults: 10, order: "relevance", safeSearch: "moderate",
+    part: "snippet", type: "video", maxResults: 25, order: "relevance", safeSearch: "moderate",
     videoEmbeddable: true, videoSyndicated: true, relevanceLanguage: topic.language, q: topic.query,
   });
   const ids = search.items?.map((item) => item.id?.videoId).filter(Boolean) || [];
@@ -64,10 +70,10 @@ async function discover(topic, topicIndex) {
       publishedLabel: ageLabel(item.snippet.publishedAt), palette: palettes[(topicIndex + index) % palettes.length],
       mark: "DESCOBERTA",
     };
-  }).filter(Boolean).slice(0, 4);
+  }).filter(Boolean).slice(0, 8);
 }
 
-const settled = await Promise.allSettled(topics.map(discover));
+const settled = await Promise.allSettled(activeTopics.map(({ topic, topicIndex }) => discover(topic, topicIndex)));
 const all = settled.flatMap((result) => result.status === "fulfilled" ? result.value : []);
 const videos = all.filter((video, index) => all.findIndex((item) => item.youtubeId === video.youtubeId) === index);
 if (!videos.length) {
@@ -76,5 +82,5 @@ if (!videos.length) {
 }
 
 await mkdir(new URL("../public/data/", import.meta.url), { recursive: true });
-await writeFile(new URL("../public/data/discovered-videos.json", import.meta.url), `${JSON.stringify({ updatedAt: new Date().toISOString(), source: "YouTube Data API", videos }, null, 2)}\n`, "utf8");
-console.log(`Clarity: ${videos.length} descobertas aprovadas em ${topics.length} pesquisas.`);
+await writeFile(new URL("../public/data/discovered-videos.json", import.meta.url), `${JSON.stringify({ updatedAt: new Date().toISOString(), source: "YouTube Data API", rotatingTopics: activeTopics.map(({ topic }) => topic.topic), videos }, null, 2)}\n`, "utf8");
+console.log(`Clarity: ${videos.length} descobertas aprovadas em ${activeTopics.length} pesquisas rotativas de ${topics.length} assuntos.`);

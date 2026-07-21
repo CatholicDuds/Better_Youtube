@@ -1,6 +1,7 @@
 {
-  "updatedAt": "2026-07-21T14:07:26.975Z",
+  "updatedAt": "2026-07-21T14:23:16.857Z",
   "source": "Google News RSS",
+  "spectrumMethod": "Orientação aproximada da fonte; não classifica a opinião de cada matéria.",
   "news": [
     {
       "id": "news-Criação-US-0-1784586222000",
@@ -9,7 +10,8 @@
       "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxOMl9UaTNLMHV0QmlCSkNjQXhIb3JZTVBYZHhPTVNZUURJb1UwUnZvazVGNXo2cU9FVmx4VE9UV2ZQZUxpeWFZTFZtOVQxNGJlaHRkWmNoNVByclhUUmNuX1FVczRSTHE2V1d2c2pnZkgzTzNUWkJId083ZUI1OFBTYTVyaw?oc=5",
       "category": "Criação",
       "publishedAt": "2026-07-20T22:23:42.000Z",
-      "quality": 1
+      "quality": 1,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Mundo-US-6-1784606400000",
@@ -18,7 +20,8 @@
       "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1iR0V3RzgtSGpERDh3RF9MNEVlblBmdnJXeGNwVlJFMm1CUDQ2Qjg0aW15dGk1bUZWQVV1SmFoaUdFcC0tdGdTSGxmREhWSnBrV1VHY2FFMlR3Tzlfd2ZDQTdQQUJCY3M?oc=5",
       "category": "Mundo",
       "publishedAt": "2026-07-21T04:00:00.000Z",
-      "quality": 0.98
+      "quality": 0.98,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Política-US-5-1784564299000",
@@ -27,7 +30,8 @@
       "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxQOEN3TERqamxFMzJhaFVIRDRHeTBicTcxMFJUTGVRSGFLdzJ2OGpJeFZTOThWcTMwYzdlYUhjdGktVzk0UGhFU0EzMkU5SUVKYjZMeS01ZVhkRmV4SFREcnRXVDNCQjBPcXlWejlqdUxjLXlTWUFmYUpGeWY1eXU4MjFEZUNaZVNlNVl6UllmcFdwZS1NSDJDRW1scHJQQnlmeW13T0JUQ0xfcFRYcmZYTHBxV0I?oc=5",
       "category": "Política",
       "publishedAt": "2026-07-20T16:18:19.000Z",
-      "quality": 1
+      "quality": 1,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Criação-BR-6-1784635930000",
@@ -36,7 +40,8 @@
       "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNNEJzV3Fjb3ZNZDE2YU9UUXZ5VHY1akV1SDQ2UndUMmozVWFNSEsxckRZdFFiZUJZb2c3R3R6QVN1VjlyX3ZDN01rVEhwbENWQXhyOUZTMWl5RE84XzlZNUFrRGtfQmtISmpCZVl6ZGhGREpwdWR1S05NdjZhanNsQjAwQjBKUnJTNENiYzFqNjNYYWNJR24xYl9RR1Z6d3c0ZWhKbFFkckh1NmQ5a3pMZFpVMTI2TjFjUGxkbNIBywFBVV95cUxQNlNFajhGcWtwLUVISkEwajNjYTJwSEk5eHktUFZBaVVBTEZwUGJnN0JBZ2hlMzdFdk0yMEZ5ZXFzVlJQMFR6ejZUY2F2RmtjS2ZtNEpYXzE1ZlhGSzZ3S2RTNk1CRUI5dFVDdDlWUW5hSlItZEROeFpYSVN4a1RFODN1SEdaQ2lxbkVHNGt6RDdTMWJqTGx1SnE2MlFHLV9DWU5HdldGSVZpSTN0N3RfSk4yTWxJU1VDZ0xoa1YtWkU3R1laSkwxRTJVMA?oc=5",
       "category": "Criação",
       "publishedAt": "2026-07-21T12:12:10.000Z",
-      "quality": 0.94
+      "quality": 0.94,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Fé-US-1-1784562764000",
@@ -45,7 +50,8 @@
       "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOckQyX2trd0owQnFOajdvTkIwYzUyOTFqOUF0TjdOVE9EbW1RN002M0tsWGl3V0FiUngwSHYwZmkteVhnNkVfWkdHWjRVQUJYQ084U3Jwcjkyc2NsdzZydUdCMTlUZUNwZ0pMRjBMSnJwWjVzOElqNi1qWkVPZnNiTmJYTm5nMG1hdEkxTmMwQjhqS1dVNkNLaFZNM1FaZDZoNWNHUktOeGVDQ0lidVdzTy0zNERBN2h4bmFV?oc=5",
       "category": "Fé",
       "publishedAt": "2026-07-20T15:52:44.000Z",
-      "quality": 0.98
+      "quality": 0.98,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Negócios-US-3-1784560930000",
@@ -54,7 +60,8 @@
       "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxNWVZQb0s3WTJsU1c1WTYwdXJRYUpycTRzSmdiUU9sa2lWUXZPWldBYktyak1VSDlwT0U0dVQ0Ylg5SjFCdGh6S3RUVVNqalJUZ19pQXhIVXFsMUY5R3RzRE5pWXIxbW1ndDI4YS1HWFJtcElLdnVEWEZQNzJlbUZpOHk0bEY?oc=5",
       "category": "Negócios",
       "publishedAt": "2026-07-20T15:22:10.000Z",
-      "quality": 0.98
+      "quality": 0.98,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Criação-US-1-1784577561000",
@@ -63,7 +70,8 @@
       "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxPa3dVcW9VaVd1Q2h1Q2VNWFRhc2hrOWo2a2ZfRGhmQWxMeDFLWFY1WFFWV21fcVZleWVNNnZhOUZMbTktRzBac3BNRFBaQ2J1TFExdXJ5RVVNVEVQRG5jeFRMNkpleEhiR0RqUDk4YmVHRWF4RVJUdWlZS1lxUk1VYlZqOVl0T3ZxVnc?oc=5",
       "category": "Criação",
       "publishedAt": "2026-07-20T19:59:21.000Z",
-      "quality": 0.97
+      "quality": 0.97,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Mundo-BR-2-1784623534000",
@@ -72,7 +80,8 @@
       "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNRk5PNm4yb2lhbWxUVjZSSTU4cWU3aVl2cHAtVXBRbWtDY1FyMGFVWnQ4RFE5c2huX1N6MExaaUk0Q2RDb3EtTG5OUDZ4Vy16ZldqNjJ1ejMxTmhtZnctdzR1VC14Q0QwYkE0U3dobXVtb0JFdXNMTDZuTnlWbUVvX3h2LVJCMVRmbV9Qem10WkNtZHc5Q3A2Y3Y3MVFnTkUtTVNj0gGjAUFVX3lxTE1GTk82bjJvaWFtbFRWNlJJNThxZTdpWXZwcC1VcFFta0NjUXIwYVVadDhEUTlzaG5fU3owTFppSTRDZENvcS1Mbk5QNnhXLXpmV2o2MnV6MzFOaG1mdy13NHVULXhDRDBiQTRTd2htdW1vQkV1c0xMNm5OeVZtRW9feHYtUkIxVGZtX1B6bXRaQ21kdzlDcDZjdjcxUWdORS1NU2M?oc=5",
       "category": "Mundo",
       "publishedAt": "2026-07-21T08:45:34.000Z",
-      "quality": 0.94
+      "quality": 0.94,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Criação-US-2-1784502900000",
@@ -81,7 +90,8 @@
       "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxNeWtrc3R6QmdYREpuRHNxR3dFNkJkVjdSMTRYcFhmRHJYQ18yaGFfSHcwbmVKSjZvWVo2M0FqdF9VZkJmbG9CVTVObEZTQ2t1amx5MTlJZ201YWR3cE9IMFNxVTNXdlp6SVV5MnZDLXotWS1EQVFNbUFFV2hZUWJJeUVScVNRaUhjci1zUXJoUTBnMFBkSnFzeWgwWkNpd2FqZ2hZQW14cTNCRDcydkp4X2p2QlYyRWlTRWFISmFoSllBY01OWmNlVWNpamk?oc=5",
       "category": "Criação",
       "publishedAt": "2026-07-19T23:15:00.000Z",
-      "quality": 1
+      "quality": 1,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Criação-BR-5-1784608631000",
@@ -90,7 +100,18 @@
       "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxNMl96a0NrMWFIcGtJVDRVb3RJSXdTSGU1YlBTbXlZc09jRWhEaE0zc2NwZjdiQ0RwQVpYQ0MwOU9RaGdJYklxTEtNOEJZb1RwM0JiWUhfY1RNblM5NHN0TUdNNGM3RmVsclNFVGtrRHlKTEg2MUx6bTUwZl90eWNUTlhuZmVFaXdQNmIzd3oyM2MzSnFfc0Y4eE95VU5YX1BvU0pPa1YtY1EzSDZERm01UEw4S1ZhZTNrWi1GMm56ckdYek1p0gHTAUFVX3lxTFBndC1rdm5hUUpKMjhUWFlyakZ3eGJNeEpQQUVfNjNSVzJWbXZyc2UwMVhqNDc0SnJmaHpmUXEzSmw0c3ZIdmV4WU53czNpMDJKd0kzbnY3YkJsTEJiRE5EMU0wNzU3ZS1MZmh0bEExTmF5TVhKakQzSjBfdmtaNm1nZnd3WHNxS3QwY3dMdERZYTRrTC1TTTZfWmlwNW5ZNlQtbVUxM2ZPZmhEZXI0dlpSX0lTVG9tZ2FGQ2ZocmhOanJkNW1GcVh6VVZWejctaVZic2s?oc=5",
       "category": "Criação",
       "publishedAt": "2026-07-21T04:37:11.000Z",
-      "quality": 0.94
+      "quality": 0.94,
+      "spectrum": "Centro"
+    },
+    {
+      "id": "news-Política-US-4-1784630040000",
+      "title": "Miliband has been relentlessly attacked for net zero; what will happen now?",
+      "source": "The Guardian",
+      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOamR4MGpVS2VWYWE0azhCRDlzZWZBMEZLT3Fqa0FjdUl6b1N5cHloczBVOEJESlcxd05hSGxMMnhoVWZLUHNLR3JYWEdJZUQyWkdtVlFhWVI1WW5URVctLUYtcXNEcmJYQmoyaUc2M2hPS1NuLVlnRU5RMjhPSDdzbnVyYjRsWUpWOHVmY1poSEZxakJJYm1Xdk1YUjdZVEd1bGJfQg?oc=5",
+      "category": "Política",
+      "publishedAt": "2026-07-21T10:34:00.000Z",
+      "quality": 0.92,
+      "spectrum": "Esquerda"
     },
     {
       "id": "news-Mundo-US-2-1784520000000",
@@ -99,7 +120,8 @@
       "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTFA4WXdyemRVUTh0QmttbHI0VkRiVnhaanNYeHAzRUpRdWVUcnNfUXpucmxaTkExQ2tCZ3UxSERqVFNSWGFCSE96Zm5HbXlZSk9xX3VQeVF3X25xWFlsWmtHNUZHNGpERFZpcjZjajNVcVJkbmZu?oc=5",
       "category": "Mundo",
       "publishedAt": "2026-07-20T04:00:00.000Z",
-      "quality": 0.98
+      "quality": 0.98,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Mundo-US-7-1784520000000",
@@ -108,7 +130,18 @@
       "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE13WmxtVnNjeDU1b2JGRlE2cEpEU196X0pURC02MlBLd21PanpGQU1vY0xCWkswVVJFZlNmdmJuLWNFWHFJNEpVYWRkYWlaRTJobG1WckNCbVFYQlpjYWJJLTlxXzA5N21jb0JkeGtB?oc=5",
       "category": "Mundo",
       "publishedAt": "2026-07-20T04:00:00.000Z",
-      "quality": 0.98
+      "quality": 0.98,
+      "spectrum": "Centro"
+    },
+    {
+      "id": "news-Política-US-6-1784627040000",
+      "title": "Wealth tax on UK’s super-rich could raise £10bn a year, Andy Burnham told",
+      "source": "The Guardian",
+      "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPNUpLdW1iOEZlTWRrMHd4clhBdTBUSzJZNENXYTdmakZSVGNlVWJHOFdHdk9oaUlvRHpZR1J1RTJjSmU5STJYWnhBWTRHNW16bmVhdkhWVW1jYmlpU1lXd3pSYzU2b1VTbUZQMG9QZkFKWGVVeGRuNmVUWmJoUC1za0R0UW5fZWc2RmxmMl8wSQ?oc=5",
+      "category": "Política",
+      "publishedAt": "2026-07-21T09:44:00.000Z",
+      "quality": 0.92,
+      "spectrum": "Esquerda"
     },
     {
       "id": "news-Política-US-6-1784478405000",
@@ -117,7 +150,8 @@
       "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxPNmMyZ1pTd2EyNnlYUW5BYnpZOXJXb1BkOGxER3c0SXpjajlNRzlzXzl6cU9qOUhBNmY4VFlOdlFHT0NFcWxMdTNLQkxndmY0ajk5SnBvLVItSWxkQ0lDNGxzZnNfU0ZBUFRhUnZPZHJHZUR4ZGxHdW9NTm41Y0dVSGxDRXdtU2ZHNGYwZzVaS3lMOEhZbWJSUkxyXzRkeE9aSG9rcElHNHpQRmd1X1RJ?oc=5",
       "category": "Política",
       "publishedAt": "2026-07-19T16:26:45.000Z",
-      "quality": 1
+      "quality": 1,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Política-BR-7-1784545319000",
@@ -126,7 +160,8 @@
       "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE14ZHdhZ0NSaDZ3SHVaWUVmMDdDd0ZEenVoaWNPU0l3SDFVYjBjNGJuZ21jZUQzcUhXbUpkeHRmSVFwVFlMNlpHVE54YXdzVGFZQm9IbnhUQXB0RjRCX3E1cjZR0gFnQVVfeXFMUHVwVGRaVTFrUV9QLXBPNXdwMHpwX3Byd3hOazhrWFlZRmxPWGZnQ25YYk1feE9aNTlYY1h2VHhHMFQwZ3k1dmROT2Nxdk5WaGhZNGdWMnpnekNIVnNMcGR2Y3pNX01QRQ?oc=5",
       "category": "Política",
       "publishedAt": "2026-07-20T11:01:59.000Z",
-      "quality": 0.96
+      "quality": 0.96,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Criação-BR-1-1784568543000",
@@ -135,7 +170,8 @@
       "url": "https://news.google.com/rss/articles/CBMi8gFBVV95cUxPcXV2SXdfWWtKMDFCMGt6blRoQV92MWYxZ04yVG5oejNnRDhpRVZ6bkpXcVpmVEVCNUJid0xCSndOYTU3TGUxendvX0lCeVZ6eDFUNzIzRUJXMnR1WndMd3ZWdWFkUTVORWNuZEJUdUh3UjdIZ3BSUnlPblNLTDVlM2QtNzVGVzFEU0lWY1F0SHFGc1JhcEJnMWhUdnFsSU1OVC1zbFdjZVgzZm1LSXZ1VlBzbGcxNDBZVkM3RlduM1VzQkd0cVQ1UHl4RXhjMDdzZ3FSS3ZKZVM2T0Q2ekYwS2RZRG5ydzllMzF4UmxidDFiQdIBgAJBVV95cUxPdE1iS0haVERWN2w2eldfekdGZEVZRWNqM0hLRS0yZW4xdy0wQnRCYXV2bXpwY2lyWHpTTUctRTh6MG5WdzRacUxaRlFFRUwwbXBnSG1sNWFkcS1tQmJjdTJWa1pDaWlxR2JEYW9zVHNUUEIyNTFEWTNjM2JIMmVoOFlBeDN6b3dDcUNxYlFJbmZONi14bVEwa1U0RDFLemQtN2FIbEJBS3Vsekx2RlNpWmN2b3RCRkYxY3FOUjFaTG5QanEwSjVLYjRkRzBfalE3Sk1WMWItby1qMHZ2cU9NM28wNDFJUkd1N3RmM3p3cnlfTC1XdTR6UkRLZEdhSVVD?oc=5",
       "category": "Criação",
       "publishedAt": "2026-07-20T17:29:03.000Z",
-      "quality": 0.94
+      "quality": 0.94,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Negócios-BR-3-1784562750000",
@@ -144,7 +180,28 @@
       "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxQcTdzNXd6d0h3UHNpQXllSE9EbVZzVG5nS2g2RG4zdEp1ZGVYZFpGTGc5MW9FWk1oeHVXNVI4NkxwZVhscVFVTm9odkpIR2lxQzRTemNpUHdNQjI1c25wVXVDZlFIdFZ5aWpEOWhXbWI2N3BlVDFyQzhOdGtPOEFFMUhkTi1Hd3gtam9ocEtqbE41cjhaY0ZxQkc2aUhYdlhNS29YdzF1cEdMVkVtOC11WUtRZkZXY2sxTzRnZHhnRzRfZ3otOHVFazEzSk11X0hmbVhyVkRB0gHkAUFVX3lxTE9qOGt0VUgxTlZBMVV0WUVnUklUbFAzOUxmRGFaNkZuTzdYenBudlo4RkJQZkY4UlVnSFlwMU9MZGdNNmxhQURzSFN1U3c4bEF4bkJsMEhsNTY1TjFzNDJjYmo3RGtwcnRZQWRJWmVIR0dQaW9DWFNWZ2dpYVpjc3BkMG04WEpXTnFfZlFGTndxZVExUGdQdlE0TW1UQWExT0NNTWl4YkVnZ25zMURNcG5UZXV0UHh5bjI2ZWh3OGN0ZGh4by1qdUh2QVFnUllyZ1h2U0hqaWdIRmxqQ18wRE5sVHBFNg?oc=5",
       "category": "Negócios",
       "publishedAt": "2026-07-20T15:52:30.000Z",
-      "quality": 0.94
+      "quality": 0.94,
+      "spectrum": "Centro"
+    },
+    {
+      "id": "news-Política-US-7-1784597400000",
+      "title": "Palantir isn’t the only option for the NHS | Letter",
+      "source": "The Guardian",
+      "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxONHk0MnFPbGowSXB5Ui1heXNQYlZNRW8tQ3N2QVI2Qy1GeTJaTkUzcU9mN21EU0E4REowWl93ZU9jQzQxVklfZUtXMG5RNnFMSTlLNWlaSnUwalNBckM0SU1xa0Q4ZXROa01FQUx1LXp5eGVZVzlxYmtFZS1EX1RaWVBTR3F5OUNSaVJVZlY3V2ZUU2M?oc=5",
+      "category": "Política",
+      "publishedAt": "2026-07-21T01:30:00.000Z",
+      "quality": 0.92,
+      "spectrum": "Esquerda"
+    },
+    {
+      "id": "news-Negócios-BR-7-1784555561000",
+      "title": "Economia cresce 0,7% em maio ante abril, diz FGV",
+      "source": "Valor Econômico",
+      "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNZjVwVTlUUjRTa2NyNUxkdmlGNDFMRWRsemwtVy1GYmFKbzFMVnZlY3BOSFZYUUw5d2RBQnI2dzN2WUQ4cmNvYmNXNWQzSlRzNkJoSVBaRDQ0LVJ2Mk56TTNaT0V2d0U1YXNhN1Q0VTVyY0U1b2NqWjgtYVdoYW1nekw0LUJqMEM5NEI5dnhXMUl4Y3NsVWZ4VmdCMW5pUExyVDNPRWljN1gxQUc0LVlyQjFpNmJVUEo3M3M4eNIBywFBVV95cUxPVVNLWHlPVjBPTk44NXBoWnVIOEFfblA3UW11M2VFMHJuQ1k2Y3RSckF5OUpmZlh4aFV0Y0k0WUZMSERCVVhXNVplcVI0SmU5V3hhZVRLM2w0Y0tZLWFBR3NCOWZCVXEzX2E4UmxzdVJtZG1sUWRXdjBHU1d1a1FTQ3FETHlVN3Z0bDNRRF9LMEt3UURpNUZGYXd1YzVkYW5qSmVJTnNwVDZud1NSWUdRdE9kZUxQWUE1dnRiYi1zS3dTOWtNZUh6U3VkRQ?oc=5",
+      "category": "Negócios",
+      "publishedAt": "2026-07-20T13:52:41.000Z",
+      "quality": 0.94,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Fé-US-6-1784481661000",
@@ -153,7 +210,8 @@
       "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQM2sybnVHY1d5NjNNb1lOaXhabWNLa016Z0xrcV9RWnY2LWg1azRuWFdHZnpjT0xxekpjak4xclpiUU1kYWlULTZCLTkzbS1KQUxwUm9rQW5FWFBMMEJYOFF1S19aVHZDaDNVczA4ZE81enFDN3M1Z2ZIZEg3YTZ1dkQxSndDN1p3djN1R2tZTFdUUTdhRWc3NDRUejlCcm1OcmpPT1NNVFpmR210M1hpdUtfMlpjelItYWxZWnNB?oc=5",
       "category": "Fé",
       "publishedAt": "2026-07-19T17:21:01.000Z",
-      "quality": 0.98
+      "quality": 0.98,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Fé-US-0-1784472316000",
@@ -162,16 +220,8 @@
       "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxOSW1SeGVIZUJHVW1aRkQzYWV0dGRmZnMtbkVIY1FpN3AzbmhiTURJN1FrTVczVEh3NDVsYzl2NEVlR1RraFVTMWROVjZPN1kyc29YaWN1WU5FY3MzM3h2Y0FBME5LZUJTZGxzLWQ2bjdwUXozT1FuLURtdC1ZbHEyUDVTVzVXTzA0OHRjdlIyTWJsUHZ6a1MycHlhWjd2ODlRUE9DeWVWblk0UzJWWnVSQURDLURPOUFTWFE?oc=5",
       "category": "Fé",
       "publishedAt": "2026-07-19T14:45:16.000Z",
-      "quality": 0.98
-    },
-    {
-      "id": "news-Negócios-BR-7-1784534440000",
-      "title": "Regulação de créditos de carbono dá novo passo e pode gerar R$ 5 bi em cinco anos",
-      "source": "Valor Econômico",
-      "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxPanVBSTZFaTV0ck9EYVRPTWlKUHlTLXZGUGx4ZFpwZlJ1S1N5X1lCaXRHb0YxU1pzWEJqdDc5LTBUVHdJNjlROWItWkFyRG9WMkdnbG94LWc0VTZ3TUpoLUJ4UU5QRlpBcTFWb2JyV3BGNmljYU56dkJoLUF3YzlMbks5aERFMjFnVXRlOGtpa3d0T2w1Y3ctb2xBczllcV9CWjhSNGk3c2o5Y3pfTlQxWTB5b1J2RHpndk9JOWM3QzZ2Q2RvWVd2WTFIY0lHSGo1MmfSAeABQVVfeXFMTjF2T1FySGtqUFBaZGo1R3dSNk42RVpuNV9PTzRqOGRrbnFmV0czVW02Q0ZiamtvX3RUc2ZMd2c2aHlFb2RBdS1PblZ3NERualpadVJ6SHQ5bGtsVFVwaGszc0szSDNfdGxWVnBqeHRHb1h2U2FwVWZISXR3TlRYU1ZFTnZrWGFkZjN0SHA2RHFfZnJ1WkUtMVNrX0VUbEg1cklvUHVweFVnRVF5RFlTREFTQnVsQUx2LVZhS0I3RVNLM1V6Q1h1Y0JJWDFQa3BONzBid1k5YmthWjY5Z3lLdmU?oc=5",
-      "category": "Negócios",
-      "publishedAt": "2026-07-20T08:00:40.000Z",
-      "quality": 0.94
+      "quality": 0.98,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Ciência-US-4-1784443231000",
@@ -180,16 +230,38 @@
       "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE5JM2l3N2hBa1JMaEF6cDVwOW1JTG5DbGpnS0h3RHBIY3V4cmkwOV9jUlBPZXZnSlRWc1htWEtlUEl4ZnpUbXFPQ2lMTG9tRG93bkE?oc=5",
       "category": "Ciência",
       "publishedAt": "2026-07-19T06:40:31.000Z",
-      "quality": 0.99
+      "quality": 0.99,
+      "spectrum": "Centro"
     },
     {
-      "id": "news-Fé-BR-4-1784448811000",
+      "id": "news-Política-BR-3-1784599200000",
+      "title": "Opinião - Bruno Funchal: Um plano fiscal para o Brasil: da comunicação com o povo à reforma orçamentária",
+      "source": "Folha de S.Paulo",
+      "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxOMEZzeVBwSEdObGtpX0xGa25KdnA3ZzJ5T0dfazF1R3h3eEFlNGFVWDV5VUZOX3Y2Q0RoeXVRWV9URTZOYUR6YU5LQ3dnNzFEQU44X2JOcEgwTkZUWWM0SUtMMUo3V3B3cjIyblF5dFBOR192UUxwbjJwSmprTVpkQ3FmM2JROU1JV0xGZTlmaVJMS3EwejFHZS1RS2FSZllMcVFFZEd0Vzl3c2t0Y190dnlWeV9EUU5SdE55aTNHYlM1RW1PVUZBa0t3?oc=5",
+      "category": "Política",
+      "publishedAt": "2026-07-21T02:00:00.000Z",
+      "quality": 0.9,
+      "spectrum": "Esquerda"
+    },
+    {
+      "id": "news-Fé-BR-5-1784448811000",
       "title": "Há 35 anos o renascimento da Igreja Católica latina na Ucrânia: sinal de resiliência e memória",
       "source": "Vatican News",
       "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPTUtzTDJybWRoVjhrQUJ0Q0d1d0NVYlU5RllCOXcwRE45cjc0SUwzbjJQZldlRi1yeTItOW1tcmYtOGhZZ0lMYVJtVDRieml3ZEZZNnhLOF9SMF9vQ1hmQzZJV1RuRERhSXZrcmpOZldPWXdJYVBGSDR2eDFELXhjMWI2a3VhcXlkNTVwa3BoYW42Y3JBWDhtc0htYkhDZlEtb3dqY012NHZBZw?oc=5",
       "category": "Fé",
       "publishedAt": "2026-07-19T08:13:31.000Z",
-      "quality": 0.98
+      "quality": 0.98,
+      "spectrum": "Centro"
+    },
+    {
+      "id": "news-Política-US-2-1784555640000",
+      "title": "Here be dragons: does moving power to the north work?",
+      "source": "The Guardian",
+      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQeW41ZEJVNURjdzREWXJ6SEFIaWpvWDhBbGlSMkNUVThsLXpwVDZKQVlBWHhaa09DdXlTMmIzNGFFWFZmeno5dGFxcEdVSkpkSXdQQ2VTYlhONzdsS0JkSkV1cVRGZndESWVfQzNfTWRtUmdSeldwVTJkWW91SkNYWFNtcXRTNldRNGEyMXJiR1VxeUt5NWY3VFk1T1otZFlXMkE?oc=5",
+      "category": "Política",
+      "publishedAt": "2026-07-20T13:54:00.000Z",
+      "quality": 0.92,
+      "spectrum": "Esquerda"
     },
     {
       "id": "news-Negócios-US-5-1784433656000",
@@ -198,7 +270,8 @@
       "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOWDZLYy1UdXBSb0VIN0NIM0ktN3lHZ0hsaTlWMGVqU1I4TUhROXlHTi04UkxINk1fQlBuNVBkR3UtUUhhbU9XeHB5RmVTZkt0THJwSzU5YVVIRVd5V3h6Q2RjMHdBZFpPLVlTWjNuVWlLbGs3ZWRUQm5oWEFNU1BweWdZeng?oc=5",
       "category": "Negócios",
       "publishedAt": "2026-07-19T04:00:56.000Z",
-      "quality": 0.98
+      "quality": 0.98,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Política-US-3-1784392620000",
@@ -207,7 +280,8 @@
       "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNRExvZWZaR0NUN0NMcHg1UTR0TnMwWC1aYlhTcW9XamNiSHVxU1JFa1pMMnc0cWkxNEdGVS1rU2F3Ui04YjFjUmtlaXEyTXdFVmtwYkZmbmdsdFJqSVg2TzNuZlJ2Nnc3cWtwenB0SGdTWlZfUWhIYlRTWTdEcV9QcjRVblBmT293YlZoZW5PdW5rczMwZVFROERVdVFkbmZWX2c?oc=5",
       "category": "Política",
       "publishedAt": "2026-07-18T16:37:00.000Z",
-      "quality": 1
+      "quality": 1,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Fé-BR-6-1784426160000",
@@ -216,7 +290,8 @@
       "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPN0JpS1dMQ2JmZU9vbE1rbFl4cjZxNU1GX3B3ZjBPXzFGOVV1VTNOM0NOeVpqclljSENCRmw0Qmd3ZHpVNzBoNzBOZFQzREltQnJYTHhxX0ZmU0xJV0FKcFRGdG85a0RXbU1LODBqT3lPM1kxUDhlYmN3ZzFnRjVkQXlpeU1PSW5qcExBMHA5YVBudDJSUXBwT2ZjdDI2M2ZBa2tz?oc=5",
       "category": "Fé",
       "publishedAt": "2026-07-19T01:56:00.000Z",
-      "quality": 0.98
+      "quality": 0.98,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Política-BR-2-1784550600000",
@@ -225,7 +300,18 @@
       "url": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxOZ21ybEVHT1J3bkEtc1ppT19KaGFQRVNqSjdYMWRIblFiRzFGU0VKY1ZWWFJDa3Y1T3RUXzVDU285M2NvODZsV3hKNkxJcmhCdGUzeHQwSWFmbmZfRHp2SmQwQXd5dkU2QU1KUHp5QmRvV0hTTUhjNGdOX1R6eG9hUDVTdGZ3OUhYZkgwS3RzNERYWWxYeERvNWcza0wyV0tHRThuSG9qbnhiQ3ZNS0ppbkFBM3RsQllJWFhiZEVHVkZLWnI0NlJFRHFRVkxhTU90RXlVVldZcDNkajhMSVdXcm9iQUPSAeoBQVVfeXFMTW9FaEV2SHBDdXlRdUQyUzZKNUs1TWI0UTJ1ckdGZXBQbW9YRS1SNnlEY1h3Nmk5U3k5VzNkanoyZG9XYXhaNnBodUM5cWRRRGlnTUVudDJlbHkwbDZiR1hkcXlXOHNsUm93V19CdVlmMmhTbHh4d1MwbUhQWXFkZmctRHVFajFlU3ZOZkxJR2NfX1Y0V0dYS2h5cHVOSEIzdDNNQVZYZUlwcHcwR0p1MzlyRWI1cUhrY2ZYU1o5a1hzWFdjSDh6TzJxUi1oMkZXN0diRjRXOHp4di1QcFJTM0xsUmMxdWd3ZlZ3?oc=5",
       "category": "Política",
       "publishedAt": "2026-07-20T12:30:00.000Z",
-      "quality": 0.9
+      "quality": 0.9,
+      "spectrum": "Direita"
+    },
+    {
+      "id": "news-Política-US-3-1784496060000",
+      "title": "Australia’s life dissatisfaction levels double as ‘wellbeing poverty’ reaches new highs",
+      "source": "The Guardian",
+      "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxNOTJsZTdkTzlXdzBWejV0aEhnX2pFVEJIbUJNcWhyN1htVFhhcVkwS2hfRTdzUWI5NGk5YnctMk12TXVEM1NIVjc4MHRJNmEyU00ybXM1R0RMc09saGZDSm5ucHZRb2pSdXJTOFJic0lYcnRXYjhWbmNRYlRsWF9mbHVaQUtzSzR5bjEzTVNUVlI4OF9iaUxyYzRlakxYRFNOQWpQVVQ1c19oQzNkOUd5emRuOEQ0MzF5eWhzWFdUOTg2OHkyV0VoQmpUVVhYUQ?oc=5",
+      "category": "Política",
+      "publishedAt": "2026-07-19T21:21:00.000Z",
+      "quality": 0.92,
+      "spectrum": "Esquerda"
     },
     {
       "id": "news-Fé-US-2-1784377841000",
@@ -234,7 +320,8 @@
       "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxOWE42b3dLY1VQYklCUzF5enVrRWhIS1plYWFaNkpzaVNreWxMRzNXdE8wUjFpaEJOa2ltNUEwWDFIMVZTSGVuV21pdHlNcW1IVW9SR3ZfdXVhT3lBTnBmYURiVG5vYU81ZlIwQzdUNnF5eXBxb19hVm0tYkdwR0NFT1ZDOGdQRDB2dnRmRnhCd3V4SUR6MTNKWTZrVnpBR2NJVWdhV2VR?oc=5",
       "category": "Fé",
       "publishedAt": "2026-07-18T12:30:41.000Z",
-      "quality": 0.98
+      "quality": 0.98,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Mundo-BR-1-1784412638000",
@@ -243,7 +330,18 @@
       "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE1HVExyU3JEMndaRGhrNTZWbHpIa3d1cmlIQlpEY1RuOC1idG9PeDFnWmZpcFpyX3JUNzZpeVFfUUhTejk1Q0RrTk44dUl1TG52c21FaDlYQjdIRzBhdXh2LTRn0gFnQVVfeXFMTXZwS181ZGJ4b3JiQmU5bUFOOXNhNFNyZUdIcjRIQlphQ0duSEl5Y1hLTDNYWktMUExlOWRqYk1uQV9mbURoaU1TVk1sLW5fLWxuMk1vdGZjZE5WZmNTYURyZDJUQXZMcw?oc=5",
       "category": "Mundo",
       "publishedAt": "2026-07-18T22:10:38.000Z",
-      "quality": 0.96
+      "quality": 0.96,
+      "spectrum": "Centro"
+    },
+    {
+      "id": "news-Política-US-1-1784480400000",
+      "title": "Restoring Britain’s health to 2014 levels could add 2% to GDP, thinktank says",
+      "source": "The Guardian",
+      "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxOZjJ3NWdlYXNsLUtOX09BNkpLTWN6YWRvTHpfRmsyMk5sV09OekF4ZHdvVTV2TkdFX3ZPaWx0RExIQzVfU29VdWkwMFJhTXpmcS01ck12S1lwSUczaEdJTTh5RDZuMV9nV1hDMDFXVnFkVEZaYndzZ2s1VzlLeXlENERucF9EVkVnX1lJZC1kNVEtUWtHWE5BU0hZR0xEelRhS0l6YTFHazF4emFvQjVsdDlQU3FiekJZalFtU1pxOA?oc=5",
+      "category": "Política",
+      "publishedAt": "2026-07-19T17:00:00.000Z",
+      "quality": 0.92,
+      "spectrum": "Esquerda"
     },
     {
       "id": "news-Negócios-US-1-1784321008000",
@@ -252,7 +350,8 @@
       "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxOc3cyQmhQR25iUWxFb2xxTzRnT2t3OEF0MlZVc0FQQ1FWTGNDTEVhNTFLSjQwZGcwaVk0M2pJR09neTR2WVJsTUN0ZVpLeFBFcHg5TmNnX0FEMkEwUHZaUkdZYWhnZ2Y3aFRnQzA5a19iT3R6TUFNQWpUN05aenFQSGFFSGJ1bmUwQTBkc2ZyZVZjN3UtU1BrVjRkeVVIQ3V5aXc2U2RTd1p1WENDUGc0RTUyRWxTQ25E?oc=5",
       "category": "Negócios",
       "publishedAt": "2026-07-17T20:43:28.000Z",
-      "quality": 1
+      "quality": 1,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Fé-BR-7-1784354678000",
@@ -261,16 +360,18 @@
       "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPQnhRbzloM2R4R1NsdW1ad2hKTXdiazEtUVAwTGMtYm51VDc5Qmgwb3NfaUF2RmRUU19MS1UyemY3alNzbV81V2hUcGVYSDdMMTZKZDIzcnhNT2RUcHNVU3RFakVnODlWWmFvTzgyV3pXY1BnTExhbXltSEpRandCWkx1STB2LVdnMTU3dzdZdWM?oc=5",
       "category": "Fé",
       "publishedAt": "2026-07-18T06:04:38.000Z",
-      "quality": 0.98
+      "quality": 0.98,
+      "spectrum": "Centro"
     },
     {
-      "id": "news-Fé-BR-3-1784354671000",
+      "id": "news-Fé-BR-4-1784354671000",
       "title": "Antonio Cardoso na Canção e a Prece: \"Cantiga de pastoreio”",
       "source": "Vatican News",
       "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNdkhzSGF3SEh1RVltMzcxeVlnU0FmNEwtMExtZkNHc1Q0aU1wenBTRGFTZ3JUeXloQjFrS1RxSHVaQkc3SHp1bGtENUJfa1VpUGZrTENVSlpiWmxwTEdVREhxcUs4MzFKMXhic1FUaC1QZnRVeGZITnBVY0tZLWFkZjZReXBOTllWc1JzRkI0b21fRVpBeWc1WDJCekR4YzdBR2w4?oc=5",
       "category": "Fé",
       "publishedAt": "2026-07-18T06:04:31.000Z",
-      "quality": 0.98
+      "quality": 0.98,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Ciência-US-3-1784333498000",
@@ -279,7 +380,8 @@
       "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE0zUk1KSS1XX3p0bHp0aWJDWVlqMG41Y3dNUnV4cGF2RGVPOHIybFZyeHRsVG44b3E2d29ZMl90dWZ5T1pnU2syek9rdEZuQkxaUWNsTGdjQ1NZUF9BekVF?oc=5",
       "category": "Ciência",
       "publishedAt": "2026-07-18T00:11:38.000Z",
-      "quality": 0.99
+      "quality": 0.99,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Política-US-1-1784290391000",
@@ -288,7 +390,8 @@
       "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPV2ZnSWtnalEzNDJ3S0hYZ0VDUFBvUzlLSnhzbXByNjJjMVpQVmNTdnROcmlnUzg5QmZvdU1QS0VrdDA4UG45SmxDSVBjVEdGWlFLY3A4Ni1WbjdpcG5mRXhzcUJObnhyNVZzcHZ2d0xFczM2RmNxV1pjRnhMbS14WDVhMzlYX1huNkYxbFFSMFR2SGIzN3paRFRsR3IyZHFycDFkcWt5d2JGbGtvYUk0YnRlX3dGQQ?oc=5",
       "category": "Política",
       "publishedAt": "2026-07-17T12:13:11.000Z",
-      "quality": 1
+      "quality": 1,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Negócios-US-7-1784310757000",
@@ -297,7 +400,8 @@
       "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTFB1cjhNMk84dFZPN1daeFFERDlpRkk4akFTN2lnMnFLTGdEZFhmQWZ1V2VhWHRYaGI0bXVMMGRyRV90aWJodUNHVmZyUkxuakpBaVZCa3RodVQ1UEF2WjJQNEl5Tktrc0tIVm1Dc0V1XzE?oc=5",
       "category": "Negócios",
       "publishedAt": "2026-07-17T17:52:37.000Z",
-      "quality": 0.98
+      "quality": 0.98,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Política-US-4-1784256383000",
@@ -306,7 +410,8 @@
       "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQbWlZamEwLUk2TEgxem1Yel9nd2lFVVdHTXZUd09XbmlOQzVFckVzNlByc2xhaEZJNEpTMTJiVEtCb0lLc0taSWtrdjQ3VHNubEFXRE1jZHNrSUhCTEw2WXgtaEZLTHRpQVBJZXVsU3g3bWNIZmFvdnBDLVpIN20wMmQ1a1dDWWo0SHpvQmdkV2dsRkRORE5xWlExMlVxS0hlTVpybDVqTHpDRkZxXzZZQXNZTm9BMTBSVnhoN1lKX1RmZEV5?oc=5",
       "category": "Política",
       "publishedAt": "2026-07-17T02:46:23.000Z",
-      "quality": 1
+      "quality": 1,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Fé-US-7-1784292276000",
@@ -315,7 +420,8 @@
       "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPMWY5ZW1OZk03OWVsZ3RPd29hN2djdkNKcHNUbUc2cWkxMWhBTG04dUhSZXBJUDNYNmRFSUhCMWFMcl9qSjhUN1E1R2lLN3BOdUE0UUZuNlNRUUxtazBiVVBPYm9hVmJkektFOHVhbk4tN1NudUZPOHJqUVlTbXZqVkhBc0V4d3pySjZIbGJUdnNPeURIeWR2WEZELUZQMkhRblROYUJtVGM2M0trWW05akExQ3MyaFE1b2tIQ2l3WEQtd1U?oc=5",
       "category": "Fé",
       "publishedAt": "2026-07-17T12:44:36.000Z",
-      "quality": 0.98
+      "quality": 0.98,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Mundo-US-5-1784255773000",
@@ -324,7 +430,8 @@
       "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxQZVpoVTlwUHY0LXNXd19nbFlNWVZoWDdQeVVFSi1ISkZzYVI1YUlzQTR6OXd3XzNhWDhsaTRkdnByczNqMlE4bm1JTHhyaEk2VXhrUDRFdmVjdHN3RW9FZU1OTW5aMnMzTmk1VW5sMUNGTkhYYVc1LUN5bUJJWkNBdUJFSU0wNUZyMDdtZklkRkJPLXBTRlhHQmZ1S1dQSVdTZ3l4OC13TE5aVWNBSUZfeHpfRVRwTG9hdzFKWkdVa2RfaVoxeWpr?oc=5",
       "category": "Mundo",
       "publishedAt": "2026-07-17T02:36:13.000Z",
-      "quality": 1
+      "quality": 1,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Fé-BR-2-1784288166000",
@@ -333,7 +440,8 @@
       "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPdm9BUWhZLWM1QTNmV0o5XzhwQTdPN0VHalR2eGJZWmFvV2w0Q3lFSjYxYWQ3Umt5bnd0T3RreElfQXYzLWlTOHRFUG9DREJBb3A2cWxGdElGMUctN3dYMTV4QUo4U3QtaW1ndTAtNkZQd29TNFJybjl1elZCN251S09ZRERYZkNVSVhwclF3SE9kQmUwQ0ZTMXpBWXEwQVkxY1BBLUVMYWdHUVJVeWFhSFVWaw?oc=5",
       "category": "Fé",
       "publishedAt": "2026-07-17T11:36:06.000Z",
-      "quality": 0.98
+      "quality": 0.98,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Fé-US-3-1784393549000",
@@ -342,7 +450,8 @@
       "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxQQ0dybVE2eU9vVndpVUtaSzRPMWo4QmRkNTB5cC1ENzFJMENfSXZyR25lcmhuY2h6TEUxTjkwWml2N3hlbjdGeHNtNHRfbnRZX3M1ejBwOHAzdHNmUW03QkRaR1FvUmptcG1NaFIyWlNucDgtdXUtRFc1aHdGQVFDcFhoR2FOeGtUbHBfTWZ0dWlwTjlpV2Q3SHl3ODJKdWVyNlRZODF4bmlaVUJ0M3FfUG4xQWt6bFJTMEpuQ0xEMUJ3UldSOEloSS05RVFiQQ?oc=5",
       "category": "Fé",
       "publishedAt": "2026-07-18T16:52:29.000Z",
-      "quality": 0.92
+      "quality": 0.92,
+      "spectrum": "Direita"
     },
     {
       "id": "news-Criação-US-5-1784296290000",
@@ -351,16 +460,18 @@
       "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQdVhoSmprYXdiU2JtcEE1Zi1FRXk0dU5yYl92TU1vTFJkRExqQkhtOU55a2h2NC0ya0Z3Z2VDNXBiX0hRYVRSVUh5VHcyTEdKMjc4UmozdHVkdHczLTNxRUlOLUp4b3JfRE83U3l3Qm0yYVVaaXpsZW92bFhsR2dBdkY0eHFoTnZ0RkFPZzdR?oc=5",
       "category": "Criação",
       "publishedAt": "2026-07-17T13:51:30.000Z",
-      "quality": 0.97
+      "quality": 0.97,
+      "spectrum": "Centro"
     },
     {
-      "id": "news-Fé-BR-5-1784275302000",
+      "id": "news-Fé-BR-3-1784275302000",
       "title": "XI Encontro Nacional da Pastoral do Turismo debate turismo sustentável e evangelização",
       "source": "Vatican News",
       "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNdEdtdWgtblFyLUlCZ0FFWjROSGVUN3B6S3pVNVo0U1hDaTZEU1FjRTN3djE4MW5GVzExNzE2Tm8yWm5XT0ZtNnVLS3NaUzZhay0zbTdMVnRvZnV2RllIeGt2X01CejEwanlsb2lGR1hyVjg4VDVVdENsMTI2cHVUWDEwSTN0Z0lxbFBsNFktbzNsbnlUMVQ1TG9LOEhQYm15R3NvODFaYXQ4WGlG?oc=5",
       "category": "Fé",
       "publishedAt": "2026-07-17T08:01:42.000Z",
-      "quality": 0.98
+      "quality": 0.98,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Política-US-2-1784238606000",
@@ -369,7 +480,8 @@
       "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxORlVQZ296NGV6WG1GcVcyM25nRWkyWEU4WnFWZnY1MEt5S3ZnMlRkUUJXemkxeXhTUnpPR3EtZ1ZrNVQ2Vk13cHpPQ3QyV1JHMnJXVXFsODZQWXVrUFRIbFp6STFIb2l3SnAtc2tWR2RmbjBmUHBkNzRhWmN0V3B3NmU5VmVBQk1yREhqdzhtelRSUDlvOGw2RjI2YUpvcUY5THZZX1d4d0llNWVJb00zaWJPODdHM1FNNzVJ?oc=5",
       "category": "Política",
       "publishedAt": "2026-07-16T21:50:06.000Z",
-      "quality": 1
+      "quality": 1,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Criação-US-6-1784237563000",
@@ -378,7 +490,8 @@
       "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxOV0ZaZ2h4eFlxSTdXZ0NTRDQ1R0haZF9vLURjdVhraWdUbnVHZEVmTzJjdkw4ZHpFaDRSemxOTDN5VFRWTUNwZXNtY0E2bFdsWThQMDBrQlUtZzMwRVo2SFZyVTFKZ3lHQjlEZHM3NWFxSzNZcWFHZFMxbjRmb3p4SmVoNnN0WEZVWjVBZFkxWDd5S1FVYnBfNnFQdU9wZWVJVzJsbDhNQS1mRnhZeW1Yek52RFlWTHM?oc=5",
       "category": "Criação",
       "publishedAt": "2026-07-16T21:32:43.000Z",
-      "quality": 1
+      "quality": 1,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Fé-US-4-1784271600000",
@@ -387,7 +500,28 @@
       "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxOckEtdGVzWjdrMUpOTGJuZlBIa015NHk2WWdteFBiZ1RBU3BRZkxtaU9RWDB1YUwyOVpkejN6WWIwQWREZjdGVHZpemZhM3NoSkhTbGRrRHA5RWc5R0FZQTJsRnNUOFl2Z19XVzFGYklfYUUwTkpDd05xZ0phTjZYMnpicF82bnRLVnNBcEpmS19Bd3FzcWR3WGhaVlpTMTItdWxnQlBTOXpaS2ZnTlI5bURxbw?oc=5",
       "category": "Fé",
       "publishedAt": "2026-07-17T07:00:00.000Z",
-      "quality": 0.98
+      "quality": 0.98,
+      "spectrum": "Centro"
+    },
+    {
+      "id": "news-Política-US-0-1784372400000",
+      "title": "Cuba edges toward breakdown as power cuts and US meddling push society to brink",
+      "source": "The Guardian",
+      "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxOOFBBSl8zQ2hNX0RuNUw3aXJFZHl2bEZ5MmVMLURlcWdTNU54Z2dXQTR3aV9PMTgxbWlXLVRaUDliU2o2d082aldLcEFGRVo1VTJEQklqRTNxNFBDeGd1Sm1TX0lTeU11RzFRWVhXNVBqa3ZXS1JxeFJoa0pPLUFtd0tVSlY5b3hjZ3ZDb2laYW0zZzJBeWZfWVhlM1Y3dzZld2pQeEZVX1RiZS0tUXUtLU1acmVtLU1ta2UxZTZhTG1Gd2c?oc=5",
+      "category": "Política",
+      "publishedAt": "2026-07-18T11:00:00.000Z",
+      "quality": 0.92,
+      "spectrum": "Esquerda"
+    },
+    {
+      "id": "news-Política-BR-0-1784329352000",
+      "title": "O que precisamos para dar um salto nas finanças de impacto?",
+      "source": "Nexo Jornal",
+      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNRVRTdUFqLWlOSGZHMVp4aFljUW1kVnJyQkhnLU1RbHZZdVJBZWJybVl1Sl9PTGI0NE1UU2U0TkFsM0tvNVhxNG5GaHdKa2N6UVpCeWFVb2I4ZVNZMXNxNTJlaHRmQ2ozaVVTMzJ3c05CQVpXUDBodHZJVVEtbFAtX1pndGVPYjMyXzlYakxMUWVuUWs3dWNnWUF1Z1c?oc=5",
+      "category": "Política",
+      "publishedAt": "2026-07-17T23:02:32.000Z",
+      "quality": 0.94,
+      "spectrum": "Esquerda"
     },
     {
       "id": "news-Fé-BR-1-1784308920000",
@@ -396,7 +530,8 @@
       "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxOeHhRcU5tMzQ5SjI3Y2l6bE1EZkticlNFSmM1eVRCQVpROUVpY1FzQzlQbXltM1ZMdDZEUG4zZ0FNc3RGTUJNcTNHc0phTDROOXl2SWxhS3NUSVBmMFktVEtFanhPLUtfVEw1dmszLXNhbTJOdzJxd1g5TEM3eFRfc09sZHBtNm9ja1BLY0xlaUx2U2J0bUNjQjVpZkpZNlRMMlZ4eFExaEhQckpNMnBWa3pDaDVXcVZIaUYzc080aWNYVUcwZlBrUjhNZVpFdlZjWjJBQnZvWTY3SlROS2xrWVVB0gHnAUFVX3lxTFAxaG96VnBrMWx6VE5KMHpUQmxZc0ZtbnBEN2JQU3RIUklCVmZ0d0JkMUloYkM4VW0yZGZiSENhUjJJV3BsOWtwOEZuZ216OUtHcEtBaWNUckZJMHIwbEstR1FRUC02dFhwdmFWY3hJTXpsa0xqZFRCNDJvc0IyVGVfQ25oWUR5Qk9HV3JCVFlVVTdQc0pGS1pUVk4wd2lpbU92V2lTaW5wTl9IYUVHdjRsTC1vQ2ZoeGg0eHN6WEkybTV5SG1QTkZJUmlVV1hXOTk0N3F4SS1VR3FSQXQ1b1ZmbjFZblpUSQ?oc=5",
       "category": "Fé",
       "publishedAt": "2026-07-17T17:22:00.000Z",
-      "quality": 0.95
+      "quality": 0.95,
+      "spectrum": "Direita"
     },
     {
       "id": "news-Ciência-US-5-1784227226000",
@@ -405,7 +540,8 @@
       "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNLVpJLUZZMW8tM280MlpnVEpsTDNGbGNOQThuM0RuWEY4SW9VclNzV3dXUmFKZGF5MC1TS3FTRVVLckFUQktJNzdEX1J0TVNuS2xoczVFZ0F5aWtKOGVtdVNzTlI5OVJ4T1BZZUZzRFd5bFhHMF9XbmwtcVNqQnhyOWdLZk1XQWdoajU5WXJscXFwQUU5QkVldF9UdW8?oc=5",
       "category": "Ciência",
       "publishedAt": "2026-07-16T18:40:26.000Z",
-      "quality": 0.99
+      "quality": 0.99,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Mundo-BR-5-1784315996000",
@@ -414,7 +550,8 @@
       "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxQcWw5d3A4RnRkMTZiYnZLRnNVMDQySzVtWUhzMlRhQjhGR3FyMkExRXh3dEZSVzgwck04UXFCZzdRWU1kcVcxTjlsd0piOFU4RG1qNVlpc2ZrVFYzMXp5aHRoX3pXZEM1Q2NCWVdzS0M4NzU1YlA5WWNaSjBha0FObHNKbjdkbFFBd3haZHBZNGc0ZUNJc3NVRl92ZExhNzY0Y2xZYTZLc21WaVFNeVRhbGZ3MlhmWGVCZnZYU01mb1lPTnpQZ3fSAcYBQVVfeXFMTjJhMzROYVRFTFlTdVcyS2Y2UGYwakpWYnBDSUhkbDlILW9wSU9KQ3ZTcklFZG83R3MxOFQ5ejBySlp3MDhFNGJDRzRkcWdqT0o0RVo5NVplVHFHQ1BEUnJNbTN6WkdXZzFRZ2xzaGV6NzNuRWNRYTlWcWhteW4tbWFqUWh1bG5IcF9qTjdEb1N0ZDJpblBiTXhOZlVaQXFUUks5S3lWWXZwSmcxdE90a0RQRGVlVmNld1d6WXZ0WW1tVHBUcnl3?oc=5",
       "category": "Mundo",
       "publishedAt": "2026-07-17T19:19:56.000Z",
-      "quality": 0.94
+      "quality": 0.94,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Mundo-US-1-1784193402000",
@@ -423,7 +560,8 @@
       "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxQU1VkX0Npc2Jpc0tjRFVLQ0FlWFhZMlRrYzBWWTl2bFlzc0d3VXV6ZEVmNDY2TWRMQ2ZmVlJEeFp2WXVkY0dVYUJlWXJ5RTJhb2FlUDBESUFhZmNZbnExclllMWZUSGJDNmNwTGY1NzNEZTZBbm9YemJzU3RCUzI3eXRtcFNPSW1yUWwzVC1mVmtVVk5JenlpeURPYk45R3VUR3dQV2dqOA?oc=5",
       "category": "Mundo",
       "publishedAt": "2026-07-16T09:16:42.000Z",
-      "quality": 1
+      "quality": 1,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Criação-BR-2-1784292869000",
@@ -432,7 +570,8 @@
       "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxNeWRFWTNWOWlONmpMRWNGMnJ4UERFRlRUSFc1OGpGbUZDNVN1LUFhWWhlaXh0NjRMR3pBbzc2UTZwS0E0UXU1N0xWTTRpUVRHNFZoX2hpUnF6eFM2S3E4ZmxpRWVHUkY3bGwzMGstRGpOSkEyaFZrY2lWa2hnT2pWTE8zZ19pRlVDdHpHTzZ0Z2tKeG5yLVh4Y296aFh1aW1WX1RBR3JVTWZlMnV6WlNxOEhPODAzWktLWTM0RzhxQ25zc0gwWDlLVEtxX0vSAdsBQVVfeXFMUC12QVd5UGZLOWVzV0FQRm1OdHEyelNzUlFSRGxCRHZIWDRCWE1YZEpDak8zbklYUmc2YmwyMGE0ZnVRdmpPU1dJUU5kb1dhalMwUU5wTGZ2UEN4UTJhTUg3YTJXWVBUV1Q1ZlpLUXNKMk1nQm92RGQzS0w1NWNQMV9CQ1U4czJXM1pvMi1kNzhnQzVhY1hzS25SaHZxa0FOcno5aU9SaVNURE4tdDFaVm82ZWJyN0FhSEFLVjMxWUFUR2llZGpoT1F6MVRzMEFScXhUNno0UUs2NWRN?oc=5",
       "category": "Criação",
       "publishedAt": "2026-07-17T12:54:29.000Z",
-      "quality": 0.94
+      "quality": 0.94,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Criação-US-7-1784176267000",
@@ -441,7 +580,8 @@
       "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxOcV9kVWNrQTFVVGduNXIxcWdOWDZiWGFUcVFoelNYa05IS1IycGRQX19DRFZmai1tTXRTSXRTTmJiV19uVXBHVzU4ekVFTFRVNENuRUJCMmRwcGw1anEzTjFjT3NmZWhSSFBRQ0NxY1hzc21nYXNmNHQ4RkRGOUJGWVpncFNrRWNLcENkZk9LZzEtSWd4RGFydEk3Sm9COFF1Ri1FV0VXUVJkZk9VQWhQMmNLcHV6YlJudHc?oc=5",
       "category": "Criação",
       "publishedAt": "2026-07-16T04:31:07.000Z",
-      "quality": 1
+      "quality": 1,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Política-US-7-1784243318000",
@@ -450,7 +590,8 @@
       "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1QYWtKcDQ4c0RFNVJjZHA0dnp2aXdua2xSMDlNaTd2RzJzNTZkSWR2Ujk3d1dVZWNXcnVGNjhjRVR1LVZ3bVYxMldSNXI0SnlZc1pWZVd1UmNwUQ?oc=5",
       "category": "Política",
       "publishedAt": "2026-07-16T23:08:38.000Z",
-      "quality": 0.96
+      "quality": 0.96,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Negócios-US-4-1784217652000",
@@ -459,7 +600,8 @@
       "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOdTRvMEVNSTkyUXR4N0FubTQ2TlZDSzNGendKaUwxM2xXNVpPTjhtcWZrQ19leFBGVFIzZWVnczNHZm5GdTJtQnRadV9CR3d2SFZmRXJWNldFWGVFanlRUldpMTBTNU1mYmVfcUVxaDM5Y2k1RDhjXzJoSnJfMllHdmhUNHFMR1JEdkE5a3JXQnBMSDhyNWJkcA?oc=5",
       "category": "Negócios",
       "publishedAt": "2026-07-16T16:00:52.000Z",
-      "quality": 0.97
+      "quality": 0.97,
+      "spectrum": "Direita"
     },
     {
       "id": "news-Negócios-BR-0-1784231647000",
@@ -468,7 +610,8 @@
       "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE9iaTBpeVYtYnV6Sjk4dzJia0VkZ1loNGtTZmtIXzBTa3hnb2dBWTNHYkF1Z19OZ0Y1b2N6YzhGdzhkRldaY3BVOWp0NGtrQ2pJLWl5VnhlTFZJTXY2a3hEdHJR0gFnQVVfeXFMUGlUNURtN29JUkVuV0REakoyV2RSQ3d4LUdfOEdZbTBhVEI3NXY1YzhBUFZJTXZJWkx2a2VUOGxHRWtnRGNnb0VoS3lFeXNseG5DZ3hvYVZWSjQ4SUxJRFlDUUlZMjcxUQ?oc=5",
       "category": "Negócios",
       "publishedAt": "2026-07-16T19:54:07.000Z",
-      "quality": 0.96
+      "quality": 0.96,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Política-BR-3-1784228737000",
@@ -477,7 +620,8 @@
       "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE9WM25HQktrSV9FbTc4OUVQN2xkQWdGbElOZVh5OHVNajROd0VsLXhyeGcwU0dWZW9qVU0tZlgwNzJCelAzWnpTaVRYamV5TGhOYWZhcGZTRWRfMUVTV3BBWUVB0gFnQVVfeXFMUHRvOEJKTzlIYnpselBZSTZ2WmNHWGd5Ulk5d3pjcWVFUERScjM2WFI3WEF4X3hDWXItVjV5a0FCcEg2T1hlRDZ0d1pqN1BDeHlOU2tFcDZ0YkEwZDlVX1dlb1RBU0FyZw?oc=5",
       "category": "Política",
       "publishedAt": "2026-07-16T19:05:37.000Z",
-      "quality": 0.96
+      "quality": 0.96,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Negócios-US-2-1784206429000",
@@ -486,7 +630,18 @@
       "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE53d2VNX2FhMWxzai1yVlNNMXBpclR6UFRXcDRpQ05RNjNUUE1CVGV6alJ0akY4N1RnUWlpYVRVSVhEcHhmQVRxUWRxMVotdG9uQWRlMDcyYlhvZ3JKVGFEN0ZwOUVpSWZQX3Z3NGpIUVhBNEE?oc=5",
       "category": "Negócios",
       "publishedAt": "2026-07-16T12:53:49.000Z",
-      "quality": 0.97
+      "quality": 0.97,
+      "spectrum": "Direita"
+    },
+    {
+      "id": "news-Política-BR-6-1784249961000",
+      "title": "Quais as principais preocupações com o El Niño no Brasil",
+      "source": "Nexo Jornal",
+      "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQdkhiYTlLLXRRcHpkdUJwVlZ1eGNOQ0JUVmVqaEJxNEdlb1Q4NXlvNDlIY18zNDR2Q1JOYWt2RUNKUDgtcjhMUmFHNXhuWXBzbUxralVwRVdPVUV4WlBaR3h3aHVtT1FIQUJnMXJoMXJfdWJScU4zZjhMNWJYbnJ3N19Wejh1UFZFd09pa3pIM0QwX2RSRGFnX0x5dlNMY0I3WUhxTU1n?oc=5",
+      "category": "Política",
+      "publishedAt": "2026-07-17T00:59:21.000Z",
+      "quality": 0.94,
+      "spectrum": "Esquerda"
     },
     {
       "id": "news-Negócios-US-0-1784140342000",
@@ -495,7 +650,8 @@
       "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxQeE04QTI5RUxmTHNaQmRCLTNLdmhNWUxibXVHZTFJMDRQZktBSFpLMUhuTUNITTFtLVFqdzdEb0JzSHA3bVNfS0t0eXpuWmppc0diYlRqSkJ5alZWQmhwbFBheFFBM21qMjFJcWQtMkdoOHdNdjk0TnJnZXZ0MEVoTlI1a2tubmxqbWdCQU4teUFGbG5CSzhORmN5THJ6QUVzb1hvUGFZaw?oc=5",
       "category": "Negócios",
       "publishedAt": "2026-07-15T18:32:22.000Z",
-      "quality": 1
+      "quality": 1,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Política-BR-6-1784212273000",
@@ -504,7 +660,8 @@
       "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTFBweW9BaEwzcjBwelA3U05nODFFajdhUDhrV3QyeDJhSXBnZHVCaDVLb0pVNjJPVmI3YnV4NnBoRmpsUHBjWllJOUw4QjFST24xNXl1XzRJWU5qS014RDlhU25n0gFnQVVfeXFMTmRucm9NYl9YOUxSR25uZ0xkdGJOQTJiR3ZtbVpLWU9yc0lVRGZtRU5OcDc0M2RFUjVyTWo0cUlIT24yc0hmZTZQRzJCRDNmYmo5cFB6V0RlQUlkVndpZF9zOG51YVlYMA?oc=5",
       "category": "Política",
       "publishedAt": "2026-07-16T14:31:13.000Z",
-      "quality": 0.96
+      "quality": 0.96,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Mundo-US-3-1784174400000",
@@ -513,7 +670,8 @@
       "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE5iM2wwZUhOWlY3R2RYbjdVN2QzYXhucEd4d0ZMSmhHOGxuYzFuSHNrR3F5S181dExERFdpNXUwdGpwbGs2WGd6dWF6NkV2NHZneFhEdDhWVnR5YThjRFRwNDFqNnlxT2ZRTl9PSFN0bw?oc=5",
       "category": "Mundo",
       "publishedAt": "2026-07-16T04:00:00.000Z",
-      "quality": 0.98
+      "quality": 0.98,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Ciência-US-0-1784210586000",
@@ -522,7 +680,18 @@
       "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQRlpMQTROYk9ydU5iUF9zUG1zMlQ1ZUJsZzBBY3VZcXA2RHg4MmZwd0hUVmYtUVgtdFRwandUdGNHczRlWGNtVjlJMFJUZjZKQzQtaEZxNXl5cFRZT3NSYkdFYjQ3VGNpSFNvRXNESGFiTnRYRWYtZzRIakdDcHAxQ1JYUGs5WmstLVM2V0taZnNOMDJaLVRpc1NROEJvREhpeFdtb0hmMXlDY3M?oc=5",
       "category": "Ciência",
       "publishedAt": "2026-07-16T14:03:06.000Z",
-      "quality": 0.96
+      "quality": 0.96,
+      "spectrum": "Centro"
+    },
+    {
+      "id": "news-Política-BR-4-1784311500000",
+      "title": "Lula volta a defender Pix após tarifaço e diz que 'contra o Brasil ninguém ganha mentindo'",
+      "source": "Folha de S.Paulo",
+      "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxQYnVTVXlBSkk3ajdybjRqemRUTTB1QllsYU5FUlA5ZEt6V2hJbks3RlZCZG9TT0pfUXk5UThSUFR3dmJFWmhpWS1XSElLZGhTaTlaOHFvdl9rSnJwTTZHNjlvcG9OWjlZQWxjNngwM0xlMndta3d1b1o0U1U1VnJJMDNNRV9CSGZ3dnlxVWd6NmdwUU5aZ19PX0dQeENNSTZXU3BnYkFBM3F0dHZKVTJ6VDllN1J3d0xYbG5YbkxmYkUySTF5ODI1blNJcUh3REpLQzFQTmgtSQ?oc=5",
+      "category": "Política",
+      "publishedAt": "2026-07-17T18:05:00.000Z",
+      "quality": 0.9,
+      "spectrum": "Esquerda"
     },
     {
       "id": "news-Negócios-US-6-1784127320000",
@@ -531,7 +700,8 @@
       "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxPVjJlNmNvNXVVby1JTFRHZ3RLLVU0bWJfRUJ2TUxfZGUzSkhsemphWThOMXJVcVM4NEE3SWdxNFE3NVlWMER6YjRZVzV0cW9IUUJlelE2a2R4eWk0ZHVyaXc1SmJFWW10QWZxQkJaOUhxcTRUOXlfVjNCcXF5aERkOGhTSU9VNzZOTzNIeW5pZk5CMm9kMFVOUmg2aTZ3WE5qVlFCVERiRHZ6NDdXeWFlX0c4TnlYeUZuVlNmM1EzZmdiMnVWV0R6WEpn?oc=5",
       "category": "Negócios",
       "publishedAt": "2026-07-15T14:55:20.000Z",
-      "quality": 1
+      "quality": 1,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Ciência-US-6-1784143733000",
@@ -540,7 +710,8 @@
       "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxOWXpJZ2szS2VuRHdPNjNmOF9WVmNXY1EySWZtOFFvdnRzUER5OFFvVHd1dDZrd3FKdW45UG9lOGRYdDkzcW9WV0FuR203VVhmeTJKXzYzMlFiUkdEV2VYdlJsTHQ3YWRmeXJjcFdhUGJBQUZiLUk1QUY2cjhrS2hiTldhZWNiN0gzNjM5eEJUR3dVVllkajNTRUc2Ri1Hd3hqUHZlMkRiRXFLcVNDSmxvZFlUcTlzUjNQT2QyZUFtcVl5QWs?oc=5",
       "category": "Ciência",
       "publishedAt": "2026-07-15T19:28:53.000Z",
-      "quality": 0.99
+      "quality": 0.99,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Política-BR-1-1784302725000",
@@ -549,7 +720,8 @@
       "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxNME9od1NjTUtKRVpUem1qLWRGUlcwLWtxN2tGeFA4ZlVSOW13RVoxOW1PMXRLQ1J4dnpnLVJxYkltNXVlQnYwQWNmSURxVXdzbVhrRUZPdE5rdU1MM2RBOUlHdE1wWVhSbmdURE4zclVhVEFsTWhxZW03UjNOSlhWdDl4ZG9nRW5nUVRoRUdjWWx0dkRuNGpsT3VFWXJGSE5aSG02NmpSRVI4NS1rOUR0U3k0N19abTUyS2JlcjRwZzNyNlNWQ1NORjRn0gHPAUFVX3lxTE82bDlOZF9mS041YV9OOVdWZ2RHQzZFVU5LaWt4bWpHd2duOEt5Zk82R0xmZi1kcGFPTnR6RElVcEhwcWtKLUI3ZU9nQzhKOEtNZnRiNFBEU0NoVl9zcmN4NExZd1ZGNmZtc0hmU191eEhCc1NlQmFqWUMyRFVwVXhtLVJ1bHBkTkZuZzF1Qlo2ekZZbzVPckdZLWViNnBodm01eVJWaGF3UWRJZ1Z5a3hlbjFtTm9Qa0ZCbkJrSDNYOXR5el9taXNaV2xkLU02bw?oc=5",
       "category": "Política",
       "publishedAt": "2026-07-17T15:38:45.000Z",
-      "quality": 0.9
+      "quality": 0.9,
+      "spectrum": "Direita"
     },
     {
       "id": "news-Ciência-US-1-1784116800000",
@@ -558,7 +730,18 @@
       "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxONHU5NjdhN3J4Q085S0Rxdy1pQXRlT2J0R3N1S1BUX3h5SkNoWmpZOVdHMmstOEM1dkRWRFkzWFd3ZXhKMlBpSHNJLWxHNnRmRk9ucGVSYjBrS1VNc3ZhVnBqWFdzcFAyR0l3bzVfV0ZnMEZHczFYNm5KVjM4clFwUWJGRThiNVBDRi1FdE9CWlFxQjRrOXZVakx1NEc?oc=5",
       "category": "Ciência",
       "publishedAt": "2026-07-15T12:00:00.000Z",
-      "quality": 0.99
+      "quality": 0.99,
+      "spectrum": "Centro"
+    },
+    {
+      "id": "news-Política-BR-7-1784278800000",
+      "title": "É provável que produtividade aumente com menos horas de trabalho, diz Nobel de Economia",
+      "source": "Folha de S.Paulo",
+      "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxPdVcwaHJoTmZUWC1ieDdzSWQya0JYYmc3VElOVVp5OGRPbnFkLUtYcTRkYTNDaFhEcUVjc05CS2Z0Rl8tbENTbXVfcFhhUjJQckJYajNxRTRUaTNLd1NVNkZsbzVZY0VoYU5EUElmZlpuc1hxUVNyaUJSREIyQlJ6eHkzSVhoWDZkMmxoaXRnOXE1V0lWcGI2bW04SE9WNmlUbUZLTjVtajktdHFsOUNRRjNZTm5tb2NqWks5M2x4OXZOVDZ6R2FtRmI3eUtWcEtrTVptRA?oc=5",
+      "category": "Política",
+      "publishedAt": "2026-07-17T09:00:00.000Z",
+      "quality": 0.9,
+      "spectrum": "Esquerda"
     },
     {
       "id": "news-Negócios-BR-2-1784163806000",
@@ -567,7 +750,28 @@
       "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE1RX3d0VHFvazYzcE0wdEZ3ZkROR2VsaVVYb2RyNDFqaThkbWMtYWdBZE9HaHZfR1llQ2xYN0xRemFWdG9QcmNlREtveDEweUtnV1k2dTdMeE0zaXdHNFh4cnNn0gFnQVVfeXFMTVREX3VuMUNLUC1sZ3paU29aMGl6dUN4RnNhZ0JsTDRhb2FvNl93RmtYQkhPbm5vVnh3UklGZWFqS3RaWDA1X2s5dk5xOFo0SVN6OTJMbkhqNEhrY2hPSnlSSm5XeDBFcw?oc=5",
       "category": "Negócios",
       "publishedAt": "2026-07-16T01:03:26.000Z",
-      "quality": 0.96
+      "quality": 0.96,
+      "spectrum": "Centro"
+    },
+    {
+      "id": "news-Política-BR-2-1784271600000",
+      "title": "Indicado por Trump para embaixador no Brasil é amparado por empresariado",
+      "source": "Folha de S.Paulo",
+      "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPOVZ1cm82NFU1R3NmeXBfOVJYeTVjUnJLU0djWlEyWjM5clNyWlBTYVpNSWZFUzg5Y201dm05bG91cnBtU3FhdnN2V1BiQUxzOUh5OWtpcmFGenRNTmZWZXdpLTdwSGhoa2JVbzVqS1BveHJNY0VsalJzeUVmdzVFM1FWZTQ3c3RDR3B0NHJMNHd3NDNIcE5hRGx0NFFJOF9jRURNVTNGV2JLNEczdEdkTmxDdjY1aUxpejNZbFlEMA?oc=5",
+      "category": "Política",
+      "publishedAt": "2026-07-17T07:00:00.000Z",
+      "quality": 0.9,
+      "spectrum": "Esquerda"
+    },
+    {
+      "id": "news-Política-BR-5-1784191880000",
+      "title": "Quais as portas de saída do Brasil para as tarifas americanas",
+      "source": "Nexo Jornal",
+      "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPeWRDMEwwVS15WTkwMm9DT2Zha2RmTDNRVWpQQ2ZuWHJnQ3o2YXJsOEdpN05jTEJZVnRCbXkxZ0QwQnU4ODZGa0VSTVVXak9QeTVOQzRyYzY0a0p2RGh6MW9JMmpjNFE1czJxSlNHUkt5VGk1Y2FWb243QllsRWw4NnRnRWoxV3NTQ040UlZsTTNGUG5F?oc=5",
+      "category": "Política",
+      "publishedAt": "2026-07-16T08:51:20.000Z",
+      "quality": 0.94,
+      "spectrum": "Esquerda"
     },
     {
       "id": "news-Criação-BR-3-1784188948000",
@@ -576,7 +780,8 @@
       "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOOXA2aUlMX015eno2UGFoSU5DbnhiNTdTQ0FSTC0tdUpmWVhRc192NUxPWWFaTXRCWEc2SF9hZE1NeVlOelVvMFM3X2laOHhjS3pUblp4TG9DUXNLVXpicTY2ME11Yi1tOWJ2UGFxRW5Ma0p5ZjZ4RHBfT25ZajBXNW8tcHZaejBiWUFEbTltRWlwTmcxMnRqWNIBpwFBVV95cUxNU25UenRIbXpRSDZJNUVhNG40Z2FlOEp5enFRRVByUEZ3TFBWVWxqdk85OWlHQ0JkUGw2WlpjYnJIZmFBUlNoRVNqYWR4eVNKNi12MWI5R25OczA5RWsxY1FYN0I1anhValltUFF4RHpzQnVhTXFpcXBYOXdKQXEtbGJtTzN5ZTY0cndVUU5CM2t6OFl6WFFEZXQ4S2otZHNnTGpTQ09QTQ?oc=5",
       "category": "Criação",
       "publishedAt": "2026-07-16T08:02:28.000Z",
-      "quality": 0.94
+      "quality": 0.94,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Criação-US-3-1784063290000",
@@ -585,7 +790,18 @@
       "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxOQUFKbVhBLXhGV0ZHQ1NFZWNkTTh4WkVjYV9CSXAyZ3lVaGdic0VBQ3E0Y1U5emdzMWVPLVg2Y1hIajNpMy1DeXhDR3JWZDBWdlNsWTdiWGVIX3RGRE4yRDhXMjZJMDBRY3BzLW5rMVhoN3JhcnVxVEJBaWNzT1VNNkI2bnE4VDBja1BrNHZqaGkxUWE2ZzdvTExNTFNjdXJLMFdIYkZMNm5GLWFIUnc?oc=5",
       "category": "Criação",
       "publishedAt": "2026-07-14T21:08:10.000Z",
-      "quality": 1
+      "quality": 1,
+      "spectrum": "Centro"
+    },
+    {
+      "id": "news-Política-US-5-1784203260000",
+      "title": "The federal government isn’t America’s only authoritarian institution | Jan-Werner Müller",
+      "source": "The Guardian",
+      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE9zUGxURlc5cnBuWDNmdktnNDBHQ0FTZEZHYWc0dktTMmNGT0hyZ05ybERES2NvNkRYWGpJbnlSUjNLOHdXZ3AxY0pjb09ycWJjbkhXbS1Saks4NmJBZVliWS1lMTBIR1JYOGtqN0c3cWZSQXNsdlFYbkFWbEUtdw?oc=5",
+      "category": "Política",
+      "publishedAt": "2026-07-16T12:01:00.000Z",
+      "quality": 0.92,
+      "spectrum": "Esquerda"
     },
     {
       "id": "news-Política-BR-4-1784233200000",
@@ -594,7 +810,8 @@
       "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxQNWtmczBGQjFaWldkTF8tY0RiNDdTdUNaVTh3cXhnaTdaeHhNdmV2bXlQazRReFVnX01rNWd0MUU4Q3pyN1dmcXBwSzlpb3U3VHR1UV9FV2k1bVFpNDBtUFJ0RGVlSmVhTE5FYldZMzRjdUU4VVpwMG5SQTNvQUhWVEJkWXBvUGIzX1JFdVpPWkoxSjB2QTdiLWdJVGVFZ05teEUzLUtBU1V6R2ZnSFhFZXBtT3Zoc3Z4TnhnUlhXUXRpRlI5Q0x5MmN5M0JHUjFFclRjcEo2UFnSAd4BQVVfeXFMUHFYSWR4clNWOGU0Q19fcWFlTkk1d0VfZWpsaGNrSTIyWjFINkZNbDJyN0FOa0dLdjNCUG1VSVBDU2NlTWY5X2JyclhuTGpqR3BMMlB4N2NzWnZTRjA2d1kzbEYtZEZNa3lvSEVsZGlSOS1SYVZvUkpLdmxBNkRwYVhzSGY2TUxTOTVUeXpSS2lRbzhoVm80SWpwb0FDb1V0a0NET0ZMZlJwTG56U0FKQ0JaZkxnN29nWkRzeDhlRmpWeGJieXoxd2xweTFjVklMQjlBQlFvM1JKdWdZbG9B?oc=5",
       "category": "Política",
       "publishedAt": "2026-07-16T20:20:00.000Z",
-      "quality": 0.9
+      "quality": 0.9,
+      "spectrum": "Direita"
     },
     {
       "id": "news-Mundo-US-0-1784088000000",
@@ -603,7 +820,8 @@
       "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE96bXQzWnFCNUVmcWozLUhNRlF3VW5YZFJrc3UwWjF2b0YwMjAtQ25hSUhUYWVJYmMyWmxOX3JjTkEzcFBBMGtjUzRUY0VaU1dkR0NPanFNVU5iVHpXaGxqOGdZWlg0NUpxU0tWMl92eTRlSms?oc=5",
       "category": "Mundo",
       "publishedAt": "2026-07-15T04:00:00.000Z",
-      "quality": 0.98
+      "quality": 0.98,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Mundo-US-4-1784088000000",
@@ -612,7 +830,8 @@
       "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxOdFVYS1E5X2Zxc3hIUHl6aFpBV1FqUUYtUjhxSkc5V3ZCMElsMVg4U21uNnBkTVFGbzROZ0piZERLLWlBamVpQURNUTZpd2xyV3ZOUkxacTJMcUxVQUV5WVhlOXNrbGFCU0xSeFl4Z0FWTjNoMi0zaDl1a3FZd0tUc2pB?oc=5",
       "category": "Mundo",
       "publishedAt": "2026-07-15T04:00:00.000Z",
-      "quality": 0.98
+      "quality": 0.98,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Política-US-0-1784118081000",
@@ -621,7 +840,18 @@
       "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBaUHg4RFhDYWpOVmlxQzhPQnlzWE14Q2llWFZBMmNCeXpDMURsUDBET1JSTlJGbnhacWFaSFBVQklfZG1WZmtMcGtIaFJ0NXotYzdERzZYZjdJZw?oc=5",
       "category": "Política",
       "publishedAt": "2026-07-15T12:21:21.000Z",
-      "quality": 0.96
+      "quality": 0.96,
+      "spectrum": "Centro"
+    },
+    {
+      "id": "news-Política-BR-1-1784144917000",
+      "title": "Fertilizantes: o que o Brasil pode aproveitar da política europeia",
+      "source": "Nexo Jornal",
+      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPNi1pcFJMSGgtcVNQeVJNTUNObzZySC1xa1hvVTVfS1o0QThDb2xRSktxVTZrMFd0RXF3VkwxSE40X1d3cnhNSVN2NlBXT3B5dTJpYmNKekx2Q1dZTE1xVTBmYWVnNFducDFOdDg3MGVwQTVsNkV2N2U5NTVYQUZHQ0NXWTdpcEZSTzFwMWlyZ1hGcmNXaWlaUVJiRVhyTmc2Snc?oc=5",
+      "category": "Política",
+      "publishedAt": "2026-07-15T19:48:37.000Z",
+      "quality": 0.94,
+      "spectrum": "Esquerda"
     },
     {
       "id": "news-Mundo-BR-3-1784128547000",
@@ -630,7 +860,8 @@
       "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxORHVaY1ZDREFiRHJuU0NsYVBvdVRhVFZ0S0Z4aTA5aXhnZjFjWmNZVENwd0Q3d0Q4U2xfZTNhRWpxWWtUSDBkV1FZWHJDUVZVUk1zb1pvcEFiNHY4RngtRzZtYjdkR21qSGozLWduV1NKLVl6NjFXWm0tQnFKenpuZ0huOWlDVU9VenQ0d1h1Q1loQ3dWdkk0M0dmb2JWZW5ZV3QxY1QzT1p6ZW_SAasBQVVfeXFMTnNrSVVIejJuNnZWOUtGRzRFUXNOck94UENSeWhwY3c5N29scHlUdFc5ZS1SQ1JKN2tXS0c1RW43UHZpMk9oTGF5TWxkRVpLOExHSWRCdjlvT09xQlYwaUdwQWZIZ2tkdWJjczFvRmZxZkprWXBhTHBrbGJGQ3VibTlZM1hxVDNtcmZ5bS1VdHlja1BYZzZxVDlEcnh1d3hhemdabzJsLUhzN3o0?oc=5",
       "category": "Mundo",
       "publishedAt": "2026-07-15T15:15:47.000Z",
-      "quality": 0.94
+      "quality": 0.94,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Fé-BR-0-1513440981000",
@@ -639,7 +870,8 @@
       "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBXcGVpamN4bHVGZFBrWmhxMUc4S3VWczFxR0gtSlAybUhKRU9XakxZa1NtQjJaWWh2R1hxcHpVTlBwUjNQUXlrZmYwQzVSLUdZeDFXZDhmbnY4RDJHV2c?oc=5",
       "category": "Fé",
       "publishedAt": "2017-12-16T16:16:21.000Z",
-      "quality": 0.98
+      "quality": 0.98,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Fé-US-5-1513440746000",
@@ -648,7 +880,8 @@
       "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFA3Y01BSnl1ZWJRXzU2aHNoMVVzc3dJV3lxSHVrc08xc0lKd2JnMFFSZ3dYSElwQV9Vb1FfWG41LXNsWko2T2twQUNpYnRlVWYxWG92cVZhbEswdGxUTUVr?oc=5",
       "category": "Fé",
       "publishedAt": "2017-12-16T16:12:26.000Z",
-      "quality": 0.98
+      "quality": 0.98,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Negócios-BR-1-1784102546000",
@@ -657,7 +890,8 @@
       "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQU3NaRjY0U3ZNX3pHdldWRjlDRGtqUTVDT0pDNVpnbGdkVTRXc0dZUEd2R1Y5RUpJSlR0MkpYTzZfWVFYTHFkRzk0aVZCZ1N6VS1RMmZqMklUd2NxNW1XaHVhYTZ2TzE2d3dDTWZwOHZ2dEF0R3l4NFNscktWTFlldkVrOGhIRWNTZmtNd0w0WE0tUWZ5ZFlrc3h2OEtiYTd6ekI2OUpiMUloaE5n0gG7AUFVX3lxTE1UZXdIWVZrdUtranhtWnpIblFhRnpLTE8zWVkzeUFKRkxneGliM1JLdGxJZ3BsSjFBcmF1cG9pd2k0UHlsNUl6UEJrS05xaWxBc25Jd3FaTGUxRVJxSWtRWi05MVdIbXVSOV9wTXl1aUY2eUkzZjRLQm5IZ0NhTFJ1bnFCSVJZUXhWaDBnXy1NZXl6V245US1HYnNWM08xdGNnUDVaZkZFYVlEbkZQODQ0NElhRE9NcjNqUXM?oc=5",
       "category": "Negócios",
       "publishedAt": "2026-07-15T08:02:26.000Z",
-      "quality": 0.94
+      "quality": 0.94,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Negócios-BR-6-1784102504000",
@@ -666,7 +900,8 @@
       "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPenBYTUNfOF83OWFsQjl0aDNKc0hEaDJLcmpEZGhtNHJhaUNHT3RTOVI1R0RvLVBDdUtzQWpNRG1GMDFjQ1RUSDBZMC1JOUd6dVNTS0RoNFNJZVVkQS1nLUJPQ2FuaHJ5UVFIelo4ZFJSZnZyLUNlQ1M4cF80M1VSQjZibFI1LVl5WmVKSlZJTjlDYmtQMjg1R3Y5bzJmSzBxcUNDRNIBswFBVV95cUxPZ1BKZWFiWHgwSktjUWItYU5wU3huYUo0T3o3UjBjOGZnMVc0azN0Q2s5c20wemEwTGtTbDV5N2h4NlVRR3ktN2VobE0zVFNVR0tPc0tfcnQyWTRLaHl5U2ZkU2hFV3BZREV5eDZibWlHN2tPWkRvd3Y3SUp5N0hqUTN0d1ZFUG83UVVPdEZaZnJfUjBrSDdxeXFyU1pqd1Mwcl9XZmotb2pXYm9fZFZ2UVI4cw?oc=5",
       "category": "Negócios",
       "publishedAt": "2026-07-15T08:01:44.000Z",
-      "quality": 0.94
+      "quality": 0.94,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Criação-BR-4-1784102418000",
@@ -675,7 +910,8 @@
       "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE9ERFp5STVLa2dHdm5zMXdNM1Y5ZTJCOUhPOFF2QUpyLVVVamlvc184bUxmZ1JIMEFNT3hRRkxzaEVMWnFzanNFRVdyTkFJTTRFbl9ySUxTNWJ3bG1scEVXak11UzJIeW9ObWl6am9TYUZSSVdnaXM00gGGAUFVX3lxTFBDQ3dXdGlta0RtZjJlMEdfa0pOdjRvekI2TldyMmdra3ZEbWhRQUExWWdKczhydFVOVmR6dzhMS2kzbmM3VUM3Yms5UVFmS2pEZTlZUnlOVlhwY0FrVFJJZkd2bk1iTEd0NnExOWFBS2l6Um9VRVBsZzVldFgwMlhFYmF4LU9B?oc=5",
       "category": "Criação",
       "publishedAt": "2026-07-15T08:00:18.000Z",
-      "quality": 0.94
+      "quality": 0.94,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Negócios-BR-5-1784046504000",
@@ -684,7 +920,8 @@
       "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE4xSUpYUWF1TGVWNnlzY3g2M3NFYzJkb0ljM1JPTndTd0pCeEdIaDhrTlpZTjRMT1lZNVFVbndmOW41aDZDbVpiblpFVmFjT0prcjVyVF9sNy04X0xMUThjUzNn0gFnQVVfeXFMT3VTNV9mTWNrQ3Rwc041VjZtSHlwd3Z5clRVREtyYmZlM3ZXVnBOeW1iYWRScE9RVjNmTTlLWHdsT19mVFpvcUxWZHRiZGd5RVVtZTM0SFYxNzB3dzUzWEZpWml2aXc5Yw?oc=5",
       "category": "Negócios",
       "publishedAt": "2026-07-14T16:28:24.000Z",
-      "quality": 0.96
+      "quality": 0.96,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Política-BR-5-1596535644000",
@@ -693,7 +930,8 @@
       "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5yNEU5Q2k1VUhnQ2JfZnVFWV9XWGc5a1llaElBRkdiU1lTWDR0U055cXFScUNtV0VvcUwzLTh5aDVPZ2k3NnN5clhDZ0JxRHdjUnc1OUwyYTV6ZzEzbE9j?oc=5",
       "category": "Política",
       "publishedAt": "2020-08-04T10:07:24.000Z",
-      "quality": 0.96
+      "quality": 0.96,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Política-BR-0-1784138400000",
@@ -702,7 +940,8 @@
       "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxPR2R6WjVaNTVoUWdoSGpGemVwbGkxM0JOTTN3bjhKU290b1FpZjlTZFFNRHhocTYxejFPclRIUDM5VU1ZNnNHNnUwQ2tHSjViSWtVWFZmYWQtdnVNSVFhLVhHbWhrWVJqbmhKeUZzRDZpOXQ3Vm5vSVM5b2w5UllsdmtkRUktcllNUkFDSXJGOFNNcy1wMS1UZTR6MUpRMXd4T2pMTW00aXkzNnZXd3E5NWNfSGJCbWJCWWVkbkRIRGpxU1pjMkhET0cyd3poZEt2czlKclM4UzbSAd4BQVVfeXFMTVVEd21PWlBBVUY4LWd5M1NJUVRXaW1IQzc5b0lCMlJlSTlQVl9MQlc4MUw2NElqRE53YVQ5b2JOaGM5ZVViN2daOFUyRlJuRTZUWGlkN0hJSHpwakR0cV9pS2Iwb1ZaRlB4Q3VoSEZaRGN4QWU3S3FoblE5T0hMMU9yS1FDVWdqREFpNVJBOWozM1NDSWFvemMzNjJpZEV2M3phUjVKOFJ2WWpta2ZBQXh2RHBoZ2JQa1dKdVFGajVPeHpaTV9ueHdfLTVMRUNiclhDUFo2aWl2TEVHcnVB?oc=5",
       "category": "Política",
       "publishedAt": "2026-07-15T18:00:00.000Z",
-      "quality": 0.9
+      "quality": 0.9,
+      "spectrum": "Direita"
     },
     {
       "id": "news-Mundo-BR-6-1772776529000",
@@ -711,7 +950,8 @@
       "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNSG9GbEdVUnk0c3ZRYTNoNDQ5Yk1LWVljSFNLU2Z0WWVfMjZYM3pSWXJWSW5yUFlLbUlzS3ZSRWJkYk5GeV9zMU9pRVcwSE1iOFJCYjk5XzdQMzltMnBudlQ0eEpKR1F5SXhYRHFNQ0U3eHEyTjlrazByb3hqS0pPaE5jRi1pR0xNQ2tsRE53?oc=5",
       "category": "Mundo",
       "publishedAt": "2026-03-06T05:55:29.000Z",
-      "quality": 0.94
+      "quality": 0.94,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Mundo-BR-7-1619427767000",
@@ -720,7 +960,8 @@
       "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxNRF9GT2Jmd0hXZmw1MG5iWWdrWE5raEJfNHJVWnZHc3RrTnlnSU5vQk51c2ZUa1U2VTRENEpVSlRmSG1hR0VfSEJTVHBKa05RMkdCUklobkZGelhZZ2NJMlJlNXJrcEJTQ2lXR1VHMENfU1FkNTNBNXBPUkZvb2hKR2ZR?oc=5",
       "category": "Mundo",
       "publishedAt": "2021-04-26T09:02:47.000Z",
-      "quality": 0.94
+      "quality": 0.94,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Ciência-US-7-1784225975000",
@@ -729,7 +970,8 @@
       "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE5mNVd4RC1yUmRwbGZ1bENUTWI4OHN5eWxlZFVzVm5Tc250bHcxRnhsU1hzcWZxOVBydWtNb2l6bHBSNkl5T3hwMnZsUVBXOGpWYkpWc0QwWlVqSjBQYXdDVw?oc=5",
       "category": "Ciência",
       "publishedAt": "2026-07-16T18:19:35.000Z",
-      "quality": 0.62
+      "quality": 0.62,
+      "spectrum": "Centro"
     },
     {
       "id": "news-Ciência-US-2-1784224800000",
@@ -738,7 +980,8 @@
       "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxOdEw2Z0NPSTc2ZDJZQmpmcUFfTWhyOEdzSmNZNXVxdUZvc2Rjc2NoT1FiM0hQcDBpb19TZVo3bWJ6WGxPdFo2TE5qRG9yNl9XYTNGMnFPLWMwM1JjbTI1d21sQlRabFI5bjhBVnplNU01OVFhUXlrTW5Wa2N5dzV2LVU4MnBqZWRKVVgtcVhVQ0ZBQ1RlazJtNWtuNG0wNUhQdzFuQnVEdjRlRUpCV2tnb1FvUGc?oc=5",
       "category": "Ciência",
       "publishedAt": "2026-07-16T18:00:00.000Z",
-      "quality": 0.62
+      "quality": 0.62,
+      "spectrum": "Centro"
     }
   ]
 }
