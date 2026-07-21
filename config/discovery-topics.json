@@ -1,0 +1,11 @@
+[
+  { "query": "economia e negócios aula análise profunda", "category": "Negócios", "topic": "economia", "language": "pt" },
+  { "query": "filosofia natureza humana curso palestra", "category": "Ideias", "topic": "filosofia", "language": "pt" },
+  { "query": "geopolítica política internacional análise professores", "category": "Mundo", "topic": "geopolítica", "language": "pt" },
+  { "query": "política brasileira instituições democracia aula análise", "category": "Política", "topic": "política", "language": "pt" },
+  { "query": "administração gestão empresarial estudo de caso", "category": "Negócios", "topic": "gestão", "language": "pt" },
+  { "query": "formação católica fé e razão aula", "category": "Fé", "topic": "formação católica", "language": "pt" },
+  { "query": "astronomia foguetes exploração espacial documentário", "category": "Ciência", "topic": "astronomia", "language": "pt" },
+  { "query": "estratégia youtube roteiro planejamento de vídeos", "category": "Criação", "topic": "criação de vídeos", "language": "pt" },
+  { "query": "science curiosity explained lecture documentary", "category": "Ciência", "topic": "curiosidades", "language": "en" }
+]

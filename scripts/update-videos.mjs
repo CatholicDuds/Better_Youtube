@@ -37,20 +37,27 @@ async function fetchSource(source, sourceIndex) {
   if (!response.ok) throw new Error(`Feed ${source.channelId}: ${response.status}`);
   const xml = await response.text();
   const entries = [...xml.matchAll(/<entry>([\s\S]*?)<\/entry>/g)].slice(0, 4);
-  return entries.map((match, index) => {
+  const videos = await Promise.all(entries.map(async (match, index) => {
     const block = match[1];
     const videoId = valueOf(block, "yt:videoId");
     const title = valueOf(block, "title");
     const channel = valueOf(block, "name");
     const publishedAt = valueOf(block, "published");
+    const page = await fetch(`https://www.youtube.com/watch?v=${videoId}`, { headers: { "user-agent": "ClarityLearningFeed/1.0" } });
+    if (!page.ok) return null;
+    const html = await page.text();
+    const isShort = html.includes('"canonicalUrl":"https://www.youtube.com/shorts/');
+    if (isShort) return null;
+    const durationSeconds = Number(html.match(/"lengthSeconds":"(\d+)"/)?.[1] || 900);
     return {
       id: `latest-${videoId}`, youtubeId: videoId, thumbnailId: videoId, embedType: "video", publishedAt,
       category: source.category, title, channel, topic: source.topic, url: `https://www.youtube.com/watch?v=${videoId}`,
-      durationSeconds: 900, depth: source.depth, novelty: Math.max(.65, .95 - index * .06), quality: source.quality,
+      durationSeconds, depth: source.depth, novelty: Math.max(.65, .95 - index * .06), quality: source.quality,
       evergreen: source.category === "Mundo" ? .7 : .88, publishedLabel: publishedLabel(publishedAt),
       palette: palettes[(sourceIndex + index) % palettes.length], mark: source.category.toUpperCase(),
     };
-  }).filter((video) => video.youtubeId && video.title);
+  }));
+  return videos.filter((video) => video?.youtubeId && video?.title);
 }
 
 const settled = await Promise.allSettled(sources.map(fetchSource));

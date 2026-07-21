@@ -1,6 +1,6 @@
 # Diário de aprendizado do Clarity
 
-Esta pasta é a memória de longo prazo para estudar com o Codex. Depois de cada bloco de dois vídeos e uma leitura, o Clarity baixa um arquivo `clarity-diario-AAAA-MM-DD.md`. Mova esse arquivo para `entradas/`.
+Esta pasta é a memória de longo prazo para estudar com o Codex. Depois de cada bloco de dois vídeos e uma leitura, o Clarity baixa um arquivo `clarity-diario-AAAA-MM-DD.md`. A biblioteca também exporta resumos `clarity-leitura-*.md`. Mova esses arquivos para `entradas/`.
 
 ## Como usar com o Codex
 
@@ -13,4 +13,4 @@ O Codex pode comparar dias, criar revisões espaçadas, gerar perguntas e montar
 ## Estrutura
 
 - `entradas/`: arquivos diários exportados pelo Clarity.
-- `MODELO-DE-AULA.md`: roteiro para transformar o diário em uma aula progressiva.
+- `modelo-de-aula.md`: roteiro para transformar o diário em uma aula progressiva.

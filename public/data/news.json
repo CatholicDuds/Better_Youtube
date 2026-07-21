@@ -1,0 +1,390 @@
+{
+  "updatedAt": "2026-07-21T12:26:09.292Z",
+  "source": "Google News RSS",
+  "news": [
+    {
+      "id": "news-Criação-7-1784584616000",
+      "title": "Rede de Inovação aposta em tecnologia para aumentar competitividade do comércio em Pernambuco",
+      "source": "Folha PE",
+      "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNSTJZSkMxVnN2NUFIa3BuTDZ2ZU5wQlVVSHQ0T2luMF9vcEFMX3BuX1FXRlhSZVZveUI2TWJWd25HeVFrU2FtUGdoZjQyOC1IM09JTndYS1dZU3JLbkgyUHVnenlDczVqb3FuaWFYX0o3SFZ3VUJSdnR0SklJZ2JlNTVselRCTjBDazZ5VkM2LVhOM0l2VVNEaDh3OENpMy1jUW1SbFVJbkpBZ0huQ21jMzJuZmI2ME5I?oc=5",
+      "category": "Criação",
+      "publishedAt": "2026-07-20T21:56:56.000Z"
+    },
+    {
+      "id": "news-Ciência-2-1784579520000",
+      "title": "Conheça a única tecnologia (humana) a deixar o Sistema Solar",
+      "source": "Olhar Digital",
+      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOVFRkX0h6SlhmcGR0S0hvWjREY3M1amdVTXNUVXVqRUFKUmRnbFJfWHpzdkc2TndoVmxCRjZOdzQwWFMzeXBfaHk0WWFlQXp4aWgtdzg3MFYxblJmbEpBQW9BMFNOYlR4RThaMnhTN0R3bjh6dXhTTXlKWjhqcno4VFYwbk5RaTdJcjN0bVFMY3AzRFM5VXRsS0dDcEs5SGstNy1TdFlCUmhFYUJmQjVURkNrZEkwdw?oc=5",
+      "category": "Ciência",
+      "publishedAt": "2026-07-20T20:32:00.000Z"
+    },
+    {
+      "id": "news-Negócios-2-1784577771000",
+      "title": "Economia prateada ganha força e leva empresas a adaptar estratégias para consumidores 60+",
+      "source": "VEJA",
+      "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQbGNqR3IwYTNraFc4WmxCOTc0ZHNMdE9NVW1hZ3ktaWk1QUplcEJRdGRVeGpfSF81bGRVNUlhT1ExeW9yeEprUVh6cFpMTEFHQkwwM1lZV2hrN3cwOEhGbUh2WEVGNFZEWVpNekZwUzJtaUV6VkdDVERPcTRrSTJXeFgwcDRuaTV2WXFTTnRORlNkSnM4Ym9iaGpucmUyRzIyejlaR3ZsMGI4Z0sxdHM3S1kwQklGRXpJNWNEU1MwanhnUQ?oc=5",
+      "category": "Negócios",
+      "publishedAt": "2026-07-20T20:02:51.000Z"
+    },
+    {
+      "id": "news-Política-3-1784574437000",
+      "title": "Convenções partidárias no Brasil revelam interesses e incoerências políticas",
+      "source": "Canal Rural",
+      "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNWE56dG5mcUc3ZTcxeXlDaVZhbmduUGd3Y2JDUERlbURBSEJtVUxxQ3VndVRvQjBZUHlYLVFDZW1HSnI2V2FHbDl6TUdhbmxJekhfa1d1NmF4RVVvaEczVEtOa0t3SmxXcnRnWGxJeVpaU0JwU1phRFNKNGJEc1MtOHcxZnJTQTVjRG1SdzRWUmd5N2FZaTFXUVQwVng3VjJ0czVFdTZwbTFPVkFFNFVWcWRITTE?oc=5",
+      "category": "Política",
+      "publishedAt": "2026-07-20T19:07:17.000Z"
+    },
+    {
+      "id": "news-Criação-2-1784565222000",
+      "title": "Mirante Tecnologia aponta que 92% das empresas pretendem investir em IA",
+      "source": "Inforchannel",
+      "url": "https://news.google.com/rss/articles/CBMi7AFBVV95cUxQU2pfeS1aYkEzSUhTVEtJZ1AyWVZEdGVtdFNDTWh0X3hZeXVnYTRIYWh0UHVSYjYwT1cwYmpJTXJUS2xPdzJMblFYNl9Id2R4V3Q5Q0xlX0UtaFViRVY1SHVIbzZ0S1dIektmc3ZlUTdQVk9CQm5yYXBIVV9fY2lwWVNQSy13S1VxbHpoWTVaZW9sV2FTeDNDdVF4T01RZS15cUhrbWF4WEFCN3JCejYyNkYxbEgxNW1ld2p1S0xnVzNBOU9nMF9FOTJYazRPZjVxaFBFRkhDUHAySHc4OHcyV2treVZSeFEtam5GTg?oc=5",
+      "category": "Criação",
+      "publishedAt": "2026-07-20T16:33:42.000Z"
+    },
+    {
+      "id": "news-Ciência-5-1784563162000",
+      "title": "Ciência na Estrada chega a Vicente Pires com show de ciência ao vivo do Einstein Jr.",
+      "source": "Agita Brasília",
+      "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNU0o4bWlIRDN4VVhOLVB6OGY2a1o0WWw0VUZ4NkRwTENZbzZ1TE1zSWJOenRzSmFZRk5CNU1nMlA2aEFPdWJPTTNqT01yUjRGaWxiWU5GNUkwVmczSC1Kazl3MDloaFpaQm81ajJ4dFZHTUl3SlIzdUt0amZkQWdlNFlmR0d5aG5kaGJ3aThWNmx4YU9wWmd1U1VrUEk3RV9yT1l1ME8xSmFNUTlPUjg0?oc=5",
+      "category": "Ciência",
+      "publishedAt": "2026-07-20T15:59:22.000Z"
+    },
+    {
+      "id": "news-Ciência-3-1784563072000",
+      "title": "Ciência na Estrada leva programação gratuita a Vicente Pires",
+      "source": "Jornal de Brasília",
+      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPWjlfc091VGtnakhZcTN2U3diUnREbTdEVW5yM1NXWl9xSXVOeF92aUltVExiZzRySHJNVHFNYThVeURnOWdhNGJNS05fbnBpNzlBTmNwU0pzWFFYdXF0Wi11dGlMSW9rX0JsOGZrYTlWVkdMZEx4bE5EVjktdFhvWmtfREx3U0ZXbUF2SGRKbFIyNDhBd2MxYmFlRUwwT1J1UWRQQw?oc=5",
+      "category": "Ciência",
+      "publishedAt": "2026-07-20T15:57:52.000Z"
+    },
+    {
+      "id": "news-Criação-3-1784560404000",
+      "title": "Nova Rede Senac de Inovação conecta empresas, pesquisa aplicada e tecnologia",
+      "source": "Diário do Turismo",
+      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPMTRaeU1VZWREWnQyVnAwN1c5ZW1fbEdVbVN1Mzg2THhvLTZsZ3dUdzVTUV9UdkZZMW9BcHY0M0N4MUhCNUo3Tk9fS25ydm5FVHQ1N3puWDluZFp2UHIydWhpcEIzVVV3YVF5dm9FcnBXVl9MdDJsV0t2Yl82UzU4MFBMcUdjSEdDYlNMTVA1YV8tRHpjRFVpQS0xMW1tLXpFa0lqMm5VRVpDS3M?oc=5",
+      "category": "Criação",
+      "publishedAt": "2026-07-20T15:13:24.000Z"
+    },
+    {
+      "id": "news-Mundo-4-1784556780000",
+      "title": "Da Convenção de Montreux à crise em Ormuz: como os estreitos moldam a geopolítica? Analista explica (VÍDEOS)",
+      "source": "Tribuna do Sertão",
+      "url": "https://news.google.com/rss/articles/CBMi9gFBVV95cUxObjllV2NRMjZXdVRtaE9XdEpkY0Z2U2lpcW1CTEdqcFZ2RkhjcjBQZWwxSWJUTlZmdGtYci1CTXg5NVMwY21ObDVJOS1XZTEwakxIZjIydjV5X185c0FpWS14dVFtbi1INkJvVEZvRjF1R3ZxZ2lNZnlGQ21Tb2loN1lmNE43aTZveGpYbGlqaWVCa2VYUVc4WU9kUnhJNWtDMGNfYi01VFdJUWF2ZTEzNGJWRjdEV0dvc0k4Mzc5VHhzNTBCTkEwOUhfZjlNRUtxMUk3M1RUeFd4dVRuMG9BT09FaW5yNG50ckFnMHB6alVPc0dWc1E?oc=5",
+      "category": "Mundo",
+      "publishedAt": "2026-07-20T14:13:00.000Z"
+    },
+    {
+      "id": "news-Ciência-0-1784538240000",
+      "title": "20 de julho: E o homem pisou na lua",
+      "source": "www.gov.br",
+      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPWnJPUV9YY2NNcHVBZDNYMUtCWjNBejFQQmlZLUY4cmpiTjNzRV9uRml6MmlIaHRoUzk2clExR294S2FOWHNzcWtKLVM0ai1Bd2FBRkZtMTRZZXFRWFFCNnIza3M1UllWdU5uRWVQdzBaTGhONkpORkZzNkpoSWd1WWI2UDNZbXV3ckhhTm05b3F0V1NXVWd1cQ?oc=5",
+      "category": "Ciência",
+      "publishedAt": "2026-07-20T09:04:00.000Z"
+    },
+    {
+      "id": "news-Negócios-5-1784530860000",
+      "title": "Economia Fora Da Caixa - Empresas vão para o Paraguai, mas o Brasil continua atraindo mais investimentos",
+      "source": "ojacare.com.br",
+      "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxNTnRlb3BfdWhiSTRXRGFIMmtzX1Q1RGpQRDJIN0RSZ1RZZTdGMEIzTkRvU2V3d1dFMlJzb2Q1bkdCeUdOWUF5THJxbmxMMXFFa1pHTWthcmFjVXRNNmFNRmVndDJ1aU42RU5CODNXUlkzX3NTYWZPdEtmWXNsU2h5V0ZqaGJ5VEdSQk45YS1BWlFnQXRxckZ3ZUdWTnh6TlNseHl0dHQ1MTh1cTE4U1A0ZUN2NTBtd2tpd3drLWMwSUIxenhYUkN3ajZMYkhINjhYUm02enpZUQ?oc=5",
+      "category": "Negócios",
+      "publishedAt": "2026-07-20T07:01:00.000Z"
+    },
+    {
+      "id": "news-Política-2-1784444100000",
+      "title": "Análise: Brasil entre soberania, democracia e seus problemas sociais",
+      "source": "Correio Braziliense",
+      "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxOMm9XMHBsc3JDVm1OTzZ1bFFvOUtDbmdaUTk2eDBMUmpZZVZIVTN5X1R1bTZqalpXWkt1M1psN1hZVGl2c1hnWmlfc2NDREJKalgyeUtRTm5IVFJNbmtYNnctcmJ6QXhtQ19OWG1TZVhNNE54R2Z2aTUyY3pPNzcxbXZHRV9aQWIzUEtjYkkxbzIyRS1nTm9yLVdBOWVhbUctc0s0YjV3b29QMDVzcGJUZy1PSkVfMGJwNXRKMzhLal8wUXV5Mm5UVW5Nb0ZUSzTSAdQBQVVfeXFMT2hiN2RpYWx6RjJWSkhmdXZXekpsNmMxYlVxUzAzVjg3V1ZpQW5US1JFSXFJaHBNdFRBSVplLWNYWUVKbG1VTllVX2NUcnd2WGg4dGo1Zmx2WW51TEtrSkgtc1NSN3g0UGRlTm92WVRIOUJZRHBlMU9wNXBRaHB3SGp6WlVsRWVoMzRhSmZmNUJtZnU2bGhRXzFPQTh6U1NwV3FxdVF6RlU5aEtJd3IzY01uNllRRFhmME0xQ052eUU4LVVwQmRZbjJUTjU5ZmtfM0VEbGI?oc=5",
+      "category": "Política",
+      "publishedAt": "2026-07-19T06:55:00.000Z"
+    },
+    {
+      "id": "news-Mundo-7-1784423640000",
+      "title": "Internacional - Espanha e Argentina duelam em Nova Jersey sob cinco séculos de legado",
+      "source": "Lê Notícias",
+      "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPcmQ1Y0V5TjRvMGMwZGR5YkFEUk9sNC1wNzlWUEVYdU14bXE0aGNyX0NtRmdENHlWLVZOUzh6RE02T1JMMUFzWUhYdnVDcDR0ZnVFamJ5aXNOTnFRcm1zNG9rQndEc3NYaEZqRVA1dkNHQXpmLW9aSTdNemVSZ09YamZVUHNLRnc5YlNadklmaThhWGVUV0tOcXZ4ZXZpYURMUFVVa3E1WjBKMDNmRnhDdFAzUVg2VnJW?oc=5",
+      "category": "Mundo",
+      "publishedAt": "2026-07-19T01:14:00.000Z"
+    },
+    {
+      "id": "news-Negócios-0-1784403036000",
+      "title": "PIB: o que é e quais os impactos na economia e no seu bolso",
+      "source": "CNN Brasil",
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOOUhhZ2tMbjV1NkY0Z09sWF9JV1ZyR2c3NGRZVWZxc2djc216YTd4MG5PMnAtaWJXSGRIcy1SWWp1T2JLZzE5MzBCT1FWRUxYb0Rvc1pBZjkzbGlIVndDMFRqUGRXNmp2OUJTQTJ5MkJQdmNobnp3ZV9BMjJrR1IzUG5NRGpscndHd1k4UUs5eWdnZUNQLVVaVE1McUZ1aFVlXzRxRk1WckxtZw?oc=5",
+      "category": "Negócios",
+      "publishedAt": "2026-07-18T19:30:36.000Z"
+    },
+    {
+      "id": "news-Criação-6-1784379600000",
+      "title": "O “Vale do Silício brasileiro” atrai empresas, profissionais e estudantes com tecnologia, inovação e alta qualidade de vida",
+      "source": "Correio Braziliense",
+      "url": "https://news.google.com/rss/articles/CBMi-gFBVV95cUxPTV9hV3lTTnAxSm1WeS1scDl3TGd4TTdQamNzRTFqNDk3dnBGUjIyOGJmZlRnWWNVcVR1eDN1WkdkUXZ6YTI5LWxhRERKclc5bW9JODlBbFpYS1pnY2x1eVNPMWY0QS1tblE2Vy1faXlqYnRLMkI4MU9LemljTVk5V3BmN2UzZmdqVHNFU19KR2RpU3NnSTBNemQ0VlJDVVRhV2NzVmZHNWoyWlluaGI4MU05OFNIUWtLd19WR0g2Yy1FOHRHbVJaUkFabnZMWmNNVktuMF9LbHFvaV9FVzRGWWVlN29YczZCX2hzUlk5X2ZIbVl2RUxkMXN3?oc=5",
+      "category": "Criação",
+      "publishedAt": "2026-07-18T13:00:00.000Z"
+    },
+    {
+      "id": "news-Criação-4-1784330886000",
+      "title": "Parque Tecnológico De Santo André Lança Novo Portal De Inovação",
+      "source": "ABC Agora",
+      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE9tR2doRjV6SmpiaFd0Z2Y4WmtzYzhqc3RPcHpjUVRMN09XUjBKRmYwTl84ckxEbmNoQWh6OVRKOG5XQXBEeE9aMWoxTTZsdGpYSDNqS2w4LU9lVTB1LVRsbmJBVGlKQktPVXN0VDA5bnFhS3dnc0FmV1Awa1JDdw?oc=5",
+      "category": "Criação",
+      "publishedAt": "2026-07-17T23:28:06.000Z"
+    },
+    {
+      "id": "news-Mundo-1-1784310094000",
+      "title": "Geopolítica tributária: quando a tarifa chega ao campo",
+      "source": "Canal Rural",
+      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPNkkweG96bVlzVkJXVGQxZzJoRUhfal9VZktFLVQ0LVdRSEFDVUVuVmFfMjJHczAyRkJZOXRvN0trc1pwNC00dHFubFd5Ri1HTWtrZ0RSU2lsSTh1SkV2RXZIdGR3U3EtSXBWSkFHWldGV0tpNGlfakM5dzB1NHAzZG96WUkzQjVmTzU2bm00MXc3NXFQN1dUYmh4VU9tcjRHQS1z?oc=5",
+      "category": "Mundo",
+      "publishedAt": "2026-07-17T17:41:34.000Z"
+    },
+    {
+      "id": "news-Fé-2-1784292058000",
+      "title": "Padre excomungado contesta Vaticano e mantém missas no DF",
+      "source": "Poder360",
+      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQNG1pOEhjVURKdWlsZ28ycUJuTlZZdGdSdWJUYW5DeS03cExHMVNFb2dJVEdMWmMyazZidVZMUUxJQ0tDaFh5b3dUcEFvS0tjRDh2SHRiTEJEX1lMTzVRZXRYaEdSZVhEQ1B4cXBoel84NEYzaUhqQmxBaWRhRkVzZ2duQnFvdHdRdlVGeDRBSnpXMUhzeVBNekJMN1RnemJi?oc=5",
+      "category": "Fé",
+      "publishedAt": "2026-07-17T12:40:58.000Z"
+    },
+    {
+      "id": "news-Negócios-7-1784285717000",
+      "title": "Com o novo tarifaço nos EUA, qual será o impacto na economia brasileira?",
+      "source": "InfoMoney",
+      "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxNRF9nZl9tNVR6OXVrZ3BfU05WWmx3QkdrckJVR3d2S29pNEpGTnhmcHZpRF9xQ013dE83eEplOG02aDdPejhJa1V3TDJiNGZ4QUcxUDBZYl9XN05XeUVSb1pLSS1pV0Y4bVFOX2VuNkh0dWVPQXRIMXg0VThsalExUEgzNFRiUXF6Ty1qVFpJT2tBTE94U2lscTlQcnhRNWhac2g2QXpYWUNFaUx4WUHSAbMBQVVfeXFMT01SdWxvdXhweEw4dUhfcnoxRDA4bjRJOUZ5UW5TWGNDQ2hDbkJXd1RVRUFURE42ZmxnOFBUb0xzTDNwcDhRaWhyWUNqdF9EdzdLZHF0akJIQW5lNHRmLXBuaUpkZWJxay11YVNGbHlBUVdOenU2WDdmUzNENjRSbHZILWk5RWdSX1VxUUdiTjRrSDhkNzF4ZWJJUEhUMklwZ2RaUFRJeTVSdGFzRFM1b011LVU?oc=5",
+      "category": "Negócios",
+      "publishedAt": "2026-07-17T10:55:17.000Z"
+    },
+    {
+      "id": "news-Fé-1-1784265113000",
+      "title": "Padre excomungado diz que foi advertido por recriminar rituais de macumba",
+      "source": "CNN Brasil",
+      "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxONUljQkJKdmRRZTdmV2h5cHNhdVlUR0dxamx3bk1uODQ5WUg3a29MZFZGRDN2OWRZYnRhNG1aZDJZSzNsQUVIYkhnUjBicVZfMVdwOFhCUGlUdTc0VDhicmprYkc3WFBvQk5MelV2VkxZR0ZWQklKZzFjTGJkbmNaR0FvbldReVR5bk9sRU1INEJHMi1uVWtBbTIyWDRzQUloeWhDNGY0OGpuUFNvVGZncjYxWUtrcldHZ2QyMmtFZGs2ZFdEVHF6clNnM3FBUQ?oc=5",
+      "category": "Fé",
+      "publishedAt": "2026-07-17T05:11:53.000Z"
+    },
+    {
+      "id": "news-Mundo-6-1784259009000",
+      "title": "O tarifaço de Trump: a negociação e as taxas contra o Brasil - O Assunto #1763",
+      "source": "G1",
+      "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxOVDRLOUtDUWlPcjUzY0JiRzE5Sk1GSk5kcERFV1J2NjVNX0FEb2d1SDVxTTJIMWZ2NUxCUENrQXJPX2U2YVZmYmZDRGpPWFlWQ09jcWJpaU1ETk9yWTNoaGVDRkVESzJDREZ0b2s1YWEyeHVZQldHWDJPMHVhT3djNENSY2JDQnNoS0RoUnZsdjlYVzRsX0hQUHJwZVBpU1ROWlNJZk1SS2k0NU9RYUVQeFh3dnBpSGJWR2dFLVd1ZEI0YU9UcVJMTnZIWlA0YkVxUVNrZ9IB4wFBVV95cUxNSWN4SFpIcVVMUWp1QWRUeUR3TTdIZmx1ZWZXVVFPMHVKV3BGY0sxSHVGZXU5U3l6dndCa09RSkN6UEVsSGMxd3VUS2hBNzJSYmp3dnJoMDU2ZEp6WTVwc2hCb29XLVlkOTFqQTdKdzlEVDR5MTNBMmVtZTZ0UGQ1Snk2U0tubDZoc2JfczIxT0JyTlU4X2ZBajBqSDhSUUxxYTVydmJQUUhhakdyVFQ4TzRwQUNqejlSdVVudHcwX1BzQU1HWENFbGZRb3NUU2EtS09qdG00blN6Z05KVXZjT3FPVQ?oc=5",
+      "category": "Mundo",
+      "publishedAt": "2026-07-17T03:30:09.000Z"
+    },
+    {
+      "id": "news-Política-1-1784250492000",
+      "title": "Análise: Brasil e EUA escalam e Lula fatura",
+      "source": "CNN Brasil",
+      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxQaW5BMXY0LTdWMEhDaWF3RE41SDJhUzRwUkUwb1E5WHdIdGk2dXRobmM4TW55QVA4U3czaV9SSTIxd3JOZF9PQ3Jwd1MtU1poVWl4TEtkZjlBck5jRGhlZ3ZYaGJ0ejFLaGZJWmtuV094T1otS1JVT19qcDFjV3ZoX0VqTUdaX1N6UEltSDlsUG1kYzZwekpsWDA2ZEdZMFdqQ2VZag?oc=5",
+      "category": "Política",
+      "publishedAt": "2026-07-17T01:08:12.000Z"
+    },
+    {
+      "id": "news-Negócios-3-1784239202000",
+      "title": "MEIs: 78% das novas empresas no Brasil em 2026",
+      "source": "Portal Contabeis",
+      "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxQTnAzVDZFWmo3dGJibW1ucVdTZEpQMkdmQWwwLUZkbjVlYnl5WnpRc3lLU2d2MUZnWlBUdnd2c0o4czhseE81SThEbHNQb1pKLVFoZVVkZ0Z2OFAxZUl3clRycHJhTHp0d0FOSEttb2R5TFNlWVVuY3dQWDVjZ3JZLUhhLU9RMmtQc2IyYWFHUFBxc00?oc=5",
+      "category": "Negócios",
+      "publishedAt": "2026-07-16T22:00:02.000Z"
+    },
+    {
+      "id": "news-Política-5-1784234259000",
+      "title": "Caiado critica Lula e Flávio Bolsonaro após anúncio de tarifaço dos EUA: 'A polarização está saindo cara para o país'",
+      "source": "O GLOBO",
+      "url": "https://news.google.com/rss/articles/CBMigwJBVV95cUxNYU1sdW45ZHFtNkVZVzllVVpSazZQdjViX2lrSndlNC0xS01hdUlhYWdnWWZ5VDhxbVJHWDZTcXF5Zlp4bWVPdkJKY05TekwtNXdmUjdrZ1FHVGRGTWZrWDNzY1pkaGNHRURxYmtqYTk2QnFkeVY5XzNlRlZmQjV4RWZaLWtmQkJKcFVJTjdIQmNmbHd1WGNNRWtqUjA3Q1FIM1lWcFRsVnZhWmw3SnJIaHFoWU85VzN0aWxvcDF0UU5qRFRXZDFNcU5PREMyTmRXSl9zM0xZN2R4aEx3Mm9qOHlmT2U4c1ZjbzJHTWNKYXJFSXctQlJNS00xU1NybTFKQ2dr0gGSAkFVX3lxTFBXRGlmOEV2MExQUzdFMVA0T2FhOHJmdlZQZTRKUTl0MjlULXIxQ0ZBd0JRZ09UX0hEcWVFeU16b1RyRG1CZEFmTnpabnJlRFE5Vk9nVHRaclhvRXBYelRVUnJ3T0g3TkpXV2ViZ25NZXVhYUhpZ2dGSEV4Z3J4RUd5bEpiLWhzbkZfVnVrR3htU2RTYzlqQkV5STM4VkFMSjJpOUdVdkotU0FuLW5xLUlFRlZzbDBKeHJQZGpuM3A1eWwtUDFjbTFDYVUwSGU4M0QtR0diS1B3a0RiMWNxU1dUTXpCd2NkOGsyM20xM0dFcmJJZVVWZERnXzRjVlU5bmRfMHJEZ01mS0hDWTMyTEZzMVE?oc=5",
+      "category": "Política",
+      "publishedAt": "2026-07-16T20:37:39.000Z"
+    },
+    {
+      "id": "news-Política-0-1784233336000",
+      "title": "Análise: Tarifaço indica que objetivos de Trump vão além de interferir em política do Brasil",
+      "source": "Valor Econômico",
+      "url": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxPbTYySnFoWV9vTWZRbHdMRjYxNURGZ0Q1RjU4Q3BjeGs3UWNIYTYtcm02OVVrQmMzbjR4UUhGQTh0bnZ4QjBrZ1hIbjY2TE5GcWRiVldRNmdDTkV0eXgxWnQ4STFBb2FmVVRqVGVtOXlLZjhxTHlPTElJbV9rMHFTM1ROQmZrd01vV1ZleU4zd25tMWd2clNYV0tVQXJIZ29zejJ5dzVkSXR5LW10X2JvNzJUa2tEdWhtRjk4UUpEQm53VjU1WjdFbVBoTEdUWk5PMzdzemFBMjZ4U05BZjRmQWUzNNIB8gFBVV95cUxOTTZ3a0ppM3BHaUtrcUE3U21yQXBBcVNXVmVwVktFLWZ6N3JZRklfR04yYjFFYjE3X2tHcGN4SnhibExoTkgzN0VkS0UtNE9BSGlVVGVIRDlLdTJEVUFmRGIxZWgwVlpXQ05uN0phUmxITml3YWx6WTAtWGoxLUZJeUZaMGZOX1lVQTBhblZraENmWkVreHBVVHkteWUzcmtrV3ZiaFpDemxTOVNYNkF0dlMxY3FONGNZVGpfNFFKZFpvZm9KQ0tuV1E1WEVoRXAxZC1GNFg4RXRzSDVOZmJpNF9zc3FMNk1Kb1RXUzJEaWdkZw?oc=5",
+      "category": "Política",
+      "publishedAt": "2026-07-16T20:22:16.000Z"
+    },
+    {
+      "id": "news-Ciência-1-1784228400000",
+      "title": "Conheça 5 cientistas brasileiros que trabalham na Nasa",
+      "source": "Superinteressante",
+      "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxQNXB3dW1rQTFIYnRmSjJ0SnpDLVAwRDBfRkptNDUtdENkYXh6VGc0cW1QcXdIS20yNTNfUGpqb215cW0tcDc5ZkJtRjUwNVBnYWh2WmFiRk5LMHFzQ3pCNTVrdUJXcFpDdlNWVHI3Qk83UkhWdmdGVlo1X1VUVTVhZkVOVWdtWi0ybFliRzg2WmhIem9Z?oc=5",
+      "category": "Ciência",
+      "publishedAt": "2026-07-16T19:00:00.000Z"
+    },
+    {
+      "id": "news-Mundo-0-1784222117000",
+      "title": "Na mira da geopolítica dos EUA – Brasil, Irã, Cuba -",
+      "source": "A Terra e Redonda",
+      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxQVjZueHo4VEN0cTRnY2F5NEI1cVlWMlpSLWwydEF1cGpweWFodE5hSUJHTXNoRGtTRV96MUNwTlpUS0Zla0k5MEpFMEt5RkRqUUVVeXhNRjVQeXhhUFJUODFUdHZYSTNCTWZ4bEJXenh3bUpvWHBSYS1ZeUZqOEY3RkZCaw?oc=5",
+      "category": "Mundo",
+      "publishedAt": "2026-07-16T17:15:17.000Z"
+    },
+    {
+      "id": "news-Política-7-1784208374000",
+      "title": "Tarifaço: Flávio e Zema atacam Lula, que culpa família Bolsonaro por ação de Trump, enquanto Caiado critica polarização",
+      "source": "O GLOBO",
+      "url": "https://news.google.com/rss/articles/CBMihgJBVV95cUxQQ1hHRWtHemhhekVILTJuajRVQUN3X1kwWlloYUpxX1JmcDZoeEZhblBMQTRaakZpMnprNjJIQ296S0pPNDBOdnRMMnRweG5oTml5S1lqNml6cWl4ZzBLUi1zTVJLVExXejF2ZTBqNkVJTVdYWElpNHBTRFZFanQ0VExmT2Q0SG12eWpUVDNwZ0g5RHZTNHZGSmkwMFJhZG9oNXBTbWh1cmlTZjd0dkItZjFxNXNmbUFORWMzX0V3dks4TnhXVUNDZUdsTVdlU0hjcjc0V1pyMTdHaUFrRHlaRXlTNUNQa1JLem1Rd2FSTjVJZkZKX0Rvd3lNcmNjalIwNU1HYXpR0gGUAkFVX3lxTE04RE9qcnJWcGxlN1gzZ1lhaEhMaFF0c3VscnE4YjZBejAzdzl3bGU5dy13NW8xaXdkalh5czNVVFI1Mldyd1ZiRFNuM1lLMlhnc1pTZmxkLThaVHhDMnl3SGZ5dTRXa01PWlRVeHBtaFdCVnFQcTVoMGs2aXl5bDhSaE9lalJzYUU4Snk1OEFmMXRMQXQxSXlUNl9QaXJjSzlZUXV2QW9SMVVfUWdXYXE0TFJMYTBZZkc0NnJtdHlfM2ticFd3N0tWVUF1OEVFS2k2T251YkhfeGZscFBKWUZmZUhDZm1HQ180d2RFZUpvY2xpQ3FETjZkMVRqLXlZOFctTkdoU1hmZTJQbEgtRExBaThQRQ?oc=5",
+      "category": "Política",
+      "publishedAt": "2026-07-16T13:26:14.000Z"
+    },
+    {
+      "id": "news-Fé-4-1784207160000",
+      "title": "O Concílio Vaticano II e sua luta contra o anacronismo",
+      "source": "Brasil 247",
+      "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxNR3hMQzR0c3oyZkNiUE5pZ3p3aTVQUTNsb3lQNWpoNXFPNDRfTXpEcGJJNUdQLTdOS2FEZDFOV1huMzVWQ2NrZS1XbXdTbkwzdVNvTlRCQnd4dGFXSHlhVkxab01pZGx0dFpvdWFwYmZpbkZZM1UzNnVVVTNQYTBMSElRNU1BSEFMbVRhVkN2Yw?oc=5",
+      "category": "Fé",
+      "publishedAt": "2026-07-16T13:06:00.000Z"
+    },
+    {
+      "id": "news-Fé-5-1784203860000",
+      "title": "Fraternidade excomungada pelo Vaticano recorre de decisão",
+      "source": "Estadão",
+      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOZWNxYzRxbExGWVpTbGd3ckc1eEtLZ1lXM2pYcXhjTDFLRXl4em1XcjBIWlpXOVh5ODlOdXlBejhERW5PMmJxTEhDWlM1Z0Q3clJkYTBNXzl5ejhOTWJYY3gxMlBfMUNEQmNWbnpWTmlLSWRfbHpDZDFYZVJzMnNMallwOWRpc2NXUlhwMXFGVFRKOEpyT0M40gGcAUFVX3lxTE9nUkpHc0J1b1ZOQllYOTFGa094dEItdF9abS1neHo1Y0FYcnlzRW9NRzNwV0xIblRnN0tLbWZ1VFlUTHRfSXBMcE9SR1N6aHh1VUpnWE12OFlReXBRYkFHc05uN3ViS3NzQWJid2tfM0lqWUJxQ2ptM1FBMlNkNTdicUgzbjNtT3NTUHp6bUY2ZUtUMGNlRnhGYXhqUw?oc=5",
+      "category": "Fé",
+      "publishedAt": "2026-07-16T12:11:00.000Z"
+    },
+    {
+      "id": "news-Fé-7-1784200883000",
+      "title": "Grupo ultratradicionalista desafia o Vaticano e abre novo capítulo da crise no Brasil",
+      "source": "ncnews.com.br",
+      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPWHVwUVdVTzVPUTNwb0tYSy1ENUJoWm9MTXJrd2xiR01Sc1c0dGYwUFRNNEhyc2lGejUzcUFvTUxDU3k2SVNfQWE4WjY5VEd6X2FPcjFld1AxQ1RadWNoMks4M0ZnX3R5RWFaWFZnMXdPVWpMOHlyZGJMa3JWYndKOVBqYlhkTm9rWjU4ZjlhRFlFSllncHhIZXZBMWg4dFVUQ3FaNFNIWmZKWllvZnh3am9ZTzkzUDRNS1o0?oc=5",
+      "category": "Fé",
+      "publishedAt": "2026-07-16T11:21:23.000Z"
+    },
+    {
+      "id": "news-Fé-0-1784183412000",
+      "title": "Quem são os católicos ultratradicionalistas em cisma com o Vaticano e que estão em 11 estados do Brasil",
+      "source": "O GLOBO",
+      "url": "https://news.google.com/rss/articles/CBMi8gFBVV95cUxPVUYzSmxMQ193QWwwTTdISk9PTHMydUhoazhoNXlyWEdBX0g1SC1NUjFNaWV2RERJYWhYaGlCWnRaV0ljcDVGb3VGZXhmU213UUNtVk05N1hnX21VOHF5eDFZUFJlQlNyV256Z04ycEZuNU5hdndUTS03NzlkUFpLMVpTeWVuWF9HazYwSmVjZmIwNzFzVEJnekUtM2F0NktBWUxYZjUtd2x6aU9yRWtnRVBnNHpjYmtJY1dtQU1IeWNXM3V3anF0ZzRlVHFuTl93TUdwck1qLTBhWm0yNkZIZEVjRWNlUUZoVFplU1lPQS0yQdIBgAJBVV95cUxNMFZ2OFlnN3VGZF9Ic2Z5YWFCZ2FKNDk4dlRVSUl1TWR1T1F5bENNWDhvYXJ6ZkNqZGRUNVh5UlNqc1pZTllweUFBbnByVVN6Y2J3dWlGd0dxc1RnSlNTZFA4cE1XX09GZzRDTWE2Z0RCOWVXejZQZlIxNzFVZWN2aW5xaEVnMkVPa29SM3N1Q2lvMWpETmVCNzJsYzVoNGRZQ2RDbXFwcnQ4VzNJWF9VS1ZueGVqQ2hTTkdNeHhJa2I3Mll3SUhCNlQ5NkJlSUcxTEhCZVdaWVN0MV81SDJaczRzdlV5LWtEcGVaaVp0Y2xsTGx5a2MtdWlwM0hNaG13?oc=5",
+      "category": "Fé",
+      "publishedAt": "2026-07-16T06:30:12.000Z"
+    },
+    {
+      "id": "news-Política-4-1784163785000",
+      "title": "Análise: Tarifaço de Trump vira ativo eleitoral para Lula",
+      "source": "CNN Brasil",
+      "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxPWFloZnhfMUtKc1VwamJYQzM0ZkhLNGlEZk9ib1JUdzlpVXdhRmp4QzNVajVBdjQyWUJRN0hiOGxrUzB2T3R0SHVoU210WTJiejZVbWVnVG4waVJ0ek9vX0wxa0lWQS1KVEt4M1VHX19DZ0I5VkV0TVVxV3lSRkpFbmlRMk4tOXQwOWFJbExHSi0xNWY2OWlaM1FIYlZrREktbFp6WWk3cERiZW45Y2paYWlUZ3lPakE?oc=5",
+      "category": "Política",
+      "publishedAt": "2026-07-16T01:03:05.000Z"
+    },
+    {
+      "id": "news-Mundo-3-1784151600000",
+      "title": "Avanço da Direita e a Geopolítica Latino-Americana",
+      "source": "Tribuna do Agreste",
+      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxOc0VweVNsQzd5MHVLcG5vd2xodjJJUmNJSldzYnhBM3ZmbUhWWHVfVFZaY2xIelJ3Vi1YelhLT2FmRHM4dHFTWFQ0aEZNQjJ6QjJLLUtJN1ozOE5YVDVUejB0ejByUWFYTWlYQVI1QjZWUWZRU2QxX2J4dldhLWlKZ1pYM012SkFxTVBITkpnSjF3LTlTRUdhazVMb1VLLWdWVVdYRDZuNzdWQjdzeE9iWDhjVQ?oc=5",
+      "category": "Mundo",
+      "publishedAt": "2026-07-15T21:40:00.000Z"
+    },
+    {
+      "id": "news-Negócios-6-1784140020000",
+      "title": "Brasil registra alta na abertura de pequenos negócios e reforça força do empreendedorismo",
+      "source": "Portal Nosso Meio",
+      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNRGRBbFNOOEswVTdCS2VKZkQyRzVIX3Bzc0RtN0dNbVZzNFlrS1ppSklEeFMxRUtQWThGS29kcURpakFoWDBkekozaXpQZGFtTGhiQUppaVFsTFVfU2x5WXpsQktrY1N2Sm4wRjFranNIY1NXUWdsZTNIeVNvZnVvMXp0aWtIYS12QjhDd0hPZ3RMay1SdFV0ZUhHQzhkTlNweVJRU3JaYjVRaHJmS0xBdHowMEs0Zw?oc=5",
+      "category": "Negócios",
+      "publishedAt": "2026-07-15T18:27:00.000Z"
+    },
+    {
+      "id": "news-Criação-5-1784139720000",
+      "title": "AEB abre seleção para empresas brasileiras exporem no International Astronautical Congress, na Turquia",
+      "source": "www.gov.br",
+      "url": "https://news.google.com/rss/articles/CBMikwJBVV95cUxPVnROdGxZWkRHY3h2WmNSbGozRG9iRnpreVIyWG8zUkxlYjhoWUt1eHBrR2hYSy1KM010Z3JTZjJzUHdVdHRRTGY2SHlJeDVrUU8xc214V1N4bGpZRHlHOHlTbHlHYU16QjE2bFZRelNYamVXX1pIQkJXSUtYZF9fSWhaMUozVldDQmhsYTIwb19RSU82WlRsVVNqTVFNLWRvWnlkeVNHSVc4bTlwR0J2U3otc0dPN1NyNF9nTFlkNmVXb0ZZTmF6N0hCeDFYT3h2V0R0Y19qb05kTUF1ZXgyWEFFZF9XRGgtRVdOWXIxc0U1dzloYXFSNVBpWllBeGZGU1c2dFJVYXFTNllsWG5DZXFBWQ?oc=5",
+      "category": "Criação",
+      "publishedAt": "2026-07-15T18:22:00.000Z"
+    },
+    {
+      "id": "news-Ciência-6-1784137620000",
+      "title": "A Terra terá uma segunda lua? A ciência explica — Ministério da Ciência, Tecnologia e Inovação",
+      "source": "www.gov.br",
+      "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxPdG9Qd2poSWpheDVQSFB4Q1VCbXVNbVV5MktGVGlBZVBuNVdmLUVodjlYd1ZYdF9OQ1hvem9PWTUyZC03MFhkVTJDYTY2ZnlkcEF2VUdPMWI4VFZpYnA2dldmSWNCM05VYlp4ZnRGdDVkYk9HbGhlVHE5ZVZKeVUyS3ZGMjVkRkVIek41cnYzd0VaNWZmY1NGX1ZlaUtZNXpYUTRDa0xQVC1ydU9fQ3RkaXZkRXB2VDY2RmNnQTd4aHluMGZKVUtlbFpR?oc=5",
+      "category": "Ciência",
+      "publishedAt": "2026-07-15T17:47:00.000Z"
+    },
+    {
+      "id": "news-Política-6-1784129147000",
+      "title": "Análise: A atuação do TSE sobre as pesquisas eleitorais",
+      "source": "CNN Brasil",
+      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNcGY5U1BtR3pjUl9tMGROQzFXNWE0amZ0b3hOUkdIUnBYX0dLcmQyZENrWktraGxXMGVwOFNpellucWI4QVRKSkFSa0ktUmNjd0Z3SG94aGZmOThXc2xtenBQVE5GOFVhOGw5OE56Q0RNMXJvazBwM0FNbXI5a3FZdzlxMGFEekVUeDZTRmYzSjFRMzM4VHVHdA?oc=5",
+      "category": "Política",
+      "publishedAt": "2026-07-15T15:25:47.000Z"
+    },
+    {
+      "id": "news-Criação-1-1784123987000",
+      "title": "Veteranos da tecnologia apostam novamente na inovação com IA",
+      "source": "SITEPD",
+      "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxOQy1EalpHM29oa25WLVBvQlF3U0FZeHB6dUhGTjhQM3JHXzNWZERDTFZUa0F6Zm5uc21QOEJjTTRKbGc0c2JrdXR0cU1hRzAxMWNLNHJTTWtuT1dwVVFxMUZ2eDRwVDRmM0JuS19hMFRMQWJzcnkzaGhuUzBvWDR2QU5GVzRlZGU3Ykow?oc=5",
+      "category": "Criação",
+      "publishedAt": "2026-07-15T13:59:47.000Z"
+    },
+    {
+      "id": "news-Mundo-5-1784114400000",
+      "title": "Argentina e Inglaterra: quando a geopolítica entra em campo, por Francisco Ladeira",
+      "source": "Jornal GGN",
+      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNZVZxeEhNcHhwbVBkc3Frb1l4Yk5uYkRHb1JQbHZCWHNJdDZTNzNqbXlNd0hDRHRVMXFMNWhVZnV0RlNkUlFlLUZXRE55QWNQNXlmM1A1WkdkNFk3aEpZLVExaEx3MFRUSDhqMmNXYmN4MmdxWmI0VG01NHhlODlxLWJlX2hIdUdFRDltaUtmb3hfUmItN3FWdzlKRzZKSHZI?oc=5",
+      "category": "Mundo",
+      "publishedAt": "2026-07-15T11:20:00.000Z"
+    },
+    {
+      "id": "news-Mundo-2-1784088900000",
+      "title": "Juliana Monteiro: \"A geopolítica da reconstrução\"",
+      "source": "O POVO+",
+      "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPelUwdUluUmRzNGtsV2hLcUk4NW9IQmhBQmdPLXhuelBjMGdJWWZzOE45MVAxTEVtVTNaR1dsWWh0QWV0dVF6a2swczg2VHJQaGpweWx0Uk9oenloZ0ktY1ZobUNiYmYxRnFfbk5FVng2N2dnd3dzUmFBZnVJa3hsc0c5T1VUNG54MUt3ZEx4LXpHMmJoaTAwWGNvX2l1OXFTTkE2MlVB?oc=5",
+      "category": "Mundo",
+      "publishedAt": "2026-07-15T04:15:00.000Z"
+    },
+    {
+      "id": "news-Negócios-1-1784084431000",
+      "title": "Comércio de Brasil e China bate recorde: país asiático compra mais petróleo e quadruplica venda de carros elétricos",
+      "source": "O GLOBO",
+      "url": "https://news.google.com/rss/articles/CBMijwJBVV95cUxNTzE5MnZtT0dPVFg4S1liY2k1eVBHZkZlbEZUNkQzMjhOd3lWNlhNMF8xdXRmTFlCZmRabkVfRmg2N1BiQ014RTdJOXVpZTNVRERJbmJ1cG1JM1lDSlJIdFVZSm0tWnBLY0NaZWhfaGFoWjE3ZTVNcE95bXVKWnM4dzdGR1I4blVuMnV2N0gtMGJLTGxsa1hiUUVobWlfRksxWkdQc0doWkNuSGJSbXlJLWgzOF8tZFZlVjZMWTl1dDVFVkZQTXhhWFViaHljMXlBb25hRFl4eFJXRTZtQ3dyWVdPQ3lMYlZEZzd3ZHpJV3NqTVNPX0hxRXlFSWdYajdoXy1ubVIwbDNoeDRRTHBN0gGeAkFVX3lxTFBvZFJDQmJPamptT2FQT2Z2aHJxZnNLY0JSVlpYZENYU1gxcHF4YmtMa3RzdXMyWGptOEZ0ZjVJeHo1RWF5dXBuT0Y2RERDRjQ1MGlNOWZxcjdjMVo3emRVRExVbUhXWmZEdURYWkhCN0N3RHI5UWY2RllCVDN6ME5mb3ZMRm5xbnY3aHF3YWREVlpJRGZQRUNQUVJYLXBTN1FnQnBUUE1jXzJwVGh1WjJKZVgwTjluNkxiMUhCb1RLdUE4QXEwY0JMOXBfNjlHT083bFZDcnA3dFdzSC1uSUxoeE0teEg4RThlT05pX2pLdWhSV1BuT21Wc05xZlpCclNhTHVNd3B2anZEZ014ZVdrcFhlNk9oNXFzMEhPbXc?oc=5",
+      "category": "Negócios",
+      "publishedAt": "2026-07-15T03:00:31.000Z"
+    },
+    {
+      "id": "news-Criação-0-1784074216000",
+      "title": "CONTEÚDO PATROCINADO por @hpbrasil | O Brasil vive um momento histórico para o empreendedorismo. Apenas em 2025, mais de 5 milhões de empresas foram abertas no País, segundo dados do Sebrae, e cerca de 96% delas são pequenos negócios.",
+      "source": "instagram.com",
+      "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE50am5rYmZFdFhyTHMzdmczNUprS0kyclVPR3ZmR3ItN1Z3LXR2ZWlMczd1S1l0OUpMMS1yZTdLVGtmaGtjbEwtdVAxMDgxWkxvelE?oc=5",
+      "category": "Criação",
+      "publishedAt": "2026-07-15T00:10:16.000Z"
+    },
+    {
+      "id": "news-Ciência-7-1784058350000",
+      "title": "Nova equipe de astronautas chega à Estação Espacial Internacional",
+      "source": "VEJA",
+      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQNDQ4YmVqMnRWV1QtdVBIeTY3WHdhVkwxXzRNdUxMbGRUX2tjcTRqMk90MmltUExaa3NfNVdROTBHb3pZbW92RnFxTmxIczhaNzNnVGlZc1VyYTU0TTJCZS15cVB3MVdvc2kwVEUyakNfVzhpY1NKU185cVlhTEtPNWh4SjBKNlJvSTdOUUswb29xNHQxYWdxYmtkWjVhQ1ZOb1E?oc=5",
+      "category": "Ciência",
+      "publishedAt": "2026-07-14T19:45:50.000Z"
+    },
+    {
+      "id": "news-Fé-6-1784050860000",
+      "title": "CRISE DA IGREJA CATÓLICA: PADRE EXPLICA A EXCOMUNHÃO EM MASSA NO VATICANO | EM REVISTA",
+      "source": "REDE BRASIL DE TELEVISÃO",
+      "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNcGpBTGRnc1hCa3FPZU1pWFh0ZzhSRHl3YXh6RktIZFFTVTJMdFBEYW1ZazNWUUZxZXNhTHlKVzJBS2pVLWowMlNoRHJjbDZQaXFlcV9nTGNQQWdnV2xPOXR0M2I2U1F2Wm1iZ0d0a3VOZk5wMlZYMFpwbjRvM0ZkUUlrd0d6ak15VERFTGJpRHpxYmw1Vy01ejE0RWRuZWQzUUVRcXBOV0k5bDVxLXp5OVhR?oc=5",
+      "category": "Fé",
+      "publishedAt": "2026-07-14T17:41:00.000Z"
+    },
+    {
+      "id": "news-Ciência-4-1784042227000",
+      "title": "Asteroide Bennu entra no radar da NASA por possível risco futuro à Terra",
+      "source": "Aventuras na História",
+      "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxNd2xEZXpPUHl6ZmgtbC1YZG5jRklubjgwV1pwSzlfa21rUjdWZzdtWUloZGRhYV84dk1EaXQ1dWk5aVpIbUZaZFdsVjFZNHBtdDhTMDY0d2tNVmticlgtYk9XYkEyTzd2SENONEQ1YmJIUjdpUHRwekplNGVzSmNWSWhoNnQ1emVyOTMwSExlTk92amExR2xxQkVZbS1tVHAwUUtxdUtTVEVsYWNic3ZUODIzdm03c0h2SU9ZaU9oWlh4VDUtTUZWSHdtOVo0ZlhmRFE?oc=5",
+      "category": "Ciência",
+      "publishedAt": "2026-07-14T15:17:07.000Z"
+    },
+    {
+      "id": "news-Negócios-4-1784039384000",
+      "title": "Empresas que buscaram certificado verde por ‘moda do ESG’ ficaram pelo caminho, diz CEO do Sistema B",
+      "source": "Estadão",
+      "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPbzFEdmgyQVBuV25tQ254NXdBOVBjQ1B5NEQ4UmpNNkxGQVItQVVqVDNEMVRTN2QtZUdDS3dicC1EUUp2clpVbVZrZE9OOFU0enl4ejZHMm8xa0U3cG5tS2FZRnhCQ3M0ZEZNd2dyV0JYM0Utc3hYbVNFd3J3RzFpbVlpUWRiZWhVUmNXZWU2YzJJb19BUkV4d3RjZ3JFVm1GNEhKb3FmeW9JSDd5LUNJc0swNUttTGNrOG5UX3NLZlpVWknSAcgBQVVfeXFMTmE2SGtJNzhTRFlXazI4dFNFeFlIU3FKM29RSHRObVhTSmp4OHVxbDZvdkRLWVMtb3dZTnAzR2s0WHJUSFZKaUJZdkZBXzFOQVFjOF9ocDB5ZHhJMzd0dURyN1NvT0Y4dVhCc1JFdVJ5azRKNFcwamJFMnpxZG5IekxTc2I1elZHWk55aFhEMHpsQ3UwOGNuczlWYlJReF9pMDdKVmVveFFYLUxJWl9JWlBJSm9sZFRMY2JpbWNpVkV2SmZ2UDJVWnM?oc=5",
+      "category": "Negócios",
+      "publishedAt": "2026-07-14T14:29:44.000Z"
+    },
+    {
+      "id": "news-Fé-3-1784034960000",
+      "title": "Padre do DF desafia o papa por tê-lo excomungado",
+      "source": "Jornal do Brasil",
+      "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxOOXB1Mmk4ZkFYZS1RdWxBT29kajJFSkZ3YzFiWi1VNkpPdXIzZTlZalFwVTBzNld1LUZEUDBpbHhQZ2dqNVVVamtFVTF6UkloUTdaeDZGSHlORHlJNDM2c3pDX1NFNkpEaWFIaFhGaWUtdEVQZXNuUmh2dzRHaEt2SE5aSGNDRkRMTFlreG04VVlSWTYzcEM2MzdqaWFpYXhlcW1TcUdaRkJnZnc4TnhpUFRMb3lDV2lRNURIdjNzbWwxQXBE?oc=5",
+      "category": "Fé",
+      "publishedAt": "2026-07-14T13:16:00.000Z"
+    }
+  ]
+}
