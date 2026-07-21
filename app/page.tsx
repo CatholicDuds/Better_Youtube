@@ -339,6 +339,8 @@ export default function Home() {
   const [playingPodcast, setPlayingPodcast] = useState<Podcast | null>(null);
   const [podcastArtwork, setPodcastArtwork] = useState<Record<string, { artworkUrl: string; appleUrl: string }>>({});
   const [showControls, setShowControls] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [compactCarousel, setCompactCarousel] = useState(false);
   const [showAdd, setShowAdd] = useState(false);
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [showInterestManager, setShowInterestManager] = useState(false);
@@ -372,6 +374,7 @@ export default function Home() {
       const storedLevel = localStorage.getItem("clarity-language-level") as "Essencial" | "Intermediário" | "Avançado" | null;
       const storedInterests = localStorage.getItem("clarity-interests");
       const storedInterestFeeds = localStorage.getItem("clarity-interest-feeds");
+      const requestedCategory = new URLSearchParams(window.location.search).get("tema");
       queueMicrotask(() => {
         if (storedTheme) setTheme(storedTheme);
         if (storedPrefs) setPreferences({ ...DEFAULT_PREFERENCES, ...JSON.parse(storedPrefs) });
@@ -379,6 +382,7 @@ export default function Home() {
         if (storedLevel) setLanguageLevel(storedLevel);
         if (storedInterests) setUserInterests(JSON.parse(storedInterests));
         if (storedInterestFeeds) setInterestFeeds(JSON.parse(storedInterestFeeds));
+        if (requestedCategory && defaultInterestLabels.includes(requestedCategory)) setCategory(requestedCategory);
         if (!localStorage.getItem("clarity-onboarding-complete")) setShowOnboarding(true);
       });
     } catch {}
@@ -411,6 +415,14 @@ export default function Home() {
     document.documentElement.dataset.theme = theme;
     try { localStorage.setItem("clarity-theme", theme); } catch {}
   }, [theme]);
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 600px)");
+    const syncLayout = () => setCompactCarousel(media.matches);
+    syncLayout();
+    media.addEventListener("change", syncLayout);
+    return () => media.removeEventListener("change", syncLayout);
+  }, []);
 
   const categories = useMemo(() => ["Todos", ...userInterests, "Minha biblioteca"], [userInterests]);
   const contentSearchActive = Boolean(completedSearch && normalizeSearchText(query) === normalizeSearchText(completedSearch));
@@ -462,8 +474,8 @@ export default function Home() {
     }).slice(0, 12);
   }, [news, searchedNews, contentSearchActive, newsPeriod, newsSpectrum, category, userInterests, currentTime]);
 
-  const newsPages = useMemo(() => paginate(visibleNews, 4), [visibleNews]);
-  const podcastPages = useMemo(() => paginate(visiblePodcasts, 6), [visiblePodcasts]);
+  const newsPages = useMemo(() => paginate(visibleNews, compactCarousel ? 2 : 4), [visibleNews, compactCarousel]);
+  const podcastPages = useMemo(() => paginate(visiblePodcasts, compactCarousel ? 2 : 6), [visiblePodcasts, compactCarousel]);
 
   async function refreshRecommendations() {
     setRefreshing(true);
@@ -605,6 +617,7 @@ export default function Home() {
   }
 
   function openCategory(nextCategory: string) {
+    setMobileMenuOpen(false);
     setCategory(nextCategory);
     setVisibleCount(16);
     setQuery("");
@@ -723,7 +736,7 @@ export default function Home() {
     <div className="app-shell">
       <header className="topbar">
         <div className="brand-group">
-          <button className="icon-button menu-button" aria-label="Abrir menu">☰</button>
+          <button className="icon-button menu-button" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} aria-label={mobileMenuOpen ? "Fechar menu" : "Abrir menu"} aria-expanded={mobileMenuOpen} aria-controls="main-sidebar">☰</button>
           <a className="brand" href="#top"><span className="brand-mark">C</span><strong>Clarity</strong><sup>BR</sup></a>
         </div>
         <div className="search-box">
@@ -737,18 +750,20 @@ export default function Home() {
         </div>
       </header>
 
-      <aside className="sidebar">
+      {mobileMenuOpen && <button className="sidebar-backdrop" onClick={() => setMobileMenuOpen(false)} aria-label="Fechar menu de temas" />}
+      <aside className={mobileMenuOpen ? "sidebar mobile-open" : "sidebar"} id="main-sidebar">
+        <div className="mobile-sidebar-head"><strong>Navegar e explorar</strong><button onClick={() => setMobileMenuOpen(false)} aria-label="Fechar menu">×</button></div>
         <nav>
           <button className={category === "Todos" ? "nav-item active" : "nav-item"} onClick={() => openCategory("Todos")}><span>⌂</span>Início</button>
           <a className="nav-item" href={`${BASE_PATH}/estudo/`}><span>⌘</span>Modo Estudo</a>
           <a className="nav-item" href={`${BASE_PATH}/leituras/`}><span>▤</span>Leituras</a>
-          <button className="nav-item" onClick={() => document.getElementById("noticias")?.scrollIntoView()}><span>◫</span>Notícias</button>
+          <button className="nav-item" onClick={() => { setMobileMenuOpen(false); document.getElementById("noticias")?.scrollIntoView(); }}><span>◫</span>Notícias</button>
           <button className="nav-item" onClick={() => openCategory("Minha biblioteca")}><span>▱</span>Minha biblioteca</button>
         </nav>
         <div className="side-separator" />
         <p className="side-label">EXPLORAR</p>
         {userInterests.map((item) => <button key={item} className={category === item ? "nav-item active" : "nav-item"} onClick={() => openCategory(item)}><span>{interestIcon(item)}</span>{item}{!defaultInterestLabels.includes(item) && <small className="interest-count">{interestFeeds[item]?.videos?.length || "⌕"}</small>}</button>)}
-        <button className="nav-item manage-interests" onClick={() => setShowInterestManager(true)}><span>＋</span>Editar interesses</button>
+        <button className="nav-item manage-interests" onClick={() => { setMobileMenuOpen(false); setShowInterestManager(true); }}><span>＋</span>Editar interesses</button>
         <div className="side-separator" />
         <div className="focus-card"><strong>Modo intencional</strong><p>Sem autoplay e sem feed infinito. A cada 2 vídeos, uma leitura.</p><span>{watchedBlock.length}/2 neste bloco</span></div>
       </aside>
@@ -780,7 +795,7 @@ export default function Home() {
         <div className="top-discovery">
           <section className="news-section compact-news" id="noticias">
             <div className="section-heading news-heading"><div><p className="eyebrow">{contentSearchActive ? "PESQUISA COM CONTEXTO" : "RADAR DO DIA"}</p><h2>{contentSearchActive ? `Notícias sobre “${completedSearch}”` : "Notícias com contexto"}</h2></div><div className="news-controls"><div className="period-control"><button className={newsPeriod === "today" ? "active" : ""} onClick={() => setNewsPeriod("today")}>Hoje</button><button className={newsPeriod === "week" ? "active" : ""} onClick={() => setNewsPeriod("week")}>Semana</button></div><label>Fonte<select value={newsSpectrum} onChange={(event) => setNewsSpectrum(event.target.value as "Todos" | PoliticalSpectrum)}><option>Todos</option><option>Esquerda</option><option>Centro</option><option>Direita</option></select></label></div></div>
-            {visibleNews.length ? <ContentCarousel key={`${newsPeriod}-${newsSpectrum}-${category}-${completedSearch}`} label="Notícias com contexto" pageClassName="news-grid" pages={newsPages.map((page, pageIndex) => page.map((item, index) => <article className="news-card" key={item.id}><div><span>{item.category}</span><time>{relativeDate(item.publishedAt)}</time></div><span className="news-number">{String(pageIndex * 4 + index + 1).padStart(2, "0")}</span><h3>{item.title}</h3><p>{item.source}<span className={`spectrum-badge spectrum-${(item.spectrum || "Centro").toLowerCase()}`} title="Orientação editorial aproximada da fonte; não da matéria individual">{item.spectrum || "Centro"}</span></p><a href={item.url} target="_blank" rel="noreferrer">Ler notícia ↗</a></article>))} /> : <div className="news-empty"><strong>Nenhuma notícia passou pelo filtro.</strong><p>{newsPeriod === "today" ? "Veja a seleção da semana ou outro espectro." : "Nenhuma fonte confiável publicou algo relevante para esta combinação."}</p></div>}
+            {visibleNews.length ? <ContentCarousel key={`${newsPeriod}-${newsSpectrum}-${category}-${completedSearch}-${compactCarousel}`} label="Notícias com contexto" pageClassName="news-grid" pages={newsPages.map((page, pageIndex) => page.map((item, index) => <article className="news-card" key={item.id}><div><span>{item.category}</span><time>{relativeDate(item.publishedAt)}</time></div><span className="news-number">{String(pageIndex * (compactCarousel ? 2 : 4) + index + 1).padStart(2, "0")}</span><h3>{item.title}</h3><p>{item.source}<span className={`spectrum-badge spectrum-${(item.spectrum || "Centro").toLowerCase()}`} title="Orientação editorial aproximada da fonte; não da matéria individual">{item.spectrum || "Centro"}</span></p><a href={item.url} target="_blank" rel="noreferrer">Ler notícia ↗</a></article>))} /> : <div className="news-empty"><strong>Nenhuma notícia passou pelo filtro.</strong><p>{newsPeriod === "today" ? "Veja a seleção da semana ou outro espectro." : "Nenhuma fonte confiável publicou algo relevante para esta combinação."}</p></div>}
             <div className="news-meta">{(contentSearchActive || newsUpdatedAt) && <small className="news-update">{contentSearchActive ? "Pesquisa filtrada agora" : `Atualizado ${updateTimestamp(newsUpdatedAt!)}`}</small>}<small>Espectro = orientação aproximada da fonte, não da matéria.</small></div>
           </section>
 

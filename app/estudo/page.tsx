@@ -3,6 +3,7 @@
 
 import { useEffect, useMemo, useState, type CSSProperties } from "react";
 import { studyTracks, type StudyLanguage, type StudyLesson, type StudyVideo } from "../../lib/study";
+import SectionSidebar from "../components/SectionSidebar";
 
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || "";
 const dayOptions = [
@@ -173,14 +174,15 @@ export default function StudyPage() {
   }
 
   return (
-    <div className="study-page">
-      <header className="study-topbar">
+    <div className="study-page section-page">
+      <header className="study-topbar section-topbar">
         <a className="brand" href={`${BASE_PATH}/`}><span className="brand-mark">C</span><strong>Clarity</strong><sup>ESTUDO</sup></a>
         <nav aria-label="Navegação do modo estudo"><a href={`${BASE_PATH}/`}>Vídeos</a><a href={`${BASE_PATH}/leituras/`}>Leituras</a><a className="active" href={`${BASE_PATH}/estudo/`}>Estudo</a></nav>
         <button className="icon-button" onClick={() => setTheme(theme === "dark" ? "light" : "dark")} aria-label="Alternar tema">{theme === "dark" ? "☀" : "◐"}</button>
       </header>
+      <SectionSidebar active="Modo Estudo" />
 
-      <main className="study-content">
+      <main className="study-content section-shell-content">
         <section className="study-hero">
           <div><p className="eyebrow">APRENDER EM CAMADAS, NÃO EM PEDAÇOS</p><h1>Seu mapa para estudar com direção.</h1><p>Escolha uma trilha, avance dos primeiros princípios à aplicação e feche cada aula explicando o que entendeu. Sem autoplay e sem pressa artificial.</p><div className="study-hero-actions"><button onClick={beginSession}>Começar agora</button><a href="#agenda">Programar horário</a></div></div>
           <div className={`focus-timer ${timerRunning ? "running" : ""}`}><p className="eyebrow">SESSÃO DE FOCO</p><strong>{formatTimer(timerSeconds)}</strong><span>{timerRunning ? `${activeTrack.title} · em andamento` : `${schedule.duration} minutos preparados`}</span><div><button onClick={() => { if (timerSeconds === 0) setTimerSeconds(schedule.duration * 60); setTimerRunning(!timerRunning); }}>{timerRunning ? "Pausar" : timerSeconds === 0 ? "Reiniciar" : "Iniciar"}</button><button onClick={() => { setTimerRunning(false); setTimerSeconds(schedule.duration * 60); }}>Zerar</button></div></div>

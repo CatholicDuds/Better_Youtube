@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { readingTypes, readings, type Reading, type ReadingLevel } from "../../lib/readings";
+import SectionSidebar from "../components/SectionSidebar";
 
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || "";
 const categories = ["Todos", "Negócios", "Ideias", "Mundo", "Política", "Fé", "Ciência", "Criação"];
@@ -64,14 +65,15 @@ export default function ReadingsPage() {
   const valid = simple.trim().length >= 50 && principles.trim().length >= 30 && connections.trim().length >= 30 && evidence.trim().length >= 30 && application.trim().length >= 20;
 
   return (
-    <div className="library-page">
-      <header className="library-topbar">
+    <div className="library-page section-page">
+      <header className="library-topbar section-topbar">
         <a className="brand" href={`${BASE_PATH}/`}><span className="brand-mark">C</span><strong>Clarity</strong><sup>LEITURAS</sup></a>
         <div className="search-box"><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Pesquisar título, autor, fonte ou tema" aria-label="Pesquisar leituras" /><button aria-label="Pesquisar">⌕</button></div>
         <div className="header-actions"><a className="back-link" href={`${BASE_PATH}/estudo/`}>⌘ Estudo</a><a className="back-link" href={`${BASE_PATH}/`}>← Vídeos</a><button className="icon-button" onClick={() => setTheme(theme === "dark" ? "light" : "dark")} aria-label="Alternar tema">{theme === "dark" ? "☀" : "◐"}</button></div>
       </header>
+      <SectionSidebar active="Leituras" />
 
-      <main className="library-content">
+      <main className="library-content section-shell-content">
         <section className="library-hero">
           <div><p className="eyebrow">BIBLIOTECA CLARITY</p><h1>Leia para construir uma visão de mundo</h1><p>Fontes abertas e confiáveis para sair da superfície: livros, artigos, pesquisas, documentos e guias. Abra a fonte, volte e ensine a ideia com suas palavras.</p></div>
           <div className="library-stat"><strong>{readings.length}</strong><span>leituras selecionadas</span><small>Sem feed infinito</small></div>
