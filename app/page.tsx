@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import { seedVideos, type Video } from "../lib/videos";
 import { DEFAULT_PREFERENCES, rankVideos, type Preferences, type RankedVideo } from "../lib/recommender";
 import { readings } from "../lib/readings";
+import { supabase } from "../lib/supabase";
 
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || "";
 const defaultInterests = [
@@ -25,6 +26,20 @@ type NewsItem = {
   url: string;
   category: string;
   publishedAt: string;
+};
+
+type YouTubeSearchVideo = {
+  id: string;
+  snippet: {
+    title: string;
+    description?: string;
+    channelTitle: string;
+    publishedAt: string;
+    liveBroadcastContent?: string;
+  };
+  contentDetails?: { duration?: string };
+  statistics?: { viewCount?: string; likeCount?: string };
+  status?: { embeddable?: boolean };
 };
 
 type Article = {
@@ -98,6 +113,40 @@ function isoDurationSeconds(value = "PT0S") {
   const match = value.match(/P(?:(\d+)D)?T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
   if (!match) return 0;
   return Number(match[1] || 0) * 86400 + Number(match[2] || 0) * 3600 + Number(match[3] || 0) * 60 + Number(match[4] || 0);
+}
+
+const SEARCH_STOP_WORDS = new Set(["a", "o", "as", "os", "de", "da", "do", "das", "dos", "e", "em", "no", "na", "nos", "nas", "para", "por", "com", "como", "que", "um", "uma", "sobre", "ao", "aos"]);
+const ATTENTION_TRAP = /\b(shorts?|cortes? (do|de) podcast|treta|fofoca|pegadinha|prank|tente nao rir|reacao|reaction|compilacao|melhores momentos|urgente|chocante|voce nao vai acreditar|ninguem te conta|humilhou|destruiu|lacrou|mitou|exposed|ganhe dinheiro (facil|rapido)|fique rico rapido)\b/i;
+const LEARNING_SIGNAL = /\b(aula|curso|explica|explicacao|fundamentos?|documentario|palestra|analise|historia|guia|tutorial|estrategia|ciencia|estudo|entrevista|debate|como|por que|porque|o que e|introducao|lecture|explained|documentary|strategy|science|history|guide)\b/i;
+
+function normalizeSearchText(value: string) {
+  return value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+}
+
+function meaningfulSearchTerms(value: string) {
+  const terms = normalizeSearchText(value).split(/\s+/).filter((term) => term.length >= 2 && !SEARCH_STOP_WORDS.has(term));
+  return terms.length ? [...new Set(terms)] : normalizeSearchText(value).split(/\s+/).filter(Boolean);
+}
+
+function searchRejectionReason(item: YouTubeSearchVideo, searchTerm: string, seconds: number) {
+  if (seconds < 241 || seconds > 10_800) return "duracao";
+  if ((item.snippet.liveBroadcastContent && item.snippet.liveBroadcastContent !== "none") || item.status?.embeddable === false) return "indisponivel";
+
+  const title = normalizeSearchText(item.snippet.title);
+  const description = normalizeSearchText(item.snippet.description || "");
+  const channel = normalizeSearchText(item.snippet.channelTitle);
+  const context = `${title} ${description} ${channel}`;
+  if (ATTENTION_TRAP.test(title)) return "distracao";
+
+  const terms = meaningfulSearchTerms(searchTerm);
+  const titleHits = terms.filter((term) => title.includes(term)).length;
+  const contextHits = terms.filter((term) => context.includes(term)).length;
+  const requiredHits = terms.length <= 2 ? 1 : Math.ceil(terms.length * .6);
+  const exactTitleMatch = title.includes(normalizeSearchText(searchTerm));
+  const focusedTitle = exactTitleMatch || titleHits >= Math.min(2, terms.length);
+  if (contextHits < requiredHits || (!focusedTitle && contextHits < terms.length)) return "relevancia";
+  if (!LEARNING_SIGNAL.test(`${title} ${description}`) && seconds < 480) return "densidade";
+  return null;
 }
 
 function relativeDate(publishedAt: string) {
@@ -206,11 +255,9 @@ export default function Home() {
   const [podcastArtwork, setPodcastArtwork] = useState<Record<string, { artworkUrl: string; appleUrl: string }>>({});
   const [showControls, setShowControls] = useState(false);
   const [showAdd, setShowAdd] = useState(false);
-  const [showSearchSetup, setShowSearchSetup] = useState(false);
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [showInterestManager, setShowInterestManager] = useState(false);
   const [addError, setAddError] = useState("");
-  const [searchApiKey, setSearchApiKey] = useState("");
   const [webSearching, setWebSearching] = useState(false);
   const [webSearchStatus, setWebSearchStatus] = useState("");
   const [news, setNews] = useState<NewsItem[]>([]);
@@ -237,14 +284,12 @@ export default function Home() {
       const storedPrefs = localStorage.getItem("clarity-preferences");
       const storedVideos = localStorage.getItem("clarity-videos");
       const storedLevel = localStorage.getItem("clarity-language-level") as "Essencial" | "Intermediário" | "Avançado" | null;
-      const storedSearchKey = localStorage.getItem("clarity-youtube-api-key");
       const storedInterests = localStorage.getItem("clarity-interests");
       queueMicrotask(() => {
         if (storedTheme) setTheme(storedTheme);
         if (storedPrefs) setPreferences({ ...DEFAULT_PREFERENCES, ...JSON.parse(storedPrefs) });
         if (storedVideos) setCustomVideos(JSON.parse(storedVideos));
         if (storedLevel) setLanguageLevel(storedLevel);
-        if (storedSearchKey) setSearchApiKey(storedSearchKey);
         if (storedInterests) setUserInterests(JSON.parse(storedInterests));
         if (!localStorage.getItem("clarity-onboarding-complete")) setShowOnboarding(true);
       });
@@ -350,60 +395,83 @@ export default function Home() {
     setRefreshing(false);
   }
 
-  async function searchYouTube(key = searchApiKey) {
+  async function searchYouTube() {
     const searchTerm = query.trim();
     if (!searchTerm) { setWebSearchStatus("Digite um assunto antes de pesquisar."); return; }
-    if (!key) { setShowSearchSetup(true); return; }
+    if (!supabase) { setWebSearchStatus("A pesquisa segura aguarda a conexão com o Supabase."); return; }
     setWebSearching(true);
     setWebSearchStatus("Pesquisando e avaliando resultados…");
     try {
-      const searchParams = new URLSearchParams({ part: "snippet", type: "video", maxResults: "25", order: "relevance", safeSearch: "moderate", videoEmbeddable: "true", videoSyndicated: "true", relevanceLanguage: "pt", regionCode: "BR", q: searchTerm, key });
-      const searchResponse = await fetch(`https://www.googleapis.com/youtube/v3/search?${searchParams}`);
-      if (!searchResponse.ok) throw new Error(String(searchResponse.status));
-      const searchData = await searchResponse.json();
-      const ids = (searchData.items || []).map((item: { id?: { videoId?: string } }) => item.id?.videoId).filter(Boolean);
-      if (!ids.length) throw new Error("empty");
-      const detailParams = new URLSearchParams({ part: "snippet,contentDetails,statistics,status", id: ids.join(","), key });
-      const detailResponse = await fetch(`https://www.googleapis.com/youtube/v3/videos?${detailParams}`);
-      if (!detailResponse.ok) throw new Error(String(detailResponse.status));
-      const detailData = await detailResponse.json();
-      const shallow = /#shorts|\bshorts?\b|cortes?\s+(do|de|podcast)|urgente|chocante|você não vai acreditar|treta/i;
-      const educational = /aula|curso|explic|fundamento|document|palestra|análise|história|lecture|explained|documentary|strategy|science/i;
+      const { data, error: functionError } = await supabase.functions.invoke<{ items?: YouTubeSearchVideo[]; error?: string }>("search-youtube", { body: { query: searchTerm } });
+      if (functionError) {
+        const response = (functionError as { context?: Response }).context;
+        const details = response ? await response.clone().json().catch(() => null) as { error?: string } | null : null;
+        throw new Error(details?.error || functionError.message);
+      }
+      if (data?.error) throw new Error(data.error);
       const selectedCategory = category === "Todos" || category === "Minha biblioteca" ? "Ideias" : category;
-      const found: Video[] = (detailData.items || []).map((item: { id: string; snippet: { title: string; channelTitle: string; publishedAt: string; liveBroadcastContent?: string }; contentDetails?: { duration?: string }; statistics?: { viewCount?: string; likeCount?: string }; status?: { embeddable?: boolean } }, index: number) => {
+      const candidates = Array.isArray(data?.items) ? data.items : [];
+      const rejected = { duracao: 0, indisponivel: 0, distracao: 0, relevancia: 0, densidade: 0, repeticao: 0, excesso: 0 };
+      const approved = candidates.map((item, index) => {
         const seconds = isoDurationSeconds(item.contentDetails?.duration);
-        if (seconds < 241 || seconds > 10_800 || shallow.test(item.snippet.title) || item.snippet.liveBroadcastContent !== "none" || item.status?.embeddable === false) return null;
+        const rejectionReason = searchRejectionReason(item, searchTerm, seconds);
+        if (rejectionReason) {
+          rejected[rejectionReason] += 1;
+          return null;
+        }
         const views = Number(item.statistics?.viewCount || 0);
         const likes = Number(item.statistics?.likeCount || 0);
         const reception = views > 0 ? Math.min(.08, (likes / views) * 14) : 0;
-        const learningBonus = educational.test(item.snippet.title) ? .09 : 0;
-        return { id: `web-${item.id}`, youtubeId: item.id, thumbnailId: item.id, embedType: "video", publishedAt: item.snippet.publishedAt, category: selectedCategory, title: item.snippet.title, channel: item.snippet.channelTitle, topic: searchTerm.toLowerCase(), url: `https://www.youtube.com/watch?v=${item.id}`, durationSeconds: seconds, depth: Math.min(.96, .65 + Math.min(.22, seconds / 15_000) + learningBonus), novelty: Math.max(.58, .9 - index * .02), quality: Math.min(.96, .72 + learningBonus + reception), evergreen: .8, publishedLabel: relativeDate(item.snippet.publishedAt), palette: (["blue", "coral", "ink", "moss", "violet", "sand"] as const)[index % 6], mark: "PESQUISA" };
+        const normalizedTitle = normalizeSearchText(item.snippet.title);
+        const normalizedDescription = normalizeSearchText(item.snippet.description || "");
+        const terms = meaningfulSearchTerms(searchTerm);
+        const titleCoverage = terms.filter((term) => normalizedTitle.includes(term)).length / Math.max(1, terms.length);
+        const contextCoverage = terms.filter((term) => `${normalizedTitle} ${normalizedDescription}`.includes(term)).length / Math.max(1, terms.length);
+        const learningBonus = LEARNING_SIGNAL.test(`${normalizedTitle} ${normalizedDescription}`) ? .09 : 0;
+        const relevanceBonus = Math.min(.12, titleCoverage * .08 + contextCoverage * .04);
+        return { id: `web-${item.id}`, youtubeId: item.id, thumbnailId: item.id, embedType: "video", publishedAt: item.snippet.publishedAt, category: selectedCategory, title: item.snippet.title, channel: item.snippet.channelTitle, topic: searchTerm.toLowerCase(), url: `https://www.youtube.com/watch?v=${item.id}`, durationSeconds: seconds, depth: Math.min(.96, .65 + Math.min(.22, seconds / 15_000) + learningBonus), novelty: Math.max(.58, .9 - index * .02), quality: Math.min(.96, .7 + learningBonus + relevanceBonus + reception), evergreen: .8, publishedLabel: relativeDate(item.snippet.publishedAt), palette: (["blue", "coral", "ink", "moss", "violet", "sand"] as const)[index % 6], mark: "PESQUISA" };
       }).filter(Boolean) as Video[];
+
+      const channelCount = new Map<string, number>();
+      const diverse = approved.filter((video) => {
+        const channelKey = normalizeSearchText(video.channel);
+        const count = channelCount.get(channelKey) || 0;
+        if (count >= 2) {
+          rejected.repeticao += 1;
+          return false;
+        }
+        channelCount.set(channelKey, count + 1);
+        return true;
+      });
+      rejected.excesso = Math.max(0, diverse.length - 12);
+      const found = diverse.slice(0, 12);
       setWebVideos(found);
       setRefreshSeed(Date.now());
       setVisibleCount(20);
-      setWebSearchStatus(found.length ? `${found.length} vídeos longos passaram pelo filtro local.` : "Nenhum resultado passou pelo filtro de qualidade e duração.");
+      const removed = candidates.length - found.length;
+      const removalSummary = [
+        rejected.relevancia && `${rejected.relevancia} fora do assunto`,
+        rejected.distracao && `${rejected.distracao} isca de atenção`,
+        rejected.densidade && `${rejected.densidade} de baixa densidade`,
+        rejected.duracao && `${rejected.duracao} fora da duração`,
+        rejected.indisponivel && `${rejected.indisponivel} indisponível`,
+        rejected.repeticao && `${rejected.repeticao} repetido por canal`,
+        rejected.excesso && `${rejected.excesso} além do limite consciente`,
+      ].filter(Boolean).join(" · ");
+      setWebSearchStatus(found.length ? `Filtro de atenção: ${found.length} aprovados e ${removed} removidos${removalSummary ? ` (${removalSummary})` : ""}.` : "Nenhum resultado passou pelo filtro de relevância, profundidade e atenção.");
     } catch (error) {
-      setWebSearchStatus(error instanceof Error && error.message === "403" ? "A chave foi recusada ou atingiu a cota. Verifique a YouTube Data API v3." : "A pesquisa online não pôde ser concluída agora.");
+      const code = error instanceof Error ? error.message : "";
+      const messages: Record<string, string> = {
+        missing_api_key: "A pesquisa aguarda a chave YOUTUBE_API_KEY nos Secrets da função do Supabase.",
+        daily_limit: "O limite consciente de pesquisas das últimas 24 horas foi atingido. Tente novamente amanhã.",
+        access_denied: "Seu período de acesso não permite novas pesquisas.",
+        youtube_quota: "A cota diária da YouTube Data API foi atingida.",
+        invalid_session: "Sua sessão expirou. Entre novamente.",
+      };
+      setWebSearchStatus(messages[code] || "A pesquisa segura não pôde ser concluída agora.");
     } finally {
       setWebSearching(false);
     }
-  }
-
-  function saveSearchKey(formData: FormData) {
-    const key = String(formData.get("apiKey") || "").trim();
-    if (!key) return;
-    setSearchApiKey(key);
-    try { localStorage.setItem("clarity-youtube-api-key", key); } catch {}
-    setShowSearchSetup(false);
-    void searchYouTube(key);
-  }
-
-  function clearSearchKey() {
-    setSearchApiKey("");
-    setWebVideos([]);
-    setWebSearchStatus("");
-    try { localStorage.removeItem("clarity-youtube-api-key"); } catch {}
   }
 
   function changeLanguageLevel(level: "Essencial" | "Intermediário" | "Avançado") {
@@ -530,8 +598,8 @@ export default function Home() {
           <a className="brand" href="#top"><span className="brand-mark">C</span><strong>Clarity</strong><sup>BR</sup></a>
         </div>
         <div className="search-box">
-          <input value={query} onChange={(event) => setQuery(event.target.value)} onKeyDown={(event) => { if (event.key === "Enter") void searchYouTube(); }} placeholder="Pesquisar aqui ou descobrir na internet" aria-label="Pesquisar vídeos" />
-          <button className="web-search-button" onClick={() => void searchYouTube()} disabled={webSearching || !query.trim()} aria-label="Pesquisar novos vídeos na internet" title="Pesquisar novos vídeos na internet">{webSearching ? "…" : "⌕+"}</button>
+          <input value={query} onChange={(event) => setQuery(event.target.value)} onKeyDown={(event) => { if (event.key === "Enter") void searchYouTube(); }} placeholder="Pesquisar com filtro de atenção" aria-label="Pesquisar vídeos com filtro de atenção" />
+          <button className="web-search-button" onClick={() => void searchYouTube()} disabled={webSearching || !query.trim()} aria-label="Pesquisar conteúdos relevantes na internet" title="Pesquisar com filtro de relevância e profundidade">{webSearching ? "…" : "⌕+"}</button>
         </div>
         <div className="header-actions">
           <button className="create-button" onClick={() => { setAddError(""); setShowAdd(true); }}>＋ Criar</button>
@@ -577,7 +645,7 @@ export default function Home() {
           <label>Duração máxima <output>{preferences.maxMinutes} min</output><input type="range" min="8" max="120" value={preferences.maxMinutes} onChange={(event) => persistPreferences({ ...preferences, maxMinutes: Number(event.target.value) })} /></label>
         </section>}
 
-        {webSearchStatus && <div className="web-search-status"><span>⌕</span><p>{webSearchStatus}</p>{searchApiKey && <button onClick={() => setShowSearchSetup(true)}>Configurar busca</button>}</div>}
+        {webSearchStatus && <div className="web-search-status"><span>⌕</span><p>{webSearchStatus}</p></div>}
 
         <div className="top-discovery">
           <section className="news-section compact-news" id="noticias">
@@ -588,7 +656,7 @@ export default function Home() {
 
           {visiblePodcasts.length > 0 && <section className="podcast-section compact-podcasts" aria-labelledby="podcasts-title">
             <div className="section-heading"><div><p className="eyebrow">OUÇA SEM PRESSA</p><h2 id="podcasts-title">Podcasts</h2></div><span>Apple Podcasts</span></div>
-            <div className="podcast-grid">{visiblePodcasts.slice(0, 4).map((podcast) => <PodcastCard key={podcast.id} podcast={podcast} onPlay={setPlayingPodcast} />)}</div>
+            <div className="podcast-grid">{visiblePodcasts.slice(0, 6).map((podcast) => <PodcastCard key={podcast.id} podcast={podcast} onPlay={setPlayingPodcast} />)}</div>
           </section>}
         </div>
 
@@ -634,7 +702,6 @@ export default function Home() {
 
       {showInterestManager && <div className="overlay" onMouseDown={() => setShowInterestManager(false)}><section className="small-modal interest-modal" onMouseDown={(event) => event.stopPropagation()}><button className="close" onClick={() => setShowInterestManager(false)}>×</button><p className="eyebrow">SEUS INTERESSES</p><h2>Personalizar temas</h2><div className="interest-list">{userInterests.map((item) => <div key={item}><span>{interestIcon(item)}</span><strong>{item}</strong><button onClick={() => persistInterests(userInterests.filter((interest) => interest !== item))} aria-label={`Remover ${item}`}>×</button></div>)}</div><form action={addInterest}><label>Novo assunto<input name="interest" required maxLength={30} placeholder="Ex.: arquitetura, direito, música" /></label><button type="submit">＋ Adicionar interesse</button></form><p className="modal-note">Ao selecionar um tema novo, use a busca ⌕+ para descobrir vídeos na internet.</p></section></div>}
 
-      {showSearchSetup && <div className="overlay" onMouseDown={() => setShowSearchSetup(false)}><section className="small-modal search-setup-modal" onMouseDown={(event) => event.stopPropagation()}><button className="close" onClick={() => setShowSearchSetup(false)}>×</button><p className="eyebrow">PESQUISA EM TEMPO REAL</p><h2>Conectar busca do YouTube</h2><p>A chave fica somente neste navegador e não entra no repositório. Para segurança, restrinja-a ao seu domínio e à YouTube Data API v3.</p><form action={saveSearchKey}><label>Chave pessoal da API<input name="apiKey" type="password" required defaultValue={searchApiKey} placeholder="AIza…" autoComplete="off" /></label><button type="submit">Salvar e pesquisar agora</button>{searchApiKey && <button className="secondary-form-button" type="button" onClick={clearSearchKey}>Remover chave deste dispositivo</button>}</form><a href="https://console.cloud.google.com/apis/library/youtube.googleapis.com" target="_blank" rel="noreferrer">Abrir configuração oficial da API ↗</a><p className="modal-note">Para a atualização autônoma do site público, adicione a mesma chave como segredo <b>YOUTUBE_API_KEY</b> no GitHub.</p></section></div>}
 
       {showAdd && <div className="overlay" onMouseDown={() => setShowAdd(false)}><section className="small-modal" onMouseDown={(event) => event.stopPropagation()}><button className="close" onClick={() => setShowAdd(false)}>×</button><p className="eyebrow">MINHA BIBLIOTECA</p><h2>Adicionar vídeo</h2><form action={addVideo}><label>Link do YouTube<input name="url" type="url" required placeholder="https://youtube.com/watch?v=…" /></label><label>Título<input name="title" required placeholder="Título do vídeo" /></label><label>Tema<input name="topic" required placeholder="Ex.: economia" /></label>{addError && <p className="form-error">{addError}</p>}<button type="submit">Guardar e assistir aqui</button></form></section></div>}
 

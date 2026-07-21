@@ -12,7 +12,7 @@ No primeiro acesso, cada pessoa escolhe interesses, complexidade e profundidade.
 
 ## Pesquisa e notícias
 
-A pesquisa local continua instantânea. O botão **⌕+** também pode procurar novos vídeos no YouTube, buscar os detalhes e rejeitar Shorts, lives, títulos sensacionalistas e vídeos com menos de quatro minutos antes de enviá-los ao ranking. A chave pessoal informada na tela fica no `localStorage` daquele dispositivo.
+A pesquisa local continua instantânea. O botão **⌕+** consulta a função autenticada `search-youtube` no Supabase, que mantém a chave fora do navegador. Antes de chegar ao ranking, os resultados passam por relação real com o assunto, ausência de iscas de atenção, duração, densidade educativa e diversidade de canais. Cada usuário tem um limite diário e a função também protege a cota global da API.
 
 Para ativar a descoberta autônoma no site público:
 
@@ -21,6 +21,15 @@ Para ativar a descoberta autônoma no site público:
 3. Crie o segredo `YOUTUBE_API_KEY`.
 
 O workflow pesquisa os assuntos de `config/discovery-topics.json` a cada seis horas. Sem o segredo, essa etapa é ignorada e o restante do site continua funcionando.
+
+Para ativar a pesquisa em tempo real sem expor a chave:
+
+1. Execute novamente `supabase/schema.sql` para criar o controle privado de uso.
+2. No Supabase, abra **Edge Functions → Deploy a new function → Via Editor**.
+3. Crie a função `search-youtube` com o conteúdo de `supabase/functions/search-youtube/index.ts` e mantenha a verificação de JWT ativada.
+4. Em **Edge Functions → Secrets**, crie `YOUTUBE_API_KEY` com a mesma chave usada no GitHub.
+
+O segredo do GitHub atende às atualizações programadas; o segredo do Supabase atende às pesquisas feitas no site. A chave nunca deve ser adicionada ao código ou a uma variável `NEXT_PUBLIC_*`.
 
 O radar de notícias usa RSS, separa notícias de hoje e dos últimos sete dias e é atualizado no mesmo ciclo. Política, economia, mundo, ciência, tecnologia/criação e fé têm consultas próprias; as notícias sempre abrem na fonte para leitura e verificação.
 
