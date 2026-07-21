@@ -6,7 +6,7 @@ Uma biblioteca de formação guiada por intenção, não por tempo de tela. O fe
 
 O algoritmo roda inteiramente no navegador e combina qualidade editorial, profundidade, relevância atemporal, duração, descoberta e feedback explícito. Preferências e vídeos adicionados ficam no `localStorage`; nenhum perfil é enviado a um servidor.
 
-O feed público é renovado automaticamente a cada seis horas pelo GitHub Actions. O job lê os feeds oficiais dos canais selecionados, rejeita Shorts, gera `public/data/latest-videos.json` e publica a nova versão sem expor chaves de API. A interface oferece busca, filtros temáticos, thumbnails reais, player incorporado, podcasts selecionados, atualização manual e temas claro/escuro.
+O feed público é renovado automaticamente a cada seis horas pelo GitHub Actions. O job lê os feeds oficiais dos canais selecionados, rejeita Shorts, gera `public/data/latest-videos.json` e publica a nova versão sem expor chaves de API. A interface oferece busca, filtros temáticos, thumbnails reais, player incorporado, podcasts selecionados com capas oficiais do catálogo Apple, atualização manual e temas claro/escuro.
 
 No primeiro acesso, cada pessoa escolhe interesses, complexidade e profundidade. Política faz parte dos temas iniciais, e novos assuntos podem ser criados em **Editar interesses**. As preferências ficam somente no navegador.
 
@@ -23,6 +23,24 @@ Para ativar a descoberta autônoma no site público:
 O workflow pesquisa os assuntos de `config/discovery-topics.json` a cada seis horas. Sem o segredo, essa etapa é ignorada e o restante do site continua funcionando.
 
 O radar de notícias usa RSS, separa notícias de hoje e dos últimos sete dias e é atualizado no mesmo ciclo. Política, economia, mundo, ciência, tecnologia/criação e fé têm consultas próprias; as notícias sempre abrem na fonte para leitura e verificação.
+
+## Usuários, administrador e trial
+
+O login usa Supabase Auth com e-mail, senha, confirmação de e-mail, recuperação de senha e sessão persistente. O banco cria um perfil no momento da confirmação e inicia um trial de sete dias. A conta confirmada `eduardo.emilio.gomes@gmail.com` recebe o papel `admin` e não expira.
+
+Para ativar:
+
+1. Crie um projeto no Supabase e execute `supabase/schema.sql` no **SQL Editor**.
+2. Em **Authentication → Providers → Email**, mantenha **Confirm Email** ativado.
+3. Em **Authentication → URL Configuration**, cadastre a URL completa do GitHub Pages, terminando em `/Better_Youtube/`, como Site URL e Redirect URL.
+4. No GitHub, crie a variável `NEXT_PUBLIC_SUPABASE_URL` e o segredo `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`.
+5. Nunca use a chave `service_role` no frontend.
+
+O papel e o prazo ficam protegidos por Row Level Security; usuários comuns só leem o próprio perfil. Como os vídeos e notícias ainda são arquivos públicos do GitHub Pages, o bloqueio do trial protege a experiência do aplicativo, mas não transforma esses arquivos estáticos em conteúdo privado. Conteúdo pago futuro deve ser servido por uma tabela ou função protegida pelo `current_user_has_access()` incluído no esquema.
+
+## Estudar com IA
+
+O painel **Estudar com IA** oferece botões para ChatGPT, Claude, Gemini e Grok. Ele monta um roteiro socrático com o resumo mais recente, copia para a área de transferência e abre o serviço escolhido. Nenhum dado é enviado automaticamente.
 
 ## Biblioteca de leituras
 

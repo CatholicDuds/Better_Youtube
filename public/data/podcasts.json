@@ -1,0 +1,42 @@
+{
+  "updatedAt": "2026-07-21T12:39:28.932Z",
+  "source": "Apple iTunes Search API",
+  "podcasts": [
+    {
+      "appleId": "1347139874",
+      "title": "Nova Acropole Podcast Filosofia",
+      "artworkUrl": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/e2/ee/2d/e2ee2d2a-1b46-0608-79db-ef85fb0172fb/mza_9165812571258038762.jpg/600x600bb.jpg",
+      "appleUrl": "https://podcasts.apple.com/br/podcast/nova-acropole-podcast-filosofia/id1347139874?uo=4"
+    },
+    {
+      "appleId": "991572436",
+      "title": "Filosofia Pop",
+      "artworkUrl": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts115/v4/7b/d8/7d/7bd87d41-7cc1-36f6-e4c9-40b71b970c99/mza_13386460704348740924.jpg/600x600bb.jpg",
+      "appleUrl": "https://podcasts.apple.com/br/podcast/filosofia-pop/id991572436?uo=4"
+    },
+    {
+      "appleId": "1193387182",
+      "title": "Petit Journal",
+      "artworkUrl": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts116/v4/92/0a/bc/920abc52-a830-7d40-4c97-ca20496b13be/mza_15900765804048820826.jpg/600x600bb.jpg",
+      "appleUrl": "https://podcasts.apple.com/br/podcast/petit-journal/id1193387182?uo=4"
+    },
+    {
+      "appleId": "1553427360",
+      "title": "Os Sócios Podcast",
+      "artworkUrl": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/55/95/25/559525fe-0c69-1e3b-1225-6705a244b612/mza_2434104345682217915.jpg/600x600bb.jpg",
+      "appleUrl": "https://podcasts.apple.com/br/podcast/os-s%C3%B3cios-podcast/id1553427360?uo=4"
+    },
+    {
+      "appleId": "1455626095",
+      "title": "Christo Nihil Praeponere",
+      "artworkUrl": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts115/v4/24/50/a9/2450a953-8e6f-9a14-f615-90c6e9d88434/mza_1147449132379799041.jpg/600x600bb.jpg",
+      "appleUrl": "https://podcasts.apple.com/br/podcast/christo-nihil-praeponere/id1455626095?uo=4"
+    },
+    {
+      "appleId": "191182582",
+      "title": "Canal Café Brasil",
+      "artworkUrl": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts126/v4/41/4f/b3/414fb358-a017-8c14-a813-025f2671b7b7/mza_1454136388890927951.jpg/600x600bb.jpg",
+      "appleUrl": "https://podcasts.apple.com/br/podcast/canal-caf%C3%A9-brasil/id191182582?uo=4"
+    }
+  ]
+}

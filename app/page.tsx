@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable @next/next/no-img-element -- capas e thumbnails vêm de CDNs oficiais em uma exportação estática */
 
 import { useEffect, useMemo, useState } from "react";
 import { seedVideos, type Video } from "../lib/videos";
@@ -44,6 +45,8 @@ type Podcast = {
   depth: number;
   clarity: number;
   accent: string;
+  artworkUrl?: string;
+  appleUrl?: string;
 };
 
 const podcasts: Podcast[] = [
@@ -147,9 +150,9 @@ function PodcastCard({ podcast, onPlay }: { podcast: Podcast; onPlay: (podcast: 
   return (
     <article className="podcast-card">
       <button className="podcast-art" style={{ background: `linear-gradient(145deg, ${podcast.accent}, #111)` }} onClick={() => onPlay(podcast)} aria-label={`Ouvir ${podcast.title}`}>
-        <span>◖))</span><small>OUVIR</small>
+        {podcast.artworkUrl ? <img src={podcast.artworkUrl} alt={`Capa oficial de ${podcast.title}`} loading="lazy" /> : <span className="podcast-fallback">◖))</span>}<span className="podcast-play">▶</span>
       </button>
-      <div className="podcast-copy"><p>{podcast.category} · {levelLabel(podcast.depth)}</p><button onClick={() => onPlay(podcast)}>{podcast.title}</button><span>{podcast.author}</span><small>{podcast.description}</small><em>{Math.round(podcast.clarity * 100)}% clareza editorial</em></div>
+      <div className="podcast-copy"><p>{podcast.category} · {levelLabel(podcast.depth)}</p><button onClick={() => onPlay(podcast)}>{podcast.title}</button><span>{podcast.author}</span><small>{podcast.description}</small><em>{Math.round(podcast.clarity * 100)}% clareza editorial</em>{podcast.appleUrl && <a href={podcast.appleUrl} target="_blank" rel="noreferrer">Ver no Apple Podcasts ↗</a>}</div>
     </article>
   );
 }
@@ -200,6 +203,7 @@ export default function Home() {
   const [updatedAt, setUpdatedAt] = useState<string | null>(null);
   const [playing, setPlaying] = useState<RankedVideo | null>(null);
   const [playingPodcast, setPlayingPodcast] = useState<Podcast | null>(null);
+  const [podcastArtwork, setPodcastArtwork] = useState<Record<string, { artworkUrl: string; appleUrl: string }>>({});
   const [showControls, setShowControls] = useState(false);
   const [showAdd, setShowAdd] = useState(false);
   const [showSearchSetup, setShowSearchSetup] = useState(false);
@@ -225,6 +229,7 @@ export default function Home() {
   const [connections, setConnections] = useState("");
   const [evidence, setEvidence] = useState("");
   const [application, setApplication] = useState("");
+  const [currentTime] = useState(() => Date.now());
 
   useEffect(() => {
     try {
@@ -234,13 +239,15 @@ export default function Home() {
       const storedLevel = localStorage.getItem("clarity-language-level") as "Essencial" | "Intermediário" | "Avançado" | null;
       const storedSearchKey = localStorage.getItem("clarity-youtube-api-key");
       const storedInterests = localStorage.getItem("clarity-interests");
-      if (storedTheme) setTheme(storedTheme);
-      if (storedPrefs) setPreferences({ ...DEFAULT_PREFERENCES, ...JSON.parse(storedPrefs) });
-      if (storedVideos) setCustomVideos(JSON.parse(storedVideos));
-      if (storedLevel) setLanguageLevel(storedLevel);
-      if (storedSearchKey) setSearchApiKey(storedSearchKey);
-      if (storedInterests) setUserInterests(JSON.parse(storedInterests));
-      if (!localStorage.getItem("clarity-onboarding-complete")) setShowOnboarding(true);
+      queueMicrotask(() => {
+        if (storedTheme) setTheme(storedTheme);
+        if (storedPrefs) setPreferences({ ...DEFAULT_PREFERENCES, ...JSON.parse(storedPrefs) });
+        if (storedVideos) setCustomVideos(JSON.parse(storedVideos));
+        if (storedLevel) setLanguageLevel(storedLevel);
+        if (storedSearchKey) setSearchApiKey(storedSearchKey);
+        if (storedInterests) setUserInterests(JSON.parse(storedInterests));
+        if (!localStorage.getItem("clarity-onboarding-complete")) setShowOnboarding(true);
+      });
     } catch {}
 
     fetch(`${BASE_PATH}/data/latest-videos.json`)
@@ -257,6 +264,13 @@ export default function Home() {
     fetch(`${BASE_PATH}/data/news.json`)
       .then((response) => response.ok ? response.json() : Promise.reject())
       .then((data) => { if (Array.isArray(data.news)) setNews(data.news); if (data.updatedAt) setNewsUpdatedAt(data.updatedAt); })
+      .catch(() => {});
+    fetch(`${BASE_PATH}/data/podcasts.json`)
+      .then((response) => response.ok ? response.json() : Promise.reject())
+      .then((data) => {
+        if (!Array.isArray(data.podcasts)) return;
+        setPodcastArtwork(Object.fromEntries(data.podcasts.map((item: { appleId: string; artworkUrl: string; appleUrl: string }) => [item.appleId, { artworkUrl: item.artworkUrl, appleUrl: item.appleUrl }])));
+      })
       .catch(() => {});
   }, []);
 
@@ -281,9 +295,9 @@ export default function Home() {
     }).sort((a, b) => (b.score + seededNoise(b.id, refreshSeed) * 5) - (a.score + seededNoise(a.id, refreshSeed) * 5));
   }, [videos, preferences, category, query, refreshSeed]);
 
-  const visiblePodcasts = useMemo(() => podcasts
+  const visiblePodcasts = useMemo(() => podcasts.map((podcast) => ({ ...podcast, ...podcastArtwork[podcast.appleId] }))
     .filter((podcast) => category === "Todos" || podcast.category === category)
-    .sort((a, b) => Math.abs(a.depth - preferences.depth / 100) - Math.abs(b.depth - preferences.depth / 100)), [category, preferences.depth]);
+    .sort((a, b) => Math.abs(a.depth - preferences.depth / 100) - Math.abs(b.depth - preferences.depth / 100)), [category, preferences.depth, podcastArtwork]);
 
   const homeReadings = useMemo(() => {
     const levelOrder = { Essencial: 0, Intermediário: 1, Avançado: 2 };
@@ -294,7 +308,7 @@ export default function Home() {
   }, [category, languageLevel]);
 
   const visibleNews = useMemo(() => {
-    const cutoff = Date.now() - (newsPeriod === "today" ? 30 : 7 * 24) * 3_600_000;
+    const cutoff = currentTime - (newsPeriod === "today" ? 30 : 7 * 24) * 3_600_000;
     const candidates = news.filter((item) => Date.parse(item.publishedAt) >= cutoff)
       .filter((item) => category === "Todos" ? userInterests.includes(item.category) : item.category === category);
     const categoryCount: Record<string, number> = {};
@@ -306,7 +320,7 @@ export default function Home() {
       sourceCount[item.source] = (sourceCount[item.source] || 0) + 1;
       return true;
     }).slice(0, 8);
-  }, [news, newsPeriod, category, userInterests]);
+  }, [news, newsPeriod, category, userInterests, currentTime]);
 
   async function refreshRecommendations() {
     setRefreshing(true);
@@ -522,7 +536,7 @@ export default function Home() {
         <div className="header-actions">
           <button className="create-button" onClick={() => { setAddError(""); setShowAdd(true); }}>＋ Criar</button>
           <button className="icon-button" onClick={() => setTheme(theme === "dark" ? "light" : "dark")} aria-label="Alternar tema">{theme === "dark" ? "☀" : "◐"}</button>
-          <span className="avatar">EG</span>
+          <span className="avatar" aria-hidden="true">C</span>
         </div>
       </header>
 
@@ -565,26 +579,28 @@ export default function Home() {
 
         {webSearchStatus && <div className="web-search-status"><span>⌕</span><p>{webSearchStatus}</p>{searchApiKey && <button onClick={() => setShowSearchSetup(true)}>Configurar busca</button>}</div>}
 
+        <div className="top-discovery">
+          <section className="news-section compact-news" id="noticias">
+            <div className="section-heading news-heading"><div><p className="eyebrow">RADAR DO DIA</p><h2>Notícias com contexto</h2></div><div className="period-control"><button className={newsPeriod === "today" ? "active" : ""} onClick={() => setNewsPeriod("today")}>Hoje</button><button className={newsPeriod === "week" ? "active" : ""} onClick={() => setNewsPeriod("week")}>Semana</button></div></div>
+            {visibleNews.length ? <div className="news-grid">{visibleNews.slice(0, 4).map((item, index) => <article className="news-card" key={item.id}><div><span>{item.category}</span><time>{relativeDate(item.publishedAt)}</time></div><span className="news-number">{String(index + 1).padStart(2, "0")}</span><h3>{item.title}</h3><p>{item.source}</p><a href={item.url} target="_blank" rel="noreferrer">Ler notícia ↗</a></article>)}</div> : <div className="news-empty"><strong>Nenhuma notícia neste período.</strong><p>{newsPeriod === "today" ? "Veja a seleção da semana." : "A atualização ainda está preparando este tema."}</p></div>}
+            {newsUpdatedAt && <small className="news-update">Atualizado {new Date(newsUpdatedAt).toLocaleDateString("pt-BR")}</small>}
+          </section>
+
+          {visiblePodcasts.length > 0 && <section className="podcast-section compact-podcasts" aria-labelledby="podcasts-title">
+            <div className="section-heading"><div><p className="eyebrow">OUÇA SEM PRESSA</p><h2 id="podcasts-title">Podcasts</h2></div><span>Apple Podcasts</span></div>
+            <div className="podcast-grid">{visiblePodcasts.slice(0, 4).map((podcast) => <PodcastCard key={podcast.id} podcast={podcast} onPlay={setPlayingPodcast} />)}</div>
+          </section>}
+        </div>
+
         {ranked.length ? <section className="video-grid">
           {ranked.slice(0, Math.min(8, visibleCount)).map((video) => <VideoCard key={video.id} video={video} onPlay={setPlaying} onFeedback={feedback} />)}
         </section> : <div className="empty-state"><strong>Nenhum vídeo encontrado</strong><p>Tente outro filtro ou termo de busca.</p></div>}
-
-        {visiblePodcasts.length > 0 && <section className="podcast-section" aria-labelledby="podcasts-title">
-          <div className="section-heading"><div><p className="eyebrow">CONVERSAS PARA OUVIR SEM PRESSA</p><h2 id="podcasts-title">Podcasts em profundidade</h2></div><span>Apple Podcasts · sem reprodução automática</span></div>
-          <div className="podcast-grid">{visiblePodcasts.slice(0, 4).map((podcast) => <PodcastCard key={podcast.id} podcast={podcast} onPlay={setPlayingPodcast} />)}</div>
-        </section>}
 
         {ranked.length > 8 && visibleCount > 8 && <section className="video-grid second-grid">
           {ranked.slice(8, visibleCount).map((video) => <VideoCard key={video.id} video={video} onPlay={setPlaying} onFeedback={feedback} />)}
         </section>}
 
         {visibleCount < ranked.length && <button className="load-more" onClick={() => setVisibleCount((value) => value + 8)}>Mostrar mais vídeos</button>}
-
-        <section className="news-section" id="noticias">
-          <div className="section-heading news-heading"><div><p className="eyebrow">RADAR PARA ENTENDER O PRESENTE</p><h2>Notícias que merecem contexto</h2><p>Uma seleção finita por temas, sem manchetes em rolagem infinita.</p></div><div className="period-control"><button className={newsPeriod === "today" ? "active" : ""} onClick={() => setNewsPeriod("today")}>Hoje</button><button className={newsPeriod === "week" ? "active" : ""} onClick={() => setNewsPeriod("week")}>Esta semana</button></div></div>
-          {visibleNews.length ? <div className="news-grid">{visibleNews.map((item, index) => <article className="news-card" key={item.id}><div><span>{item.category}</span><time>{relativeDate(item.publishedAt)}</time></div><span className="news-number">{String(index + 1).padStart(2, "0")}</span><h3>{item.title}</h3><p>{item.source}</p><a href={item.url} target="_blank" rel="noreferrer">Ler notícia ↗</a></article>)}</div> : <div className="news-empty"><strong>Nenhuma notícia neste período.</strong><p>{newsPeriod === "today" ? "Veja a seleção da semana ou recarregue os dados." : "A atualização automática ainda está preparando este tema."}</p></div>}
-          {newsUpdatedAt && <small className="news-update">Atualizado {new Date(newsUpdatedAt).toLocaleString("pt-BR")} · abra a fonte para verificar contexto e correções.</small>}
-        </section>
 
         <section className="reading-section" id="leituras">
           <div className="reading-intro"><p className="eyebrow">LEITURAS PARA FORMAR REPERTÓRIO</p><h2>Uma estante, não outro feed</h2><p>Artigos, livros, documentos e pesquisas selecionados para construir fundamentos e ligar ideias.</p><a className="library-link" href={`${BASE_PATH}/leituras/`}>Abrir biblioteca completa →</a></div>
