@@ -33,6 +33,8 @@ export function scoreVideo(video: Video, preferences: Preferences) {
   const durationMinutes = video.durationSeconds / 60;
   const durationFit = durationMinutes <= preferences.maxMinutes ? 1 : Math.max(0, 1 - (durationMinutes - preferences.maxMinutes) / 60);
   const feedback = preferences.topicWeights[video.topic] ?? 0;
+  const ageDays = video.publishedAt ? Math.max(0, (Date.now() - new Date(video.publishedAt).getTime()) / 86_400_000) : 365;
+  const freshness = Math.max(0, 1 - ageDays / 45);
 
   return (
     video.quality * 32 +
@@ -41,7 +43,8 @@ export function scoreVideo(video: Video, preferences: Preferences) {
     topicFit * 16 +
     durationFit * 10 +
     video.novelty * discoveryFactor * 8 +
-    feedback * 4
+    feedback * 4 +
+    freshness * (preferences.discovery / 100) * 8
   );
 }
 

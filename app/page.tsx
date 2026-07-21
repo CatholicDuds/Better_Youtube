@@ -2,123 +2,93 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { seedVideos, type Video } from "../lib/videos";
-import {
-  DEFAULT_PREFERENCES,
-  rankVideos,
-  type Preferences,
-  type RankedVideo,
-} from "../lib/recommender";
+import { DEFAULT_PREFERENCES, rankVideos, type Preferences, type RankedVideo } from "../lib/recommender";
 
-type Intent = "negocios" | "ideias" | "mundo" | "fe" | "curiosidade" | "criar";
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || "";
+const categories = ["Todos", "Negócios", "Ideias", "Mundo", "Fé", "Ciência", "Criação", "Minha biblioteca"];
+const palettes = ["blue", "coral", "ink", "moss", "violet", "sand"] as const;
 
-type Article = { title: string; kicker: string; readTime: string; paragraphs: string[]; takeaway: string; principles: [string, string, string] };
-
-const intentCopy: Record<Intent, { label: string; prompt: string }> = {
-  negocios: { label: "Negócios", prompt: "Economia, estratégia e gestão" },
-  ideias: { label: "Ideias", prompt: "Filosofia e natureza humana" },
-  mundo: { label: "Mundo", prompt: "Política, história e geopolítica" },
-  fe: { label: "Fé & razão", prompt: "Formação católica e vida interior" },
-  curiosidade: { label: "Curiosidade", prompt: "Astronomia, foguetes e grandes perguntas" },
-  criar: { label: "Criar", prompt: "Canais, roteiros e planejamento" },
-};
-
-const intentTopics: Record<Intent, string[]> = {
-  negocios: ["negócios", "economia", "gestão", "administração"],
-  ideias: ["filosofia", "natureza humana", "psicologia", "antropologia"],
-  mundo: ["geopolítica", "política", "história", "economia"],
-  fe: ["formação católica", "teologia", "vida espiritual", "filosofia"],
-  curiosidade: ["astronomia", "foguetes", "curiosidades", "ciência"],
-  criar: ["criação de vídeos", "roteiro", "estratégia de canal", "planejamento"],
+type Article = {
+  title: string;
+  kicker: string;
+  paragraphs: string[];
+  principle: string;
 };
 
 const articles: Article[] = [
   {
     kicker: "ESTRATÉGIA · 4 MIN",
     title: "Pensar em segunda ordem muda a qualidade de uma decisão",
-    readTime: "4 min de leitura",
     paragraphs: [
-      "Uma decisão fácil olha apenas para o primeiro efeito: reduzir o preço aumenta as vendas; publicar mais aumenta o alcance; contratar mais acelera a entrega. O pensamento de segunda ordem pergunta o que acontece depois — e depois disso.",
-      "Se o preço menor atrai clientes menos fiéis, a receita pode subir enquanto a empresa enfraquece. Se publicar todos os dias reduz a qualidade, o canal cresce em volume e perde confiança. Bons estrategistas não tentam prever tudo: eles desenham uma pequena árvore de consequências e procuram efeitos que se acumulam.",
-      "Antes de decidir, escreva três linhas: o efeito imediato, o provável efeito em seis meses e o comportamento que essa escolha recompensa. Essa pausa simples costuma revelar custos que uma planilha não mostra.",
+      "Uma decisão apressada olha apenas para o primeiro efeito. O pensamento de segunda ordem pergunta o que acontece depois — e depois disso.",
+      "Antes de decidir, descreva o efeito imediato, o efeito provável em seis meses e o comportamento que a escolha recompensa. Essa pequena árvore de consequências revela custos que uma planilha não mostra.",
     ],
-    takeaway: "Pergunta para guardar: se eu repetir esta decisão cem vezes, em quem ou no que ela me transforma?",
-    principles: ["Básico — toda escolha produz mais de um efeito.", "Intermediário — efeitos acumulados importam mais do que vitórias imediatas.", "Avançado — estratégias robustas moldam incentivos e permanecem boas quando repetidas."],
+    principle: "Se eu repetir esta decisão cem vezes, no que ela transforma meu sistema?",
   },
   {
     kicker: "CRIAÇÃO · 5 MIN",
-    title: "Um bom vídeo começa com uma tensão, não com uma introdução",
-    readTime: "5 min de leitura",
+    title: "Um bom vídeo começa com tensão, não com introdução",
     paragraphs: [
-      "Roteiros fracos começam explicando o tema. Roteiros fortes começam mostrando por que o tema é um problema. A tensão pode ser uma contradição, uma pergunta sem resposta, uma escolha difícil ou um fato que desafia a intuição.",
-      "Estruture o vídeo em quatro movimentos: promessa, contexto, descoberta e consequência. A promessa diz o que o espectador compreenderá. O contexto entrega apenas o necessário. A descoberta reorganiza o que ele pensava. A consequência responde: o que muda agora que sabemos disso?",
-      "Planeje uma ideia central por vídeo e corte tudo o que não a serve. Um canal ganha identidade quando cada publicação parece parte da mesma investigação, não quando repete a mesma estética.",
+      "Roteiros fracos começam explicando o tema. Roteiros fortes começam mostrando por que o tema é um problema, uma contradição ou uma pergunta que merece resposta.",
+      "Organize o vídeo em quatro movimentos: promessa, contexto, descoberta e consequência. Corte tudo o que não serve à ideia central.",
     ],
-    takeaway: "Exercício: resuma seu próximo vídeo em ‘Você pensa X, mas Y — e isso importa porque Z’. Se não couber, a ideia ainda não está clara.",
-    principles: ["Básico — um vídeo precisa defender uma ideia central.", "Intermediário — tensão e consequência sustentam uma narrativa.", "Avançado — a tese editorial conecta vídeos isolados em um canal coerente."],
+    principle: "Você pensa X, mas Y — e isso importa porque Z.",
   },
   {
     kicker: "CURIOSIDADE · 4 MIN",
-    title: "A escala do espaço é também uma aula de humildade",
-    readTime: "4 min de leitura",
+    title: "Curiosidade boa substitui uma imagem mental ruim",
     paragraphs: [
-      "A luz do Sol leva pouco mais de oito minutos para chegar à Terra. Da estrela mais próxima depois dele, leva mais de quatro anos. Quando olhamos o céu, nunca vemos o universo ‘agora’; vemos uma coleção de passados chegando em momentos diferentes.",
-      "Foguetes não sobem apenas vencendo a gravidade. Eles precisam ganhar velocidade horizontal suficiente para continuar caindo sem tocar o chão: é isso que chamamos de órbita. A imagem ajuda a corrigir uma intuição comum — ir ao espaço não é apenas subir, mas aprender a cair ao redor de um mundo.",
-      "A boa curiosidade não coleciona fatos isolados. Ela usa um fato para substituir uma imagem mental ruim por uma melhor. O ganho real não é saber mais uma coisa, mas passar a fazer perguntas melhores.",
+      "Aprender não é colecionar fatos. É trocar uma representação imprecisa por outra que explica mais e prevê melhor.",
+      "Depois de um vídeo, pergunte: qual imagem eu carregava sem perceber? O que agora consigo explicar que antes apenas repetia?",
     ],
-    takeaway: "Ideia para observar: toda explicação científica valiosa muda uma imagem que carregávamos sem perceber.",
-    principles: ["Básico — fatos ganham sentido quando corrigem uma intuição.", "Intermediário — modelos mentais explicam mais do que listas de curiosidades.", "Avançado — conhecer é trocar uma representação menos precisa por outra que prevê melhor."],
+    principle: "Conhecimento valioso muda as perguntas que somos capazes de fazer.",
   },
 ];
 
 function durationLabel(seconds: number) {
+  if (!seconds) return "aula";
   const minutes = Math.floor(seconds / 60);
-  const remaining = seconds % 60;
-  return `${minutes}:${String(remaining).padStart(2, "0")}`;
+  return minutes >= 60 ? `${Math.floor(minutes / 60)}h ${minutes % 60}m` : `${minutes} min`;
 }
 
-function VideoCard({
-  video,
-  onFeedback,
-  onWatch,
-}: {
+function thumbnail(video: Video) {
+  const id = video.thumbnailId || (video.embedType !== "playlist" ? video.youtubeId : "");
+  return id ? `https://i.ytimg.com/vi/${id}/hqdefault.jpg` : "";
+}
+
+function embedUrl(video: Video) {
+  return video.embedType === "playlist"
+    ? `https://www.youtube-nocookie.com/embed/videoseries?list=${video.youtubeId}&rel=0`
+    : `https://www.youtube-nocookie.com/embed/${video.youtubeId}?rel=0&modestbranding=1`;
+}
+
+function VideoCard({ video, onPlay, onFeedback }: {
   video: RankedVideo;
+  onPlay: (video: RankedVideo) => void;
   onFeedback: (id: string, value: 1 | -1) => void;
-  onWatch: (video: RankedVideo) => void;
 }) {
+  const image = thumbnail(video);
   return (
     <article className="video-card">
-      <a
-        className={`video-visual visual-${video.palette}`}
-        href={video.url}
-        target="_blank"
-        rel="noreferrer"
-        onClick={() => onWatch(video)}
-        aria-label={`Assistir ${video.title} no YouTube`}
-      >
-        <span className="visual-topic">{video.topic}</span>
-        <span className="visual-mark" aria-hidden="true">
-          {video.mark}
-        </span>
-        <span className="duration">{durationLabel(video.durationSeconds)}</span>
-        <span className="play" aria-hidden="true">▶</span>
-      </a>
-      <div className="video-body">
-        <div className="video-heading">
-          <div className="channel-avatar" aria-hidden="true">
-            {video.channel.slice(0, 1)}
+      <button className={`thumbnail visual-${video.palette}`} onClick={() => onPlay(video)} aria-label={`Assistir ${video.title}`}>
+        {image ? <img src={image} alt="" loading="lazy" /> : <span className="thumbnail-mark">{video.mark}</span>}
+        <span className="thumbnail-play">▶</span>
+        <span className="duration">{video.embedType === "playlist" ? "coleção" : durationLabel(video.durationSeconds)}</span>
+      </button>
+      <div className="video-info">
+        <div className="channel-avatar" aria-hidden="true">{video.channel.slice(0, 1)}</div>
+        <div className="video-copy">
+          <button className="video-title" onClick={() => onPlay(video)}>{video.title}</button>
+          <p>{video.channel}</p>
+          <p>{video.topic} · {video.publishedLabel}</p>
+          <details>
+            <summary>Por que foi recomendado?</summary>
+            <span>{video.explanation}</span>
+          </details>
+          <div className="feedback-row">
+            <button onClick={() => onFeedback(video.id, 1)}>＋ mais assim</button>
+            <button onClick={() => onFeedback(video.id, -1)}>− menos assim</button>
           </div>
-          <div>
-            <a href={video.url} target="_blank" rel="noreferrer" className="video-title" onClick={() => onWatch(video)}>
-              {video.title}
-            </a>
-            <p className="channel-line">{video.channel} · {video.publishedLabel}</p>
-          </div>
-        </div>
-        <p className="why"><span>Por que aqui</span> {video.explanation}</p>
-        <div className="card-actions">
-          <button onClick={() => onFeedback(video.id, 1)} aria-label="Quero mais vídeos assim">＋ mais assim</button>
-          <button onClick={() => onFeedback(video.id, -1)} aria-label="Quero menos vídeos assim">− menos assim</button>
-          <span className="score" title="Pontuação calculada no seu dispositivo">{Math.round(video.score)} pts</span>
         </div>
       </div>
     </article>
@@ -126,19 +96,20 @@ function VideoCard({
 }
 
 export default function Home() {
-  const [intent, setIntent] = useState<Intent>("ideias");
-  const [preferences, setPreferences] = useState<Preferences>(DEFAULT_PREFERENCES);
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const [category, setCategory] = useState("Todos");
   const [query, setQuery] = useState("");
-  const [visibleCount, setVisibleCount] = useState(6);
+  const [preferences, setPreferences] = useState<Preferences>(DEFAULT_PREFERENCES);
+  const [liveVideos, setLiveVideos] = useState<Video[]>([]);
+  const [customVideos, setCustomVideos] = useState<Video[]>([]);
+  const [updatedAt, setUpdatedAt] = useState<string | null>(null);
+  const [playing, setPlaying] = useState<RankedVideo | null>(null);
   const [showControls, setShowControls] = useState(false);
   const [showAdd, setShowAdd] = useState(false);
-  const [customVideos, setCustomVideos] = useState<Video[]>([]);
-  const [saved, setSaved] = useState(false);
-  const [videosSinceRead, setVideosSinceRead] = useState(0);
-  const [readingIndex, setReadingIndex] = useState(0);
-  const [activeArticle, setActiveArticle] = useState<Article | null>(null);
-  const [readingConfirmed, setReadingConfirmed] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(12);
   const [watchedBlock, setWatchedBlock] = useState<string[]>([]);
+  const [articleIndex, setArticleIndex] = useState(0);
+  const [activeArticle, setActiveArticle] = useState<Article | null>(null);
   const [reflectionVideos, setReflectionVideos] = useState<string[]>([]);
   const [summary, setSummary] = useState("");
   const [principle, setPrinciple] = useState("");
@@ -146,88 +117,94 @@ export default function Home() {
 
   useEffect(() => {
     try {
-      const raw = localStorage.getItem("clarity-preferences");
-      const videos = localStorage.getItem("clarity-videos");
-      if (raw) setPreferences({ ...DEFAULT_PREFERENCES, ...JSON.parse(raw) });
-      if (videos) setCustomVideos(JSON.parse(videos));
-    } catch {
-      // A private browsing session can make storage unavailable; the app still works.
-    }
+      const storedTheme = localStorage.getItem("clarity-theme") as "dark" | "light" | null;
+      const storedPrefs = localStorage.getItem("clarity-preferences");
+      const storedVideos = localStorage.getItem("clarity-videos");
+      if (storedTheme) setTheme(storedTheme);
+      if (storedPrefs) setPreferences({ ...DEFAULT_PREFERENCES, ...JSON.parse(storedPrefs) });
+      if (storedVideos) setCustomVideos(JSON.parse(storedVideos));
+    } catch {}
+
+    fetch(`${BASE_PATH}/data/latest-videos.json`)
+      .then((response) => response.ok ? response.json() : Promise.reject())
+      .then((data) => {
+        if (Array.isArray(data.videos)) setLiveVideos(data.videos);
+        if (data.updatedAt) setUpdatedAt(data.updatedAt);
+      })
+      .catch(() => {});
   }, []);
 
-  const videos = useMemo(() => [...customVideos, ...seedVideos], [customVideos]);
-  const ranked = useMemo(() => {
-    const tuned: Preferences = {
-      ...preferences,
-      topics: intentTopics[intent],
-      discovery: intent === "mundo" ? Math.max(preferences.discovery, 68) : preferences.discovery,
-      depth: intent === "ideias" || intent === "fe" ? Math.max(preferences.depth, 85) : preferences.depth,
-    };
-    return rankVideos(videos, tuned).filter((video) => {
-      const haystack = `${video.title} ${video.channel} ${video.topic}`.toLowerCase();
-      return haystack.includes(query.toLowerCase());
-    });
-  }, [intent, preferences, query, videos]);
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    try { localStorage.setItem("clarity-theme", theme); } catch {}
+  }, [theme]);
 
-  function persist(next: Preferences) {
+  const videos = useMemo(() => {
+    const all = [...customVideos, ...liveVideos, ...seedVideos];
+    return all.filter((video, index) => all.findIndex((item) => item.youtubeId === video.youtubeId) === index);
+  }, [customVideos, liveVideos]);
+
+  const ranked = useMemo(() => {
+    return rankVideos(videos, preferences).filter((video) => {
+      const categoryMatch = category === "Todos" || video.category === category;
+      const text = `${video.title} ${video.channel} ${video.topic} ${video.category}`.toLowerCase();
+      return categoryMatch && text.includes(query.trim().toLowerCase());
+    });
+  }, [videos, preferences, category, query]);
+
+  function persistPreferences(next: Preferences) {
     setPreferences(next);
-    try {
-      localStorage.setItem("clarity-preferences", JSON.stringify(next));
-    } catch {}
+    try { localStorage.setItem("clarity-preferences", JSON.stringify(next)); } catch {}
   }
 
   function feedback(id: string, value: 1 | -1) {
     const video = videos.find((item) => item.id === id);
     if (!video) return;
     const topicWeights = { ...preferences.topicWeights };
-    topicWeights[video.topic] = Math.max(-3, Math.min(3, (topicWeights[video.topic] ?? 0) + value));
-    persist({ ...preferences, topicWeights });
+    topicWeights[video.topic] = Math.max(-3, Math.min(3, (topicWeights[video.topic] || 0) + value));
+    persistPreferences({ ...preferences, topicWeights });
+  }
+
+  function finishVideo() {
+    if (!playing) return;
+    const next = [...watchedBlock, playing.title];
+    setPlaying(null);
+    if (next.length >= 2) {
+      setReflectionVideos(next);
+      setWatchedBlock([]);
+      setActiveArticle(articles[articleIndex % articles.length]);
+      setArticleIndex((value) => value + 1);
+    } else {
+      setWatchedBlock(next);
+    }
   }
 
   function addVideo(formData: FormData) {
     const url = String(formData.get("url") || "");
-    const title = String(formData.get("title") || "Vídeo salvo para depois");
-    const topic = String(formData.get("topic") || "tecnologia").toLowerCase();
-    const match = url.match(/(?:v=|youtu\.be\/)([a-zA-Z0-9_-]{6,})/);
+    const match = url.match(/(?:v=|youtu\.be\/|shorts\/|embed\/)([a-zA-Z0-9_-]{6,})/);
     if (!match) return;
     const next: Video = {
       id: `custom-${match[1]}`,
       youtubeId: match[1],
-      title,
-      channel: "Sua biblioteca",
-      topic,
+      category: "Minha biblioteca",
+      title: String(formData.get("title") || "Vídeo da minha biblioteca"),
+      channel: "Minha biblioteca",
+      topic: String(formData.get("topic") || "estudo").toLowerCase(),
       url,
       durationSeconds: 900,
-      depth: 0.72,
-      novelty: 0.55,
-      quality: 0.8,
-      evergreen: 0.9,
+      depth: .75,
+      novelty: .6,
+      quality: .8,
+      evergreen: .85,
       publishedLabel: "adicionado agora",
-      palette: "sand",
+      palette: "coral",
       mark: "SALVO",
     };
-    const nextVideos = [next, ...customVideos.filter((item) => item.id !== next.id)];
+    const nextVideos = [next, ...customVideos.filter((video) => video.id !== next.id)];
     setCustomVideos(nextVideos);
-    localStorage.setItem("clarity-videos", JSON.stringify(nextVideos));
+    try { localStorage.setItem("clarity-videos", JSON.stringify(nextVideos)); } catch {}
     setShowAdd(false);
-    setSaved(true);
-    setTimeout(() => setSaved(false), 2500);
-  }
-
-  function registerWatch(video: RankedVideo) {
-    const next = videosSinceRead + 1;
-    const nextBlock = [...watchedBlock, video.title];
-    if (next >= 2) {
-      setVideosSinceRead(0);
-      setReflectionVideos(nextBlock);
-      setWatchedBlock([]);
-      setActiveArticle(articles[readingIndex % articles.length]);
-      setReadingIndex((index) => index + 1);
-      setReadingConfirmed(false);
-    } else {
-      setVideosSinceRead(next);
-      setWatchedBlock(nextBlock);
-    }
+    setCategory("Minha biblioteca");
   }
 
   function saveReflection() {
@@ -242,162 +219,92 @@ export default function Home() {
     } catch {}
     const today = date.toISOString().slice(0, 10);
     const daily = entries.filter((item: typeof entry) => item.date.slice(0, 10) === today);
-    const markdown = `# Diário de aprendizado — ${today}\n\n${daily.map((item: typeof entry, index: number) => `## Bloco ${index + 1}\n\n### Vídeos\n${item.videos.map((title: string) => `- ${title}`).join("\n")}\n\n### Leitura\n- ${item.article}\n\n### Resumo com minhas palavras\n${item.summary}\n\n### Princípio fundamental\n${item.principle}\n\n### Aplicação concreta\n${item.application}\n`).join("\n---\n\n")}\n\n## Perguntas para a próxima aula\n- O que ainda não consigo explicar com clareza?\n- Qual premissa eu deveria testar?\n- Como este princípio se conecta ao que já estudei?\n`;
-    const blob = new Blob([markdown], { type: "text/markdown;charset=utf-8" });
-    const url = URL.createObjectURL(blob);
+    const markdown = `# Diário de aprendizado — ${today}\n\n${daily.map((item: typeof entry, index: number) => `## Bloco ${index + 1}\n\n### Vídeos\n${item.videos.map((title: string) => `- ${title}`).join("\n")}\n\n### Leitura\n- ${item.article}\n\n### Resumo\n${item.summary}\n\n### Princípio\n${item.principle}\n\n### Aplicação\n${item.application}`).join("\n\n---\n\n")}`;
+    const url = URL.createObjectURL(new Blob([markdown], { type: "text/markdown;charset=utf-8" }));
     const link = document.createElement("a");
     link.href = url;
     link.download = `clarity-diario-${today}.md`;
     link.click();
     URL.revokeObjectURL(url);
     setActiveArticle(null);
-    setSummary("");
-    setPrinciple("");
-    setApplication("");
+    setSummary(""); setPrinciple(""); setApplication("");
   }
 
   return (
-    <main>
+    <div className="app-shell">
       <header className="topbar">
-        <a className="brand" href="#top" aria-label="Clarity, início">
-          <span className="brand-icon">C</span>
-          <span>CLARITY</span>
-        </a>
-        <div className="search-wrap">
-          <span aria-hidden="true">⌕</span>
-          <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Buscar na sua biblioteca" aria-label="Buscar vídeos" />
-          <kbd>/</kbd>
+        <div className="brand-group">
+          <button className="icon-button menu-button" aria-label="Abrir menu">☰</button>
+          <a className="brand" href="#top"><span className="brand-play">▶</span><strong>Clarity</strong><sup>BR</sup></a>
         </div>
-        <div className="top-actions">
-          <button className="text-button" onClick={() => setShowAdd(true)}>＋ Adicionar vídeo</button>
-          <button className="avatar" aria-label="Perfil local">EG</button>
+        <div className="search-box">
+          <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Pesquisar aulas, canais e temas" aria-label="Pesquisar vídeos" />
+          <button aria-label="Pesquisar">⌕</button>
+        </div>
+        <div className="header-actions">
+          <button className="create-button" onClick={() => setShowAdd(true)}>＋ Criar</button>
+          <button className="icon-button" onClick={() => setTheme(theme === "dark" ? "light" : "dark")} aria-label="Alternar tema">{theme === "dark" ? "☀" : "◐"}</button>
+          <span className="avatar">EG</span>
         </div>
       </header>
 
-      <section className="hero" id="top">
-        <div className="eyebrow"><span></span> Sua atenção tem destino</div>
-        <h1>O que vale<br /><em>compreender?</em></h1>
-        <p>Aulas, ensaios e conversas longas para formar repertório — não para preencher silêncio.</p>
-        <div className="topic-rail" aria-label="Temas da biblioteca">
-          <span>Negócios</span><span>Economia</span><span>Filosofia</span><span>Natureza humana</span><span>Geopolítica</span><span>Gestão</span><span>Formação católica</span><span>Astronomia</span><span>Foguetes</span><span>Criação de vídeos</span>
-        </div>
-        <div className="intent-grid" role="group" aria-label="Escolha sua intenção">
-          {(Object.keys(intentCopy) as Intent[]).map((key, index) => (
-            <button key={key} className={intent === key ? "intent active" : "intent"} onClick={() => { setIntent(key); setVisibleCount(6); }}>
-              <span className="intent-number">0{index + 1}</span>
-              <span><strong>{intentCopy[key].label}</strong><small>{intentCopy[key].prompt}</small></span>
-              <span className="intent-arrow">↗</span>
-            </button>
-          ))}
-        </div>
-      </section>
+      <aside className="sidebar">
+        <nav>
+          <button className={category === "Todos" ? "nav-item active" : "nav-item"} onClick={() => setCategory("Todos")}><span>⌂</span>Início</button>
+          <button className="nav-item" onClick={() => document.getElementById("leituras")?.scrollIntoView()}><span>▤</span>Leituras</button>
+          <button className="nav-item" onClick={() => setCategory("Minha biblioteca")}><span>▱</span>Minha biblioteca</button>
+        </nav>
+        <div className="side-separator" />
+        <p className="side-label">EXPLORAR</p>
+        {categories.slice(1, -1).map((item) => <button key={item} className={category === item ? "nav-item active" : "nav-item"} onClick={() => { setCategory(item); setVisibleCount(12); }}><span>{item === "Fé" ? "✦" : "○"}</span>{item}</button>)}
+        <div className="side-separator" />
+        <div className="focus-card"><strong>Modo intencional</strong><p>Sem autoplay e sem feed infinito. A cada 2 vídeos, uma leitura.</p><span>{watchedBlock.length}/2 neste bloco</span></div>
+      </aside>
 
-      <section className="feed-section">
-        <div className="section-head">
-          <div>
-            <p className="section-kicker">AULAS E ENSAIOS · {ranked.length} CONTEÚDOS</p>
-            <h2>Para {intentCopy[intent].label.toLowerCase()}</h2>
+      <main className="content" id="top">
+        <div className="chip-row">
+          {categories.map((item) => <button key={item} className={category === item ? "chip active" : "chip"} onClick={() => { setCategory(item); setVisibleCount(12); }}>{item}</button>)}
+        </div>
+
+        <section className="feed-heading">
+          <div><p className="eyebrow">SELEÇÃO EXPLICÁVEL</p><h1>{category === "Todos" ? "Vídeos que valem seu tempo" : category}</h1><p>O algoritmo roda no seu dispositivo e prioriza profundidade, diversidade e valor formativo.</p></div>
+          <div className="heading-actions">
+            {updatedAt && <span className="live-badge"><i /> atualizado {new Date(updatedAt).toLocaleDateString("pt-BR")}</span>}
+            <button className="tune-button" onClick={() => setShowControls(!showControls)}>⚙ Ajustar algoritmo</button>
           </div>
-          <button className="tune-button" onClick={() => setShowControls((value) => !value)} aria-expanded={showControls}>
-            <span>⚙</span> Ajustar algoritmo
-          </button>
-        </div>
+        </section>
 
-        {showControls && (
-          <aside className="algorithm-panel">
-            <div className="panel-copy">
-              <p className="section-kicker">SEU ALGORITMO</p>
-              <h3>Você define o que ganha espaço.</h3>
-              <p>O motor favorece profundidade, valor atemporal e diversidade de perspectivas. Todos os cálculos acontecem neste dispositivo.</p>
-              <button onClick={() => persist(DEFAULT_PREFERENCES)}>Restaurar equilíbrio</button>
-            </div>
-            <div className="sliders">
-              <label>Profundidade <output>{preferences.depth}%</output><input type="range" min="0" max="100" value={preferences.depth} onChange={(e) => persist({ ...preferences, depth: Number(e.target.value) })} /></label>
-              <label>Descoberta <output>{preferences.discovery}%</output><input type="range" min="0" max="100" value={preferences.discovery} onChange={(e) => persist({ ...preferences, discovery: Number(e.target.value) })} /></label>
-              <label>Duração máxima <output>{preferences.maxMinutes} min</output><input type="range" min="8" max="90" step="2" value={preferences.maxMinutes} onChange={(e) => persist({ ...preferences, maxMinutes: Number(e.target.value) })} /></label>
-              <label>Valor formativo <output>{preferences.evergreen}%</output><input type="range" min="0" max="100" value={preferences.evergreen} onChange={(e) => persist({ ...preferences, evergreen: Number(e.target.value) })} /></label>
-            </div>
-          </aside>
-        )}
+        {showControls && <section className="algorithm-panel">
+          <div><strong>Seu algoritmo</strong><p>Nenhum clique oculto decide por você. Ajuste os critérios conscientemente.</p></div>
+          <label>Profundidade <output>{preferences.depth}%</output><input type="range" min="0" max="100" value={preferences.depth} onChange={(event) => persistPreferences({ ...preferences, depth: Number(event.target.value) })} /></label>
+          <label>Descoberta <output>{preferences.discovery}%</output><input type="range" min="0" max="100" value={preferences.discovery} onChange={(event) => persistPreferences({ ...preferences, discovery: Number(event.target.value) })} /></label>
+          <label>Duração máxima <output>{preferences.maxMinutes} min</output><input type="range" min="8" max="120" value={preferences.maxMinutes} onChange={(event) => persistPreferences({ ...preferences, maxMinutes: Number(event.target.value) })} /></label>
+        </section>}
 
-        {ranked.length ? (
-          <div className="video-grid">
-            {ranked.slice(0, visibleCount).map((video) => <VideoCard key={video.id} video={video} onFeedback={feedback} onWatch={registerWatch} />)}
-          </div>
-        ) : (
-          <div className="empty-state"><span>⌕</span><h3>Nada encontrado.</h3><p>Tente outro tema ou limpe a busca.</p></div>
-        )}
+        {ranked.length ? <section className="video-grid">
+          {ranked.slice(0, visibleCount).map((video) => <VideoCard key={video.id} video={video} onPlay={setPlaying} onFeedback={feedback} />)}
+        </section> : <div className="empty-state"><strong>Nenhum vídeo encontrado</strong><p>Tente outro filtro ou termo de busca.</p></div>}
 
-        {visibleCount < ranked.length ? (
-          <button className="more-button" onClick={() => setVisibleCount((count) => count + 3)}>Mostrar mais 3 vídeos</button>
-        ) : ranked.length > 0 ? (
-          <div className="feed-end"><span>✓</span><strong>Você chegou ao fim.</strong><p>Volte quando tiver uma nova intenção — não há rolagem infinita aqui.</p></div>
-        ) : null}
-      </section>
+        {visibleCount < ranked.length && <button className="load-more" onClick={() => setVisibleCount((value) => value + 8)}>Mostrar mais vídeos</button>}
 
-      <section className="reading-section">
-        <div className="reading-intro">
-          <p className="section-kicker">LER TAMBÉM É PARTE DO MÉTODO</p>
-          <h2>Entre uma ideia<br />e a próxima.</h2>
-          <p>A cada dois vídeos, o Clarity propõe uma leitura curta. É a pausa que transforma informação em repertório.</p>
-        </div>
-        <div className="article-list">
-          {articles.map((article, index) => (
-            <button key={article.title} className="article-card" onClick={() => { setActiveArticle(article); setReadingConfirmed(false); }}>
-              <span className="article-index">0{index + 1}</span>
-              <span><small>{article.kicker}</small><strong>{article.title}</strong><em>{article.readTime} →</em></span>
-            </button>
-          ))}
-        </div>
-      </section>
+        <section className="reading-section" id="leituras">
+          <div><p className="eyebrow">PAUSA PARA PENSAR</p><h2>Leitura entre os vídeos</h2><p>Informação vira conhecimento quando você consegue reconstruí-la com suas palavras.</p></div>
+          <div className="article-grid">{articles.map((article, index) => <button key={article.title} onClick={() => { setReflectionVideos([]); setActiveArticle(article); }}><span>0{index + 1}</span><small>{article.kicker}</small><strong>{article.title}</strong><em>Ler artigo →</em></button>)}</div>
+        </section>
+      </main>
 
-      <footer>
-        <div className="brand footer-brand"><span className="brand-icon">C</span><span>CLARITY</span></div>
-        <p>Uma interface experimental para assistir com intenção.<br />Sem anúncios. Sem autoplay. Seus dados ficam com você.</p>
-        <a href="https://github.com" target="_blank" rel="noreferrer">Código aberto ↗</a>
-      </footer>
+      {playing && <div className="overlay player-overlay">
+        <section className="player-modal" role="dialog" aria-modal="true" aria-label={playing.title}>
+          <div className="player-top"><div><span>{playing.category}</span><strong>{playing.title}</strong></div><button onClick={finishVideo} aria-label="Fechar vídeo">×</button></div>
+          <div className="player-frame"><iframe src={embedUrl(playing)} title={playing.title} allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen /></div>
+          <div className="player-meta"><div className="channel-avatar">{playing.channel.slice(0, 1)}</div><div><strong>{playing.channel}</strong><p>{playing.explanation}</p></div><a href={playing.url} target="_blank" rel="noreferrer">Abrir no YouTube ↗</a></div>
+          <button className="finish-button" onClick={finishVideo}>Concluir e voltar ao feed</button>
+        </section>
+      </div>}
 
-      {showAdd && (
-        <div className="modal-backdrop" role="presentation" onMouseDown={() => setShowAdd(false)}>
-          <div className="modal" role="dialog" aria-modal="true" aria-labelledby="add-title" onMouseDown={(e) => e.stopPropagation()}>
-            <button className="modal-close" onClick={() => setShowAdd(false)} aria-label="Fechar">×</button>
-            <p className="section-kicker">SUA BIBLIOTECA</p>
-            <h2 id="add-title">Adicionar um vídeo</h2>
-            <p>Cole um link do YouTube. Ele ficará salvo apenas neste navegador.</p>
-            <form action={addVideo}>
-              <label>Link do YouTube<input name="url" type="url" required placeholder="https://youtube.com/watch?v=…" /></label>
-              <label>Título<input name="title" required placeholder="O que vale lembrar sobre este vídeo?" /></label>
-              <label>Tema<select name="topic"><option>Negócios</option><option>Economia</option><option>Gestão</option><option>Filosofia</option><option>Natureza humana</option><option>Geopolítica</option><option>Política</option><option>Formação católica</option><option>Teologia</option><option>História</option></select></label>
-              <button className="submit-button" type="submit">Guardar na biblioteca</button>
-            </form>
-          </div>
-        </div>
-      )}
-      {activeArticle && (
-        <div className="modal-backdrop reading-backdrop">
-          <article className="reader" role="dialog" aria-modal="true" aria-labelledby="reader-title">
-            <div className="reader-progress"><span></span><span></span><span></span></div>
-            <p className="section-kicker">PAUSA DE LEITURA · APÓS 2 VÍDEOS</p>
-            <h2 id="reader-title">{activeArticle.title}</h2>
-            <div className="reader-body">{activeArticle.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</div>
-            <blockquote>{activeArticle.takeaway}</blockquote>
-            <div className="principle-ladder">
-              <p className="section-kicker">DO FUNDAMENTO AO AVANÇADO</p>
-              {activeArticle.principles.map((item, index) => <p key={item}><span>0{index + 1}</span>{item}</p>)}
-            </div>
-            <div className="reflection-form">
-              <p className="section-kicker">AGORA ENSINE DE VOLTA</p>
-              <p>Resuma os dois vídeos e esta leitura como se explicasse a alguém. O arquivo diário será baixado para você guardar em <strong>diario-de-aprendizado/entradas</strong> e consultar com o Codex.</p>
-              <label>1. O que foi dito, com suas palavras?<textarea value={summary} onChange={(event) => setSummary(event.target.value)} placeholder="Sem copiar: reconstrua a ideia…" /></label>
-              <label>2. Qual princípio fundamental conecta as ideias?<textarea value={principle} onChange={(event) => setPrinciple(event.target.value)} placeholder="Vá além do exemplo e encontre a regra…" /></label>
-              <label>3. Onde você aplicará isso?<textarea value={application} onChange={(event) => setApplication(event.target.value)} placeholder="Defina uma decisão ou experiência concreta…" /></label>
-            </div>
-            <label className="reading-check"><input type="checkbox" checked={readingConfirmed} onChange={(event) => setReadingConfirmed(event.target.checked)} /> Consigo explicar a ideia sem reler o texto.</label>
-            <button className="submit-button" disabled={!readingConfirmed || summary.trim().length < 30 || principle.trim().length < 20 || application.trim().length < 20} onClick={saveReflection}>Salvar diário e voltar ao feed</button>
-          </article>
-        </div>
-      )}
-      {saved && <div className="toast">✓ Vídeo salvo no seu dispositivo</div>}
-    </main>
+      {showAdd && <div className="overlay" onMouseDown={() => setShowAdd(false)}><section className="small-modal" onMouseDown={(event) => event.stopPropagation()}><button className="close" onClick={() => setShowAdd(false)}>×</button><p className="eyebrow">MINHA BIBLIOTECA</p><h2>Adicionar vídeo</h2><form action={addVideo}><label>Link do YouTube<input name="url" type="url" required placeholder="https://youtube.com/watch?v=…" /></label><label>Título<input name="title" required placeholder="Título do vídeo" /></label><label>Tema<input name="topic" required placeholder="Ex.: economia" /></label><button type="submit">Guardar e assistir aqui</button></form></section></div>}
+
+      {activeArticle && <div className="overlay reading-overlay"><article className="reader" role="dialog" aria-modal="true"><p className="eyebrow">{activeArticle.kicker}</p><h2>{activeArticle.title}</h2>{activeArticle.paragraphs.map((text) => <p key={text}>{text}</p>)}<blockquote>{activeArticle.principle}</blockquote><div className="reflection"><h3>Ensine de volta</h3><p>Resuma os vídeos e a leitura. Extraia o princípio antes de avançar.</p><label>Resumo<textarea value={summary} onChange={(event) => setSummary(event.target.value)} /></label><label>Princípio fundamental<textarea value={principle} onChange={(event) => setPrinciple(event.target.value)} /></label><label>Aplicação concreta<textarea value={application} onChange={(event) => setApplication(event.target.value)} /></label><button disabled={summary.trim().length < 30 || principle.trim().length < 20 || application.trim().length < 20} onClick={saveReflection}>Salvar diário e continuar</button></div></article></div>}
+    </div>
   );
 }

@@ -6,6 +6,8 @@ Uma biblioteca de formação guiada por intenção, não por tempo de tela. O fe
 
 O algoritmo roda inteiramente no navegador e combina qualidade editorial, profundidade, relevância atemporal, duração, descoberta e feedback explícito. Preferências e vídeos adicionados ficam no `localStorage`; nenhum perfil é enviado a um servidor.
 
+O feed público é renovado automaticamente a cada seis horas pelo GitHub Actions. O job lê os feeds oficiais dos canais selecionados, gera `public/data/latest-videos.json` e publica a nova versão sem expor chaves de API. A interface oferece busca, filtros temáticos, thumbnails reais, player incorporado e temas claro/escuro.
+
 ## Rodar localmente
 
 ```bash
