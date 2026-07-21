@@ -235,7 +235,7 @@ export default function Home() {
       <header className="topbar">
         <div className="brand-group">
           <button className="icon-button menu-button" aria-label="Abrir menu">☰</button>
-          <a className="brand" href="#top"><span className="brand-play">▶</span><strong>Clarity</strong><sup>BR</sup></a>
+          <a className="brand" href="#top"><span className="brand-mark">C</span><strong>Clarity</strong><sup>BR</sup></a>
         </div>
         <div className="search-box">
           <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Pesquisar aulas, canais e temas" aria-label="Pesquisar vídeos" />
