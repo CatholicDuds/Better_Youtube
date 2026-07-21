@@ -1,7 +1,7 @@
 "use client";
 /* eslint-disable @next/next/no-img-element -- capas e thumbnails vêm de CDNs oficiais em uma exportação estática */
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { seedVideos, type Video } from "../lib/videos";
 import { DEFAULT_PREFERENCES, rankVideos, type Preferences, type RankedVideo } from "../lib/recommender";
 import { readings } from "../lib/readings";
@@ -64,6 +64,15 @@ type Podcast = {
   appleUrl?: string;
 };
 
+type SearchFunctionResponse = {
+  items?: YouTubeSearchVideo[];
+  news?: NewsItem[];
+  podcasts?: Podcast[];
+  meta?: { videosExamined?: number; newsExamined?: number; podcastsExamined?: number };
+  warnings?: string[];
+  error?: string;
+};
+
 const podcasts: Podcast[] = [
   { id: "nova-acropole", appleId: "1347139874", slug: "nova-acropole-podcast-filosofia", title: "Nova Acrópole Podcast Filosofia", author: "Nova Acrópole do Brasil", category: "Ideias", description: "Filosofia clássica aplicada ao cotidiano, com linguagem progressiva e exemplos concretos.", depth: .9, clarity: .91, accent: "#8267e8" },
   { id: "filosofia-pop", appleId: "991572436", slug: "filosofia-pop", title: "Filosofia Pop", author: "Filosofia Pop", category: "Ideias", description: "Conversas longas que conectam filosofia, cultura, política e experiência brasileira.", depth: .94, clarity: .78, accent: "#3677d8" },
@@ -71,6 +80,18 @@ const podcasts: Podcast[] = [
   { id: "os-socios", appleId: "1553427360", slug: "os-sócios-podcast", title: "Os Sócios Podcast", author: "Grupo Primo", category: "Negócios", description: "Negócios, dinheiro e desenvolvimento pessoal em conversas acessíveis e extensas.", depth: .78, clarity: .9, accent: "#d59d2a" },
   { id: "christo", appleId: "1455626095", slug: "christo-nihil-praeponere", title: "Christo Nihil Praeponere", author: "Padre Paulo Ricardo", category: "Fé", description: "Formação espiritual diária a partir do Evangelho e da tradição católica.", depth: .86, clarity: .94, accent: "#9f7549" },
   { id: "cafe-brasil", appleId: "191182582", slug: "canal-café-brasil", title: "Canal Café Brasil", author: "Luciano Pires", category: "Mundo", description: "Comportamento, cidadania, política e cultura para exercitar autonomia de pensamento.", depth: .76, clarity: .9, accent: "#228b70" },
+  { id: "acquired", appleId: "1050462261", slug: "acquired", title: "Acquired", author: "Ben Gilbert e David Rosenthal", category: "Negócios", description: "Histórias profundamente pesquisadas sobre as empresas e estratégias que moldaram mercados inteiros.", depth: .96, clarity: .86, accent: "#5b6ff0" },
+  { id: "knowledge-project", appleId: "990149481", slug: "the-knowledge-project", title: "The Knowledge Project", author: "Shane Parrish", category: "Ideias", description: "Modelos mentais, decisões e aprendizado explicados por pensadores e operadores experientes.", depth: .9, clarity: .88, accent: "#be8c52" },
+  { id: "hidden-brain", appleId: "1028908750", slug: "hidden-brain", title: "Hidden Brain", author: "Shankar Vedantam", category: "Ideias", description: "Ciência do comportamento e natureza humana em narrativas claras, práticas e bem documentadas.", depth: .82, clarity: .96, accent: "#cf5368" },
+  { id: "startalk", appleId: "325404506", slug: "startalk-radio", title: "StarTalk Radio", author: "Neil deGrasse Tyson", category: "Ciência", description: "Astronomia, física e exploração espacial traduzidas em conversas acessíveis sem perder rigor.", depth: .74, clarity: .95, accent: "#295c9d" },
+  { id: "rest-history", appleId: "1537788786", slug: "the-rest-is-history", title: "The Rest Is History", author: "Tom Holland e Dominic Sandbrook", category: "Mundo", description: "Grandes processos históricos reconstruídos com contexto, fontes e conexões com o presente.", depth: .86, clarity: .92, accent: "#b94335" },
+  { id: "rest-politics", appleId: "1611374685", slug: "the-rest-is-politics", title: "The Rest Is Politics", author: "Alastair Campbell e Rory Stewart", category: "Política", description: "Política internacional explicada por perspectivas divergentes e experiência institucional.", depth: .8, clarity: .88, accent: "#6a4ba0" },
+  { id: "econtalk", appleId: "135066958", slug: "econtalk", title: "EconTalk", author: "Russ Roberts", category: "Negócios", description: "Economia, instituições e escolhas humanas em diálogos longos que valorizam objeções e evidências.", depth: .94, clarity: .85, accent: "#446a75" },
+  { id: "conversations-tyler", appleId: "983795625", slug: "conversations-with-tyler", title: "Conversations with Tyler", author: "Tyler Cowen", category: "Ideias", description: "Conversas exigentes sobre economia, cultura, tecnologia e as ideias que movem pessoas excepcionais.", depth: .96, clarity: .74, accent: "#8b6939" },
+  { id: "mindscape", appleId: "1406534739", slug: "sean-carrolls-mindscape-science-society-philosophy", title: "Sean Carroll's Mindscape", author: "Sean Carroll", category: "Ciência", description: "Ciência, filosofia e sociedade tratadas do fundamento técnico às consequências intelectuais.", depth: .98, clarity: .78, accent: "#315d78" },
+  { id: "pints-aquinas", appleId: "1097862282", slug: "pints-with-aquinas", title: "Pints With Aquinas", author: "Matt Fradd", category: "Fé", description: "Filosofia tomista, teologia e vida católica em debates longos com convidados diversos.", depth: .85, clarity: .86, accent: "#8b5b35" },
+  { id: "bible-year", appleId: "1539568321", slug: "the-bible-in-a-year-with-fr-mike-schmitz", title: "The Bible in a Year", author: "Fr. Mike Schmitz", category: "Fé", description: "Leitura bíblica guiada com contexto histórico, oração e explicações progressivas.", depth: .72, clarity: .97, accent: "#a34f3d" },
+  { id: "lex-fridman", appleId: "1434243584", slug: "lex-fridman-podcast", title: "Lex Fridman Podcast", author: "Lex Fridman", category: "Ideias", description: "Conversas extensas sobre ciência, tecnologia, história, poder e natureza humana.", depth: .92, clarity: .76, accent: "#4d4d4d" },
 ];
 
 const articles: Article[] = [
@@ -128,6 +149,10 @@ function meaningfulSearchTerms(value: string) {
   return terms.length ? [...new Set(terms)] : normalizeSearchText(value).split(/\s+/).filter(Boolean);
 }
 
+function searchTermAppears(text: string, term: string) {
+  return text.includes(term) || (term.length > 4 && term.endsWith("s") && text.includes(term.slice(0, -1)));
+}
+
 function searchRejectionReason(item: YouTubeSearchVideo, searchTerm: string, seconds: number) {
   if (seconds < 241 || seconds > 10_800) return "duracao";
   if ((item.snippet.liveBroadcastContent && item.snippet.liveBroadcastContent !== "none") || item.status?.embeddable === false) return "indisponivel";
@@ -139,8 +164,8 @@ function searchRejectionReason(item: YouTubeSearchVideo, searchTerm: string, sec
   if (ATTENTION_TRAP.test(title)) return "distracao";
 
   const terms = meaningfulSearchTerms(searchTerm);
-  const titleHits = terms.filter((term) => title.includes(term)).length;
-  const contextHits = terms.filter((term) => context.includes(term)).length;
+  const titleHits = terms.filter((term) => searchTermAppears(title, term)).length;
+  const contextHits = terms.filter((term) => searchTermAppears(context, term)).length;
   const requiredHits = terms.length <= 2 ? 1 : Math.ceil(terms.length * .6);
   const exactTitleMatch = title.includes(normalizeSearchText(searchTerm));
   const focusedTitle = exactTitleMatch || titleHits >= Math.min(2, terms.length);
@@ -185,6 +210,10 @@ function seededNoise(id: string, seed: number) {
   return ((hash >>> 0) % 1000) / 1000;
 }
 
+function paginate<T>(items: T[], pageSize: number, maxPages = 3) {
+  return Array.from({ length: Math.min(maxPages, Math.ceil(items.length / pageSize)) }, (_, index) => items.slice(index * pageSize, (index + 1) * pageSize));
+}
+
 function interestIcon(label: string) {
   return defaultInterests.find((item) => item.label === label)?.icon || "◆";
 }
@@ -203,6 +232,47 @@ function PodcastCard({ podcast, onPlay }: { podcast: Podcast; onPlay: (podcast: 
       </button>
       <div className="podcast-copy"><p>{podcast.category} · {levelLabel(podcast.depth)}</p><button onClick={() => onPlay(podcast)}>{podcast.title}</button><span>{podcast.author}</span><small>{podcast.description}</small><em>{Math.round(podcast.clarity * 100)}% clareza editorial</em>{podcast.appleUrl && <a href={podcast.appleUrl} target="_blank" rel="noreferrer">Ver no Apple Podcasts ↗</a>}</div>
     </article>
+  );
+}
+
+function ContentCarousel({ pages, pageClassName, label }: { pages: ReactNode[][]; pageClassName: string; label: string }) {
+  const [activePage, setActivePage] = useState(0);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const pageCount = pages.length;
+
+  useEffect(() => {
+    if (activePage >= pageCount) setActivePage(Math.max(0, pageCount - 1));
+  }, [activePage, pageCount]);
+
+  function move(direction: -1 | 1) {
+    setActivePage((current) => Math.max(0, Math.min(pageCount - 1, current + direction)));
+  }
+
+  if (!pageCount) return null;
+  return (
+    <div className="content-carousel" role="region" aria-roledescription="carrossel" aria-label={label}>
+      <div
+        className="carousel-viewport"
+        onTouchStart={(event) => setTouchStart(event.touches[0]?.clientX ?? null)}
+        onTouchEnd={(event) => {
+          if (touchStart === null) return;
+          const distance = (event.changedTouches[0]?.clientX ?? touchStart) - touchStart;
+          if (Math.abs(distance) >= 45) move(distance < 0 ? 1 : -1);
+          setTouchStart(null);
+        }}
+      >
+        <div className="carousel-track" style={{ transform: `translateX(-${activePage * 100}%)` }}>
+          {pages.map((page, index) => <div className={`carousel-page ${pageClassName}`} key={index} aria-hidden={index !== activePage} inert={index !== activePage}>{page}</div>)}
+        </div>
+      </div>
+      {pageCount > 1 && <div className="carousel-navigation">
+        <button className="carousel-arrow" onClick={() => move(-1)} disabled={activePage === 0} aria-label={`Página anterior de ${label}`}>‹</button>
+        <div className="carousel-dots" aria-label={`Página ${activePage + 1} de ${pageCount}`}>
+          {pages.map((_, index) => <button key={index} className={index === activePage ? "active" : ""} onClick={() => setActivePage(index)} aria-label={`Mostrar página ${index + 1} de ${label}`} aria-current={index === activePage ? "true" : undefined} />)}
+        </div>
+        <button className="carousel-arrow" onClick={() => move(1)} disabled={activePage === pageCount - 1} aria-label={`Próxima página de ${label}`}>›</button>
+      </div>}
+    </div>
   );
 }
 
@@ -248,6 +318,9 @@ export default function Home() {
   const [liveVideos, setLiveVideos] = useState<Video[]>([]);
   const [discoveredVideos, setDiscoveredVideos] = useState<Video[]>([]);
   const [webVideos, setWebVideos] = useState<Video[]>([]);
+  const [searchedNews, setSearchedNews] = useState<NewsItem[]>([]);
+  const [searchedPodcasts, setSearchedPodcasts] = useState<Podcast[]>([]);
+  const [completedSearch, setCompletedSearch] = useState("");
   const [customVideos, setCustomVideos] = useState<Video[]>([]);
   const [updatedAt, setUpdatedAt] = useState<string | null>(null);
   const [playing, setPlaying] = useState<RankedVideo | null>(null);
@@ -325,6 +398,7 @@ export default function Home() {
   }, [theme]);
 
   const categories = useMemo(() => ["Todos", ...userInterests, "Minha biblioteca"], [userInterests]);
+  const contentSearchActive = Boolean(completedSearch && normalizeSearchText(query) === normalizeSearchText(completedSearch));
 
   const videos = useMemo(() => {
     const all = [...customVideos, ...webVideos, ...discoveredVideos, ...liveVideos, ...seedVideos];
@@ -340,9 +414,12 @@ export default function Home() {
     }).sort((a, b) => (b.score + seededNoise(b.id, refreshSeed) * 5) - (a.score + seededNoise(a.id, refreshSeed) * 5));
   }, [videos, preferences, category, query, refreshSeed]);
 
-  const visiblePodcasts = useMemo(() => podcasts.map((podcast) => ({ ...podcast, ...podcastArtwork[podcast.appleId] }))
-    .filter((podcast) => category === "Todos" || podcast.category === category)
-    .sort((a, b) => Math.abs(a.depth - preferences.depth / 100) - Math.abs(b.depth - preferences.depth / 100)), [category, preferences.depth, podcastArtwork]);
+  const visiblePodcasts = useMemo(() => {
+    const candidates = contentSearchActive ? searchedPodcasts : podcasts.map((podcast) => ({ ...podcast, ...podcastArtwork[podcast.appleId] }));
+    return candidates
+      .filter((podcast) => contentSearchActive || category === "Todos" || podcast.category === category)
+      .sort((a, b) => Math.abs(a.depth - preferences.depth / 100) - Math.abs(b.depth - preferences.depth / 100));
+  }, [category, preferences.depth, podcastArtwork, contentSearchActive, searchedPodcasts]);
 
   const homeReadings = useMemo(() => {
     const levelOrder = { Essencial: 0, Intermediário: 1, Avançado: 2 };
@@ -354,18 +431,22 @@ export default function Home() {
 
   const visibleNews = useMemo(() => {
     const cutoff = currentTime - (newsPeriod === "today" ? 30 : 7 * 24) * 3_600_000;
-    const candidates = news.filter((item) => Date.parse(item.publishedAt) >= cutoff)
-      .filter((item) => category === "Todos" ? userInterests.includes(item.category) : item.category === category);
+    const sourceNews = contentSearchActive ? searchedNews : news;
+    const candidates = sourceNews.filter((item) => Date.parse(item.publishedAt) >= cutoff)
+      .filter((item) => contentSearchActive || (category === "Todos" ? userInterests.includes(item.category) : item.category === category));
     const categoryCount: Record<string, number> = {};
     const sourceCount: Record<string, number> = {};
     return candidates.filter((item) => {
-      const categoryLimit = category === "Todos" ? 2 : 8;
+      const categoryLimit = contentSearchActive ? 12 : category === "Todos" ? 2 : 8;
       if ((categoryCount[item.category] || 0) >= categoryLimit || (sourceCount[item.source] || 0) >= 2) return false;
       categoryCount[item.category] = (categoryCount[item.category] || 0) + 1;
       sourceCount[item.source] = (sourceCount[item.source] || 0) + 1;
       return true;
-    }).slice(0, 8);
-  }, [news, newsPeriod, category, userInterests, currentTime]);
+    }).slice(0, 12);
+  }, [news, searchedNews, contentSearchActive, newsPeriod, category, userInterests, currentTime]);
+
+  const newsPages = useMemo(() => paginate(visibleNews, 4), [visibleNews]);
+  const podcastPages = useMemo(() => paginate(visiblePodcasts, 6), [visiblePodcasts]);
 
   async function refreshRecommendations() {
     setRefreshing(true);
@@ -395,20 +476,26 @@ export default function Home() {
     setRefreshing(false);
   }
 
-  async function searchYouTube() {
+  async function searchContent() {
     const searchTerm = query.trim();
     if (!searchTerm) { setWebSearchStatus("Digite um assunto antes de pesquisar."); return; }
     if (!supabase) { setWebSearchStatus("A pesquisa segura aguarda a conexão com o Supabase."); return; }
     setWebSearching(true);
     setWebSearchStatus("Pesquisando e avaliando resultados…");
     try {
-      const { data, error: functionError } = await supabase.functions.invoke<{ items?: YouTubeSearchVideo[]; error?: string }>("search-youtube", { body: { query: searchTerm } });
+      const { data, error: functionError } = await supabase.functions.invoke<SearchFunctionResponse>("search-youtube", { body: { query: searchTerm } });
       if (functionError) {
         const response = (functionError as { context?: Response }).context;
         const details = response ? await response.clone().json().catch(() => null) as { error?: string } | null : null;
         throw new Error(details?.error || functionError.message);
       }
       if (data?.error) throw new Error(data.error);
+      const resultNews = Array.isArray(data?.news) ? data.news : [];
+      const resultPodcasts = Array.isArray(data?.podcasts) ? data.podcasts : [];
+      setSearchedNews(resultNews);
+      setSearchedPodcasts(resultPodcasts);
+      setCompletedSearch(searchTerm);
+      setNewsPeriod("week");
       const selectedCategory = category === "Todos" || category === "Minha biblioteca" ? "Ideias" : category;
       const candidates = Array.isArray(data?.items) ? data.items : [];
       const rejected = { duracao: 0, indisponivel: 0, distracao: 0, relevancia: 0, densidade: 0, repeticao: 0, excesso: 0 };
@@ -425,8 +512,9 @@ export default function Home() {
         const normalizedTitle = normalizeSearchText(item.snippet.title);
         const normalizedDescription = normalizeSearchText(item.snippet.description || "");
         const terms = meaningfulSearchTerms(searchTerm);
-        const titleCoverage = terms.filter((term) => normalizedTitle.includes(term)).length / Math.max(1, terms.length);
-        const contextCoverage = terms.filter((term) => `${normalizedTitle} ${normalizedDescription}`.includes(term)).length / Math.max(1, terms.length);
+        const titleCoverage = terms.filter((term) => searchTermAppears(normalizedTitle, term)).length / Math.max(1, terms.length);
+        const normalizedContext = `${normalizedTitle} ${normalizedDescription}`;
+        const contextCoverage = terms.filter((term) => searchTermAppears(normalizedContext, term)).length / Math.max(1, terms.length);
         const learningBonus = LEARNING_SIGNAL.test(`${normalizedTitle} ${normalizedDescription}`) ? .09 : 0;
         const relevanceBonus = Math.min(.12, titleCoverage * .08 + contextCoverage * .04);
         return { id: `web-${item.id}`, youtubeId: item.id, thumbnailId: item.id, embedType: "video", publishedAt: item.snippet.publishedAt, category: selectedCategory, title: item.snippet.title, channel: item.snippet.channelTitle, topic: searchTerm.toLowerCase(), url: `https://www.youtube.com/watch?v=${item.id}`, durationSeconds: seconds, depth: Math.min(.96, .65 + Math.min(.22, seconds / 15_000) + learningBonus), novelty: Math.max(.58, .9 - index * .02), quality: Math.min(.96, .7 + learningBonus + relevanceBonus + reception), evergreen: .8, publishedLabel: relativeDate(item.snippet.publishedAt), palette: (["blue", "coral", "ink", "moss", "violet", "sand"] as const)[index % 6], mark: "PESQUISA" };
@@ -458,7 +546,10 @@ export default function Home() {
         rejected.repeticao && `${rejected.repeticao} repetido por canal`,
         rejected.excesso && `${rejected.excesso} além do limite consciente`,
       ].filter(Boolean).join(" · ");
-      setWebSearchStatus(found.length ? `Filtro de atenção: ${found.length} aprovados e ${removed} removidos${removalSummary ? ` (${removalSummary})` : ""}.` : "Nenhum resultado passou pelo filtro de relevância, profundidade e atenção.");
+      const sourceWarning = data?.warnings?.length ? " Uma das fontes ficou temporariamente indisponível." : "";
+      setWebSearchStatus(
+        `Filtro de atenção: ${found.length} vídeos, ${resultNews.length} notícias e ${resultPodcasts.length} podcasts aprovados.${removalSummary ? ` Vídeos removidos: ${removalSummary}.` : removed ? ` ${removed} vídeos removidos.` : ""}${sourceWarning}`,
+      );
     } catch (error) {
       const code = error instanceof Error ? error.message : "";
       const messages: Record<string, string> = {
@@ -598,8 +689,8 @@ export default function Home() {
           <a className="brand" href="#top"><span className="brand-mark">C</span><strong>Clarity</strong><sup>BR</sup></a>
         </div>
         <div className="search-box">
-          <input value={query} onChange={(event) => setQuery(event.target.value)} onKeyDown={(event) => { if (event.key === "Enter") void searchYouTube(); }} placeholder="Pesquisar com filtro de atenção" aria-label="Pesquisar vídeos com filtro de atenção" />
-          <button className="web-search-button" onClick={() => void searchYouTube()} disabled={webSearching || !query.trim()} aria-label="Pesquisar conteúdos relevantes na internet" title="Pesquisar com filtro de relevância e profundidade">{webSearching ? "…" : "⌕+"}</button>
+          <input value={query} onChange={(event) => setQuery(event.target.value)} onKeyDown={(event) => { if (event.key === "Enter") void searchContent(); }} placeholder="Pesquisar com filtro de atenção" aria-label="Pesquisar vídeos, notícias e podcasts com filtro de atenção" />
+          <button className="web-search-button" onClick={() => void searchContent()} disabled={webSearching || !query.trim()} aria-label="Pesquisar conteúdos relevantes na internet" title="Pesquisar vídeos, notícias e podcasts com filtro de relevância e profundidade">{webSearching ? "…" : "⌕+"}</button>
         </div>
         <div className="header-actions">
           <button className="create-button" onClick={() => { setAddError(""); setShowAdd(true); }}>＋ Criar</button>
@@ -649,14 +740,14 @@ export default function Home() {
 
         <div className="top-discovery">
           <section className="news-section compact-news" id="noticias">
-            <div className="section-heading news-heading"><div><p className="eyebrow">RADAR DO DIA</p><h2>Notícias com contexto</h2></div><div className="period-control"><button className={newsPeriod === "today" ? "active" : ""} onClick={() => setNewsPeriod("today")}>Hoje</button><button className={newsPeriod === "week" ? "active" : ""} onClick={() => setNewsPeriod("week")}>Semana</button></div></div>
-            {visibleNews.length ? <div className="news-grid">{visibleNews.slice(0, 4).map((item, index) => <article className="news-card" key={item.id}><div><span>{item.category}</span><time>{relativeDate(item.publishedAt)}</time></div><span className="news-number">{String(index + 1).padStart(2, "0")}</span><h3>{item.title}</h3><p>{item.source}</p><a href={item.url} target="_blank" rel="noreferrer">Ler notícia ↗</a></article>)}</div> : <div className="news-empty"><strong>Nenhuma notícia neste período.</strong><p>{newsPeriod === "today" ? "Veja a seleção da semana." : "A atualização ainda está preparando este tema."}</p></div>}
-            {newsUpdatedAt && <small className="news-update">Atualizado {new Date(newsUpdatedAt).toLocaleDateString("pt-BR")}</small>}
+            <div className="section-heading news-heading"><div><p className="eyebrow">{contentSearchActive ? "PESQUISA COM CONTEXTO" : "RADAR DO DIA"}</p><h2>{contentSearchActive ? `Notícias sobre “${completedSearch}”` : "Notícias com contexto"}</h2></div><div className="period-control"><button className={newsPeriod === "today" ? "active" : ""} onClick={() => setNewsPeriod("today")}>Hoje</button><button className={newsPeriod === "week" ? "active" : ""} onClick={() => setNewsPeriod("week")}>Semana</button></div></div>
+            {visibleNews.length ? <ContentCarousel key={`${newsPeriod}-${category}-${completedSearch}`} label="Notícias com contexto" pageClassName="news-grid" pages={newsPages.map((page, pageIndex) => page.map((item, index) => <article className="news-card" key={item.id}><div><span>{item.category}</span><time>{relativeDate(item.publishedAt)}</time></div><span className="news-number">{String(pageIndex * 4 + index + 1).padStart(2, "0")}</span><h3>{item.title}</h3><p>{item.source}</p><a href={item.url} target="_blank" rel="noreferrer">Ler notícia ↗</a></article>))} /> : <div className="news-empty"><strong>Nenhuma notícia passou pelo filtro.</strong><p>{newsPeriod === "today" ? "Veja a seleção da semana." : "Nenhuma fonte confiável publicou algo relevante sobre o tema neste período."}</p></div>}
+            {(contentSearchActive || newsUpdatedAt) && <small className="news-update">{contentSearchActive ? "Pesquisa filtrada agora" : `Atualizado ${new Date(newsUpdatedAt!).toLocaleDateString("pt-BR")}`}</small>}
           </section>
 
-          {visiblePodcasts.length > 0 && <section className="podcast-section compact-podcasts" aria-labelledby="podcasts-title">
-            <div className="section-heading"><div><p className="eyebrow">OUÇA SEM PRESSA</p><h2 id="podcasts-title">Podcasts</h2></div><span>Apple Podcasts</span></div>
-            <div className="podcast-grid">{visiblePodcasts.slice(0, 6).map((podcast) => <PodcastCard key={podcast.id} podcast={podcast} onPlay={setPlayingPodcast} />)}</div>
+          {(visiblePodcasts.length > 0 || contentSearchActive) && <section className="podcast-section compact-podcasts" aria-labelledby="podcasts-title">
+            <div className="section-heading"><div><p className="eyebrow">{contentSearchActive ? "PODCASTS SOBRE O TEMA" : "OUÇA SEM PRESSA"}</p><h2 id="podcasts-title">{contentSearchActive ? completedSearch : "Podcasts"}</h2></div><span>Apple Podcasts</span></div>
+            {visiblePodcasts.length ? <ContentCarousel key={`${category}-${completedSearch}`} label="Podcasts selecionados" pageClassName="podcast-grid" pages={podcastPages.map((page) => page.map((podcast) => <PodcastCard key={podcast.id} podcast={podcast} onPlay={setPlayingPodcast} />))} /> : <div className="news-empty"><strong>Nenhum podcast passou pelo filtro.</strong><p>A busca prioriza relação com o tema, atividade recente e profundidade.</p></div>}
           </section>}
         </div>
 

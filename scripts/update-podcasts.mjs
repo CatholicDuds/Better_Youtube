@@ -1,6 +1,10 @@
 import { mkdir, writeFile } from "node:fs/promises";
 
-const ids = ["1347139874", "991572436", "1193387182", "1553427360", "1455626095", "191182582"];
+const ids = [
+  "1347139874", "991572436", "1193387182", "1553427360", "1455626095", "191182582",
+  "1050462261", "990149481", "1028908750", "325404506", "1537788786", "1611374685",
+  "135066958", "983795625", "1406534739", "1097862282", "1539568321", "1434243584",
+];
 const response = await fetch(`https://itunes.apple.com/lookup?id=${ids.join(",")}&country=BR&entity=podcast`, { headers: { "user-agent": "ClarityLearningFeed/1.0" } });
 if (!response.ok) {
   console.warn(`Clarity: capas do Apple Podcasts indisponíveis (${response.status}); mantendo o arquivo anterior.`);

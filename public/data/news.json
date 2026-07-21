@@ -1,390 +1,744 @@
 {
-  "updatedAt": "2026-07-21T12:26:09.292Z",
+  "updatedAt": "2026-07-21T14:07:26.975Z",
   "source": "Google News RSS",
   "news": [
     {
-      "id": "news-Criação-7-1784584616000",
-      "title": "Rede de Inovação aposta em tecnologia para aumentar competitividade do comércio em Pernambuco",
-      "source": "Folha PE",
-      "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNSTJZSkMxVnN2NUFIa3BuTDZ2ZU5wQlVVSHQ0T2luMF9vcEFMX3BuX1FXRlhSZVZveUI2TWJWd25HeVFrU2FtUGdoZjQyOC1IM09JTndYS1dZU3JLbkgyUHVnenlDczVqb3FuaWFYX0o3SFZ3VUJSdnR0SklJZ2JlNTVselRCTjBDazZ5VkM2LVhOM0l2VVNEaDh3OENpMy1jUW1SbFVJbkpBZ0huQ21jMzJuZmI2ME5I?oc=5",
+      "id": "news-Criação-US-0-1784586222000",
+      "title": "Head of US AI safety agency resigns",
+      "source": "Reuters",
+      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxOMl9UaTNLMHV0QmlCSkNjQXhIb3JZTVBYZHhPTVNZUURJb1UwUnZvazVGNXo2cU9FVmx4VE9UV2ZQZUxpeWFZTFZtOVQxNGJlaHRkWmNoNVByclhUUmNuX1FVczRSTHE2V1d2c2pnZkgzTzNUWkJId083ZUI1OFBTYTVyaw?oc=5",
       "category": "Criação",
-      "publishedAt": "2026-07-20T21:56:56.000Z"
+      "publishedAt": "2026-07-20T22:23:42.000Z",
+      "quality": 1
     },
     {
-      "id": "news-Ciência-2-1784579520000",
-      "title": "Conheça a única tecnologia (humana) a deixar o Sistema Solar",
-      "source": "Olhar Digital",
-      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOVFRkX0h6SlhmcGR0S0hvWjREY3M1amdVTXNUVXVqRUFKUmRnbFJfWHpzdkc2TndoVmxCRjZOdzQwWFMzeXBfaHk0WWFlQXp4aWgtdzg3MFYxblJmbEpBQW9BMFNOYlR4RThaMnhTN0R3bjh6dXhTTXlKWjhqcno4VFYwbk5RaTdJcjN0bVFMY3AzRFM5VXRsS0dDcEs5SGstNy1TdFlCUmhFYUJmQjVURkNrZEkwdw?oc=5",
-      "category": "Ciência",
-      "publishedAt": "2026-07-20T20:32:00.000Z"
-    },
-    {
-      "id": "news-Negócios-2-1784577771000",
-      "title": "Economia prateada ganha força e leva empresas a adaptar estratégias para consumidores 60+",
-      "source": "VEJA",
-      "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQbGNqR3IwYTNraFc4WmxCOTc0ZHNMdE9NVW1hZ3ktaWk1QUplcEJRdGRVeGpfSF81bGRVNUlhT1ExeW9yeEprUVh6cFpMTEFHQkwwM1lZV2hrN3cwOEhGbUh2WEVGNFZEWVpNekZwUzJtaUV6VkdDVERPcTRrSTJXeFgwcDRuaTV2WXFTTnRORlNkSnM4Ym9iaGpucmUyRzIyejlaR3ZsMGI4Z0sxdHM3S1kwQklGRXpJNWNEU1MwanhnUQ?oc=5",
-      "category": "Negócios",
-      "publishedAt": "2026-07-20T20:02:51.000Z"
-    },
-    {
-      "id": "news-Política-3-1784574437000",
-      "title": "Convenções partidárias no Brasil revelam interesses e incoerências políticas",
-      "source": "Canal Rural",
-      "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNWE56dG5mcUc3ZTcxeXlDaVZhbmduUGd3Y2JDUERlbURBSEJtVUxxQ3VndVRvQjBZUHlYLVFDZW1HSnI2V2FHbDl6TUdhbmxJekhfa1d1NmF4RVVvaEczVEtOa0t3SmxXcnRnWGxJeVpaU0JwU1phRFNKNGJEc1MtOHcxZnJTQTVjRG1SdzRWUmd5N2FZaTFXUVQwVng3VjJ0czVFdTZwbTFPVkFFNFVWcWRITTE?oc=5",
-      "category": "Política",
-      "publishedAt": "2026-07-20T19:07:17.000Z"
-    },
-    {
-      "id": "news-Criação-2-1784565222000",
-      "title": "Mirante Tecnologia aponta que 92% das empresas pretendem investir em IA",
-      "source": "Inforchannel",
-      "url": "https://news.google.com/rss/articles/CBMi7AFBVV95cUxQU2pfeS1aYkEzSUhTVEtJZ1AyWVZEdGVtdFNDTWh0X3hZeXVnYTRIYWh0UHVSYjYwT1cwYmpJTXJUS2xPdzJMblFYNl9Id2R4V3Q5Q0xlX0UtaFViRVY1SHVIbzZ0S1dIektmc3ZlUTdQVk9CQm5yYXBIVV9fY2lwWVNQSy13S1VxbHpoWTVaZW9sV2FTeDNDdVF4T01RZS15cUhrbWF4WEFCN3JCejYyNkYxbEgxNW1ld2p1S0xnVzNBOU9nMF9FOTJYazRPZjVxaFBFRkhDUHAySHc4OHcyV2treVZSeFEtam5GTg?oc=5",
-      "category": "Criação",
-      "publishedAt": "2026-07-20T16:33:42.000Z"
-    },
-    {
-      "id": "news-Ciência-5-1784563162000",
-      "title": "Ciência na Estrada chega a Vicente Pires com show de ciência ao vivo do Einstein Jr.",
-      "source": "Agita Brasília",
-      "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNU0o4bWlIRDN4VVhOLVB6OGY2a1o0WWw0VUZ4NkRwTENZbzZ1TE1zSWJOenRzSmFZRk5CNU1nMlA2aEFPdWJPTTNqT01yUjRGaWxiWU5GNUkwVmczSC1Kazl3MDloaFpaQm81ajJ4dFZHTUl3SlIzdUt0amZkQWdlNFlmR0d5aG5kaGJ3aThWNmx4YU9wWmd1U1VrUEk3RV9yT1l1ME8xSmFNUTlPUjg0?oc=5",
-      "category": "Ciência",
-      "publishedAt": "2026-07-20T15:59:22.000Z"
-    },
-    {
-      "id": "news-Ciência-3-1784563072000",
-      "title": "Ciência na Estrada leva programação gratuita a Vicente Pires",
-      "source": "Jornal de Brasília",
-      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPWjlfc091VGtnakhZcTN2U3diUnREbTdEVW5yM1NXWl9xSXVOeF92aUltVExiZzRySHJNVHFNYThVeURnOWdhNGJNS05fbnBpNzlBTmNwU0pzWFFYdXF0Wi11dGlMSW9rX0JsOGZrYTlWVkdMZEx4bE5EVjktdFhvWmtfREx3U0ZXbUF2SGRKbFIyNDhBd2MxYmFlRUwwT1J1UWRQQw?oc=5",
-      "category": "Ciência",
-      "publishedAt": "2026-07-20T15:57:52.000Z"
-    },
-    {
-      "id": "news-Criação-3-1784560404000",
-      "title": "Nova Rede Senac de Inovação conecta empresas, pesquisa aplicada e tecnologia",
-      "source": "Diário do Turismo",
-      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPMTRaeU1VZWREWnQyVnAwN1c5ZW1fbEdVbVN1Mzg2THhvLTZsZ3dUdzVTUV9UdkZZMW9BcHY0M0N4MUhCNUo3Tk9fS25ydm5FVHQ1N3puWDluZFp2UHIydWhpcEIzVVV3YVF5dm9FcnBXVl9MdDJsV0t2Yl82UzU4MFBMcUdjSEdDYlNMTVA1YV8tRHpjRFVpQS0xMW1tLXpFa0lqMm5VRVpDS3M?oc=5",
-      "category": "Criação",
-      "publishedAt": "2026-07-20T15:13:24.000Z"
-    },
-    {
-      "id": "news-Mundo-4-1784556780000",
-      "title": "Da Convenção de Montreux à crise em Ormuz: como os estreitos moldam a geopolítica? Analista explica (VÍDEOS)",
-      "source": "Tribuna do Sertão",
-      "url": "https://news.google.com/rss/articles/CBMi9gFBVV95cUxObjllV2NRMjZXdVRtaE9XdEpkY0Z2U2lpcW1CTEdqcFZ2RkhjcjBQZWwxSWJUTlZmdGtYci1CTXg5NVMwY21ObDVJOS1XZTEwakxIZjIydjV5X185c0FpWS14dVFtbi1INkJvVEZvRjF1R3ZxZ2lNZnlGQ21Tb2loN1lmNE43aTZveGpYbGlqaWVCa2VYUVc4WU9kUnhJNWtDMGNfYi01VFdJUWF2ZTEzNGJWRjdEV0dvc0k4Mzc5VHhzNTBCTkEwOUhfZjlNRUtxMUk3M1RUeFd4dVRuMG9BT09FaW5yNG50ckFnMHB6alVPc0dWc1E?oc=5",
+      "id": "news-Mundo-US-6-1784606400000",
+      "title": "The Gulf’s China Problem",
+      "source": "Foreign Affairs",
+      "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1iR0V3RzgtSGpERDh3RF9MNEVlblBmdnJXeGNwVlJFMm1CUDQ2Qjg0aW15dGk1bUZWQVV1SmFoaUdFcC0tdGdTSGxmREhWSnBrV1VHY2FFMlR3Tzlfd2ZDQTdQQUJCY3M?oc=5",
       "category": "Mundo",
-      "publishedAt": "2026-07-20T14:13:00.000Z"
+      "publishedAt": "2026-07-21T04:00:00.000Z",
+      "quality": 0.98
     },
     {
-      "id": "news-Ciência-0-1784538240000",
-      "title": "20 de julho: E o homem pisou na lua",
-      "source": "www.gov.br",
-      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPWnJPUV9YY2NNcHVBZDNYMUtCWjNBejFQQmlZLUY4cmpiTjNzRV9uRml6MmlIaHRoUzk2clExR294S2FOWHNzcWtKLVM0ai1Bd2FBRkZtMTRZZXFRWFFCNnIza3M1UllWdU5uRWVQdzBaTGhONkpORkZzNkpoSWd1WWI2UDNZbXV3ckhhTm05b3F0V1NXVWd1cQ?oc=5",
-      "category": "Ciência",
-      "publishedAt": "2026-07-20T09:04:00.000Z"
-    },
-    {
-      "id": "news-Negócios-5-1784530860000",
-      "title": "Economia Fora Da Caixa - Empresas vão para o Paraguai, mas o Brasil continua atraindo mais investimentos",
-      "source": "ojacare.com.br",
-      "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxNTnRlb3BfdWhiSTRXRGFIMmtzX1Q1RGpQRDJIN0RSZ1RZZTdGMEIzTkRvU2V3d1dFMlJzb2Q1bkdCeUdOWUF5THJxbmxMMXFFa1pHTWthcmFjVXRNNmFNRmVndDJ1aU42RU5CODNXUlkzX3NTYWZPdEtmWXNsU2h5V0ZqaGJ5VEdSQk45YS1BWlFnQXRxckZ3ZUdWTnh6TlNseHl0dHQ1MTh1cTE4U1A0ZUN2NTBtd2tpd3drLWMwSUIxenhYUkN3ajZMYkhINjhYUm02enpZUQ?oc=5",
-      "category": "Negócios",
-      "publishedAt": "2026-07-20T07:01:00.000Z"
-    },
-    {
-      "id": "news-Política-2-1784444100000",
-      "title": "Análise: Brasil entre soberania, democracia e seus problemas sociais",
-      "source": "Correio Braziliense",
-      "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxOMm9XMHBsc3JDVm1OTzZ1bFFvOUtDbmdaUTk2eDBMUmpZZVZIVTN5X1R1bTZqalpXWkt1M1psN1hZVGl2c1hnWmlfc2NDREJKalgyeUtRTm5IVFJNbmtYNnctcmJ6QXhtQ19OWG1TZVhNNE54R2Z2aTUyY3pPNzcxbXZHRV9aQWIzUEtjYkkxbzIyRS1nTm9yLVdBOWVhbUctc0s0YjV3b29QMDVzcGJUZy1PSkVfMGJwNXRKMzhLal8wUXV5Mm5UVW5Nb0ZUSzTSAdQBQVVfeXFMT2hiN2RpYWx6RjJWSkhmdXZXekpsNmMxYlVxUzAzVjg3V1ZpQW5US1JFSXFJaHBNdFRBSVplLWNYWUVKbG1VTllVX2NUcnd2WGg4dGo1Zmx2WW51TEtrSkgtc1NSN3g0UGRlTm92WVRIOUJZRHBlMU9wNXBRaHB3SGp6WlVsRWVoMzRhSmZmNUJtZnU2bGhRXzFPQTh6U1NwV3FxdVF6RlU5aEtJd3IzY01uNllRRFhmME0xQ052eUU4LVVwQmRZbjJUTjU5ZmtfM0VEbGI?oc=5",
+      "id": "news-Política-US-5-1784564299000",
+      "title": "South Africa opposition proposes law to curb political influence at PIC",
+      "source": "Reuters",
+      "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxQOEN3TERqamxFMzJhaFVIRDRHeTBicTcxMFJUTGVRSGFLdzJ2OGpJeFZTOThWcTMwYzdlYUhjdGktVzk0UGhFU0EzMkU5SUVKYjZMeS01ZVhkRmV4SFREcnRXVDNCQjBPcXlWejlqdUxjLXlTWUFmYUpGeWY1eXU4MjFEZUNaZVNlNVl6UllmcFdwZS1NSDJDRW1scHJQQnlmeW13T0JUQ0xfcFRYcmZYTHBxV0I?oc=5",
       "category": "Política",
-      "publishedAt": "2026-07-19T06:55:00.000Z"
+      "publishedAt": "2026-07-20T16:18:19.000Z",
+      "quality": 1
     },
     {
-      "id": "news-Mundo-7-1784423640000",
-      "title": "Internacional - Espanha e Argentina duelam em Nova Jersey sob cinco séculos de legado",
-      "source": "Lê Notícias",
-      "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPcmQ1Y0V5TjRvMGMwZGR5YkFEUk9sNC1wNzlWUEVYdU14bXE0aGNyX0NtRmdENHlWLVZOUzh6RE02T1JMMUFzWUhYdnVDcDR0ZnVFamJ5aXNOTnFRcm1zNG9rQndEc3NYaEZqRVA1dkNHQXpmLW9aSTdNemVSZ09YamZVUHNLRnc5YlNadklmaThhWGVUV0tOcXZ4ZXZpYURMUFVVa3E1WjBKMDNmRnhDdFAzUVg2VnJW?oc=5",
-      "category": "Mundo",
-      "publishedAt": "2026-07-19T01:14:00.000Z"
-    },
-    {
-      "id": "news-Negócios-0-1784403036000",
-      "title": "PIB: o que é e quais os impactos na economia e no seu bolso",
-      "source": "CNN Brasil",
-      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOOUhhZ2tMbjV1NkY0Z09sWF9JV1ZyR2c3NGRZVWZxc2djc216YTd4MG5PMnAtaWJXSGRIcy1SWWp1T2JLZzE5MzBCT1FWRUxYb0Rvc1pBZjkzbGlIVndDMFRqUGRXNmp2OUJTQTJ5MkJQdmNobnp3ZV9BMjJrR1IzUG5NRGpscndHd1k4UUs5eWdnZUNQLVVaVE1McUZ1aFVlXzRxRk1WckxtZw?oc=5",
-      "category": "Negócios",
-      "publishedAt": "2026-07-18T19:30:36.000Z"
-    },
-    {
-      "id": "news-Criação-6-1784379600000",
-      "title": "O “Vale do Silício brasileiro” atrai empresas, profissionais e estudantes com tecnologia, inovação e alta qualidade de vida",
-      "source": "Correio Braziliense",
-      "url": "https://news.google.com/rss/articles/CBMi-gFBVV95cUxPTV9hV3lTTnAxSm1WeS1scDl3TGd4TTdQamNzRTFqNDk3dnBGUjIyOGJmZlRnWWNVcVR1eDN1WkdkUXZ6YTI5LWxhRERKclc5bW9JODlBbFpYS1pnY2x1eVNPMWY0QS1tblE2Vy1faXlqYnRLMkI4MU9LemljTVk5V3BmN2UzZmdqVHNFU19KR2RpU3NnSTBNemQ0VlJDVVRhV2NzVmZHNWoyWlluaGI4MU05OFNIUWtLd19WR0g2Yy1FOHRHbVJaUkFabnZMWmNNVktuMF9LbHFvaV9FVzRGWWVlN29YczZCX2hzUlk5X2ZIbVl2RUxkMXN3?oc=5",
-      "category": "Criação",
-      "publishedAt": "2026-07-18T13:00:00.000Z"
-    },
-    {
-      "id": "news-Criação-4-1784330886000",
-      "title": "Parque Tecnológico De Santo André Lança Novo Portal De Inovação",
-      "source": "ABC Agora",
-      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE9tR2doRjV6SmpiaFd0Z2Y4WmtzYzhqc3RPcHpjUVRMN09XUjBKRmYwTl84ckxEbmNoQWh6OVRKOG5XQXBEeE9aMWoxTTZsdGpYSDNqS2w4LU9lVTB1LVRsbmJBVGlKQktPVXN0VDA5bnFhS3dnc0FmV1Awa1JDdw?oc=5",
-      "category": "Criação",
-      "publishedAt": "2026-07-17T23:28:06.000Z"
-    },
-    {
-      "id": "news-Mundo-1-1784310094000",
-      "title": "Geopolítica tributária: quando a tarifa chega ao campo",
-      "source": "Canal Rural",
-      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPNkkweG96bVlzVkJXVGQxZzJoRUhfal9VZktFLVQ0LVdRSEFDVUVuVmFfMjJHczAyRkJZOXRvN0trc1pwNC00dHFubFd5Ri1HTWtrZ0RSU2lsSTh1SkV2RXZIdGR3U3EtSXBWSkFHWldGV0tpNGlfakM5dzB1NHAzZG96WUkzQjVmTzU2bm00MXc3NXFQN1dUYmh4VU9tcjRHQS1z?oc=5",
-      "category": "Mundo",
-      "publishedAt": "2026-07-17T17:41:34.000Z"
-    },
-    {
-      "id": "news-Fé-2-1784292058000",
-      "title": "Padre excomungado contesta Vaticano e mantém missas no DF",
-      "source": "Poder360",
-      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQNG1pOEhjVURKdWlsZ28ycUJuTlZZdGdSdWJUYW5DeS03cExHMVNFb2dJVEdMWmMyazZidVZMUUxJQ0tDaFh5b3dUcEFvS0tjRDh2SHRiTEJEX1lMTzVRZXRYaEdSZVhEQ1B4cXBoel84NEYzaUhqQmxBaWRhRkVzZ2duQnFvdHdRdlVGeDRBSnpXMUhzeVBNekJMN1RnemJi?oc=5",
-      "category": "Fé",
-      "publishedAt": "2026-07-17T12:40:58.000Z"
-    },
-    {
-      "id": "news-Negócios-7-1784285717000",
-      "title": "Com o novo tarifaço nos EUA, qual será o impacto na economia brasileira?",
-      "source": "InfoMoney",
-      "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxNRF9nZl9tNVR6OXVrZ3BfU05WWmx3QkdrckJVR3d2S29pNEpGTnhmcHZpRF9xQ013dE83eEplOG02aDdPejhJa1V3TDJiNGZ4QUcxUDBZYl9XN05XeUVSb1pLSS1pV0Y4bVFOX2VuNkh0dWVPQXRIMXg0VThsalExUEgzNFRiUXF6Ty1qVFpJT2tBTE94U2lscTlQcnhRNWhac2g2QXpYWUNFaUx4WUHSAbMBQVVfeXFMT01SdWxvdXhweEw4dUhfcnoxRDA4bjRJOUZ5UW5TWGNDQ2hDbkJXd1RVRUFURE42ZmxnOFBUb0xzTDNwcDhRaWhyWUNqdF9EdzdLZHF0akJIQW5lNHRmLXBuaUpkZWJxay11YVNGbHlBUVdOenU2WDdmUzNENjRSbHZILWk5RWdSX1VxUUdiTjRrSDhkNzF4ZWJJUEhUMklwZ2RaUFRJeTVSdGFzRFM1b011LVU?oc=5",
-      "category": "Negócios",
-      "publishedAt": "2026-07-17T10:55:17.000Z"
-    },
-    {
-      "id": "news-Fé-1-1784265113000",
-      "title": "Padre excomungado diz que foi advertido por recriminar rituais de macumba",
-      "source": "CNN Brasil",
-      "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxONUljQkJKdmRRZTdmV2h5cHNhdVlUR0dxamx3bk1uODQ5WUg3a29MZFZGRDN2OWRZYnRhNG1aZDJZSzNsQUVIYkhnUjBicVZfMVdwOFhCUGlUdTc0VDhicmprYkc3WFBvQk5MelV2VkxZR0ZWQklKZzFjTGJkbmNaR0FvbldReVR5bk9sRU1INEJHMi1uVWtBbTIyWDRzQUloeWhDNGY0OGpuUFNvVGZncjYxWUtrcldHZ2QyMmtFZGs2ZFdEVHF6clNnM3FBUQ?oc=5",
-      "category": "Fé",
-      "publishedAt": "2026-07-17T05:11:53.000Z"
-    },
-    {
-      "id": "news-Mundo-6-1784259009000",
-      "title": "O tarifaço de Trump: a negociação e as taxas contra o Brasil - O Assunto #1763",
-      "source": "G1",
-      "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxOVDRLOUtDUWlPcjUzY0JiRzE5Sk1GSk5kcERFV1J2NjVNX0FEb2d1SDVxTTJIMWZ2NUxCUENrQXJPX2U2YVZmYmZDRGpPWFlWQ09jcWJpaU1ETk9yWTNoaGVDRkVESzJDREZ0b2s1YWEyeHVZQldHWDJPMHVhT3djNENSY2JDQnNoS0RoUnZsdjlYVzRsX0hQUHJwZVBpU1ROWlNJZk1SS2k0NU9RYUVQeFh3dnBpSGJWR2dFLVd1ZEI0YU9UcVJMTnZIWlA0YkVxUVNrZ9IB4wFBVV95cUxNSWN4SFpIcVVMUWp1QWRUeUR3TTdIZmx1ZWZXVVFPMHVKV3BGY0sxSHVGZXU5U3l6dndCa09RSkN6UEVsSGMxd3VUS2hBNzJSYmp3dnJoMDU2ZEp6WTVwc2hCb29XLVlkOTFqQTdKdzlEVDR5MTNBMmVtZTZ0UGQ1Snk2U0tubDZoc2JfczIxT0JyTlU4X2ZBajBqSDhSUUxxYTVydmJQUUhhakdyVFQ4TzRwQUNqejlSdVVudHcwX1BzQU1HWENFbGZRb3NUU2EtS09qdG00blN6Z05KVXZjT3FPVQ?oc=5",
-      "category": "Mundo",
-      "publishedAt": "2026-07-17T03:30:09.000Z"
-    },
-    {
-      "id": "news-Política-1-1784250492000",
-      "title": "Análise: Brasil e EUA escalam e Lula fatura",
-      "source": "CNN Brasil",
-      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxQaW5BMXY0LTdWMEhDaWF3RE41SDJhUzRwUkUwb1E5WHdIdGk2dXRobmM4TW55QVA4U3czaV9SSTIxd3JOZF9PQ3Jwd1MtU1poVWl4TEtkZjlBck5jRGhlZ3ZYaGJ0ejFLaGZJWmtuV094T1otS1JVT19qcDFjV3ZoX0VqTUdaX1N6UEltSDlsUG1kYzZwekpsWDA2ZEdZMFdqQ2VZag?oc=5",
-      "category": "Política",
-      "publishedAt": "2026-07-17T01:08:12.000Z"
-    },
-    {
-      "id": "news-Negócios-3-1784239202000",
-      "title": "MEIs: 78% das novas empresas no Brasil em 2026",
-      "source": "Portal Contabeis",
-      "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxQTnAzVDZFWmo3dGJibW1ucVdTZEpQMkdmQWwwLUZkbjVlYnl5WnpRc3lLU2d2MUZnWlBUdnd2c0o4czhseE81SThEbHNQb1pKLVFoZVVkZ0Z2OFAxZUl3clRycHJhTHp0d0FOSEttb2R5TFNlWVVuY3dQWDVjZ3JZLUhhLU9RMmtQc2IyYWFHUFBxc00?oc=5",
-      "category": "Negócios",
-      "publishedAt": "2026-07-16T22:00:02.000Z"
-    },
-    {
-      "id": "news-Política-5-1784234259000",
-      "title": "Caiado critica Lula e Flávio Bolsonaro após anúncio de tarifaço dos EUA: 'A polarização está saindo cara para o país'",
-      "source": "O GLOBO",
-      "url": "https://news.google.com/rss/articles/CBMigwJBVV95cUxNYU1sdW45ZHFtNkVZVzllVVpSazZQdjViX2lrSndlNC0xS01hdUlhYWdnWWZ5VDhxbVJHWDZTcXF5Zlp4bWVPdkJKY05TekwtNXdmUjdrZ1FHVGRGTWZrWDNzY1pkaGNHRURxYmtqYTk2QnFkeVY5XzNlRlZmQjV4RWZaLWtmQkJKcFVJTjdIQmNmbHd1WGNNRWtqUjA3Q1FIM1lWcFRsVnZhWmw3SnJIaHFoWU85VzN0aWxvcDF0UU5qRFRXZDFNcU5PREMyTmRXSl9zM0xZN2R4aEx3Mm9qOHlmT2U4c1ZjbzJHTWNKYXJFSXctQlJNS00xU1NybTFKQ2dr0gGSAkFVX3lxTFBXRGlmOEV2MExQUzdFMVA0T2FhOHJmdlZQZTRKUTl0MjlULXIxQ0ZBd0JRZ09UX0hEcWVFeU16b1RyRG1CZEFmTnpabnJlRFE5Vk9nVHRaclhvRXBYelRVUnJ3T0g3TkpXV2ViZ25NZXVhYUhpZ2dGSEV4Z3J4RUd5bEpiLWhzbkZfVnVrR3htU2RTYzlqQkV5STM4VkFMSjJpOUdVdkotU0FuLW5xLUlFRlZzbDBKeHJQZGpuM3A1eWwtUDFjbTFDYVUwSGU4M0QtR0diS1B3a0RiMWNxU1dUTXpCd2NkOGsyM20xM0dFcmJJZVVWZERnXzRjVlU5bmRfMHJEZ01mS0hDWTMyTEZzMVE?oc=5",
-      "category": "Política",
-      "publishedAt": "2026-07-16T20:37:39.000Z"
-    },
-    {
-      "id": "news-Política-0-1784233336000",
-      "title": "Análise: Tarifaço indica que objetivos de Trump vão além de interferir em política do Brasil",
+      "id": "news-Criação-BR-6-1784635930000",
+      "title": "Wooba expande tecnologia integrada ao turismo global",
       "source": "Valor Econômico",
-      "url": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxPbTYySnFoWV9vTWZRbHdMRjYxNURGZ0Q1RjU4Q3BjeGs3UWNIYTYtcm02OVVrQmMzbjR4UUhGQTh0bnZ4QjBrZ1hIbjY2TE5GcWRiVldRNmdDTkV0eXgxWnQ4STFBb2FmVVRqVGVtOXlLZjhxTHlPTElJbV9rMHFTM1ROQmZrd01vV1ZleU4zd25tMWd2clNYV0tVQXJIZ29zejJ5dzVkSXR5LW10X2JvNzJUa2tEdWhtRjk4UUpEQm53VjU1WjdFbVBoTEdUWk5PMzdzemFBMjZ4U05BZjRmQWUzNNIB8gFBVV95cUxOTTZ3a0ppM3BHaUtrcUE3U21yQXBBcVNXVmVwVktFLWZ6N3JZRklfR04yYjFFYjE3X2tHcGN4SnhibExoTkgzN0VkS0UtNE9BSGlVVGVIRDlLdTJEVUFmRGIxZWgwVlpXQ05uN0phUmxITml3YWx6WTAtWGoxLUZJeUZaMGZOX1lVQTBhblZraENmWkVreHBVVHkteWUzcmtrV3ZiaFpDemxTOVNYNkF0dlMxY3FONGNZVGpfNFFKZFpvZm9KQ0tuV1E1WEVoRXAxZC1GNFg4RXRzSDVOZmJpNF9zc3FMNk1Kb1RXUzJEaWdkZw?oc=5",
-      "category": "Política",
-      "publishedAt": "2026-07-16T20:22:16.000Z"
+      "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNNEJzV3Fjb3ZNZDE2YU9UUXZ5VHY1akV1SDQ2UndUMmozVWFNSEsxckRZdFFiZUJZb2c3R3R6QVN1VjlyX3ZDN01rVEhwbENWQXhyOUZTMWl5RE84XzlZNUFrRGtfQmtISmpCZVl6ZGhGREpwdWR1S05NdjZhanNsQjAwQjBKUnJTNENiYzFqNjNYYWNJR24xYl9RR1Z6d3c0ZWhKbFFkckh1NmQ5a3pMZFpVMTI2TjFjUGxkbNIBywFBVV95cUxQNlNFajhGcWtwLUVISkEwajNjYTJwSEk5eHktUFZBaVVBTEZwUGJnN0JBZ2hlMzdFdk0yMEZ5ZXFzVlJQMFR6ejZUY2F2RmtjS2ZtNEpYXzE1ZlhGSzZ3S2RTNk1CRUI5dFVDdDlWUW5hSlItZEROeFpYSVN4a1RFODN1SEdaQ2lxbkVHNGt6RDdTMWJqTGx1SnE2MlFHLV9DWU5HdldGSVZpSTN0N3RfSk4yTWxJU1VDZ0xoa1YtWkU3R1laSkwxRTJVMA?oc=5",
+      "category": "Criação",
+      "publishedAt": "2026-07-21T12:12:10.000Z",
+      "quality": 0.94
     },
     {
-      "id": "news-Ciência-1-1784228400000",
-      "title": "Conheça 5 cientistas brasileiros que trabalham na Nasa",
-      "source": "Superinteressante",
-      "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxQNXB3dW1rQTFIYnRmSjJ0SnpDLVAwRDBfRkptNDUtdENkYXh6VGc0cW1QcXdIS20yNTNfUGpqb215cW0tcDc5ZkJtRjUwNVBnYWh2WmFiRk5LMHFzQ3pCNTVrdUJXcFpDdlNWVHI3Qk83UkhWdmdGVlo1X1VUVTVhZkVOVWdtWi0ybFliRzg2WmhIem9Z?oc=5",
-      "category": "Ciência",
-      "publishedAt": "2026-07-16T19:00:00.000Z"
-    },
-    {
-      "id": "news-Mundo-0-1784222117000",
-      "title": "Na mira da geopolítica dos EUA – Brasil, Irã, Cuba -",
-      "source": "A Terra e Redonda",
-      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxQVjZueHo4VEN0cTRnY2F5NEI1cVlWMlpSLWwydEF1cGpweWFodE5hSUJHTXNoRGtTRV96MUNwTlpUS0Zla0k5MEpFMEt5RkRqUUVVeXhNRjVQeXhhUFJUODFUdHZYSTNCTWZ4bEJXenh3bUpvWHBSYS1ZeUZqOEY3RkZCaw?oc=5",
-      "category": "Mundo",
-      "publishedAt": "2026-07-16T17:15:17.000Z"
-    },
-    {
-      "id": "news-Política-7-1784208374000",
-      "title": "Tarifaço: Flávio e Zema atacam Lula, que culpa família Bolsonaro por ação de Trump, enquanto Caiado critica polarização",
-      "source": "O GLOBO",
-      "url": "https://news.google.com/rss/articles/CBMihgJBVV95cUxQQ1hHRWtHemhhekVILTJuajRVQUN3X1kwWlloYUpxX1JmcDZoeEZhblBMQTRaakZpMnprNjJIQ296S0pPNDBOdnRMMnRweG5oTml5S1lqNml6cWl4ZzBLUi1zTVJLVExXejF2ZTBqNkVJTVdYWElpNHBTRFZFanQ0VExmT2Q0SG12eWpUVDNwZ0g5RHZTNHZGSmkwMFJhZG9oNXBTbWh1cmlTZjd0dkItZjFxNXNmbUFORWMzX0V3dks4TnhXVUNDZUdsTVdlU0hjcjc0V1pyMTdHaUFrRHlaRXlTNUNQa1JLem1Rd2FSTjVJZkZKX0Rvd3lNcmNjalIwNU1HYXpR0gGUAkFVX3lxTE04RE9qcnJWcGxlN1gzZ1lhaEhMaFF0c3VscnE4YjZBejAzdzl3bGU5dy13NW8xaXdkalh5czNVVFI1Mldyd1ZiRFNuM1lLMlhnc1pTZmxkLThaVHhDMnl3SGZ5dTRXa01PWlRVeHBtaFdCVnFQcTVoMGs2aXl5bDhSaE9lalJzYUU4Snk1OEFmMXRMQXQxSXlUNl9QaXJjSzlZUXV2QW9SMVVfUWdXYXE0TFJMYTBZZkc0NnJtdHlfM2ticFd3N0tWVUF1OEVFS2k2T251YkhfeGZscFBKWUZmZUhDZm1HQ180d2RFZUpvY2xpQ3FETjZkMVRqLXlZOFctTkdoU1hmZTJQbEgtRExBaThQRQ?oc=5",
-      "category": "Política",
-      "publishedAt": "2026-07-16T13:26:14.000Z"
-    },
-    {
-      "id": "news-Fé-4-1784207160000",
-      "title": "O Concílio Vaticano II e sua luta contra o anacronismo",
-      "source": "Brasil 247",
-      "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxNR3hMQzR0c3oyZkNiUE5pZ3p3aTVQUTNsb3lQNWpoNXFPNDRfTXpEcGJJNUdQLTdOS2FEZDFOV1huMzVWQ2NrZS1XbXdTbkwzdVNvTlRCQnd4dGFXSHlhVkxab01pZGx0dFpvdWFwYmZpbkZZM1UzNnVVVTNQYTBMSElRNU1BSEFMbVRhVkN2Yw?oc=5",
+      "id": "news-Fé-US-1-1784562764000",
+      "title": "Church leaders urge ethical investment in Eastern Africa",
+      "source": "Vatican News",
+      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOckQyX2trd0owQnFOajdvTkIwYzUyOTFqOUF0TjdOVE9EbW1RN002M0tsWGl3V0FiUngwSHYwZmkteVhnNkVfWkdHWjRVQUJYQ084U3Jwcjkyc2NsdzZydUdCMTlUZUNwZ0pMRjBMSnJwWjVzOElqNi1qWkVPZnNiTmJYTm5nMG1hdEkxTmMwQjhqS1dVNkNLaFZNM1FaZDZoNWNHUktOeGVDQ0lidVdzTy0zNERBN2h4bmFV?oc=5",
       "category": "Fé",
-      "publishedAt": "2026-07-16T13:06:00.000Z"
+      "publishedAt": "2026-07-20T15:52:44.000Z",
+      "quality": 0.98
     },
     {
-      "id": "news-Fé-5-1784203860000",
-      "title": "Fraternidade excomungada pelo Vaticano recorre de decisão",
+      "id": "news-Negócios-US-3-1784560930000",
+      "title": "US petrol prices climb back above $4 as Iran war intensifies",
+      "source": "Financial Times",
+      "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxNWVZQb0s3WTJsU1c1WTYwdXJRYUpycTRzSmdiUU9sa2lWUXZPWldBYktyak1VSDlwT0U0dVQ0Ylg5SjFCdGh6S3RUVVNqalJUZ19pQXhIVXFsMUY5R3RzRE5pWXIxbW1ndDI4YS1HWFJtcElLdnVEWEZQNzJlbUZpOHk0bEY?oc=5",
+      "category": "Negócios",
+      "publishedAt": "2026-07-20T15:22:10.000Z",
+      "quality": 0.98
+    },
+    {
+      "id": "news-Criação-US-1-1784577561000",
+      "title": "Design AI Systems That Actually Strengthen Human Reasoning",
+      "source": "Harvard Business Review",
+      "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxPa3dVcW9VaVd1Q2h1Q2VNWFRhc2hrOWo2a2ZfRGhmQWxMeDFLWFY1WFFWV21fcVZleWVNNnZhOUZMbTktRzBac3BNRFBaQ2J1TFExdXJ5RVVNVEVQRG5jeFRMNkpleEhiR0RqUDk4YmVHRWF4RVJUdWlZS1lxUk1VYlZqOVl0T3ZxVnc?oc=5",
+      "category": "Criação",
+      "publishedAt": "2026-07-20T19:59:21.000Z",
+      "quality": 0.97
+    },
+    {
+      "id": "news-Mundo-BR-2-1784623534000",
+      "title": "\"Recebo essa indicação com humildade e responsabilidade\"",
+      "source": "dw.com",
+      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNRk5PNm4yb2lhbWxUVjZSSTU4cWU3aVl2cHAtVXBRbWtDY1FyMGFVWnQ4RFE5c2huX1N6MExaaUk0Q2RDb3EtTG5OUDZ4Vy16ZldqNjJ1ejMxTmhtZnctdzR1VC14Q0QwYkE0U3dobXVtb0JFdXNMTDZuTnlWbUVvX3h2LVJCMVRmbV9Qem10WkNtZHc5Q3A2Y3Y3MVFnTkUtTVNj0gGjAUFVX3lxTE1GTk82bjJvaWFtbFRWNlJJNThxZTdpWXZwcC1VcFFta0NjUXIwYVVadDhEUTlzaG5fU3owTFppSTRDZENvcS1Mbk5QNnhXLXpmV2o2MnV6MzFOaG1mdy13NHVULXhDRDBiQTRTd2htdW1vQkV1c0xMNm5OeVZtRW9feHYtUkIxVGZtX1B6bXRaQ21kdzlDcDZjdjcxUWdORS1NU2M?oc=5",
+      "category": "Mundo",
+      "publishedAt": "2026-07-21T08:45:34.000Z",
+      "quality": 0.94
+    },
+    {
+      "id": "news-Criação-US-2-1784502900000",
+      "title": "TSMC expects 'strong, multi-year' demand for AI chips as it ramps up Arizona investment",
+      "source": "Reuters",
+      "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxNeWtrc3R6QmdYREpuRHNxR3dFNkJkVjdSMTRYcFhmRHJYQ18yaGFfSHcwbmVKSjZvWVo2M0FqdF9VZkJmbG9CVTVObEZTQ2t1amx5MTlJZ201YWR3cE9IMFNxVTNXdlp6SVV5MnZDLXotWS1EQVFNbUFFV2hZUWJJeUVScVNRaUhjci1zUXJoUTBnMFBkSnFzeWgwWkNpd2FqZ2hZQW14cTNCRDcydkp4X2p2QlYyRWlTRWFISmFoSllBY01OWmNlVWNpamk?oc=5",
+      "category": "Criação",
+      "publishedAt": "2026-07-19T23:15:00.000Z",
+      "quality": 1
+    },
+    {
+      "id": "news-Criação-BR-5-1784608631000",
+      "title": "Dívida oculta de gigantes de tecnologia dos EUA chega a US$ 1,65 trilhão",
+      "source": "Valor Econômico",
+      "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxNMl96a0NrMWFIcGtJVDRVb3RJSXdTSGU1YlBTbXlZc09jRWhEaE0zc2NwZjdiQ0RwQVpYQ0MwOU9RaGdJYklxTEtNOEJZb1RwM0JiWUhfY1RNblM5NHN0TUdNNGM3RmVsclNFVGtrRHlKTEg2MUx6bTUwZl90eWNUTlhuZmVFaXdQNmIzd3oyM2MzSnFfc0Y4eE95VU5YX1BvU0pPa1YtY1EzSDZERm01UEw4S1ZhZTNrWi1GMm56ckdYek1p0gHTAUFVX3lxTFBndC1rdm5hUUpKMjhUWFlyakZ3eGJNeEpQQUVfNjNSVzJWbXZyc2UwMVhqNDc0SnJmaHpmUXEzSmw0c3ZIdmV4WU53czNpMDJKd0kzbnY3YkJsTEJiRE5EMU0wNzU3ZS1MZmh0bEExTmF5TVhKakQzSjBfdmtaNm1nZnd3WHNxS3QwY3dMdERZYTRrTC1TTTZfWmlwNW5ZNlQtbVUxM2ZPZmhEZXI0dlpSX0lTVG9tZ2FGQ2ZocmhOanJkNW1GcVh6VVZWejctaVZic2s?oc=5",
+      "category": "Criação",
+      "publishedAt": "2026-07-21T04:37:11.000Z",
+      "quality": 0.94
+    },
+    {
+      "id": "news-Mundo-US-2-1784520000000",
+      "title": "An Iranian Vision of the New Middle East",
+      "source": "Foreign Affairs",
+      "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTFA4WXdyemRVUTh0QmttbHI0VkRiVnhaanNYeHAzRUpRdWVUcnNfUXpucmxaTkExQ2tCZ3UxSERqVFNSWGFCSE96Zm5HbXlZSk9xX3VQeVF3X25xWFlsWmtHNUZHNGpERFZpcjZjajNVcVJkbmZu?oc=5",
+      "category": "Mundo",
+      "publishedAt": "2026-07-20T04:00:00.000Z",
+      "quality": 0.98
+    },
+    {
+      "id": "news-Mundo-US-7-1784520000000",
+      "title": "Pakistan Won the War in Iran",
+      "source": "Foreign Affairs",
+      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE13WmxtVnNjeDU1b2JGRlE2cEpEU196X0pURC02MlBLd21PanpGQU1vY0xCWkswVVJFZlNmdmJuLWNFWHFJNEpVYWRkYWlaRTJobG1WckNCbVFYQlpjYWJJLTlxXzA5N21jb0JkeGtB?oc=5",
+      "category": "Mundo",
+      "publishedAt": "2026-07-20T04:00:00.000Z",
+      "quality": 0.98
+    },
+    {
+      "id": "news-Política-US-6-1784478405000",
+      "title": "Democratic Taiwan must not become 'China's Taiwan', president says",
+      "source": "Reuters",
+      "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxPNmMyZ1pTd2EyNnlYUW5BYnpZOXJXb1BkOGxER3c0SXpjajlNRzlzXzl6cU9qOUhBNmY4VFlOdlFHT0NFcWxMdTNLQkxndmY0ajk5SnBvLVItSWxkQ0lDNGxzZnNfU0ZBUFRhUnZPZHJHZUR4ZGxHdW9NTm41Y0dVSGxDRXdtU2ZHNGYwZzVaS3lMOEhZbWJSUkxyXzRkeE9aSG9rcElHNHpQRmd1X1RJ?oc=5",
+      "category": "Política",
+      "publishedAt": "2026-07-19T16:26:45.000Z",
+      "quality": 1
+    },
+    {
+      "id": "news-Política-BR-7-1784545319000",
+      "title": "Análise: Burnham é o 7º premiê em 10 anos — e agora tenta contrariar tendência no Reino Unido",
+      "source": "BBC",
+      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE14ZHdhZ0NSaDZ3SHVaWUVmMDdDd0ZEenVoaWNPU0l3SDFVYjBjNGJuZ21jZUQzcUhXbUpkeHRmSVFwVFlMNlpHVE54YXdzVGFZQm9IbnhUQXB0RjRCX3E1cjZR0gFnQVVfeXFMUHVwVGRaVTFrUV9QLXBPNXdwMHpwX3Byd3hOazhrWFlZRmxPWGZnQ25YYk1feE9aNTlYY1h2VHhHMFQwZ3k1dmROT2Nxdk5WaGhZNGdWMnpnekNIVnNMcGR2Y3pNX01QRQ?oc=5",
+      "category": "Política",
+      "publishedAt": "2026-07-20T11:01:59.000Z",
+      "quality": 0.96
+    },
+    {
+      "id": "news-Criação-BR-1-1784568543000",
+      "title": "Empresas de tecnologia encontram no futebol uma nova estratégia para fortalecer marcas",
+      "source": "Valor Econômico",
+      "url": "https://news.google.com/rss/articles/CBMi8gFBVV95cUxPcXV2SXdfWWtKMDFCMGt6blRoQV92MWYxZ04yVG5oejNnRDhpRVZ6bkpXcVpmVEVCNUJid0xCSndOYTU3TGUxendvX0lCeVZ6eDFUNzIzRUJXMnR1WndMd3ZWdWFkUTVORWNuZEJUdUh3UjdIZ3BSUnlPblNLTDVlM2QtNzVGVzFEU0lWY1F0SHFGc1JhcEJnMWhUdnFsSU1OVC1zbFdjZVgzZm1LSXZ1VlBzbGcxNDBZVkM3RlduM1VzQkd0cVQ1UHl4RXhjMDdzZ3FSS3ZKZVM2T0Q2ekYwS2RZRG5ydzllMzF4UmxidDFiQdIBgAJBVV95cUxPdE1iS0haVERWN2w2eldfekdGZEVZRWNqM0hLRS0yZW4xdy0wQnRCYXV2bXpwY2lyWHpTTUctRTh6MG5WdzRacUxaRlFFRUwwbXBnSG1sNWFkcS1tQmJjdTJWa1pDaWlxR2JEYW9zVHNUUEIyNTFEWTNjM2JIMmVoOFlBeDN6b3dDcUNxYlFJbmZONi14bVEwa1U0RDFLemQtN2FIbEJBS3Vsekx2RlNpWmN2b3RCRkYxY3FOUjFaTG5QanEwSjVLYjRkRzBfalE3Sk1WMWItby1qMHZ2cU9NM28wNDFJUkd1N3RmM3p3cnlfTC1XdTR6UkRLZEdhSVVD?oc=5",
+      "category": "Criação",
+      "publishedAt": "2026-07-20T17:29:03.000Z",
+      "quality": 0.94
+    },
+    {
+      "id": "news-Negócios-BR-3-1784562750000",
+      "title": "Economia cresce em maio, mas dá sinais de arrefecimento, diz Claudio Considera, da FGV",
+      "source": "Valor Econômico",
+      "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxQcTdzNXd6d0h3UHNpQXllSE9EbVZzVG5nS2g2RG4zdEp1ZGVYZFpGTGc5MW9FWk1oeHVXNVI4NkxwZVhscVFVTm9odkpIR2lxQzRTemNpUHdNQjI1c25wVXVDZlFIdFZ5aWpEOWhXbWI2N3BlVDFyQzhOdGtPOEFFMUhkTi1Hd3gtam9ocEtqbE41cjhaY0ZxQkc2aUhYdlhNS29YdzF1cEdMVkVtOC11WUtRZkZXY2sxTzRnZHhnRzRfZ3otOHVFazEzSk11X0hmbVhyVkRB0gHkAUFVX3lxTE9qOGt0VUgxTlZBMVV0WUVnUklUbFAzOUxmRGFaNkZuTzdYenBudlo4RkJQZkY4UlVnSFlwMU9MZGdNNmxhQURzSFN1U3c4bEF4bkJsMEhsNTY1TjFzNDJjYmo3RGtwcnRZQWRJWmVIR0dQaW9DWFNWZ2dpYVpjc3BkMG04WEpXTnFfZlFGTndxZVExUGdQdlE0TW1UQWExT0NNTWl4YkVnZ25zMURNcG5UZXV0UHh5bjI2ZWh3OGN0ZGh4by1qdUh2QVFnUllyZ1h2U0hqaWdIRmxqQ18wRE5sVHBFNg?oc=5",
+      "category": "Negócios",
+      "publishedAt": "2026-07-20T15:52:30.000Z",
+      "quality": 0.94
+    },
+    {
+      "id": "news-Fé-US-6-1784481661000",
+      "title": "Gallagher in Berdychiv: Prayer for peace to Our Lady of Mount Carmel",
+      "source": "Vatican News",
+      "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQM2sybnVHY1d5NjNNb1lOaXhabWNLa016Z0xrcV9RWnY2LWg1azRuWFdHZnpjT0xxekpjak4xclpiUU1kYWlULTZCLTkzbS1KQUxwUm9rQW5FWFBMMEJYOFF1S19aVHZDaDNVczA4ZE81enFDN3M1Z2ZIZEg3YTZ1dkQxSndDN1p3djN1R2tZTFdUUTdhRWc3NDRUejlCcm1OcmpPT1NNVFpmR210M1hpdUtfMlpjelItYWxZWnNB?oc=5",
+      "category": "Fé",
+      "publishedAt": "2026-07-19T17:21:01.000Z",
+      "quality": 0.98
+    },
+    {
+      "id": "news-Fé-US-0-1784472316000",
+      "title": "Ukraine: 35 years since the rebirth of the Latin Rite Catholic Church",
+      "source": "Vatican News",
+      "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxOSW1SeGVIZUJHVW1aRkQzYWV0dGRmZnMtbkVIY1FpN3AzbmhiTURJN1FrTVczVEh3NDVsYzl2NEVlR1RraFVTMWROVjZPN1kyc29YaWN1WU5FY3MzM3h2Y0FBME5LZUJTZGxzLWQ2bjdwUXozT1FuLURtdC1ZbHEyUDVTVzVXTzA0OHRjdlIyTWJsUHZ6a1MycHlhWjd2ODlRUE9DeWVWblk0UzJWWnVSQURDLURPOUFTWFE?oc=5",
+      "category": "Fé",
+      "publishedAt": "2026-07-19T14:45:16.000Z",
+      "quality": 0.98
+    },
+    {
+      "id": "news-Negócios-BR-7-1784534440000",
+      "title": "Regulação de créditos de carbono dá novo passo e pode gerar R$ 5 bi em cinco anos",
+      "source": "Valor Econômico",
+      "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxPanVBSTZFaTV0ck9EYVRPTWlKUHlTLXZGUGx4ZFpwZlJ1S1N5X1lCaXRHb0YxU1pzWEJqdDc5LTBUVHdJNjlROWItWkFyRG9WMkdnbG94LWc0VTZ3TUpoLUJ4UU5QRlpBcTFWb2JyV3BGNmljYU56dkJoLUF3YzlMbks5aERFMjFnVXRlOGtpa3d0T2w1Y3ctb2xBczllcV9CWjhSNGk3c2o5Y3pfTlQxWTB5b1J2RHpndk9JOWM3QzZ2Q2RvWVd2WTFIY0lHSGo1MmfSAeABQVVfeXFMTjF2T1FySGtqUFBaZGo1R3dSNk42RVpuNV9PTzRqOGRrbnFmV0czVW02Q0ZiamtvX3RUc2ZMd2c2aHlFb2RBdS1PblZ3NERualpadVJ6SHQ5bGtsVFVwaGszc0szSDNfdGxWVnBqeHRHb1h2U2FwVWZISXR3TlRYU1ZFTnZrWGFkZjN0SHA2RHFfZnJ1WkUtMVNrX0VUbEg1cklvUHVweFVnRVF5RFlTREFTQnVsQUx2LVZhS0I3RVNLM1V6Q1h1Y0JJWDFQa3BONzBid1k5YmthWjY5Z3lLdmU?oc=5",
+      "category": "Negócios",
+      "publishedAt": "2026-07-20T08:00:40.000Z",
+      "quality": 0.94
+    },
+    {
+      "id": "news-Ciência-US-4-1784443231000",
+      "title": "2026 July 19 – Flying Saucer Crash Lands in Utah Desert",
+      "source": "NASA (.gov)",
+      "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE5JM2l3N2hBa1JMaEF6cDVwOW1JTG5DbGpnS0h3RHBIY3V4cmkwOV9jUlBPZXZnSlRWc1htWEtlUEl4ZnpUbXFPQ2lMTG9tRG93bkE?oc=5",
+      "category": "Ciência",
+      "publishedAt": "2026-07-19T06:40:31.000Z",
+      "quality": 0.99
+    },
+    {
+      "id": "news-Fé-BR-4-1784448811000",
+      "title": "Há 35 anos o renascimento da Igreja Católica latina na Ucrânia: sinal de resiliência e memória",
+      "source": "Vatican News",
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPTUtzTDJybWRoVjhrQUJ0Q0d1d0NVYlU5RllCOXcwRE45cjc0SUwzbjJQZldlRi1yeTItOW1tcmYtOGhZZ0lMYVJtVDRieml3ZEZZNnhLOF9SMF9vQ1hmQzZJV1RuRERhSXZrcmpOZldPWXdJYVBGSDR2eDFELXhjMWI2a3VhcXlkNTVwa3BoYW42Y3JBWDhtc0htYkhDZlEtb3dqY012NHZBZw?oc=5",
+      "category": "Fé",
+      "publishedAt": "2026-07-19T08:13:31.000Z",
+      "quality": 0.98
+    },
+    {
+      "id": "news-Negócios-US-5-1784433656000",
+      "title": "Chinese leaders zero in on need for stimulus for economy",
+      "source": "Financial Times",
+      "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOWDZLYy1UdXBSb0VIN0NIM0ktN3lHZ0hsaTlWMGVqU1I4TUhROXlHTi04UkxINk1fQlBuNVBkR3UtUUhhbU9XeHB5RmVTZkt0THJwSzU5YVVIRVd5V3h6Q2RjMHdBZFpPLVlTWjNuVWlLbGs3ZWRUQm5oWEFNU1BweWdZeng?oc=5",
+      "category": "Negócios",
+      "publishedAt": "2026-07-19T04:00:56.000Z",
+      "quality": 0.98
+    },
+    {
+      "id": "news-Política-US-3-1784392620000",
+      "title": "Hungary's president signs law change ending his term in office",
+      "source": "Reuters",
+      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNRExvZWZaR0NUN0NMcHg1UTR0TnMwWC1aYlhTcW9XamNiSHVxU1JFa1pMMnc0cWkxNEdGVS1rU2F3Ui04YjFjUmtlaXEyTXdFVmtwYkZmbmdsdFJqSVg2TzNuZlJ2Nnc3cWtwenB0SGdTWlZfUWhIYlRTWTdEcV9QcjRVblBmT293YlZoZW5PdW5rczMwZVFROERVdVFkbmZWX2c?oc=5",
+      "category": "Política",
+      "publishedAt": "2026-07-18T16:37:00.000Z",
+      "quality": 1
+    },
+    {
+      "id": "news-Fé-BR-6-1784426160000",
+      "title": "Os desafios da comunicação humana na era da Inteligência Artificial",
+      "source": "Vatican News",
+      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPN0JpS1dMQ2JmZU9vbE1rbFl4cjZxNU1GX3B3ZjBPXzFGOVV1VTNOM0NOeVpqclljSENCRmw0Qmd3ZHpVNzBoNzBOZFQzREltQnJYTHhxX0ZmU0xJV0FKcFRGdG85a0RXbU1LODBqT3lPM1kxUDhlYmN3ZzFnRjVkQXlpeU1PSW5qcExBMHA5YVBudDJSUXBwT2ZjdDI2M2ZBa2tz?oc=5",
+      "category": "Fé",
+      "publishedAt": "2026-07-19T01:56:00.000Z",
+      "quality": 0.98
+    },
+    {
+      "id": "news-Política-BR-2-1784550600000",
+      "title": "Brasil sob ataque: os dados da inteligência do Exército sobre ações cibernéticas e do narcotráfico",
       "source": "Estadão",
-      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOZWNxYzRxbExGWVpTbGd3ckc1eEtLZ1lXM2pYcXhjTDFLRXl4em1XcjBIWlpXOVh5ODlOdXlBejhERW5PMmJxTEhDWlM1Z0Q3clJkYTBNXzl5ejhOTWJYY3gxMlBfMUNEQmNWbnpWTmlLSWRfbHpDZDFYZVJzMnNMallwOWRpc2NXUlhwMXFGVFRKOEpyT0M40gGcAUFVX3lxTE9nUkpHc0J1b1ZOQllYOTFGa094dEItdF9abS1neHo1Y0FYcnlzRW9NRzNwV0xIblRnN0tLbWZ1VFlUTHRfSXBMcE9SR1N6aHh1VUpnWE12OFlReXBRYkFHc05uN3ViS3NzQWJid2tfM0lqWUJxQ2ptM1FBMlNkNTdicUgzbjNtT3NTUHp6bUY2ZUtUMGNlRnhGYXhqUw?oc=5",
-      "category": "Fé",
-      "publishedAt": "2026-07-16T12:11:00.000Z"
-    },
-    {
-      "id": "news-Fé-7-1784200883000",
-      "title": "Grupo ultratradicionalista desafia o Vaticano e abre novo capítulo da crise no Brasil",
-      "source": "ncnews.com.br",
-      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPWHVwUVdVTzVPUTNwb0tYSy1ENUJoWm9MTXJrd2xiR01Sc1c0dGYwUFRNNEhyc2lGejUzcUFvTUxDU3k2SVNfQWE4WjY5VEd6X2FPcjFld1AxQ1RadWNoMks4M0ZnX3R5RWFaWFZnMXdPVWpMOHlyZGJMa3JWYndKOVBqYlhkTm9rWjU4ZjlhRFlFSllncHhIZXZBMWg4dFVUQ3FaNFNIWmZKWllvZnh3am9ZTzkzUDRNS1o0?oc=5",
-      "category": "Fé",
-      "publishedAt": "2026-07-16T11:21:23.000Z"
-    },
-    {
-      "id": "news-Fé-0-1784183412000",
-      "title": "Quem são os católicos ultratradicionalistas em cisma com o Vaticano e que estão em 11 estados do Brasil",
-      "source": "O GLOBO",
-      "url": "https://news.google.com/rss/articles/CBMi8gFBVV95cUxPVUYzSmxMQ193QWwwTTdISk9PTHMydUhoazhoNXlyWEdBX0g1SC1NUjFNaWV2RERJYWhYaGlCWnRaV0ljcDVGb3VGZXhmU213UUNtVk05N1hnX21VOHF5eDFZUFJlQlNyV256Z04ycEZuNU5hdndUTS03NzlkUFpLMVpTeWVuWF9HazYwSmVjZmIwNzFzVEJnekUtM2F0NktBWUxYZjUtd2x6aU9yRWtnRVBnNHpjYmtJY1dtQU1IeWNXM3V3anF0ZzRlVHFuTl93TUdwck1qLTBhWm0yNkZIZEVjRWNlUUZoVFplU1lPQS0yQdIBgAJBVV95cUxNMFZ2OFlnN3VGZF9Ic2Z5YWFCZ2FKNDk4dlRVSUl1TWR1T1F5bENNWDhvYXJ6ZkNqZGRUNVh5UlNqc1pZTllweUFBbnByVVN6Y2J3dWlGd0dxc1RnSlNTZFA4cE1XX09GZzRDTWE2Z0RCOWVXejZQZlIxNzFVZWN2aW5xaEVnMkVPa29SM3N1Q2lvMWpETmVCNzJsYzVoNGRZQ2RDbXFwcnQ4VzNJWF9VS1ZueGVqQ2hTTkdNeHhJa2I3Mll3SUhCNlQ5NkJlSUcxTEhCZVdaWVN0MV81SDJaczRzdlV5LWtEcGVaaVp0Y2xsTGx5a2MtdWlwM0hNaG13?oc=5",
-      "category": "Fé",
-      "publishedAt": "2026-07-16T06:30:12.000Z"
-    },
-    {
-      "id": "news-Política-4-1784163785000",
-      "title": "Análise: Tarifaço de Trump vira ativo eleitoral para Lula",
-      "source": "CNN Brasil",
-      "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxPWFloZnhfMUtKc1VwamJYQzM0ZkhLNGlEZk9ib1JUdzlpVXdhRmp4QzNVajVBdjQyWUJRN0hiOGxrUzB2T3R0SHVoU210WTJiejZVbWVnVG4waVJ0ek9vX0wxa0lWQS1KVEt4M1VHX19DZ0I5VkV0TVVxV3lSRkpFbmlRMk4tOXQwOWFJbExHSi0xNWY2OWlaM1FIYlZrREktbFp6WWk3cERiZW45Y2paYWlUZ3lPakE?oc=5",
+      "url": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxOZ21ybEVHT1J3bkEtc1ppT19KaGFQRVNqSjdYMWRIblFiRzFGU0VKY1ZWWFJDa3Y1T3RUXzVDU285M2NvODZsV3hKNkxJcmhCdGUzeHQwSWFmbmZfRHp2SmQwQXd5dkU2QU1KUHp5QmRvV0hTTUhjNGdOX1R6eG9hUDVTdGZ3OUhYZkgwS3RzNERYWWxYeERvNWcza0wyV0tHRThuSG9qbnhiQ3ZNS0ppbkFBM3RsQllJWFhiZEVHVkZLWnI0NlJFRHFRVkxhTU90RXlVVldZcDNkajhMSVdXcm9iQUPSAeoBQVVfeXFMTW9FaEV2SHBDdXlRdUQyUzZKNUs1TWI0UTJ1ckdGZXBQbW9YRS1SNnlEY1h3Nmk5U3k5VzNkanoyZG9XYXhaNnBodUM5cWRRRGlnTUVudDJlbHkwbDZiR1hkcXlXOHNsUm93V19CdVlmMmhTbHh4d1MwbUhQWXFkZmctRHVFajFlU3ZOZkxJR2NfX1Y0V0dYS2h5cHVOSEIzdDNNQVZYZUlwcHcwR0p1MzlyRWI1cUhrY2ZYU1o5a1hzWFdjSDh6TzJxUi1oMkZXN0diRjRXOHp4di1QcFJTM0xsUmMxdWd3ZlZ3?oc=5",
       "category": "Política",
-      "publishedAt": "2026-07-16T01:03:05.000Z"
+      "publishedAt": "2026-07-20T12:30:00.000Z",
+      "quality": 0.9
     },
     {
-      "id": "news-Mundo-3-1784151600000",
-      "title": "Avanço da Direita e a Geopolítica Latino-Americana",
-      "source": "Tribuna do Agreste",
-      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxOc0VweVNsQzd5MHVLcG5vd2xodjJJUmNJSldzYnhBM3ZmbUhWWHVfVFZaY2xIelJ3Vi1YelhLT2FmRHM4dHFTWFQ0aEZNQjJ6QjJLLUtJN1ozOE5YVDVUejB0ejByUWFYTWlYQVI1QjZWUWZRU2QxX2J4dldhLWlKZ1pYM012SkFxTVBITkpnSjF3LTlTRUdhazVMb1VLLWdWVVdYRDZuNzdWQjdzeE9iWDhjVQ?oc=5",
-      "category": "Mundo",
-      "publishedAt": "2026-07-15T21:40:00.000Z"
-    },
-    {
-      "id": "news-Negócios-6-1784140020000",
-      "title": "Brasil registra alta na abertura de pequenos negócios e reforça força do empreendedorismo",
-      "source": "Portal Nosso Meio",
-      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNRGRBbFNOOEswVTdCS2VKZkQyRzVIX3Bzc0RtN0dNbVZzNFlrS1ppSklEeFMxRUtQWThGS29kcURpakFoWDBkekozaXpQZGFtTGhiQUppaVFsTFVfU2x5WXpsQktrY1N2Sm4wRjFranNIY1NXUWdsZTNIeVNvZnVvMXp0aWtIYS12QjhDd0hPZ3RMay1SdFV0ZUhHQzhkTlNweVJRU3JaYjVRaHJmS0xBdHowMEs0Zw?oc=5",
-      "category": "Negócios",
-      "publishedAt": "2026-07-15T18:27:00.000Z"
-    },
-    {
-      "id": "news-Criação-5-1784139720000",
-      "title": "AEB abre seleção para empresas brasileiras exporem no International Astronautical Congress, na Turquia",
-      "source": "www.gov.br",
-      "url": "https://news.google.com/rss/articles/CBMikwJBVV95cUxPVnROdGxZWkRHY3h2WmNSbGozRG9iRnpreVIyWG8zUkxlYjhoWUt1eHBrR2hYSy1KM010Z3JTZjJzUHdVdHRRTGY2SHlJeDVrUU8xc214V1N4bGpZRHlHOHlTbHlHYU16QjE2bFZRelNYamVXX1pIQkJXSUtYZF9fSWhaMUozVldDQmhsYTIwb19RSU82WlRsVVNqTVFNLWRvWnlkeVNHSVc4bTlwR0J2U3otc0dPN1NyNF9nTFlkNmVXb0ZZTmF6N0hCeDFYT3h2V0R0Y19qb05kTUF1ZXgyWEFFZF9XRGgtRVdOWXIxc0U1dzloYXFSNVBpWllBeGZGU1c2dFJVYXFTNllsWG5DZXFBWQ?oc=5",
-      "category": "Criação",
-      "publishedAt": "2026-07-15T18:22:00.000Z"
-    },
-    {
-      "id": "news-Ciência-6-1784137620000",
-      "title": "A Terra terá uma segunda lua? A ciência explica — Ministério da Ciência, Tecnologia e Inovação",
-      "source": "www.gov.br",
-      "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxPdG9Qd2poSWpheDVQSFB4Q1VCbXVNbVV5MktGVGlBZVBuNVdmLUVodjlYd1ZYdF9OQ1hvem9PWTUyZC03MFhkVTJDYTY2ZnlkcEF2VUdPMWI4VFZpYnA2dldmSWNCM05VYlp4ZnRGdDVkYk9HbGhlVHE5ZVZKeVUyS3ZGMjVkRkVIek41cnYzd0VaNWZmY1NGX1ZlaUtZNXpYUTRDa0xQVC1ydU9fQ3RkaXZkRXB2VDY2RmNnQTd4aHluMGZKVUtlbFpR?oc=5",
-      "category": "Ciência",
-      "publishedAt": "2026-07-15T17:47:00.000Z"
-    },
-    {
-      "id": "news-Política-6-1784129147000",
-      "title": "Análise: A atuação do TSE sobre as pesquisas eleitorais",
-      "source": "CNN Brasil",
-      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNcGY5U1BtR3pjUl9tMGROQzFXNWE0amZ0b3hOUkdIUnBYX0dLcmQyZENrWktraGxXMGVwOFNpellucWI4QVRKSkFSa0ktUmNjd0Z3SG94aGZmOThXc2xtenBQVE5GOFVhOGw5OE56Q0RNMXJvazBwM0FNbXI5a3FZdzlxMGFEekVUeDZTRmYzSjFRMzM4VHVHdA?oc=5",
-      "category": "Política",
-      "publishedAt": "2026-07-15T15:25:47.000Z"
-    },
-    {
-      "id": "news-Criação-1-1784123987000",
-      "title": "Veteranos da tecnologia apostam novamente na inovação com IA",
-      "source": "SITEPD",
-      "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxOQy1EalpHM29oa25WLVBvQlF3U0FZeHB6dUhGTjhQM3JHXzNWZERDTFZUa0F6Zm5uc21QOEJjTTRKbGc0c2JrdXR0cU1hRzAxMWNLNHJTTWtuT1dwVVFxMUZ2eDRwVDRmM0JuS19hMFRMQWJzcnkzaGhuUzBvWDR2QU5GVzRlZGU3Ykow?oc=5",
-      "category": "Criação",
-      "publishedAt": "2026-07-15T13:59:47.000Z"
-    },
-    {
-      "id": "news-Mundo-5-1784114400000",
-      "title": "Argentina e Inglaterra: quando a geopolítica entra em campo, por Francisco Ladeira",
-      "source": "Jornal GGN",
-      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNZVZxeEhNcHhwbVBkc3Frb1l4Yk5uYkRHb1JQbHZCWHNJdDZTNzNqbXlNd0hDRHRVMXFMNWhVZnV0RlNkUlFlLUZXRE55QWNQNXlmM1A1WkdkNFk3aEpZLVExaEx3MFRUSDhqMmNXYmN4MmdxWmI0VG01NHhlODlxLWJlX2hIdUdFRDltaUtmb3hfUmItN3FWdzlKRzZKSHZI?oc=5",
-      "category": "Mundo",
-      "publishedAt": "2026-07-15T11:20:00.000Z"
-    },
-    {
-      "id": "news-Mundo-2-1784088900000",
-      "title": "Juliana Monteiro: \"A geopolítica da reconstrução\"",
-      "source": "O POVO+",
-      "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPelUwdUluUmRzNGtsV2hLcUk4NW9IQmhBQmdPLXhuelBjMGdJWWZzOE45MVAxTEVtVTNaR1dsWWh0QWV0dVF6a2swczg2VHJQaGpweWx0Uk9oenloZ0ktY1ZobUNiYmYxRnFfbk5FVng2N2dnd3dzUmFBZnVJa3hsc0c5T1VUNG54MUt3ZEx4LXpHMmJoaTAwWGNvX2l1OXFTTkE2MlVB?oc=5",
-      "category": "Mundo",
-      "publishedAt": "2026-07-15T04:15:00.000Z"
-    },
-    {
-      "id": "news-Negócios-1-1784084431000",
-      "title": "Comércio de Brasil e China bate recorde: país asiático compra mais petróleo e quadruplica venda de carros elétricos",
-      "source": "O GLOBO",
-      "url": "https://news.google.com/rss/articles/CBMijwJBVV95cUxNTzE5MnZtT0dPVFg4S1liY2k1eVBHZkZlbEZUNkQzMjhOd3lWNlhNMF8xdXRmTFlCZmRabkVfRmg2N1BiQ014RTdJOXVpZTNVRERJbmJ1cG1JM1lDSlJIdFVZSm0tWnBLY0NaZWhfaGFoWjE3ZTVNcE95bXVKWnM4dzdGR1I4blVuMnV2N0gtMGJLTGxsa1hiUUVobWlfRksxWkdQc0doWkNuSGJSbXlJLWgzOF8tZFZlVjZMWTl1dDVFVkZQTXhhWFViaHljMXlBb25hRFl4eFJXRTZtQ3dyWVdPQ3lMYlZEZzd3ZHpJV3NqTVNPX0hxRXlFSWdYajdoXy1ubVIwbDNoeDRRTHBN0gGeAkFVX3lxTFBvZFJDQmJPamptT2FQT2Z2aHJxZnNLY0JSVlpYZENYU1gxcHF4YmtMa3RzdXMyWGptOEZ0ZjVJeHo1RWF5dXBuT0Y2RERDRjQ1MGlNOWZxcjdjMVo3emRVRExVbUhXWmZEdURYWkhCN0N3RHI5UWY2RllCVDN6ME5mb3ZMRm5xbnY3aHF3YWREVlpJRGZQRUNQUVJYLXBTN1FnQnBUUE1jXzJwVGh1WjJKZVgwTjluNkxiMUhCb1RLdUE4QXEwY0JMOXBfNjlHT083bFZDcnA3dFdzSC1uSUxoeE0teEg4RThlT05pX2pLdWhSV1BuT21Wc05xZlpCclNhTHVNd3B2anZEZ014ZVdrcFhlNk9oNXFzMEhPbXc?oc=5",
-      "category": "Negócios",
-      "publishedAt": "2026-07-15T03:00:31.000Z"
-    },
-    {
-      "id": "news-Criação-0-1784074216000",
-      "title": "CONTEÚDO PATROCINADO por @hpbrasil | O Brasil vive um momento histórico para o empreendedorismo. Apenas em 2025, mais de 5 milhões de empresas foram abertas no País, segundo dados do Sebrae, e cerca de 96% delas são pequenos negócios.",
-      "source": "instagram.com",
-      "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE50am5rYmZFdFhyTHMzdmczNUprS0kyclVPR3ZmR3ItN1Z3LXR2ZWlMczd1S1l0OUpMMS1yZTdLVGtmaGtjbEwtdVAxMDgxWkxvelE?oc=5",
-      "category": "Criação",
-      "publishedAt": "2026-07-15T00:10:16.000Z"
-    },
-    {
-      "id": "news-Ciência-7-1784058350000",
-      "title": "Nova equipe de astronautas chega à Estação Espacial Internacional",
-      "source": "VEJA",
-      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQNDQ4YmVqMnRWV1QtdVBIeTY3WHdhVkwxXzRNdUxMbGRUX2tjcTRqMk90MmltUExaa3NfNVdROTBHb3pZbW92RnFxTmxIczhaNzNnVGlZc1VyYTU0TTJCZS15cVB3MVdvc2kwVEUyakNfVzhpY1NKU185cVlhTEtPNWh4SjBKNlJvSTdOUUswb29xNHQxYWdxYmtkWjVhQ1ZOb1E?oc=5",
-      "category": "Ciência",
-      "publishedAt": "2026-07-14T19:45:50.000Z"
-    },
-    {
-      "id": "news-Fé-6-1784050860000",
-      "title": "CRISE DA IGREJA CATÓLICA: PADRE EXPLICA A EXCOMUNHÃO EM MASSA NO VATICANO | EM REVISTA",
-      "source": "REDE BRASIL DE TELEVISÃO",
-      "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNcGpBTGRnc1hCa3FPZU1pWFh0ZzhSRHl3YXh6RktIZFFTVTJMdFBEYW1ZazNWUUZxZXNhTHlKVzJBS2pVLWowMlNoRHJjbDZQaXFlcV9nTGNQQWdnV2xPOXR0M2I2U1F2Wm1iZ0d0a3VOZk5wMlZYMFpwbjRvM0ZkUUlrd0d6ak15VERFTGJpRHpxYmw1Vy01ejE0RWRuZWQzUUVRcXBOV0k5bDVxLXp5OVhR?oc=5",
+      "id": "news-Fé-US-2-1784377841000",
+      "title": "Shevchuk: Forgiveness and reconciliation can heal the historical memory of Europe's peoples",
+      "source": "Vatican News",
+      "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxOWE42b3dLY1VQYklCUzF5enVrRWhIS1plYWFaNkpzaVNreWxMRzNXdE8wUjFpaEJOa2ltNUEwWDFIMVZTSGVuV21pdHlNcW1IVW9SR3ZfdXVhT3lBTnBmYURiVG5vYU81ZlIwQzdUNnF5eXBxb19hVm0tYkdwR0NFT1ZDOGdQRDB2dnRmRnhCd3V4SUR6MTNKWTZrVnpBR2NJVWdhV2VR?oc=5",
       "category": "Fé",
-      "publishedAt": "2026-07-14T17:41:00.000Z"
+      "publishedAt": "2026-07-18T12:30:41.000Z",
+      "quality": 0.98
     },
     {
-      "id": "news-Ciência-4-1784042227000",
-      "title": "Asteroide Bennu entra no radar da NASA por possível risco futuro à Terra",
-      "source": "Aventuras na História",
-      "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxNd2xEZXpPUHl6ZmgtbC1YZG5jRklubjgwV1pwSzlfa21rUjdWZzdtWUloZGRhYV84dk1EaXQ1dWk5aVpIbUZaZFdsVjFZNHBtdDhTMDY0d2tNVmticlgtYk9XYkEyTzd2SENONEQ1YmJIUjdpUHRwekplNGVzSmNWSWhoNnQ1emVyOTMwSExlTk92amExR2xxQkVZbS1tVHAwUUtxdUtTVEVsYWNic3ZUODIzdm03c0h2SU9ZaU9oWlh4VDUtTUZWSHdtOVo0ZlhmRFE?oc=5",
+      "id": "news-Mundo-BR-1-1784412638000",
+      "title": "Escassez de combustível afeta a Rússia, mas será suficiente para fazer Putin mudar de estratégia na Ucrânia?",
+      "source": "BBC",
+      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE1HVExyU3JEMndaRGhrNTZWbHpIa3d1cmlIQlpEY1RuOC1idG9PeDFnWmZpcFpyX3JUNzZpeVFfUUhTejk1Q0RrTk44dUl1TG52c21FaDlYQjdIRzBhdXh2LTRn0gFnQVVfeXFMTXZwS181ZGJ4b3JiQmU5bUFOOXNhNFNyZUdIcjRIQlphQ0duSEl5Y1hLTDNYWktMUExlOWRqYk1uQV9mbURoaU1TVk1sLW5fLWxuMk1vdGZjZE5WZmNTYURyZDJUQXZMcw?oc=5",
+      "category": "Mundo",
+      "publishedAt": "2026-07-18T22:10:38.000Z",
+      "quality": 0.96
+    },
+    {
+      "id": "news-Negócios-US-1-1784321008000",
+      "title": "The economic goal that never came: World Cup falls short of boosting Mexico",
+      "source": "Reuters",
+      "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxOc3cyQmhQR25iUWxFb2xxTzRnT2t3OEF0MlZVc0FQQ1FWTGNDTEVhNTFLSjQwZGcwaVk0M2pJR09neTR2WVJsTUN0ZVpLeFBFcHg5TmNnX0FEMkEwUHZaUkdZYWhnZ2Y3aFRnQzA5a19iT3R6TUFNQWpUN05aenFQSGFFSGJ1bmUwQTBkc2ZyZVZjN3UtU1BrVjRkeVVIQ3V5aXc2U2RTd1p1WENDUGc0RTUyRWxTQ25E?oc=5",
+      "category": "Negócios",
+      "publishedAt": "2026-07-17T20:43:28.000Z",
+      "quality": 1
+    },
+    {
+      "id": "news-Fé-BR-7-1784354678000",
+      "title": "Reflexão para o XVI Domingo do Tempo Comum",
+      "source": "Vatican News",
+      "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPQnhRbzloM2R4R1NsdW1ad2hKTXdiazEtUVAwTGMtYm51VDc5Qmgwb3NfaUF2RmRUU19MS1UyemY3alNzbV81V2hUcGVYSDdMMTZKZDIzcnhNT2RUcHNVU3RFakVnODlWWmFvTzgyV3pXY1BnTExhbXltSEpRandCWkx1STB2LVdnMTU3dzdZdWM?oc=5",
+      "category": "Fé",
+      "publishedAt": "2026-07-18T06:04:38.000Z",
+      "quality": 0.98
+    },
+    {
+      "id": "news-Fé-BR-3-1784354671000",
+      "title": "Antonio Cardoso na Canção e a Prece: \"Cantiga de pastoreio”",
+      "source": "Vatican News",
+      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNdkhzSGF3SEh1RVltMzcxeVlnU0FmNEwtMExtZkNHc1Q0aU1wenBTRGFTZ3JUeXloQjFrS1RxSHVaQkc3SHp1bGtENUJfa1VpUGZrTENVSlpiWmxwTEdVREhxcUs4MzFKMXhic1FUaC1QZnRVeGZITnBVY0tZLWFkZjZReXBOTllWc1JzRkI0b21fRVpBeWc1WDJCekR4YzdBR2w4?oc=5",
+      "category": "Fé",
+      "publishedAt": "2026-07-18T06:04:31.000Z",
+      "quality": 0.98
+    },
+    {
+      "id": "news-Ciência-US-3-1784333498000",
+      "title": "Can giant space mirrors boost green energy on Earth? A start-up aims to find out",
+      "source": "Nature",
+      "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE0zUk1KSS1XX3p0bHp0aWJDWVlqMG41Y3dNUnV4cGF2RGVPOHIybFZyeHRsVG44b3E2d29ZMl90dWZ5T1pnU2syek9rdEZuQkxaUWNsTGdjQ1NZUF9BekVF?oc=5",
       "category": "Ciência",
-      "publishedAt": "2026-07-14T15:17:07.000Z"
+      "publishedAt": "2026-07-18T00:11:38.000Z",
+      "quality": 0.99
     },
     {
-      "id": "news-Negócios-4-1784039384000",
-      "title": "Empresas que buscaram certificado verde por ‘moda do ESG’ ficaram pelo caminho, diz CEO do Sistema B",
+      "id": "news-Política-US-1-1784290391000",
+      "title": "Andy Burnham bets political future on remaking Britain's centralised state",
+      "source": "Reuters",
+      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPV2ZnSWtnalEzNDJ3S0hYZ0VDUFBvUzlLSnhzbXByNjJjMVpQVmNTdnROcmlnUzg5QmZvdU1QS0VrdDA4UG45SmxDSVBjVEdGWlFLY3A4Ni1WbjdpcG5mRXhzcUJObnhyNVZzcHZ2d0xFczM2RmNxV1pjRnhMbS14WDVhMzlYX1huNkYxbFFSMFR2SGIzN3paRFRsR3IyZHFycDFkcWt5d2JGbGtvYUk0YnRlX3dGQQ?oc=5",
+      "category": "Política",
+      "publishedAt": "2026-07-17T12:13:11.000Z",
+      "quality": 1
+    },
+    {
+      "id": "news-Negócios-US-7-1784310757000",
+      "title": "How long can oil markets absorb the Hormuz shock?",
+      "source": "Financial Times",
+      "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTFB1cjhNMk84dFZPN1daeFFERDlpRkk4akFTN2lnMnFLTGdEZFhmQWZ1V2VhWHRYaGI0bXVMMGRyRV90aWJodUNHVmZyUkxuakpBaVZCa3RodVQ1UEF2WjJQNEl5Tktrc0tIVm1Dc0V1XzE?oc=5",
+      "category": "Negócios",
+      "publishedAt": "2026-07-17T17:52:37.000Z",
+      "quality": 0.98
+    },
+    {
+      "id": "news-Política-US-4-1784256383000",
+      "title": "Trump threatens to revoke licenses of US networks for not carrying primetime speech",
+      "source": "Reuters",
+      "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQbWlZamEwLUk2TEgxem1Yel9nd2lFVVdHTXZUd09XbmlOQzVFckVzNlByc2xhaEZJNEpTMTJiVEtCb0lLc0taSWtrdjQ3VHNubEFXRE1jZHNrSUhCTEw2WXgtaEZLTHRpQVBJZXVsU3g3bWNIZmFvdnBDLVpIN20wMmQ1a1dDWWo0SHpvQmdkV2dsRkRORE5xWlExMlVxS0hlTVpybDVqTHpDRkZxXzZZQXNZTm9BMTBSVnhoN1lKX1RmZEV5?oc=5",
+      "category": "Política",
+      "publishedAt": "2026-07-17T02:46:23.000Z",
+      "quality": 1
+    },
+    {
+      "id": "news-Fé-US-7-1784292276000",
+      "title": "Ukraine: Archbishop Gallagher calls for the conditions for a just peace",
+      "source": "Vatican News",
+      "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPMWY5ZW1OZk03OWVsZ3RPd29hN2djdkNKcHNUbUc2cWkxMWhBTG04dUhSZXBJUDNYNmRFSUhCMWFMcl9qSjhUN1E1R2lLN3BOdUE0UUZuNlNRUUxtazBiVVBPYm9hVmJkektFOHVhbk4tN1NudUZPOHJqUVlTbXZqVkhBc0V4d3pySjZIbGJUdnNPeURIeWR2WEZELUZQMkhRblROYUJtVGM2M0trWW05akExQ3MyaFE1b2tIQ2l3WEQtd1U?oc=5",
+      "category": "Fé",
+      "publishedAt": "2026-07-17T12:44:36.000Z",
+      "quality": 0.98
+    },
+    {
+      "id": "news-Mundo-US-5-1784255773000",
+      "title": "Xi pitches China as leader of new global AI order, challenging US dominance",
+      "source": "Reuters",
+      "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxQZVpoVTlwUHY0LXNXd19nbFlNWVZoWDdQeVVFSi1ISkZzYVI1YUlzQTR6OXd3XzNhWDhsaTRkdnByczNqMlE4bm1JTHhyaEk2VXhrUDRFdmVjdHN3RW9FZU1OTW5aMnMzTmk1VW5sMUNGTkhYYVc1LUN5bUJJWkNBdUJFSU0wNUZyMDdtZklkRkJPLXBTRlhHQmZ1S1dQSVdTZ3l4OC13TE5aVWNBSUZfeHpfRVRwTG9hdzFKWkdVa2RfaVoxeWpr?oc=5",
+      "category": "Mundo",
+      "publishedAt": "2026-07-17T02:36:13.000Z",
+      "quality": 1
+    },
+    {
+      "id": "news-Fé-BR-2-1784288166000",
+      "title": "A Igreja latino-americana fortalece resposta integral às dependências",
+      "source": "Vatican News",
+      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPdm9BUWhZLWM1QTNmV0o5XzhwQTdPN0VHalR2eGJZWmFvV2w0Q3lFSjYxYWQ3Umt5bnd0T3RreElfQXYzLWlTOHRFUG9DREJBb3A2cWxGdElGMUctN3dYMTV4QUo4U3QtaW1ndTAtNkZQd29TNFJybjl1elZCN251S09ZRERYZkNVSVhwclF3SE9kQmUwQ0ZTMXpBWXEwQVkxY1BBLUVMYWdHUVJVeWFhSFVWaw?oc=5",
+      "category": "Fé",
+      "publishedAt": "2026-07-17T11:36:06.000Z",
+      "quality": 0.98
+    },
+    {
+      "id": "news-Fé-US-3-1784393549000",
+      "title": "Traditionalist Catholics face a difficult choice after Vatican cuts off breakaway group",
+      "source": "Crux | Taking the Catholic Pulse",
+      "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxQQ0dybVE2eU9vVndpVUtaSzRPMWo4QmRkNTB5cC1ENzFJMENfSXZyR25lcmhuY2h6TEUxTjkwWml2N3hlbjdGeHNtNHRfbnRZX3M1ejBwOHAzdHNmUW03QkRaR1FvUmptcG1NaFIyWlNucDgtdXUtRFc1aHdGQVFDcFhoR2FOeGtUbHBfTWZ0dWlwTjlpV2Q3SHl3ODJKdWVyNlRZODF4bmlaVUJ0M3FfUG4xQWt6bFJTMEpuQ0xEMUJ3UldSOEloSS05RVFiQQ?oc=5",
+      "category": "Fé",
+      "publishedAt": "2026-07-18T16:52:29.000Z",
+      "quality": 0.92
+    },
+    {
+      "id": "news-Criação-US-5-1784296290000",
+      "title": "How Highly Effective Global Teams Collaborate Across Cultures",
+      "source": "Harvard Business Review",
+      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQdVhoSmprYXdiU2JtcEE1Zi1FRXk0dU5yYl92TU1vTFJkRExqQkhtOU55a2h2NC0ya0Z3Z2VDNXBiX0hRYVRSVUh5VHcyTEdKMjc4UmozdHVkdHczLTNxRUlOLUp4b3JfRE83U3l3Qm0yYVVaaXpsZW92bFhsR2dBdkY0eHFoTnZ0RkFPZzdR?oc=5",
+      "category": "Criação",
+      "publishedAt": "2026-07-17T13:51:30.000Z",
+      "quality": 0.97
+    },
+    {
+      "id": "news-Fé-BR-5-1784275302000",
+      "title": "XI Encontro Nacional da Pastoral do Turismo debate turismo sustentável e evangelização",
+      "source": "Vatican News",
+      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNdEdtdWgtblFyLUlCZ0FFWjROSGVUN3B6S3pVNVo0U1hDaTZEU1FjRTN3djE4MW5GVzExNzE2Tm8yWm5XT0ZtNnVLS3NaUzZhay0zbTdMVnRvZnV2RllIeGt2X01CejEwanlsb2lGR1hyVjg4VDVVdENsMTI2cHVUWDEwSTN0Z0lxbFBsNFktbzNsbnlUMVQ1TG9LOEhQYm15R3NvODFaYXQ4WGlG?oc=5",
+      "category": "Fé",
+      "publishedAt": "2026-07-17T08:01:42.000Z",
+      "quality": 0.98
+    },
+    {
+      "id": "news-Política-US-2-1784238606000",
+      "title": "US will focus counterterrorism efforts on left-wing groups, Rubio says",
+      "source": "Reuters",
+      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxORlVQZ296NGV6WG1GcVcyM25nRWkyWEU4WnFWZnY1MEt5S3ZnMlRkUUJXemkxeXhTUnpPR3EtZ1ZrNVQ2Vk13cHpPQ3QyV1JHMnJXVXFsODZQWXVrUFRIbFp6STFIb2l3SnAtc2tWR2RmbjBmUHBkNzRhWmN0V3B3NmU5VmVBQk1yREhqdzhtelRSUDlvOGw2RjI2YUpvcUY5THZZX1d4d0llNWVJb00zaWJPODdHM1FNNzVJ?oc=5",
+      "category": "Política",
+      "publishedAt": "2026-07-16T21:50:06.000Z",
+      "quality": 1
+    },
+    {
+      "id": "news-Criação-US-6-1784237563000",
+      "title": "Americans are angry about data centers. Politicians are feeling the pressure",
+      "source": "Reuters",
+      "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxOV0ZaZ2h4eFlxSTdXZ0NTRDQ1R0haZF9vLURjdVhraWdUbnVHZEVmTzJjdkw4ZHpFaDRSemxOTDN5VFRWTUNwZXNtY0E2bFdsWThQMDBrQlUtZzMwRVo2SFZyVTFKZ3lHQjlEZHM3NWFxSzNZcWFHZFMxbjRmb3p4SmVoNnN0WEZVWjVBZFkxWDd5S1FVYnBfNnFQdU9wZWVJVzJsbDhNQS1mRnhZeW1Yek52RFlWTHM?oc=5",
+      "category": "Criação",
+      "publishedAt": "2026-07-16T21:32:43.000Z",
+      "quality": 1
+    },
+    {
+      "id": "news-Fé-US-4-1784271600000",
+      "title": "Archbishop of Lviv, Ukraine: \"People are tired, our hope is in God\"",
+      "source": "Vatican News",
+      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxOckEtdGVzWjdrMUpOTGJuZlBIa015NHk2WWdteFBiZ1RBU3BRZkxtaU9RWDB1YUwyOVpkejN6WWIwQWREZjdGVHZpemZhM3NoSkhTbGRrRHA5RWc5R0FZQTJsRnNUOFl2Z19XVzFGYklfYUUwTkpDd05xZ0phTjZYMnpicF82bnRLVnNBcEpmS19Bd3FzcWR3WGhaVlpTMTItdWxnQlBTOXpaS2ZnTlI5bURxbw?oc=5",
+      "category": "Fé",
+      "publishedAt": "2026-07-17T07:00:00.000Z",
+      "quality": 0.98
+    },
+    {
+      "id": "news-Fé-BR-1-1784308920000",
+      "title": "Juventude católica do Brasil quer mais doutrina, santidade, cuidado com a liturgia e menos política na Igreja",
+      "source": "ACI Digital",
+      "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxOeHhRcU5tMzQ5SjI3Y2l6bE1EZkticlNFSmM1eVRCQVpROUVpY1FzQzlQbXltM1ZMdDZEUG4zZ0FNc3RGTUJNcTNHc0phTDROOXl2SWxhS3NUSVBmMFktVEtFanhPLUtfVEw1dmszLXNhbTJOdzJxd1g5TEM3eFRfc09sZHBtNm9ja1BLY0xlaUx2U2J0bUNjQjVpZkpZNlRMMlZ4eFExaEhQckpNMnBWa3pDaDVXcVZIaUYzc080aWNYVUcwZlBrUjhNZVpFdlZjWjJBQnZvWTY3SlROS2xrWVVB0gHnAUFVX3lxTFAxaG96VnBrMWx6VE5KMHpUQmxZc0ZtbnBEN2JQU3RIUklCVmZ0d0JkMUloYkM4VW0yZGZiSENhUjJJV3BsOWtwOEZuZ216OUtHcEtBaWNUckZJMHIwbEstR1FRUC02dFhwdmFWY3hJTXpsa0xqZFRCNDJvc0IyVGVfQ25oWUR5Qk9HV3JCVFlVVTdQc0pGS1pUVk4wd2lpbU92V2lTaW5wTl9IYUVHdjRsTC1vQ2ZoeGg0eHN6WEkybTV5SG1QTkZJUmlVV1hXOTk0N3F4SS1VR3FSQXQ1b1ZmbjFZblpUSQ?oc=5",
+      "category": "Fé",
+      "publishedAt": "2026-07-17T17:22:00.000Z",
+      "quality": 0.95
+    },
+    {
+      "id": "news-Ciência-US-5-1784227226000",
+      "title": "NASA Study Finds Near-Earth Asteroid Is Actually Comet",
+      "source": "NASA (.gov)",
+      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNLVpJLUZZMW8tM280MlpnVEpsTDNGbGNOQThuM0RuWEY4SW9VclNzV3dXUmFKZGF5MC1TS3FTRVVLckFUQktJNzdEX1J0TVNuS2xoczVFZ0F5aWtKOGVtdVNzTlI5OVJ4T1BZZUZzRFd5bFhHMF9XbmwtcVNqQnhyOWdLZk1XQWdoajU5WXJscXFwQUU5QkVldF9UdW8?oc=5",
+      "category": "Ciência",
+      "publishedAt": "2026-07-16T18:40:26.000Z",
+      "quality": 0.99
+    },
+    {
+      "id": "news-Mundo-BR-5-1784315996000",
+      "title": "Por que países do Golfo estão investindo bilhões na África",
+      "source": "dw.com",
+      "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxQcWw5d3A4RnRkMTZiYnZLRnNVMDQySzVtWUhzMlRhQjhGR3FyMkExRXh3dEZSVzgwck04UXFCZzdRWU1kcVcxTjlsd0piOFU4RG1qNVlpc2ZrVFYzMXp5aHRoX3pXZEM1Q2NCWVdzS0M4NzU1YlA5WWNaSjBha0FObHNKbjdkbFFBd3haZHBZNGc0ZUNJc3NVRl92ZExhNzY0Y2xZYTZLc21WaVFNeVRhbGZ3MlhmWGVCZnZYU01mb1lPTnpQZ3fSAcYBQVVfeXFMTjJhMzROYVRFTFlTdVcyS2Y2UGYwakpWYnBDSUhkbDlILW9wSU9KQ3ZTcklFZG83R3MxOFQ5ejBySlp3MDhFNGJDRzRkcWdqT0o0RVo5NVplVHFHQ1BEUnJNbTN6WkdXZzFRZ2xzaGV6NzNuRWNRYTlWcWhteW4tbWFqUWh1bG5IcF9qTjdEb1N0ZDJpblBiTXhOZlVaQXFUUks5S3lWWXZwSmcxdE90a0RQRGVlVmNld1d6WXZ0WW1tVHBUcnl3?oc=5",
+      "category": "Mundo",
+      "publishedAt": "2026-07-17T19:19:56.000Z",
+      "quality": 0.94
+    },
+    {
+      "id": "news-Mundo-US-1-1784193402000",
+      "title": "China's Xi to outline AI diplomacy vision at key Shanghai forum",
+      "source": "Reuters",
+      "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxQU1VkX0Npc2Jpc0tjRFVLQ0FlWFhZMlRrYzBWWTl2bFlzc0d3VXV6ZEVmNDY2TWRMQ2ZmVlJEeFp2WXVkY0dVYUJlWXJ5RTJhb2FlUDBESUFhZmNZbnExclllMWZUSGJDNmNwTGY1NzNEZTZBbm9YemJzU3RCUzI3eXRtcFNPSW1yUWwzVC1mVmtVVk5JenlpeURPYk45R3VUR3dQV2dqOA?oc=5",
+      "category": "Mundo",
+      "publishedAt": "2026-07-16T09:16:42.000Z",
+      "quality": 1
+    },
+    {
+      "id": "news-Criação-BR-2-1784292869000",
+      "title": "Ranking mapeia indústrias mais inovadoras e preocupadas com sua perenidade",
+      "source": "Valor Econômico",
+      "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxNeWRFWTNWOWlONmpMRWNGMnJ4UERFRlRUSFc1OGpGbUZDNVN1LUFhWWhlaXh0NjRMR3pBbzc2UTZwS0E0UXU1N0xWTTRpUVRHNFZoX2hpUnF6eFM2S3E4ZmxpRWVHUkY3bGwzMGstRGpOSkEyaFZrY2lWa2hnT2pWTE8zZ19pRlVDdHpHTzZ0Z2tKeG5yLVh4Y296aFh1aW1WX1RBR3JVTWZlMnV6WlNxOEhPODAzWktLWTM0RzhxQ25zc0gwWDlLVEtxX0vSAdsBQVVfeXFMUC12QVd5UGZLOWVzV0FQRm1OdHEyelNzUlFSRGxCRHZIWDRCWE1YZEpDak8zbklYUmc2YmwyMGE0ZnVRdmpPU1dJUU5kb1dhalMwUU5wTGZ2UEN4UTJhTUg3YTJXWVBUV1Q1ZlpLUXNKMk1nQm92RGQzS0w1NWNQMV9CQ1U4czJXM1pvMi1kNzhnQzVhY1hzS25SaHZxa0FOcno5aU9SaVNURE4tdDFaVm82ZWJyN0FhSEFLVjMxWUFUR2llZGpoT1F6MVRzMEFScXhUNno0UUs2NWRN?oc=5",
+      "category": "Criação",
+      "publishedAt": "2026-07-17T12:54:29.000Z",
+      "quality": 0.94
+    },
+    {
+      "id": "news-Criação-US-7-1784176267000",
+      "title": "Trump presses defense executives to boost weapons production",
+      "source": "Reuters",
+      "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxOcV9kVWNrQTFVVGduNXIxcWdOWDZiWGFUcVFoelNYa05IS1IycGRQX19DRFZmai1tTXRTSXRTTmJiV19uVXBHVzU4ekVFTFRVNENuRUJCMmRwcGw1anEzTjFjT3NmZWhSSFBRQ0NxY1hzc21nYXNmNHQ4RkRGOUJGWVpncFNrRWNLcENkZk9LZzEtSWd4RGFydEk3Sm9COFF1Ri1FV0VXUVJkZk9VQWhQMmNLcHV6YlJudHc?oc=5",
+      "category": "Criação",
+      "publishedAt": "2026-07-16T04:31:07.000Z",
+      "quality": 1
+    },
+    {
+      "id": "news-Política-US-7-1784243318000",
+      "title": "Rubio calls for global crackdown on far-left extremism",
+      "source": "BBC",
+      "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1QYWtKcDQ4c0RFNVJjZHA0dnp2aXdua2xSMDlNaTd2RzJzNTZkSWR2Ujk3d1dVZWNXcnVGNjhjRVR1LVZ3bVYxMldSNXI0SnlZc1pWZVd1UmNwUQ?oc=5",
+      "category": "Política",
+      "publishedAt": "2026-07-16T23:08:38.000Z",
+      "quality": 0.96
+    },
+    {
+      "id": "news-Negócios-US-4-1784217652000",
+      "title": "The man reinventing a trillion-dollar drugmaker",
+      "source": "The Economist",
+      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOdTRvMEVNSTkyUXR4N0FubTQ2TlZDSzNGendKaUwxM2xXNVpPTjhtcWZrQ19leFBGVFIzZWVnczNHZm5GdTJtQnRadV9CR3d2SFZmRXJWNldFWGVFanlRUldpMTBTNU1mYmVfcUVxaDM5Y2k1RDhjXzJoSnJfMllHdmhUNHFMR1JEdkE5a3JXQnBMSDhyNWJkcA?oc=5",
+      "category": "Negócios",
+      "publishedAt": "2026-07-16T16:00:52.000Z",
+      "quality": 0.97
+    },
+    {
+      "id": "news-Negócios-BR-0-1784231647000",
+      "title": "Qual o impacto do tarifaço de Trump no Brasil? 'Deve ser restrito' e mostra 'limites do protecionismo americano', diz economista",
+      "source": "BBC",
+      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE9iaTBpeVYtYnV6Sjk4dzJia0VkZ1loNGtTZmtIXzBTa3hnb2dBWTNHYkF1Z19OZ0Y1b2N6YzhGdzhkRldaY3BVOWp0NGtrQ2pJLWl5VnhlTFZJTXY2a3hEdHJR0gFnQVVfeXFMUGlUNURtN29JUkVuV0REakoyV2RSQ3d4LUdfOEdZbTBhVEI3NXY1YzhBUFZJTXZJWkx2a2VUOGxHRWtnRGNnb0VoS3lFeXNseG5DZ3hvYVZWSjQ4SUxJRFlDUUlZMjcxUQ?oc=5",
+      "category": "Negócios",
+      "publishedAt": "2026-07-16T19:54:07.000Z",
+      "quality": 0.96
+    },
+    {
+      "id": "news-Política-BR-3-1784228737000",
+      "title": "Marco Rubio acusa Lula de priorizar 'o próprio ego' após tarifaço de Trump contra o Brasil",
+      "source": "BBC",
+      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE9WM25HQktrSV9FbTc4OUVQN2xkQWdGbElOZVh5OHVNajROd0VsLXhyeGcwU0dWZW9qVU0tZlgwNzJCelAzWnpTaVRYamV5TGhOYWZhcGZTRWRfMUVTV3BBWUVB0gFnQVVfeXFMUHRvOEJKTzlIYnpselBZSTZ2WmNHWGd5Ulk5d3pjcWVFUERScjM2WFI3WEF4X3hDWXItVjV5a0FCcEg2T1hlRDZ0d1pqN1BDeHlOU2tFcDZ0YkEwZDlVX1dlb1RBU0FyZw?oc=5",
+      "category": "Política",
+      "publishedAt": "2026-07-16T19:05:37.000Z",
+      "quality": 0.96
+    },
+    {
+      "id": "news-Negócios-US-2-1784206429000",
+      "title": "Business",
+      "source": "The Economist",
+      "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE53d2VNX2FhMWxzai1yVlNNMXBpclR6UFRXcDRpQ05RNjNUUE1CVGV6alJ0akY4N1RnUWlpYVRVSVhEcHhmQVRxUWRxMVotdG9uQWRlMDcyYlhvZ3JKVGFEN0ZwOUVpSWZQX3Z3NGpIUVhBNEE?oc=5",
+      "category": "Negócios",
+      "publishedAt": "2026-07-16T12:53:49.000Z",
+      "quality": 0.97
+    },
+    {
+      "id": "news-Negócios-US-0-1784140342000",
+      "title": "IMF strategy chief calls for price stability, credibility in shock-prone world",
+      "source": "Reuters",
+      "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxQeE04QTI5RUxmTHNaQmRCLTNLdmhNWUxibXVHZTFJMDRQZktBSFpLMUhuTUNITTFtLVFqdzdEb0JzSHA3bVNfS0t0eXpuWmppc0diYlRqSkJ5alZWQmhwbFBheFFBM21qMjFJcWQtMkdoOHdNdjk0TnJnZXZ0MEVoTlI1a2tubmxqbWdCQU4teUFGbG5CSzhORmN5THJ6QUVzb1hvUGFZaw?oc=5",
+      "category": "Negócios",
+      "publishedAt": "2026-07-15T18:32:22.000Z",
+      "quality": 1
+    },
+    {
+      "id": "news-Política-BR-6-1784212273000",
+      "title": "Entenda o tarifaço de Trump: por que o Brasil é o país mais afetado e quais os impactos",
+      "source": "BBC",
+      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTFBweW9BaEwzcjBwelA3U05nODFFajdhUDhrV3QyeDJhSXBnZHVCaDVLb0pVNjJPVmI3YnV4NnBoRmpsUHBjWllJOUw4QjFST24xNXl1XzRJWU5qS014RDlhU25n0gFnQVVfeXFMTmRucm9NYl9YOUxSR25uZ0xkdGJOQTJiR3ZtbVpLWU9yc0lVRGZtRU5OcDc0M2RFUjVyTWo0cUlIT24yc0hmZTZQRzJCRDNmYmo5cFB6V0RlQUlkVndpZF9zOG51YVlYMA?oc=5",
+      "category": "Política",
+      "publishedAt": "2026-07-16T14:31:13.000Z",
+      "quality": 0.96
+    },
+    {
+      "id": "news-Mundo-US-3-1784174400000",
+      "title": "The Lost Art of Coercion: Why Trump’s Belligerence Is a Sign of Weakness",
+      "source": "Foreign Affairs",
+      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE5iM2wwZUhOWlY3R2RYbjdVN2QzYXhucEd4d0ZMSmhHOGxuYzFuSHNrR3F5S181dExERFdpNXUwdGpwbGs2WGd6dWF6NkV2NHZneFhEdDhWVnR5YThjRFRwNDFqNnlxT2ZRTl9PSFN0bw?oc=5",
+      "category": "Mundo",
+      "publishedAt": "2026-07-16T04:00:00.000Z",
+      "quality": 0.98
+    },
+    {
+      "id": "news-Ciência-US-0-1784210586000",
+      "title": "U.S. approval of a controversial satellite has scientists asking: Who’s really in charge of space?",
+      "source": "Scientific American",
+      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQRlpMQTROYk9ydU5iUF9zUG1zMlQ1ZUJsZzBBY3VZcXA2RHg4MmZwd0hUVmYtUVgtdFRwandUdGNHczRlWGNtVjlJMFJUZjZKQzQtaEZxNXl5cFRZT3NSYkdFYjQ3VGNpSFNvRXNESGFiTnRYRWYtZzRIakdDcHAxQ1JYUGs5WmstLVM2V0taZnNOMDJaLVRpc1NROEJvREhpeFdtb0hmMXlDY3M?oc=5",
+      "category": "Ciência",
+      "publishedAt": "2026-07-16T14:03:06.000Z",
+      "quality": 0.96
+    },
+    {
+      "id": "news-Negócios-US-6-1784127320000",
+      "title": "Bank of Canada holds rates, says the economy is growing again",
+      "source": "Reuters",
+      "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxPVjJlNmNvNXVVby1JTFRHZ3RLLVU0bWJfRUJ2TUxfZGUzSkhsemphWThOMXJVcVM4NEE3SWdxNFE3NVlWMER6YjRZVzV0cW9IUUJlelE2a2R4eWk0ZHVyaXc1SmJFWW10QWZxQkJaOUhxcTRUOXlfVjNCcXF5aERkOGhTSU9VNzZOTzNIeW5pZk5CMm9kMFVOUmg2aTZ3WE5qVlFCVERiRHZ6NDdXeWFlX0c4TnlYeUZuVlNmM1EzZmdiMnVWV0R6WEpn?oc=5",
+      "category": "Negócios",
+      "publishedAt": "2026-07-15T14:55:20.000Z",
+      "quality": 1
+    },
+    {
+      "id": "news-Ciência-US-6-1784143733000",
+      "title": "NASA Study of Pristine Meteorite Adds to Story of Ancient Asteroids",
+      "source": "NASA Science (.gov)",
+      "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxOWXpJZ2szS2VuRHdPNjNmOF9WVmNXY1EySWZtOFFvdnRzUER5OFFvVHd1dDZrd3FKdW45UG9lOGRYdDkzcW9WV0FuR203VVhmeTJKXzYzMlFiUkdEV2VYdlJsTHQ3YWRmeXJjcFdhUGJBQUZiLUk1QUY2cjhrS2hiTldhZWNiN0gzNjM5eEJUR3dVVllkajNTRUc2Ri1Hd3hqUHZlMkRiRXFLcVNDSmxvZFlUcTlzUjNQT2QyZUFtcVl5QWs?oc=5",
+      "category": "Ciência",
+      "publishedAt": "2026-07-15T19:28:53.000Z",
+      "quality": 0.99
+    },
+    {
+      "id": "news-Política-BR-1-1784302725000",
+      "title": "Brasil troca pragmatismo externo por retórica política. E colhe os resultados",
       "source": "Estadão",
-      "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPbzFEdmgyQVBuV25tQ254NXdBOVBjQ1B5NEQ4UmpNNkxGQVItQVVqVDNEMVRTN2QtZUdDS3dicC1EUUp2clpVbVZrZE9OOFU0enl4ejZHMm8xa0U3cG5tS2FZRnhCQ3M0ZEZNd2dyV0JYM0Utc3hYbVNFd3J3RzFpbVlpUWRiZWhVUmNXZWU2YzJJb19BUkV4d3RjZ3JFVm1GNEhKb3FmeW9JSDd5LUNJc0swNUttTGNrOG5UX3NLZlpVWknSAcgBQVVfeXFMTmE2SGtJNzhTRFlXazI4dFNFeFlIU3FKM29RSHRObVhTSmp4OHVxbDZvdkRLWVMtb3dZTnAzR2s0WHJUSFZKaUJZdkZBXzFOQVFjOF9ocDB5ZHhJMzd0dURyN1NvT0Y4dVhCc1JFdVJ5azRKNFcwamJFMnpxZG5IekxTc2I1elZHWk55aFhEMHpsQ3UwOGNuczlWYlJReF9pMDdKVmVveFFYLUxJWl9JWlBJSm9sZFRMY2JpbWNpVkV2SmZ2UDJVWnM?oc=5",
-      "category": "Negócios",
-      "publishedAt": "2026-07-14T14:29:44.000Z"
+      "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxNME9od1NjTUtKRVpUem1qLWRGUlcwLWtxN2tGeFA4ZlVSOW13RVoxOW1PMXRLQ1J4dnpnLVJxYkltNXVlQnYwQWNmSURxVXdzbVhrRUZPdE5rdU1MM2RBOUlHdE1wWVhSbmdURE4zclVhVEFsTWhxZW03UjNOSlhWdDl4ZG9nRW5nUVRoRUdjWWx0dkRuNGpsT3VFWXJGSE5aSG02NmpSRVI4NS1rOUR0U3k0N19abTUyS2JlcjRwZzNyNlNWQ1NORjRn0gHPAUFVX3lxTE82bDlOZF9mS041YV9OOVdWZ2RHQzZFVU5LaWt4bWpHd2duOEt5Zk82R0xmZi1kcGFPTnR6RElVcEhwcWtKLUI3ZU9nQzhKOEtNZnRiNFBEU0NoVl9zcmN4NExZd1ZGNmZtc0hmU191eEhCc1NlQmFqWUMyRFVwVXhtLVJ1bHBkTkZuZzF1Qlo2ekZZbzVPckdZLWViNnBodm01eVJWaGF3UWRJZ1Z5a3hlbjFtTm9Qa0ZCbkJrSDNYOXR5el9taXNaV2xkLU02bw?oc=5",
+      "category": "Política",
+      "publishedAt": "2026-07-17T15:38:45.000Z",
+      "quality": 0.9
     },
     {
-      "id": "news-Fé-3-1784034960000",
-      "title": "Padre do DF desafia o papa por tê-lo excomungado",
-      "source": "Jornal do Brasil",
-      "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxOOXB1Mmk4ZkFYZS1RdWxBT29kajJFSkZ3YzFiWi1VNkpPdXIzZTlZalFwVTBzNld1LUZEUDBpbHhQZ2dqNVVVamtFVTF6UkloUTdaeDZGSHlORHlJNDM2c3pDX1NFNkpEaWFIaFhGaWUtdEVQZXNuUmh2dzRHaEt2SE5aSGNDRkRMTFlreG04VVlSWTYzcEM2MzdqaWFpYXhlcW1TcUdaRkJnZnc4TnhpUFRMb3lDV2lRNURIdjNzbWwxQXBE?oc=5",
+      "id": "news-Ciência-US-1-1784116800000",
+      "title": "NASA’s Webb Discovers Hidden Planet in Famous Star System",
+      "source": "NASA Science (.gov)",
+      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxONHU5NjdhN3J4Q085S0Rxdy1pQXRlT2J0R3N1S1BUX3h5SkNoWmpZOVdHMmstOEM1dkRWRFkzWFd3ZXhKMlBpSHNJLWxHNnRmRk9ucGVSYjBrS1VNc3ZhVnBqWFdzcFAyR0l3bzVfV0ZnMEZHczFYNm5KVjM4clFwUWJGRThiNVBDRi1FdE9CWlFxQjRrOXZVakx1NEc?oc=5",
+      "category": "Ciência",
+      "publishedAt": "2026-07-15T12:00:00.000Z",
+      "quality": 0.99
+    },
+    {
+      "id": "news-Negócios-BR-2-1784163806000",
+      "title": "Tarifaço de Trump: EUA confirmam tarifa de 25%; governo brasileiro promete reciprocidade",
+      "source": "BBC",
+      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE1RX3d0VHFvazYzcE0wdEZ3ZkROR2VsaVVYb2RyNDFqaThkbWMtYWdBZE9HaHZfR1llQ2xYN0xRemFWdG9QcmNlREtveDEweUtnV1k2dTdMeE0zaXdHNFh4cnNn0gFnQVVfeXFMTVREX3VuMUNLUC1sZ3paU29aMGl6dUN4RnNhZ0JsTDRhb2FvNl93RmtYQkhPbm5vVnh3UklGZWFqS3RaWDA1X2s5dk5xOFo0SVN6OTJMbkhqNEhrY2hPSnlSSm5XeDBFcw?oc=5",
+      "category": "Negócios",
+      "publishedAt": "2026-07-16T01:03:26.000Z",
+      "quality": 0.96
+    },
+    {
+      "id": "news-Criação-BR-3-1784188948000",
+      "title": "Infraestrutura financeira precisa de governança",
+      "source": "Valor Econômico",
+      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOOXA2aUlMX015eno2UGFoSU5DbnhiNTdTQ0FSTC0tdUpmWVhRc192NUxPWWFaTXRCWEc2SF9hZE1NeVlOelVvMFM3X2laOHhjS3pUblp4TG9DUXNLVXpicTY2ME11Yi1tOWJ2UGFxRW5Ma0p5ZjZ4RHBfT25ZajBXNW8tcHZaejBiWUFEbTltRWlwTmcxMnRqWNIBpwFBVV95cUxNU25UenRIbXpRSDZJNUVhNG40Z2FlOEp5enFRRVByUEZ3TFBWVWxqdk85OWlHQ0JkUGw2WlpjYnJIZmFBUlNoRVNqYWR4eVNKNi12MWI5R25OczA5RWsxY1FYN0I1anhValltUFF4RHpzQnVhTXFpcXBYOXdKQXEtbGJtTzN5ZTY0cndVUU5CM2t6OFl6WFFEZXQ4S2otZHNnTGpTQ09QTQ?oc=5",
+      "category": "Criação",
+      "publishedAt": "2026-07-16T08:02:28.000Z",
+      "quality": 0.94
+    },
+    {
+      "id": "news-Criação-US-3-1784063290000",
+      "title": "US to launch AI and cybersecurity coordination group, White House says",
+      "source": "Reuters",
+      "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxOQUFKbVhBLXhGV0ZHQ1NFZWNkTTh4WkVjYV9CSXAyZ3lVaGdic0VBQ3E0Y1U5emdzMWVPLVg2Y1hIajNpMy1DeXhDR3JWZDBWdlNsWTdiWGVIX3RGRE4yRDhXMjZJMDBRY3BzLW5rMVhoN3JhcnVxVEJBaWNzT1VNNkI2bnE4VDBja1BrNHZqaGkxUWE2ZzdvTExNTFNjdXJLMFdIYkZMNm5GLWFIUnc?oc=5",
+      "category": "Criação",
+      "publishedAt": "2026-07-14T21:08:10.000Z",
+      "quality": 1
+    },
+    {
+      "id": "news-Política-BR-4-1784233200000",
+      "title": "O impacto do novo tarifaço na campanha de Flávio e o peso de Trump na eleição brasileira",
+      "source": "Estadão",
+      "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxQNWtmczBGQjFaWldkTF8tY0RiNDdTdUNaVTh3cXhnaTdaeHhNdmV2bXlQazRReFVnX01rNWd0MUU4Q3pyN1dmcXBwSzlpb3U3VHR1UV9FV2k1bVFpNDBtUFJ0RGVlSmVhTE5FYldZMzRjdUU4VVpwMG5SQTNvQUhWVEJkWXBvUGIzX1JFdVpPWkoxSjB2QTdiLWdJVGVFZ05teEUzLUtBU1V6R2ZnSFhFZXBtT3Zoc3Z4TnhnUlhXUXRpRlI5Q0x5MmN5M0JHUjFFclRjcEo2UFnSAd4BQVVfeXFMUHFYSWR4clNWOGU0Q19fcWFlTkk1d0VfZWpsaGNrSTIyWjFINkZNbDJyN0FOa0dLdjNCUG1VSVBDU2NlTWY5X2JyclhuTGpqR3BMMlB4N2NzWnZTRjA2d1kzbEYtZEZNa3lvSEVsZGlSOS1SYVZvUkpLdmxBNkRwYVhzSGY2TUxTOTVUeXpSS2lRbzhoVm80SWpwb0FDb1V0a0NET0ZMZlJwTG56U0FKQ0JaZkxnN29nWkRzeDhlRmpWeGJieXoxd2xweTFjVklMQjlBQlFvM1JKdWdZbG9B?oc=5",
+      "category": "Política",
+      "publishedAt": "2026-07-16T20:20:00.000Z",
+      "quality": 0.9
+    },
+    {
+      "id": "news-Mundo-US-0-1784088000000",
+      "title": "The World Is Giving Up on America",
+      "source": "Foreign Affairs",
+      "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE96bXQzWnFCNUVmcWozLUhNRlF3VW5YZFJrc3UwWjF2b0YwMjAtQ25hSUhUYWVJYmMyWmxOX3JjTkEzcFBBMGtjUzRUY0VaU1dkR0NPanFNVU5iVHpXaGxqOGdZWlg0NUpxU0tWMl92eTRlSms?oc=5",
+      "category": "Mundo",
+      "publishedAt": "2026-07-15T04:00:00.000Z",
+      "quality": 0.98
+    },
+    {
+      "id": "news-Mundo-US-4-1784088000000",
+      "title": "China Is Sabotaging the World That Enables Its Rise",
+      "source": "Foreign Affairs",
+      "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxOdFVYS1E5X2Zxc3hIUHl6aFpBV1FqUUYtUjhxSkc5V3ZCMElsMVg4U21uNnBkTVFGbzROZ0piZERLLWlBamVpQURNUTZpd2xyV3ZOUkxacTJMcUxVQUV5WVhlOXNrbGFCU0xSeFl4Z0FWTjNoMi0zaDl1a3FZd0tUc2pB?oc=5",
+      "category": "Mundo",
+      "publishedAt": "2026-07-15T04:00:00.000Z",
+      "quality": 0.98
+    },
+    {
+      "id": "news-Política-US-0-1784118081000",
+      "title": "Venezuela government to launch formal talks with opposition members",
+      "source": "BBC",
+      "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBaUHg4RFhDYWpOVmlxQzhPQnlzWE14Q2llWFZBMmNCeXpDMURsUDBET1JSTlJGbnhacWFaSFBVQklfZG1WZmtMcGtIaFJ0NXotYzdERzZYZjdJZw?oc=5",
+      "category": "Política",
+      "publishedAt": "2026-07-15T12:21:21.000Z",
+      "quality": 0.96
+    },
+    {
+      "id": "news-Mundo-BR-3-1784128547000",
+      "title": "Guiné-Bissau congela relações com Governo de Cabo Verde",
+      "source": "dw.com",
+      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxORHVaY1ZDREFiRHJuU0NsYVBvdVRhVFZ0S0Z4aTA5aXhnZjFjWmNZVENwd0Q3d0Q4U2xfZTNhRWpxWWtUSDBkV1FZWHJDUVZVUk1zb1pvcEFiNHY4RngtRzZtYjdkR21qSGozLWduV1NKLVl6NjFXWm0tQnFKenpuZ0huOWlDVU9VenQ0d1h1Q1loQ3dWdkk0M0dmb2JWZW5ZV3QxY1QzT1p6ZW_SAasBQVVfeXFMTnNrSVVIejJuNnZWOUtGRzRFUXNOck94UENSeWhwY3c5N29scHlUdFc5ZS1SQ1JKN2tXS0c1RW43UHZpMk9oTGF5TWxkRVpLOExHSWRCdjlvT09xQlYwaUdwQWZIZ2tkdWJjczFvRmZxZkprWXBhTHBrbGJGQ3VibTlZM1hxVDNtcmZ5bS1VdHlja1BYZzZxVDlEcnh1d3hhemdabzJsLUhzN3o0?oc=5",
+      "category": "Mundo",
+      "publishedAt": "2026-07-15T15:15:47.000Z",
+      "quality": 0.94
+    },
+    {
+      "id": "news-Fé-BR-0-1513440981000",
+      "title": "Evangelho e palavra do dia - o pensamento do dia",
+      "source": "Vatican News",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBXcGVpamN4bHVGZFBrWmhxMUc4S3VWczFxR0gtSlAybUhKRU9XakxZa1NtQjJaWWh2R1hxcHpVTlBwUjNQUXlrZmYwQzVSLUdZeDFXZDhmbnY4RDJHV2c?oc=5",
       "category": "Fé",
-      "publishedAt": "2026-07-14T13:16:00.000Z"
+      "publishedAt": "2017-12-16T16:16:21.000Z",
+      "quality": 0.98
+    },
+    {
+      "id": "news-Fé-US-5-1513440746000",
+      "title": "Gospel and Thought for the Day",
+      "source": "Vatican News",
+      "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFA3Y01BSnl1ZWJRXzU2aHNoMVVzc3dJV3lxSHVrc08xc0lKd2JnMFFSZ3dYSElwQV9Vb1FfWG41LXNsWko2T2twQUNpYnRlVWYxWG92cVZhbEswdGxUTUVr?oc=5",
+      "category": "Fé",
+      "publishedAt": "2017-12-16T16:12:26.000Z",
+      "quality": 0.98
+    },
+    {
+      "id": "news-Negócios-BR-1-1784102546000",
+      "title": "Aposta alta nas empresas de IA traz risco para economia mundial",
+      "source": "Valor Econômico",
+      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQU3NaRjY0U3ZNX3pHdldWRjlDRGtqUTVDT0pDNVpnbGdkVTRXc0dZUEd2R1Y5RUpJSlR0MkpYTzZfWVFYTHFkRzk0aVZCZ1N6VS1RMmZqMklUd2NxNW1XaHVhYTZ2TzE2d3dDTWZwOHZ2dEF0R3l4NFNscktWTFlldkVrOGhIRWNTZmtNd0w0WE0tUWZ5ZFlrc3h2OEtiYTd6ekI2OUpiMUloaE5n0gG7AUFVX3lxTE1UZXdIWVZrdUtranhtWnpIblFhRnpLTE8zWVkzeUFKRkxneGliM1JLdGxJZ3BsSjFBcmF1cG9pd2k0UHlsNUl6UEJrS05xaWxBc25Jd3FaTGUxRVJxSWtRWi05MVdIbXVSOV9wTXl1aUY2eUkzZjRLQm5IZ0NhTFJ1bnFCSVJZUXhWaDBnXy1NZXl6V245US1HYnNWM08xdGNnUDVaZkZFYVlEbkZQODQ0NElhRE9NcjNqUXM?oc=5",
+      "category": "Negócios",
+      "publishedAt": "2026-07-15T08:02:26.000Z",
+      "quality": 0.94
+    },
+    {
+      "id": "news-Negócios-BR-6-1784102504000",
+      "title": "O que as gigantes da tecnologia ensinam sobre competição",
+      "source": "Valor Econômico",
+      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPenBYTUNfOF83OWFsQjl0aDNKc0hEaDJLcmpEZGhtNHJhaUNHT3RTOVI1R0RvLVBDdUtzQWpNRG1GMDFjQ1RUSDBZMC1JOUd6dVNTS0RoNFNJZVVkQS1nLUJPQ2FuaHJ5UVFIelo4ZFJSZnZyLUNlQ1M4cF80M1VSQjZibFI1LVl5WmVKSlZJTjlDYmtQMjg1R3Y5bzJmSzBxcUNDRNIBswFBVV95cUxPZ1BKZWFiWHgwSktjUWItYU5wU3huYUo0T3o3UjBjOGZnMVc0azN0Q2s5c20wemEwTGtTbDV5N2h4NlVRR3ktN2VobE0zVFNVR0tPc0tfcnQyWTRLaHl5U2ZkU2hFV3BZREV5eDZibWlHN2tPWkRvd3Y3SUp5N0hqUTN0d1ZFUG83UVVPdEZaZnJfUjBrSDdxeXFyU1pqd1Mwcl9XZmotb2pXYm9fZFZ2UVI4cw?oc=5",
+      "category": "Negócios",
+      "publishedAt": "2026-07-15T08:01:44.000Z",
+      "quality": 0.94
+    },
+    {
+      "id": "news-Criação-BR-4-1784102418000",
+      "title": "Tecnologia",
+      "source": "Valor Econômico",
+      "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE9ERFp5STVLa2dHdm5zMXdNM1Y5ZTJCOUhPOFF2QUpyLVVVamlvc184bUxmZ1JIMEFNT3hRRkxzaEVMWnFzanNFRVdyTkFJTTRFbl9ySUxTNWJ3bG1scEVXak11UzJIeW9ObWl6am9TYUZSSVdnaXM00gGGAUFVX3lxTFBDQ3dXdGlta0RtZjJlMEdfa0pOdjRvekI2TldyMmdra3ZEbWhRQUExWWdKczhydFVOVmR6dzhMS2kzbmM3VUM3Yms5UVFmS2pEZTlZUnlOVlhwY0FrVFJJZkd2bk1iTEd0NnExOWFBS2l6Um9VRVBsZzVldFgwMlhFYmF4LU9B?oc=5",
+      "category": "Criação",
+      "publishedAt": "2026-07-15T08:00:18.000Z",
+      "quality": 0.94
+    },
+    {
+      "id": "news-Negócios-BR-5-1784046504000",
+      "title": "Brasil pode se tornar 2º país do mundo mais tarifado pelos EUA se Trump confirmar novo tarifaço",
+      "source": "BBC",
+      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE4xSUpYUWF1TGVWNnlzY3g2M3NFYzJkb0ljM1JPTndTd0pCeEdIaDhrTlpZTjRMT1lZNVFVbndmOW41aDZDbVpiblpFVmFjT0prcjVyVF9sNy04X0xMUThjUzNn0gFnQVVfeXFMT3VTNV9mTWNrQ3Rwc041VjZtSHlwd3Z5clRVREtyYmZlM3ZXVnBOeW1iYWRScE9RVjNmTTlLWHdsT19mVFpvcUxWZHRiZGd5RVVtZTM0SFYxNzB3dzUzWEZpWml2aXc5Yw?oc=5",
+      "category": "Negócios",
+      "publishedAt": "2026-07-14T16:28:24.000Z",
+      "quality": 0.96
+    },
+    {
+      "id": "news-Política-BR-5-1596535644000",
+      "title": "Internacional",
+      "source": "BBC",
+      "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5yNEU5Q2k1VUhnQ2JfZnVFWV9XWGc5a1llaElBRkdiU1lTWDR0U055cXFScUNtV0VvcUwzLTh5aDVPZ2k3NnN5clhDZ0JxRHdjUnc1OUwyYTV6ZzEzbE9j?oc=5",
+      "category": "Política",
+      "publishedAt": "2020-08-04T10:07:24.000Z",
+      "quality": 0.96
+    },
+    {
+      "id": "news-Política-BR-0-1784138400000",
+      "title": "A ilusão do ‘serviço gratuito’ e a revolução silenciosa da opinião pública no Brasil",
+      "source": "Estadão",
+      "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxPR2R6WjVaNTVoUWdoSGpGemVwbGkxM0JOTTN3bjhKU290b1FpZjlTZFFNRHhocTYxejFPclRIUDM5VU1ZNnNHNnUwQ2tHSjViSWtVWFZmYWQtdnVNSVFhLVhHbWhrWVJqbmhKeUZzRDZpOXQ3Vm5vSVM5b2w5UllsdmtkRUktcllNUkFDSXJGOFNNcy1wMS1UZTR6MUpRMXd4T2pMTW00aXkzNnZXd3E5NWNfSGJCbWJCWWVkbkRIRGpxU1pjMkhET0cyd3poZEt2czlKclM4UzbSAd4BQVVfeXFMTVVEd21PWlBBVUY4LWd5M1NJUVRXaW1IQzc5b0lCMlJlSTlQVl9MQlc4MUw2NElqRE53YVQ5b2JOaGM5ZVViN2daOFUyRlJuRTZUWGlkN0hJSHpwakR0cV9pS2Iwb1ZaRlB4Q3VoSEZaRGN4QWU3S3FoblE5T0hMMU9yS1FDVWdqREFpNVJBOWozM1NDSWFvemMzNjJpZEV2M3phUjVKOFJ2WWpta2ZBQXh2RHBoZ2JQa1dKdVFGajVPeHpaTV9ueHdfLTVMRUNiclhDUFo2aWl2TEVHcnVB?oc=5",
+      "category": "Política",
+      "publishedAt": "2026-07-15T18:00:00.000Z",
+      "quality": 0.9
+    },
+    {
+      "id": "news-Mundo-BR-6-1772776529000",
+      "title": "6 de Março de 2026 - Jornal da Manhã",
+      "source": "dw.com",
+      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNSG9GbEdVUnk0c3ZRYTNoNDQ5Yk1LWVljSFNLU2Z0WWVfMjZYM3pSWXJWSW5yUFlLbUlzS3ZSRWJkYk5GeV9zMU9pRVcwSE1iOFJCYjk5XzdQMzltMnBudlQ0eEpKR1F5SXhYRHFNQ0U3eHEyTjlrazByb3hqS0pPaE5jRi1pR0xNQ2tsRE53?oc=5",
+      "category": "Mundo",
+      "publishedAt": "2026-03-06T05:55:29.000Z",
+      "quality": 0.94
+    },
+    {
+      "id": "news-Mundo-BR-7-1619427767000",
+      "title": "Os cartoons de Sérgio Piçarra",
+      "source": "dw.com",
+      "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxNRF9GT2Jmd0hXZmw1MG5iWWdrWE5raEJfNHJVWnZHc3RrTnlnSU5vQk51c2ZUa1U2VTRENEpVSlRmSG1hR0VfSEJTVHBKa05RMkdCUklobkZGelhZZ2NJMlJlNXJrcEJTQ2lXR1VHMENfU1FkNTNBNXBPUkZvb2hKR2ZR?oc=5",
+      "category": "Mundo",
+      "publishedAt": "2021-04-26T09:02:47.000Z",
+      "quality": 0.94
+    },
+    {
+      "id": "news-Ciência-US-7-1784225975000",
+      "title": "Helium escaping from the atmosphere of a nearby rocky exoplanet orbiting in a habitable zone",
+      "source": "Science | AAAS",
+      "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE5mNVd4RC1yUmRwbGZ1bENUTWI4OHN5eWxlZFVzVm5Tc250bHcxRnhsU1hzcWZxOVBydWtNb2l6bHBSNkl5T3hwMnZsUVBXOGpWYkpWc0QwWlVqSjBQYXdDVw?oc=5",
+      "category": "Ciência",
+      "publishedAt": "2026-07-16T18:19:35.000Z",
+      "quality": 0.62
+    },
+    {
+      "id": "news-Ciência-US-2-1784224800000",
+      "title": "Astronomers spot first atmosphere around a potentially habitable alien world",
+      "source": "Science | AAAS",
+      "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxOdEw2Z0NPSTc2ZDJZQmpmcUFfTWhyOEdzSmNZNXVxdUZvc2Rjc2NoT1FiM0hQcDBpb19TZVo3bWJ6WGxPdFo2TE5qRG9yNl9XYTNGMnFPLWMwM1JjbTI1d21sQlRabFI5bjhBVnplNU01OVFhUXlrTW5Wa2N5dzV2LVU4MnBqZWRKVVgtcVhVQ0ZBQ1RlazJtNWtuNG0wNUhQdzFuQnVEdjRlRUpCV2tnb1FvUGc?oc=5",
+      "category": "Ciência",
+      "publishedAt": "2026-07-16T18:00:00.000Z",
+      "quality": 0.62
     }
   ]
 }

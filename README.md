@@ -12,7 +12,7 @@ No primeiro acesso, cada pessoa escolhe interesses, complexidade e profundidade.
 
 ## Pesquisa e notícias
 
-A pesquisa local continua instantânea. O botão **⌕+** consulta a função autenticada `search-youtube` no Supabase, que mantém a chave fora do navegador. Antes de chegar ao ranking, os resultados passam por relação real com o assunto, ausência de iscas de atenção, duração, densidade educativa e diversidade de canais. Cada usuário tem um limite diário e a função também protege a cota global da API.
+A pesquisa local continua instantânea. O botão **⌕+** consulta a função autenticada `search-youtube` no Supabase e procura o mesmo assunto em três frentes: YouTube, notícias em português e inglês e podcasts ativos do Apple Podcasts. Vídeos passam por relação real com o assunto, ausência de iscas de atenção, duração, densidade educativa e diversidade de canais; notícias exigem fonte confiável, atualidade e cobertura suficiente do tema; podcasts exigem relevância, atividade recente, catálogo consistente e profundidade. Cada usuário tem um limite diário e a função também protege a cota global da API do YouTube.
 
 Para ativar a descoberta autônoma no site público:
 
@@ -26,12 +26,12 @@ Para ativar a pesquisa em tempo real sem expor a chave:
 
 1. Execute novamente `supabase/schema.sql` para criar o controle privado de uso.
 2. No Supabase, abra **Edge Functions → Deploy a new function → Via Editor**.
-3. Crie a função `search-youtube` com o conteúdo de `supabase/functions/search-youtube/index.ts` e mantenha a verificação de JWT ativada.
+3. Crie ou republice a função `search-youtube` com o conteúdo de `supabase/functions/search-youtube/index.ts` e mantenha a verificação de JWT ativada. Alterações nesse arquivo precisam ser implantadas novamente no Supabase; o deploy do GitHub Pages atualiza apenas o site estático.
 4. Em **Edge Functions → Secrets**, crie `YOUTUBE_API_KEY` com a mesma chave usada no GitHub.
 
 O segredo do GitHub atende às atualizações programadas; o segredo do Supabase atende às pesquisas feitas no site. A chave nunca deve ser adicionada ao código ou a uma variável `NEXT_PUBLIC_*`.
 
-O radar de notícias usa RSS, separa notícias de hoje e dos últimos sete dias e é atualizado no mesmo ciclo. Política, economia, mundo, ciência, tecnologia/criação e fé têm consultas próprias; as notícias sempre abrem na fonte para leitura e verificação.
+O radar de notícias usa RSS, separa notícias de hoje e dos últimos sete dias e é atualizado no mesmo ciclo. Política, economia, mundo, ciência, tecnologia/criação e fé têm consultas próprias; as notícias sempre abrem na fonte para leitura e verificação. Notícias e podcasts aparecem em carrosséis de até três páginas, com navegação por setas, indicadores e gesto lateral em telas de toque.
 
 ## Usuários, administrador e trial
 
