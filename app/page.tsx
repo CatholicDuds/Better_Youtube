@@ -188,6 +188,12 @@ function relativeDate(publishedAt: string) {
   return `há ${years} ${years === 1 ? "ano" : "anos"}`;
 }
 
+function updateTimestamp(value: string) {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "horário indisponível";
+  return `${date.toLocaleDateString("pt-BR")} • ${date.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}`;
+}
+
 function thumbnail(video: Video) {
   const id = video.thumbnailId || (video.embedType !== "playlist" ? video.youtubeId : "");
   return id ? `https://i.ytimg.com/vi/${id}/hqdefault.jpg` : "";
@@ -755,7 +761,7 @@ export default function Home() {
         <section className="feed-heading">
           <div><p className="eyebrow">SELEÇÃO EXPLICÁVEL</p><h1>{category === "Todos" ? "Vídeos que valem seu tempo" : category}</h1><p>O algoritmo roda no seu dispositivo e prioriza profundidade, diversidade e valor formativo.</p></div>
           <div className="heading-actions">
-            {updatedAt && <span className="live-badge"><i /> atualizado {new Date(updatedAt).toLocaleString("pt-BR", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}</span>}
+            {updatedAt && <span className="live-badge" title="Data e horário local da última atualização"><i /> atualizado {updateTimestamp(updatedAt)}</span>}
             <button className={refreshing ? "refresh-button loading" : "refresh-button"} onClick={refreshRecommendations} disabled={refreshing}><span>↻</span>{refreshing ? "Atualizando" : "Recarregar"}</button>
             <button className="tune-button" onClick={() => setShowControls(!showControls)}>⚙ Ajustar algoritmo</button>
           </div>
@@ -775,7 +781,7 @@ export default function Home() {
           <section className="news-section compact-news" id="noticias">
             <div className="section-heading news-heading"><div><p className="eyebrow">{contentSearchActive ? "PESQUISA COM CONTEXTO" : "RADAR DO DIA"}</p><h2>{contentSearchActive ? `Notícias sobre “${completedSearch}”` : "Notícias com contexto"}</h2></div><div className="news-controls"><div className="period-control"><button className={newsPeriod === "today" ? "active" : ""} onClick={() => setNewsPeriod("today")}>Hoje</button><button className={newsPeriod === "week" ? "active" : ""} onClick={() => setNewsPeriod("week")}>Semana</button></div><label>Fonte<select value={newsSpectrum} onChange={(event) => setNewsSpectrum(event.target.value as "Todos" | PoliticalSpectrum)}><option>Todos</option><option>Esquerda</option><option>Centro</option><option>Direita</option></select></label></div></div>
             {visibleNews.length ? <ContentCarousel key={`${newsPeriod}-${newsSpectrum}-${category}-${completedSearch}`} label="Notícias com contexto" pageClassName="news-grid" pages={newsPages.map((page, pageIndex) => page.map((item, index) => <article className="news-card" key={item.id}><div><span>{item.category}</span><time>{relativeDate(item.publishedAt)}</time></div><span className="news-number">{String(pageIndex * 4 + index + 1).padStart(2, "0")}</span><h3>{item.title}</h3><p>{item.source}<span className={`spectrum-badge spectrum-${(item.spectrum || "Centro").toLowerCase()}`} title="Orientação editorial aproximada da fonte; não da matéria individual">{item.spectrum || "Centro"}</span></p><a href={item.url} target="_blank" rel="noreferrer">Ler notícia ↗</a></article>))} /> : <div className="news-empty"><strong>Nenhuma notícia passou pelo filtro.</strong><p>{newsPeriod === "today" ? "Veja a seleção da semana ou outro espectro." : "Nenhuma fonte confiável publicou algo relevante para esta combinação."}</p></div>}
-            <div className="news-meta">{(contentSearchActive || newsUpdatedAt) && <small className="news-update">{contentSearchActive ? "Pesquisa filtrada agora" : `Atualizado ${new Date(newsUpdatedAt!).toLocaleString("pt-BR", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}`}</small>}<small>Espectro = orientação aproximada da fonte, não da matéria.</small></div>
+            <div className="news-meta">{(contentSearchActive || newsUpdatedAt) && <small className="news-update">{contentSearchActive ? "Pesquisa filtrada agora" : `Atualizado ${updateTimestamp(newsUpdatedAt!)}`}</small>}<small>Espectro = orientação aproximada da fonte, não da matéria.</small></div>
           </section>
 
           {(visiblePodcasts.length > 0 || contentSearchActive) && <section className="podcast-section compact-podcasts" aria-labelledby="podcasts-title">
