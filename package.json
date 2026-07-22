@@ -8,8 +8,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "build:pages": "next build",
-    "audit:content": "node scripts/audit-content.mjs",
+    "build:desktop": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\build-codex-launcher.ps1",
     "start": "next dev",
     "test": "next build",
     "lint": "eslint . --ignore-pattern out --ignore-pattern .next"

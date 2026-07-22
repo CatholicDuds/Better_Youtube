@@ -1,5 +1,31 @@
 {
-  "updatedAt": null,
-  "source": "YouTube Data API",
-  "videos": []
+  "updatedAt": "2026-07-22T20:15:00.000Z",
+  "source": "Curadoria editorial manual",
+  "strategy": "Descoberta fora dos canais configurados, com transcrição e análise semântica concluídas",
+  "rotatingTopics": [
+    "instituições",
+    "poder político"
+  ],
+  "videos": [
+    {
+      "id": "discover-rStL7niR7gs",
+      "youtubeId": "rStL7niR7gs",
+      "thumbnailId": "rStL7niR7gs",
+      "embedType": "video",
+      "publishedAt": "2016-10-24T00:00:00.000Z",
+      "category": "Política",
+      "title": "The Rules for Rulers",
+      "channel": "CGP Grey",
+      "topic": "instituições e poder político",
+      "url": "https://www.youtube.com/watch?v=rStL7niR7gs",
+      "durationSeconds": 1086,
+      "depth": 0.9,
+      "novelty": 0.72,
+      "quality": 0.93,
+      "evergreen": 0.96,
+      "publishedLabel": "clássico de 2016",
+      "palette": "ink",
+      "mark": "DESCOBERTA"
+    }
+  ]
 }

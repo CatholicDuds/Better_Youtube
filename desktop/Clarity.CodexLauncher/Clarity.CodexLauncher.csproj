@@ -5,13 +5,17 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <AssemblyName>ClarityCurator</AssemblyName>
+    <AssemblyName>Clarity</AssemblyName>
     <RootNamespace>Clarity.CodexLauncher</RootNamespace>
+    <ApplicationIcon>Assets\clarity.ico</ApplicationIcon>
     <PublishSingleFile>true</PublishSingleFile>
+    <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
     <SelfContained>true</SelfContained>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
   </PropertyGroup>
   <ItemGroup>
     <EmbeddedResource Include="..\..\prompts\curate-feed-with-codex.md" Link="curate-feed-with-codex.md" />
+    <Content Include="..\..\out\**\*" Link="wwwroot\%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.4078.44" />
   </ItemGroup>
 </Project>

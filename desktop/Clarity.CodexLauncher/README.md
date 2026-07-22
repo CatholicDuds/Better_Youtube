@@ -1,6 +1,6 @@
-# Clarity Curator para Windows
+# Clarity para Windows
 
-Este lançador não analisa nem envia nada automaticamente. Ele:
+Este aplicativo contém a interface gráfica completa do Clarity e lê os arquivos JSON diretamente de `public/data`. Ele também:
 
 1. incorpora o prompt editorial de `prompts/curate-feed-with-codex.md`;
 2. localiza o repositório atual;
@@ -8,8 +8,6 @@ Este lançador não analisa nem envia nada automaticamente. Ele:
 4. abre o aplicativo ChatGPT/Codex;
 5. tenta abrir uma tarefa nova e colar o texto;
 6. nunca pressiona Enter.
-
-Na primeira execução ele também registra, somente para o usuário atual do Windows, o protocolo usado pelo botão **Curar no Codex**. Não são necessários privilégios de administrador.
 
 Se a automação de foco do Windows falhar, o prompt permanece no clipboard e pode ser colado com `Ctrl+V`.
 
@@ -19,10 +17,4 @@ Se a automação de foco do Windows falhar, o prompt permanece no clipboard e po
 .\scripts\build-codex-launcher.ps1
 ```
 
-O executável será criado em `dist/ClarityCurator.exe`.
-
-Para registrar o protocolo local usado pelo botão web:
-
-```powershell
-.\dist\ClarityCurator.exe --register
-```
+O executável gráfico será criado em `dist/Clarity.exe`. Ele é local e não depende do GitHub Pages.

@@ -1,7 +1,692 @@
 {
-  "updatedAt": null,
-  "provider": "groq",
-  "model": "openai/gpt-oss-20b",
+  "updatedAt": "2026-07-22T20:15:00.000Z",
+  "provider": "codex-manual",
+  "model": "editorial-review",
   "promptVersion": 2,
-  "audits": {}
+  "rateLimited": false,
+  "audits": {
+    "video:l6DKRf-fAAM": {
+      "approved": true,
+      "overall": 94,
+      "importance": 94,
+      "depth": 97,
+      "insight": 96,
+      "evidence": 92,
+      "clarity": 97,
+      "captivating": 94,
+      "substance": 97,
+      "deception": 3,
+      "confidence": 96,
+      "thesis": "A teoria da informação nasce naturalmente quando tentamos descobrir o limite de compressão de uma linguagem, ligando previsão, códigos eficientes, entropia e inteligência.",
+      "reasons": [
+        "Constrói informação e entropia a partir de um problema concreto de codificação, em vez de apresentar fórmulas sem motivação.",
+        "Usa distribuições, códigos de prefixo e o exemplo do robô lunar para demonstrar por que eventos prováveis devem custar menos bits.",
+        "Distingue a frase provocativa 'compressão é inteligência' da afirmação mais defensável de que previsão e compressão são matematicamente equivalentes.",
+        "Conecta o teorema de codificação sem ruído de Shannon ao objetivo de pré-treinamento de modelos de linguagem sem esconder as simplificações do modelo."
+      ],
+      "weaknesses": [
+        "Exige atenção matemática contínua e deixa a aplicação detalhada a cross-entropy para a continuação da série."
+      ],
+      "method": "semantic-content",
+      "provider": "codex-manual",
+      "model": "editorial-review",
+      "auditedAt": "2026-07-22T18:30:00.000Z"
+    },
+    "video:PqtggjVAi8M": {
+      "approved": true,
+      "overall": 86,
+      "importance": 88,
+      "depth": 84,
+      "insight": 88,
+      "evidence": 78,
+      "clarity": 94,
+      "captivating": 91,
+      "substance": 91,
+      "deception": 5,
+      "confidence": 88,
+      "thesis": "Memórias são padrões distribuídos de conexões neurais que se consolidam e se modificam toda vez que são recuperados, em vez de gravações estáticas do passado.",
+      "reasons": [
+        "Explica a passagem de assembleias neurais transitórias para memória de longo prazo e o papel indexador do hipocampo.",
+        "Relaciona novidade, emoção, repetição e sono à competição e consolidação dos padrões sinápticos.",
+        "Mostra o mecanismo de reconsolidação: ao recordar, o padrão volta a ficar plástico e incorpora contexto, emoções e expectativas atuais.",
+        "Deriva uma consequência prática cautelosa para terapia sem prometer precisão autobiográfica ou controle total sobre a memória."
+      ],
+      "weaknesses": [
+        "A simplificação visual comprime debates ainda abertos da neurociência e não detalha a força de cada estudo citado."
+      ],
+      "method": "semantic-content",
+      "provider": "codex-manual",
+      "model": "editorial-review",
+      "auditedAt": "2026-07-22T18:30:00.000Z"
+    },
+    "news:https://news.google.com/rss/articles/CBMiwwFBVV95cUxOWXpJZ2szS2VuRHdPNjNmOF9WVmNXY1EySWZtOFFvdnRzUER5OFFvVHd1dDZrd3FKdW45UG9lOGRYdDkzcW9WV0FuR203VVhmeTJKXzYzMlFiUkdEV2VYdlJsTHQ3YWRmeXJjcFdhUGJBQUZiLUk1QUY2cjhrS2hiTldhZWNiN0gzNjM5eEJUR3dVVllkajNTRUc2Ri1Hd3hqUHZlMkRiRXFLcVNDSmxvZFlUcTlzUjNQT2QyZUFtcVl5QWs?oc=5": {
+      "approved": true,
+      "overall": 89,
+      "importance": 87,
+      "depth": 87,
+      "insight": 86,
+      "evidence": 94,
+      "clarity": 91,
+      "captivating": 84,
+      "substance": 94,
+      "deception": 2,
+      "confidence": 95,
+      "thesis": "A recuperação excepcionalmente rápida do meteorito Hillsborough preservou sais, fraturas e compostos orgânicos que revelam brinas antigas em asteroides primitivos.",
+      "reasons": [
+        "Explica por que luvas, recipientes limpos e pouco tempo de exposição terrestre mudam a qualidade científica da amostra.",
+        "Combina trajetória registrada por câmeras e radar com microscopia em múltiplas escalas, mineralogia e química orgânica.",
+        "Compara os sais encontrados com amostras de Bennu e Ryugu e delimita o que é semelhante e o que ainda difere.",
+        "Liga a descoberta à distribuição de água e precursores químicos da vida sem alegar que o meteorito contém vida."
+      ],
+      "weaknesses": [
+        "É uma comunicação institucional baseada no estudo e não uma avaliação independente do artigo científico."
+      ],
+      "method": "semantic-content",
+      "provider": "codex-manual",
+      "model": "editorial-review",
+      "auditedAt": "2026-07-22T18:30:00.000Z"
+    },
+    "news:https://news.google.com/rss/articles/CBMiX0FVX3lxTE0zUk1KSS1XX3p0bHp0aWJDWVlqMG41Y3dNUnV4cGF2RGVPOHIybFZyeHRsVG44b3E2d29ZMl90dWZ5T1pnU2syek9rdEZuQkxaUWNsTGdjQ1NZUF9BekVF?oc=5": {
+      "approved": true,
+      "overall": 88,
+      "importance": 90,
+      "depth": 86,
+      "insight": 85,
+      "evidence": 89,
+      "clarity": 90,
+      "captivating": 86,
+      "substance": 91,
+      "deception": 5,
+      "confidence": 91,
+      "thesis": "Espelhos orbitais podem estender a geração solar, mas o teste técnico abre riscos relevantes de detritos, degradação, poluição luminosa e dano à astronomia terrestre.",
+      "reasons": [
+        "Distingue o satélite experimental aprovado da ambição ainda não comprovada de uma constelação de 50 mil unidades.",
+        "Explica dimensões, altitude, área iluminada e mecanismos que o primeiro voo pretende validar.",
+        "Apresenta objeções de astrônomos e especialistas em detritos, além da resposta da empresa, deixando claro onde há disputa.",
+        "Detalha riscos físicos como oxigênio atômico, colisões e falhas de abertura, indo além da promessa de energia limpa."
+      ],
+      "weaknesses": [
+        "Ainda não há dados de voo; benefícios e impactos ambientais permanecem projeções."
+      ],
+      "method": "semantic-content",
+      "provider": "codex-manual",
+      "model": "editorial-review",
+      "auditedAt": "2026-07-22T18:30:00.000Z"
+    },
+    "news:https://news.google.com/rss/articles/CBMi0gFBVV95cUxPS3k0VFhMXzdjcHd4SUczVkNmWVNQU1U5OHY3dHFVdjNzVklhYS01c0FnaW9vbUVrVnpaNFNvd3JGZ2FQUXAybzdXekU4Y1ptT1JVN0p0WEVJQUdEaS1HSDFvN29lbllLbmlQZThVaWphaUUxdVNSLURqSDlSZF9zTzBpRzIxSFJyMlhlUVZQZEZZTWg2N0o2d1Y1bG81RXVacXBCZHZrSEpxNjkxZWZnU3VxbE8xVFhJa2N3OVFqd053WUliQzFKd1BtUm9jVE02UHc?oc=5": {
+      "approved": true,
+      "overall": 88,
+      "importance": 89,
+      "depth": 86,
+      "insight": 87,
+      "evidence": 90,
+      "clarity": 89,
+      "captivating": 82,
+      "substance": 92,
+      "deception": 3,
+      "confidence": 92,
+      "thesis": "A proibição americana de hardware e software chineses em carros conectados força uma reconstrução cara da cadeia de suprimentos e pode, paradoxalmente, começar por licenciar tecnologia chinesa.",
+      "reasons": [
+        "Explica os prazos distintos para software e hardware e por que montadoras precisam decidir fornecedores anos antes.",
+        "Quantifica escala, emprego, receita esperada, diferença de custo e participação chinesa nos módulos celulares automotivos.",
+        "Mostra a tensão entre segurança nacional, custo industrial, rastreabilidade profunda e dependência tecnológica.",
+        "Inclui perspectivas de fabricante, montadoras, associação industrial, governo chinês e especialista independente."
+      ],
+      "weaknesses": [
+        "O caso central é uma empresa nascente, portanto seus planos de escala e paridade de custos ainda não foram testados."
+      ],
+      "method": "semantic-content",
+      "provider": "codex-manual",
+      "model": "editorial-review",
+      "auditedAt": "2026-07-22T18:30:00.000Z"
+    },
+    "news:https://news.google.com/rss/articles/CBMixgFBVV95cUxQcWw5d3A4RnRkMTZiYnZLRnNVMDQySzVtWUhzMlRhQjhGR3FyMkExRXh3dEZSVzgwck04UXFCZzdRWU1kcVcxTjlsd0piOFU4RG1qNVlpc2ZrVFYzMXp5aHRoX3pXZEM1Q2NCWVdzS0M4NzU1YlA5WWNaSjBha0FObHNKbjdkbFFBd3haZHBZNGc0ZUNJc3NVRl92ZExhNzY0Y2xZYTZLc21WaVFNeVRhbGZ3MlhmWGVCZnZYU01mb1lPTnpQZ3fSAcYBQVVfeXFMTjJhMzROYVRFTFlTdVcyS2Y2UGYwakpWYnBDSUhkbDlILW9wSU9KQ3ZTcklFZG83R3MxOFQ5ejBySlp3MDhFNGJDRzRkcWdqT0o0RVo5NVplVHFHQ1BEUnJNbTN6WkdXZzFRZ2xzaGV6NzNuRWNRYTlWcWhteW4tbWFqUWh1bG5IcF9qTjdEb1N0ZDJpblBiTXhOZlVaQXFUUks5S3lWWXZwSmcxdE90a0RQRGVlVmNld1d6WXZ0WW1tVHBUcnl3?oc=5": {
+      "approved": true,
+      "overall": 87,
+      "importance": 90,
+      "depth": 85,
+      "insight": 86,
+      "evidence": 87,
+      "clarity": 89,
+      "captivating": 82,
+      "substance": 91,
+      "deception": 2,
+      "confidence": 90,
+      "thesis": "O capital do Golfo na África combina diversificação econômica e controle de rotas, mas só produzirá desenvolvimento durável se gerar indústria e valor local em vez de nova dependência extrativa.",
+      "reasons": [
+        "Situa o investimento em energia, portos, logística, agricultura e minerais dentro das estratégias distintas de Emirados, Arábia Saudita e Catar.",
+        "Usa valores acumulados e exemplos concretos, como a aquisição da rede da Shell na África do Sul.",
+        "Explica por que o recuo de ajuda ocidental e de crédito chinês cria uma janela para esse capital.",
+        "Contrapõe benefícios de financiamento e diversificação ao risco de portos estratégicos e matérias-primas reforçarem dependências."
+      ],
+      "weaknesses": [
+        "A matéria depende de estimativas e análises institucionais, sem medir ainda resultados de longo prazo nos países receptores."
+      ],
+      "method": "semantic-content",
+      "provider": "codex-manual",
+      "model": "editorial-review",
+      "auditedAt": "2026-07-22T18:30:00.000Z"
+    },
+    "news:https://news.google.com/rss/articles/CBMi1AFBVV95cUxPdVcwaHJoTmZUWC1ieDdzSWQya0JYYmc3VElOVVp5OGRPbnFkLUtYcTRkYTNDaFhEcUVjc05CS2Z0Rl8tbENTbXVfcFhhUjJQckJYajNxRTRUaTNLd1NVNkZsbzVZY0VoYU5EUElmZlpuc1hxUVNyaUJSREIyQlJ6eHkzSVhoWDZkMmxoaXRnOXE1V0lWcGI2bW04SE9WNmlUbUZLTjVtajktdHFsOUNRRjNZTm5tb2NqWks5M2x4OXZOVDZ6R2FtRmI3eUtWcEtrTVptRA?oc=5": {
+      "approved": true,
+      "overall": 80,
+      "importance": 87,
+      "depth": 76,
+      "insight": 76,
+      "evidence": 71,
+      "clarity": 88,
+      "captivating": 78,
+      "substance": 86,
+      "deception": 7,
+      "confidence": 83,
+      "thesis": "Reduzir horas pode elevar produtividade por hora e lazer, mas o desenho precisa ser flexível entre setores e não deve ser confundido com uma causa relevante de inflação.",
+      "reasons": [
+        "A entrevista separa produtividade por hora, produção total, inflação e escolhas sociais sobre lazer.",
+        "Reconhece que hospitalidade, transporte e trabalho de escritório não podem seguir exatamente o mesmo arranjo.",
+        "Usa a experiência francesa como contraponto à previsão de disrupção severa e evita uma resposta universal sobre a escala 6x1.",
+        "Conecta a discussão à IA, distinguindo pressão sobre cargos de entrada de ganhos de produtividade em funções seniores."
+      ],
+      "weaknesses": [
+        "As afirmações empíricas aparecem sobretudo como avaliação do entrevistado e recebem pouca quantificação ou referência a estudos."
+      ],
+      "method": "semantic-content",
+      "provider": "codex-manual",
+      "model": "editorial-review",
+      "auditedAt": "2026-07-22T18:30:00.000Z"
+    },
+    "news:https://news.google.com/rss/articles/CBMifkFVX3lxTE9zUGxURlc5cnBuWDNmdktnNDBHQ0FTZEZHYWc0dktTMmNGT0hyZ05ybERES2NvNkRYWGpJbnlSUjNLOHdXZ3AxY0pjb09ycWJjbkhXbS1Saks4NmJBZVliWS1lMTBIR1JYOGtqN0c3cWZSQXNsdlFYbkFWbEUtdw?oc=5": {
+      "approved": true,
+      "overall": 84,
+      "importance": 91,
+      "depth": 83,
+      "insight": 87,
+      "evidence": 76,
+      "clarity": 91,
+      "captivating": 83,
+      "substance": 90,
+      "deception": 6,
+      "confidence": 86,
+      "thesis": "A sociedade civil não protege automaticamente a democracia quando universidades, firmas e associações são governadas por estruturas internas concentradas e pouco participativas.",
+      "reasons": [
+        "Declara-se como opinião e desenvolve uma tese institucional, em vez de disfarçar juízo normativo como notícia factual.",
+        "Contrasta Tocqueville e Putnam com o caso da sociedade civil antidemocrática de Weimar.",
+        "Usa Yale, Harvard, escritórios de advocacia e Fifa para mostrar como governança concentrada facilita obediência antecipatória.",
+        "Inclui limites: nem toda instituição precisa copiar eleições representativas e lideranças também respondem pela continuidade de longo prazo."
+      ],
+      "weaknesses": [
+        "Os casos ilustram a tese, mas não constituem comparação sistemática entre modelos de governança."
+      ],
+      "method": "semantic-content",
+      "provider": "codex-manual",
+      "model": "editorial-review",
+      "auditedAt": "2026-07-22T18:30:00.000Z"
+    },
+    "news:https://news.google.com/rss/articles/CBMiuAFBVV95cUxNR0tnZ2RNTklmZnFJUDdYbVd4NWZjbzctRUhuRG9xOVcxUWNhNTlyakYxZUMydlNWZkx0ZzhXVjFHNFNWdTlZcDFoaWlUX083WW1tT3k1ZmpKVkdMeUVXNmRUcjRtQm56bkVlaE5IWlEzQ09qWHE2ZlNnR2xYNGhqejRaN1hIRGRhSEk2X0ZUT3JFOTQ3bW1IVFRtUjlzQ0NmcTctUzhyc2owd243OHRwd0gtdm5yamNi?oc=5": {
+      "approved": false,
+      "overall": 62,
+      "importance": 78,
+      "depth": 50,
+      "insight": 55,
+      "evidence": 72,
+      "clarity": 86,
+      "captivating": 66,
+      "substance": 73,
+      "deception": 8,
+      "confidence": 90,
+      "thesis": "News Corp acusa a Brave de copiar e revender artigos a empresas de IA, enquanto a Brave pede reconhecimento judicial de uso justo para indexação, trechos e resumos.",
+      "reasons": [
+        "Identifica as ações judiciais concorrentes, os pedidos e as posições declaradas das duas empresas.",
+        "Situa o caso na disputa mais ampla entre editoras e empresas de tecnologia."
+      ],
+      "weaknesses": [
+        "A matéria é essencialmente um registro de petições e declarações, sem examinar precedentes ou critérios jurídicos de fair use.",
+        "Não esclarece tecnicamente o que foi copiado, licenciado, resumido ou vendido, impedindo avaliar a força das alegações.",
+        "O texto é curto demais para gerar entendimento durável além do acontecimento."
+      ],
+      "method": "semantic-content",
+      "provider": "codex-manual",
+      "model": "editorial-review",
+      "auditedAt": "2026-07-22T18:30:00.000Z"
+    },
+    "podcast:135066958": {
+      "approved": true,
+      "overall": 88,
+      "importance": 88,
+      "depth": 88,
+      "insight": 91,
+      "evidence": 79,
+      "clarity": 89,
+      "captivating": 90,
+      "substance": 91,
+      "deception": 2,
+      "confidence": 91,
+      "thesis": "Uma leitura atenta da Ilíada mostra que seus nomes, repetições e discursos transformam a guerra em uma rede de perdas humanas, orgulho, memória e responsabilidade.",
+      "reasons": [
+        "A conversa analisa escolhas formais específicas, como epítetos, catálogos de nomes, discursos repetidos e omissões deliberadas de Odisseu.",
+        "Conecta a morte de figuras menores às famílias evocadas pelo poema, mostrando como a estrutura amplia o raio moral da guerra.",
+        "Compara traduções e discute oralidade e memorização sem reduzir toda repetição a uma única explicação técnica.",
+        "As experiências pessoais do convidado iluminam identidade, encarceramento, amizade e luto sem substituir a leitura do texto."
+      ],
+      "weaknesses": [
+        "É uma leitura pessoal de primeira passagem e não pretende cobrir a tradição filológica da obra."
+      ],
+      "method": "semantic-content",
+      "provider": "codex-manual",
+      "model": "editorial-review",
+      "auditedAt": "2026-07-22T18:30:00.000Z",
+      "episodeTitle": "Dwayne Betts on the Iliad"
+    },
+    "podcast:1434243584": {
+      "approved": true,
+      "overall": 90,
+      "importance": 91,
+      "depth": 93,
+      "insight": 92,
+      "evidence": 88,
+      "clarity": 87,
+      "captivating": 88,
+      "substance": 92,
+      "deception": 3,
+      "confidence": 93,
+      "thesis": "O chamado Império Bizantino deve ser entendido como a continuidade mutável da comunidade política romana, e não como uma ruptura automática criada por língua, religião ou capital.",
+      "reasons": [
+        "Distingue rótulos modernos de termos usados nas fontes, como Romania, politeia e basileia dos romanos.",
+        "Explica continuidade por cidadania, tributação, burocracia, direito e expectativas públicas sobre o imperador.",
+        "Usa crises, golpes e a taxa elevada de deposições violentas para mostrar por que legitimidade e responsividade importavam mesmo sem democracia moderna.",
+        "Contesta o mito de comunidades rurais isoladas com evidências de censos e alcance fiscal, ao mesmo tempo em que admite transformações cumulativas profundas."
+      ],
+      "weaknesses": [
+        "A duração de quase quatro horas reduz a densidade por minuto e inclui digressões do entrevistador."
+      ],
+      "method": "semantic-content",
+      "provider": "codex-manual",
+      "model": "editorial-review",
+      "auditedAt": "2026-07-22T18:30:00.000Z",
+      "episodeTitle": "#498 – Anthony Kaldellis: Roman Empire, Byzantine Empire, Rise & Fall of Empires"
+    },
+    "video:GlYgs6v2YfU": {
+      "approved": true,
+      "overall": 95,
+      "importance": 95,
+      "depth": 97,
+      "insight": 96,
+      "evidence": 94,
+      "clarity": 98,
+      "captivating": 94,
+      "substance": 98,
+      "deception": 2,
+      "confidence": 97,
+      "thesis": "Cross-entropy é o custo médio de usar um código ou modelo probabilístico otimizado para uma distribuição quando os dados seguem outra, e por isso funciona naturalmente como perda no treinamento de modelos de linguagem.",
+      "reasons": [
+        "Parte do experimento de agrupar idiomas por compressão e reconstrói o conceito como custo de codificação, não como fórmula arbitrária.",
+        "Deriva a diferença entre entropia, cross-entropy e divergência KL com distribuições, áreas ponderadas e comprimentos médios de código.",
+        "Mostra passo a passo como a perda por token de um modelo de linguagem se agrega até a cross-entropy observada nos dados de treinamento.",
+        "Fecha com perguntas sobre destilação e KL que testam a compreensão e deixam explícito onde equivalências dependem de termos constantes."
+      ],
+      "weaknesses": [
+        "Pressupõe familiaridade com logaritmos e com a primeira aula da série, embora faça uma recapitulação suficiente."
+      ],
+      "method": "semantic-content",
+      "provider": "codex-manual",
+      "model": "editorial-review",
+      "auditedAt": "2026-07-22T20:15:00.000Z"
+    },
+    "video:GK2pZ_oVU1o": {
+      "approved": true,
+      "overall": 88,
+      "importance": 84,
+      "depth": 91,
+      "insight": 89,
+      "evidence": 91,
+      "clarity": 94,
+      "captivating": 93,
+      "substance": 84,
+      "deception": 11,
+      "confidence": 93,
+      "thesis": "O Smith chart transforma o problema complexo de reflexões e casamento de impedância em uma geometria navegável que permite projetar linhas de transmissão e transferir potência com eficiência.",
+      "reasons": [
+        "Constrói a intuição de reflexão com ondas em molas antes de passar a tensão, corrente, impedância e coeficiente de reflexão.",
+        "Reconstrói historicamente por que engenheiros buscavam uma solução gráfica e explica como impedâncias complexas são mapeadas no plano.",
+        "Usa uma demonstração física em linha de transmissão e confirma numericamente a reflexão antes e depois do casamento.",
+        "Ensina a percorrer o gráfico com componentes reativos e comprimento de linha, ligando a geometria a decisões reais de projeto."
+      ],
+      "weaknesses": [
+        "Uma inserção publicitária no meio e a divulgação de um produto no encerramento reduzem a densidade por minuto.",
+        "A apresentação dramática do gráfico como assustador é mais forte que a dificuldade efetiva depois da explicação."
+      ],
+      "method": "semantic-content",
+      "provider": "codex-manual",
+      "model": "editorial-review",
+      "auditedAt": "2026-07-22T20:15:00.000Z"
+    },
+    "video:mvcesPWvUIc": {
+      "approved": true,
+      "overall": 87,
+      "importance": 92,
+      "depth": 86,
+      "insight": 87,
+      "evidence": 93,
+      "clarity": 91,
+      "captivating": 91,
+      "substance": 86,
+      "deception": 8,
+      "confidence": 94,
+      "thesis": "Grande parte da perícia aceita em tribunais parece científica, mas falha em testes de validade, taxas de erro e controle de viés, o que exige separar métodos empíricos de tradições forenses institucionalizadas.",
+      "reasons": [
+        "Compara marcas de mordida, padrões de sangue, impressões digitais e DNA em vez de tratar toda perícia como igualmente confiável.",
+        "Apresenta casos concretos de condenações e erros, incluindo como conhecimento prévio do caso produziu conformidade entre examinadores.",
+        "Explica classificação de impressões, probabilidades de coincidência, independência do perito e por que precedente jurídico resiste à revisão científica.",
+        "Reconhece limites até do DNA e distingue poder discriminatório do método de problemas de coleta, mistura e interpretação."
+      ],
+      "weaknesses": [
+        "O formato de ranking simplifica diferenças entre jurisdições e níveis de qualidade dentro de cada técnica.",
+        "A abertura dramatizada e a promoção de um jogo no final ocupam espaço que poderia aprofundar reformas institucionais."
+      ],
+      "method": "semantic-content",
+      "provider": "codex-manual",
+      "model": "editorial-review",
+      "auditedAt": "2026-07-22T20:15:00.000Z"
+    },
+    "video:W01vL80hfoY": {
+      "approved": true,
+      "overall": 89,
+      "importance": 93,
+      "depth": 88,
+      "insight": 91,
+      "evidence": 91,
+      "clarity": 90,
+      "captivating": 87,
+      "substance": 90,
+      "deception": 4,
+      "confidence": 92,
+      "thesis": "A queda global da fecundidade é menos explicada por mulheres orientadas à carreira do que por formação tardia de casais, insegurança habitacional, transformação digital do namoro e mudanças sociais que atingem também pessoas de menor renda e países emergentes.",
+      "reasons": [
+        "Testa a hipótese da 'career woman' contra a distribuição real da queda de nascimentos por renda e escolaridade.",
+        "Compara Coreia do Sul, Japão, Estados Unidos, Europa e países emergentes, evitando tratar um único caso nacional como regra universal.",
+        "Discute evidências quase experimentais sobre chegada da internet móvel, tempo de tela e formação de casais, deixando claras hipóteses alternativas.",
+        "Avalia bônus natalistas, moradia, cultura do trabalho, aplicativos de namoro e restrições digitais sem prometer uma solução única."
+      ],
+      "weaknesses": [
+        "Algumas relações entre smartphones, pareamento e fecundidade permanecem causais apenas em parte e são apresentadas como agenda de pesquisa.",
+        "O formato de conversa produz pequenas repetições e digressões."
+      ],
+      "method": "semantic-content",
+      "provider": "codex-manual",
+      "model": "editorial-review",
+      "auditedAt": "2026-07-22T20:15:00.000Z"
+    },
+    "video:2gJvplli2do": {
+      "approved": false,
+      "overall": 72,
+      "importance": 82,
+      "depth": 67,
+      "insight": 65,
+      "evidence": 76,
+      "clarity": 86,
+      "captivating": 79,
+      "substance": 61,
+      "deception": 12,
+      "confidence": 91,
+      "thesis": "O microbioma influencia digestão e saúde, mas a indústria de suplementos e influenciadores transforma evidência ainda limitada em diagnósticos e produtos excessivamente específicos.",
+      "reasons": [
+        "Distingue o papel real do microbioma das promessas comerciais e lembra que suplementos não seguem o mesmo regime de medicamentos.",
+        "A recomendação final — dieta variada de padrão mediterrâneo e orientação clínica — é prudente e compatível com a evidência apresentada."
+      ],
+      "weaknesses": [
+        "O vídeo dedica uma fração grande de seus dez minutos a abertura, publicidade e chamadas de apoio.",
+        "Explica pouco os mecanismos, a qualidade dos estudos ou as diferenças entre associação e causalidade.",
+        "A conclusão útil é simples demais para superar o limiar de profundidade e substância da curadoria."
+      ],
+      "method": "semantic-content",
+      "provider": "codex-manual",
+      "model": "editorial-review",
+      "auditedAt": "2026-07-22T20:15:00.000Z"
+    },
+    "video:rRxCPEqEPDE": {
+      "approved": true,
+      "overall": 83,
+      "importance": 84,
+      "depth": 88,
+      "insight": 85,
+      "evidence": 74,
+      "clarity": 86,
+      "captivating": 85,
+      "substance": 82,
+      "deception": 6,
+      "confidence": 87,
+      "thesis": "A Odisseia pode ser lida como a reconstrução gradual de identidade, autocontrole e responsabilidade de Odisseu, enquanto Telêmaco aprende os modelos necessários para ordenar a própria casa.",
+      "reasons": [
+        "Acompanha episódios específicos do poema — Nestor, Menelau, o Ciclope, os lotófagos e as leis de hospitalidade — em vez de oferecer apenas motivação genérica.",
+        "Mostra como inteligência sem autocontrole aprisiona Odisseu, especialmente quando o orgulho o leva a revelar o próprio nome.",
+        "Relaciona a formação de Telêmaco à ausência do pai e aos modelos de rei, ordem e hospitalidade encontrados na viagem.",
+        "Distingue a adaptação cinematográfica da estrutura e do sentido do poema, usando a comparação para esclarecer perdas e escolhas narrativas."
+      ],
+      "weaknesses": [
+        "É uma interpretação filosófica pessoal e não confronta leituras filológicas concorrentes em profundidade.",
+        "A live contém instabilidade técnica, divulgação de curso e perguntas finais, reduzindo a densidade."
+      ],
+      "method": "semantic-content",
+      "provider": "codex-manual",
+      "model": "editorial-review",
+      "auditedAt": "2026-07-22T20:15:00.000Z"
+    },
+    "video:aircAruvnKk": {
+      "approved": true,
+      "overall": 93,
+      "importance": 94,
+      "depth": 95,
+      "insight": 93,
+      "evidence": 89,
+      "clarity": 98,
+      "captivating": 93,
+      "substance": 98,
+      "deception": 2,
+      "confidence": 97,
+      "thesis": "Uma rede neural é uma função parametrizada em camadas na qual pesos, vieses e não linearidades transformam pixels em ativações, oferecendo capacidade expressiva que o treinamento pode ajustar para reconhecer padrões.",
+      "reasons": [
+        "Constrói cada componente a partir do problema concreto de reconhecer dígitos de 28 por 28 pixels.",
+        "Explica pesos, vieses, ativações e funções sigmoide/ReLU visualmente, sem esconder o grande número de parâmetros.",
+        "Separa a intuição desejada de bordas e padrões do que a rede realmente aprende, prevenindo uma interpretação excessivamente antropomórfica.",
+        "Usa o experimento mental de definir parâmetros à mão para mostrar por que treinamento e interpretabilidade são problemas distintos."
+      ],
+      "weaknesses": [
+        "É uma primeira aula e deixa gradiente, retropropagação e avaliação sistemática para vídeos posteriores da série."
+      ],
+      "method": "semantic-content",
+      "provider": "codex-manual",
+      "model": "editorial-review",
+      "auditedAt": "2026-07-22T20:15:00.000Z"
+    },
+    "video:36GT2zI8lVA": {
+      "approved": true,
+      "overall": 90,
+      "importance": 90,
+      "depth": 94,
+      "insight": 96,
+      "evidence": 77,
+      "clarity": 96,
+      "captivating": 91,
+      "substance": 98,
+      "deception": 1,
+      "confidence": 93,
+      "thesis": "Explicar não é substituir um fenômeno por palavras familiares, mas situá-lo em relações cada vez mais fundamentais até reconhecer honestamente onde a descrição física termina.",
+      "reasons": [
+        "Parte da pergunta aparentemente simples sobre ímãs para revelar como contexto e conhecimento prévio definem o que conta como explicação.",
+        "Distingue nomear forças de compreender suas relações e mostra por que uma cadeia infinita de 'por quês' precisa encontrar pressupostos compartilhados.",
+        "Conecta magnetismo, contato com uma cadeira e repulsão elétrica para mostrar o poder unificador de uma explicação física.",
+        "Recusa uma analogia falsa quando não há mecanismo mais familiar disponível, modelando precisão e honestidade intelectual."
+      ],
+      "weaknesses": [
+        "O trecho é curto e deliberadamente não oferece uma derivação matemática do eletromagnetismo."
+      ],
+      "method": "semantic-content",
+      "provider": "codex-manual",
+      "model": "editorial-review",
+      "auditedAt": "2026-07-22T20:15:00.000Z"
+    },
+    "video:R9OCA6UFE-0": {
+      "approved": false,
+      "overall": 74,
+      "importance": 80,
+      "depth": 62,
+      "insight": 65,
+      "evidence": 68,
+      "clarity": 93,
+      "captivating": 82,
+      "substance": 88,
+      "deception": 4,
+      "confidence": 91,
+      "thesis": "O estoicismo combina aceitação do que não controlamos com cultivo ativo de sabedoria, temperança, justiça e coragem.",
+      "reasons": [
+        "Corrige a caricatura do estoico como pessoa sem emoções e apresenta as quatro virtudes centrais.",
+        "Usa Zeno, Sêneca, Marco Aurélio, Mandela, terapia racional-emotiva e logoterapia para mostrar permanência histórica."
+      ],
+      "weaknesses": [
+        "Resume dois milênios em cinco minutos e quase não enfrenta tensões internas, objeções ou diferenças entre autores estoicos.",
+        "As conexões com psicologia moderna são afirmadas rapidamente, sem evidência ou delimitação.",
+        "É uma boa introdução, mas não oferece profundidade suficiente para a seleção final."
+      ],
+      "method": "semantic-content",
+      "provider": "codex-manual",
+      "model": "editorial-review",
+      "auditedAt": "2026-07-22T20:15:00.000Z"
+    },
+    "video:iuYlGRnC7J8": {
+      "approved": true,
+      "overall": 87,
+      "importance": 91,
+      "depth": 86,
+      "insight": 91,
+      "evidence": 80,
+      "clarity": 96,
+      "captivating": 87,
+      "substance": 96,
+      "deception": 4,
+      "confidence": 93,
+      "thesis": "Planejamento lista ações sob controle da empresa; estratégia formula uma aposta coerente sobre onde jogar, como vencer e quais condições precisam ser verdadeiras apesar da incerteza competitiva.",
+      "reasons": [
+        "Distingue custos controláveis de resultados que dependem da escolha do cliente, explicando por que planos confortáveis não garantem vitória.",
+        "Usa a Southwest para ligar ponto a ponto, utilização de aeronaves, frota padronizada, preços e segmento-alvo em um sistema coerente.",
+        "Explica que estratégia envolve uma teoria falsificável — o que precisa ser verdade — e revisão conforme surgem evidências.",
+        "Oferece um roteiro operacional de aspiração, campo de jogo, modo de vencer, capacidades e sistemas de gestão."
+      ],
+      "weaknesses": [
+        "O caso da Southwest é apresentado como ilustração bem-sucedida e recebe pouca análise de condições externas ou contraexemplos."
+      ],
+      "method": "semantic-content",
+      "provider": "codex-manual",
+      "model": "editorial-review",
+      "auditedAt": "2026-07-22T20:15:00.000Z"
+    },
+    "video:GKhmaU9Simk": {
+      "approved": false,
+      "overall": 73,
+      "importance": 87,
+      "depth": 66,
+      "insight": 61,
+      "evidence": 79,
+      "clarity": 84,
+      "captivating": 69,
+      "substance": 86,
+      "deception": 3,
+      "confidence": 88,
+      "thesis": "O habeas corpus coletivo estende uma garantia individual a grupos submetidos à mesma restrição ilegal, como gestantes e mães presas provisoriamente.",
+      "reasons": [
+        "Define o instrumento a partir da Constituição e identifica um processo concreto do Supremo Tribunal Federal.",
+        "Explica o grupo protegido e a relação entre pesquisas sobre violações homogêneas e a concessão de prisão domiciliar."
+      ],
+      "weaknesses": [
+        "A exposição é curta e não examina objeções processuais, limites de identificação do grupo ou decisões posteriores.",
+        "A relação com democracia permanece afirmada em termos gerais, sem comparação institucional.",
+        "Funciona como introdução jurídica, mas não atinge o desenvolvimento exigido pela curadoria."
+      ],
+      "method": "semantic-content",
+      "provider": "codex-manual",
+      "model": "editorial-review",
+      "auditedAt": "2026-07-22T20:15:00.000Z"
+    },
+    "video:rStL7niR7gs": {
+      "approved": true,
+      "overall": 88,
+      "importance": 94,
+      "depth": 91,
+      "insight": 94,
+      "evidence": 80,
+      "clarity": 96,
+      "captivating": 94,
+      "substance": 98,
+      "deception": 7,
+      "confidence": 91,
+      "thesis": "Governantes sobrevivem mantendo uma coalizão indispensável; quando essa coalizão é ampla, produtividade e bens públicos se tornam politicamente necessários, e quando é estreita, extração e recompensas privadas dominam.",
+      "reasons": [
+        "Deriva incentivos de poder a partir de apoiadores-chave, fluxo de receita e risco de substituição, sem depender da bondade pessoal do governante.",
+        "Compara ditaduras e democracias pelo tamanho e pela composição das coalizões, explicando por que eleições também podem ser manipuladas por regras e distritos.",
+        "Conecta tributação, educação, infraestrutura, produtividade e recursos naturais ao interesse de sobrevivência do regime.",
+        "Estende o modelo a empresas e associações e reconhece que estruturas diferentes alteram incentivos sem tornar líderes automaticamente virtuosos."
+      ],
+      "weaknesses": [
+        "A síntese da teoria do seletorado privilegia um mecanismo e reduz o papel de ideologia, instituições informais e ação coletiva.",
+        "O tom determinista pode sugerir mais inevitabilidade do que a evidência comparada permite."
+      ],
+      "method": "semantic-content",
+      "provider": "codex-manual",
+      "model": "editorial-review",
+      "auditedAt": "2026-07-22T20:15:00.000Z"
+    },
+    "news:https://news.google.com/rss/articles/CBMiYkFVX3lxTE9vM2RpQXAzMlNsbmkwY2VqUmVZd1N6TTJYTVJld3NOczdtMk13b3BvWHpTZGNDalI5cEY3c3diVDhCOUxyaC1fOG5fN29lT3dKSldYZ1Foc2hTQUMxbk04M0F30gFnQVVfeXFMTU14T3hVYjlGR1VSaVdPNEYzb19seU9sOV9mU2RBSnJuN051TFVGM0VGSmJ3TnozcnlDTTl5bVRaNWM3cUdkckFoWnpaWEZSbzVhZzVjSGg5RjlWVlFlZ1BUektkZzlmcw?oc=5": {
+      "approved": true,
+      "overall": 86,
+      "importance": 94,
+      "depth": 82,
+      "insight": 83,
+      "evidence": 94,
+      "clarity": 92,
+      "captivating": 85,
+      "substance": 95,
+      "deception": 3,
+      "confidence": 95,
+      "thesis": "A Smartmatic teve serviços limitados no Brasil, nunca forneceu as urnas nem programou o sistema eleitoral, e documentos recentes sobre capacidade de manipulação na Venezuela não sustentam a alegação de fraude brasileira.",
+      "reasons": [
+        "Confronta a fala do pré-candidato com nota do TSE, contratos, licitação perdida e a arquitetura nacional do sistema.",
+        "Reproduz a resposta da campanha e distingue pedido de observação internacional da afirmação factual sobre a origem das urnas.",
+        "Reconstrói a atuação da Smartmatic na Venezuela e registra que a própria empresa denunciou divergência nos resultados de 2017.",
+        "Lê o limite do relatório americano corretamente: capacidade técnica possível não equivale a prova de fraude, muito menos fora da Venezuela."
+      ],
+      "weaknesses": [
+        "A matéria depende em parte de declarações institucionais e não audita tecnicamente o código ou a cadeia de fabricação das urnas."
+      ],
+      "method": "semantic-content",
+      "provider": "codex-manual",
+      "model": "editorial-review",
+      "auditedAt": "2026-07-22T20:15:00.000Z"
+    },
+    "news:https://news.google.com/rss/articles/CBMitAFBVV95cUxOdEw2Z0NPSTc2ZDJZQmpmcUFfTWhyOEdzSmNZNXVxdUZvc2Rjc2NoT1FiM0hQcDBpb19TZVo3bWJ6WGxPdFo2TE5qRG9yNl9XYTNGMnFPLWMwM1JjbTI1d21sQlRabFI5bjhBVnplNU01OVFhUXlrTW5Wa2N5dzV2LVU4MnBqZWRKVVgtcVhVQ0ZBQ1RlazJtNWtuNG0wNUhQdzFuQnVEdjRlRUpCV2tnb1FvUGc?oc=5": {
+      "approved": true,
+      "overall": 88,
+      "importance": 92,
+      "depth": 87,
+      "insight": 86,
+      "evidence": 96,
+      "clarity": 91,
+      "captivating": 88,
+      "substance": 93,
+      "deception": 6,
+      "confidence": 95,
+      "thesis": "A detecção variável de hélio escapando de LHS 1140b fornece forte evidência de uma atmosfera em um planeta rochoso na zona habitável, mas ainda não demonstra água, vida ou composição superficial.",
+      "reasons": [
+        "A cobertura está ancorada no artigo primário e explica a espectroscopia de trânsito usada para detectar hélio.",
+        "Contrasta a detecção de 2024 com a ausência em 2025 e trata essa variabilidade como dado a explicar, não como inconveniente a esconder.",
+        "Relaciona atmosfera superior rica em hélio, perda preferencial de hidrogênio e aprisionamento de voláteis a modelos de fracionamento.",
+        "Compara LHS 1140b ao planeta menor e mais irradiado do mesmo sistema e aponta observações futuras do JWST como teste independente."
+      ],
+      "weaknesses": [
+        "A manchete usa 'primeira atmosfera' de modo mais categórico que a conclusão prudente do estudo, que ainda requer confirmação e composição detalhada.",
+        "Habitabilidade significa posição orbital e possível retenção atmosférica, não evidência de condições biológicas."
+      ],
+      "method": "semantic-content",
+      "provider": "codex-manual",
+      "model": "editorial-review",
+      "auditedAt": "2026-07-22T20:15:00.000Z"
+    }
+  }
 }

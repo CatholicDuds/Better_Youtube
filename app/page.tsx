@@ -682,7 +682,7 @@ export default function Home() {
         : successfulRequests < 5
           ? `Consulta parcial: ${successfulRequests} de 5 fontes responderam. Tente novamente em instantes.`
           : changed
-            ? "Novos dados carregados, incluindo as auditorias mais recentes da Groq."
+            ? "Novos dados carregados, incluindo as auditorias editoriais mais recentes do Codex."
             : "Tudo conferido: ainda não há uma atualização nova publicada.");
     } finally {
       window.clearTimeout(timeoutId);

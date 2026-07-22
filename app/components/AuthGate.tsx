@@ -6,6 +6,7 @@ import { isSupabaseConfigured, supabase } from "../../lib/supabase";
 import AIStudyDock from "./AIStudyDock";
 
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || "";
+const DESKTOP_MODE = process.env.NEXT_PUBLIC_DESKTOP_APP === "true";
 
 type AuthMode = "signin" | "signup" | "forgot" | "update" | "verify";
 type Profile = {
@@ -120,6 +121,8 @@ export default function AuthGate({ children }: { children: ReactNode }) {
     setAccountOpen(false);
     setMode("signin");
   }
+
+  if (DESKTOP_MODE) return <>{children}</>;
 
   if (loading) return <div className="auth-loading"><span className="brand-mark">C</span><p>Preparando seu Clarity…</p></div>;
 
