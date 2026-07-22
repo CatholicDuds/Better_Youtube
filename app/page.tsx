@@ -29,6 +29,7 @@ type PoliticalSpectrum = "Esquerda" | "Centro" | "Direita";
 
 type ContentAudit = {
   approved: boolean;
+  method?: "semantic-content" | "unavailable";
   overall: number;
   depth: number;
   insight: number;
@@ -38,6 +39,13 @@ type ContentAudit = {
   reasons: string[];
   auditedAt: string;
 };
+
+type AuditState = "approved" | "rejected" | "pending";
+
+function auditState(audit?: ContentAudit): AuditState {
+  if (!audit || audit.method !== "semantic-content") return "pending";
+  return audit.approved ? "approved" : "rejected";
+}
 
 type NewsItem = {
   id: string;
@@ -264,13 +272,13 @@ function summaryPrompt(level: "Essencial" | "Intermediário" | "Avançado") {
   return "Explique a ideia central, como ela funciona e por que ela importa, sem copiar frases da fonte.";
 }
 
-function PodcastCard({ podcast, onPlay }: { podcast: Podcast; onPlay: (podcast: Podcast) => void }) {
+function PodcastCard({ podcast, onPlay, pending = false }: { podcast: Podcast; onPlay: (podcast: Podcast) => void; pending?: boolean }) {
   return (
     <article className="podcast-card">
       <button className="podcast-art" style={{ background: `linear-gradient(145deg, ${podcast.accent}, #111)` }} onClick={() => onPlay(podcast)} aria-label={`Ouvir ${podcast.title}`}>
         {podcast.artworkUrl ? <img src={podcast.artworkUrl} alt={`Capa oficial de ${podcast.title}`} loading="lazy" /> : <span className="podcast-fallback">◖))</span>}<span className="podcast-play">▶</span>
       </button>
-      <div className="podcast-copy"><p>{podcast.category} · {levelLabel(podcast.depth)}</p><button onClick={() => onPlay(podcast)}>{podcast.title}</button><span>{podcast.author}</span><small>{podcast.description}</small><em>{Math.round(podcast.clarity * 100)}% clareza editorial</em>{podcast.appleUrl && <a href={podcast.appleUrl} target="_blank" rel="noreferrer">Ver no Apple Podcasts ↗</a>}</div>
+      <div className="podcast-copy"><p>{podcast.category} · {levelLabel(podcast.depth)}</p>{pending && <span className="audit-badge">em auditoria</span>}<button onClick={() => onPlay(podcast)}>{podcast.title}</button><span>{podcast.author}</span><small>{podcast.description}</small><em>{Math.round(podcast.clarity * 100)}% clareza editorial</em>{podcast.appleUrl && <a href={podcast.appleUrl} target="_blank" rel="noreferrer">Ver no Apple Podcasts ↗</a>}</div>
     </article>
   );
 }
@@ -313,16 +321,18 @@ function ContentCarousel({ pages, pageClassName, label }: { pages: ReactNode[][]
   );
 }
 
-function VideoCard({ video, onPlay, onFeedback }: {
+function VideoCard({ video, onPlay, onFeedback, pending = false }: {
   video: RankedVideo;
   onPlay: (video: RankedVideo) => void;
   onFeedback: (id: string, value: 1 | -1) => void;
+  pending?: boolean;
 }) {
   const image = thumbnail(video);
   return (
     <article className="video-card">
       <button className={`thumbnail visual-${video.palette}`} onClick={() => onPlay(video)} aria-label={`Assistir ${video.title}`}>
         {image ? <img src={image} alt="" loading="lazy" /> : <span className="thumbnail-mark">{video.mark}</span>}
+        {pending && <span className="audit-badge audit-badge-overlay">em auditoria</span>}
         <span className="thumbnail-play">▶</span>
         <span className="duration">{video.embedType === "playlist" ? "coleção" : durationLabel(video.durationSeconds)}</span>
       </button>
@@ -346,12 +356,13 @@ function VideoCard({ video, onPlay, onFeedback }: {
   );
 }
 
-function DepthVideoCard({ video, onPlay }: { video: RankedVideo; onPlay: (video: RankedVideo) => void }) {
+function DepthVideoCard({ video, onPlay, pending = false }: { video: RankedVideo; onPlay: (video: RankedVideo) => void; pending?: boolean }) {
   const image = thumbnail(video);
   return (
     <article className="depth-video-card">
       <button className={`depth-thumbnail visual-${video.palette}`} onClick={() => onPlay(video)} aria-label={`Assistir ${video.title}`}>
         {image ? <img src={image} alt="" loading="lazy" /> : <span className="thumbnail-mark">{video.mark}</span>}
+        {pending && <span className="audit-badge audit-badge-overlay">em auditoria</span>}
         <span className="thumbnail-play">▶</span>
         <span className="duration">{video.embedType === "playlist" ? "coleção" : durationLabel(video.durationSeconds)}</span>
       </button>
@@ -493,7 +504,7 @@ export default function Home() {
     return all.filter((video, index) => {
       if (all.findIndex((item) => item.youtubeId === video.youtubeId) !== index) return false;
       if (video.category === "Minha biblioteca") return true;
-      return contentAudits[`video:${video.youtubeId}`]?.approved === true && !videoRejectionReason(video);
+      return auditState(contentAudits[`video:${video.youtubeId}`]) !== "rejected" && !videoRejectionReason(video);
     });
   }, [customVideos, webVideos, interestFeeds, discoveredVideos, liveVideos, contentAudits]);
 
@@ -554,7 +565,7 @@ export default function Home() {
   const visiblePodcasts = useMemo(() => {
     const candidates = contentSearchActive ? searchedPodcasts : podcasts.map((podcast) => ({ ...podcast, ...podcastArtwork[podcast.appleId] }));
     return candidates
-      .filter((podcast) => contentAudits[`podcast:${podcast.appleId}`]?.approved === true)
+      .filter((podcast) => auditState(contentAudits[`podcast:${podcast.appleId}`]) !== "rejected")
       .filter((podcast) => contentSearchActive || category === "Todos" || podcast.category === category)
       .sort((a, b) => Math.abs(a.depth - preferences.depth / 100) - Math.abs(b.depth - preferences.depth / 100));
   }, [category, preferences.depth, podcastArtwork, contentSearchActive, searchedPodcasts, contentAudits]);
@@ -570,7 +581,7 @@ export default function Home() {
   const visibleNews = useMemo(() => {
     const cutoff = currentTime - (newsPeriod === "today" ? 30 : 7 * 24) * 3_600_000;
     const sourceNews = contentSearchActive ? searchedNews : news;
-    const candidates = sourceNews.filter((item) => contentAudits[`news:${item.url}`]?.approved === true)
+    const candidates = sourceNews.filter((item) => auditState(contentAudits[`news:${item.url}`]) !== "rejected")
       .filter((item) => Date.parse(item.publishedAt) >= cutoff)
       .filter((item) => newsSpectrum === "Todos" || (item.spectrum || "Centro") === newsSpectrum)
       .filter((item) => contentSearchActive || (category === "Todos" ? userInterests.includes(item.category) : item.category === category));
@@ -582,6 +593,12 @@ export default function Home() {
       return true;
     }).slice(0, 12);
   }, [news, searchedNews, contentSearchActive, newsPeriod, newsSpectrum, category, userInterests, currentTime, contentAudits]);
+
+  const pendingAuditCount = useMemo(() => (
+    ranked.filter((video) => video.category !== "Minha biblioteca" && auditState(contentAudits[`video:${video.youtubeId}`]) === "pending").length
+    + visibleNews.filter((item) => auditState(contentAudits[`news:${item.url}`]) === "pending").length
+    + visiblePodcasts.filter((podcast) => auditState(contentAudits[`podcast:${podcast.appleId}`]) === "pending").length
+  ), [ranked, visibleNews, visiblePodcasts, contentAudits]);
 
   const newsPages = useMemo(() => paginate(visibleNews, compactCarousel ? 2 : 4), [visibleNews, compactCarousel]);
   const podcastPages = useMemo(() => paginate(visiblePodcasts, compactCarousel ? 2 : 6), [visiblePodcasts, compactCarousel]);
@@ -908,31 +925,32 @@ export default function Home() {
         </section>}
 
         {webSearchStatus && <div className="web-search-status"><span>⌕</span><p>{webSearchStatus}</p></div>}
+        {pendingAuditCount > 0 && <div className="audit-notice"><span>◷</span><p><strong>Auditoria de conteúdo em andamento.</strong> {pendingAuditCount} item{pendingAuditCount === 1 ? "" : "s"} desta seleção ainda está{pendingAuditCount === 1 ? "" : "ão"} na pré-seleção e pode{pendingAuditCount === 1 ? "" : "m"} desaparecer se não atingir os critérios de profundidade.</p></div>}
 
         <div className="top-discovery">
           <section className="news-section compact-news" id="noticias">
             <div className="section-heading news-heading"><div><p className="eyebrow">{contentSearchActive ? "PESQUISA COM CONTEXTO" : "RADAR DO DIA"}</p><h2>{contentSearchActive ? `Notícias sobre “${completedSearch}”` : "Notícias com contexto"}</h2></div><div className="news-controls"><div className="period-control"><button className={newsPeriod === "today" ? "active" : ""} onClick={() => setNewsPeriod("today")}>Hoje</button><button className={newsPeriod === "week" ? "active" : ""} onClick={() => setNewsPeriod("week")}>Semana</button></div><label>Fonte<select value={newsSpectrum} onChange={(event) => setNewsSpectrum(event.target.value as "Todos" | PoliticalSpectrum)}><option>Todos</option><option>Esquerda</option><option>Centro</option><option>Direita</option></select></label></div></div>
-            {visibleNews.length ? <ContentCarousel key={`${newsPeriod}-${newsSpectrum}-${category}-${completedSearch}-${compactCarousel}`} label="Notícias com contexto" pageClassName="news-grid" pages={newsPages.map((page, pageIndex) => page.map((item, index) => <article className="news-card" key={item.id}><div><span>{item.category}</span><time>{relativeDate(item.publishedAt)}</time></div><span className="news-number">{String(pageIndex * (compactCarousel ? 2 : 4) + index + 1).padStart(2, "0")}</span><h3>{item.title}</h3><p>{item.source}<span className={`spectrum-badge spectrum-${(item.spectrum || "Centro").toLowerCase()}`} title="Orientação editorial aproximada da fonte; não da matéria individual">{item.spectrum || "Centro"}</span></p><a href={item.url} target="_blank" rel="noreferrer">Ler notícia ↗</a></article>))} /> : <div className="news-empty"><strong>Nenhuma notícia passou pelo filtro.</strong><p>{newsPeriod === "today" ? "Veja a seleção da semana ou outro espectro." : "Nenhuma fonte confiável publicou algo relevante para esta combinação."}</p></div>}
+            {visibleNews.length ? <ContentCarousel key={`${newsPeriod}-${newsSpectrum}-${category}-${completedSearch}-${compactCarousel}`} label="Notícias com contexto" pageClassName="news-grid" pages={newsPages.map((page, pageIndex) => page.map((item, index) => <article className="news-card" key={item.id}><div><span>{item.category}</span><time>{relativeDate(item.publishedAt)}</time></div>{auditState(contentAudits[`news:${item.url}`]) === "pending" && <span className="audit-badge">em auditoria</span>}<span className="news-number">{String(pageIndex * (compactCarousel ? 2 : 4) + index + 1).padStart(2, "0")}</span><h3>{item.title}</h3><p>{item.source}<span className={`spectrum-badge spectrum-${(item.spectrum || "Centro").toLowerCase()}`} title="Orientação editorial aproximada da fonte; não da matéria individual">{item.spectrum || "Centro"}</span></p><a href={item.url} target="_blank" rel="noreferrer">Ler notícia ↗</a></article>))} /> : <div className="news-empty"><strong>Nenhuma notícia passou pelo filtro.</strong><p>{newsPeriod === "today" ? "Veja a seleção da semana ou outro espectro." : "Nenhuma fonte confiável publicou algo relevante para esta combinação."}</p></div>}
             <div className="news-meta">{(contentSearchActive || newsUpdatedAt) && <small className="news-update">{contentSearchActive ? "Pesquisa filtrada agora" : `Atualizado ${updateTimestamp(newsUpdatedAt!)}`}</small>}<small>Espectro = orientação aproximada da fonte, não da matéria.</small></div>
           </section>
 
           {(visiblePodcasts.length > 0 || contentSearchActive) && <section className="podcast-section compact-podcasts" aria-labelledby="podcasts-title">
             <div className="section-heading"><div><p className="eyebrow">{contentSearchActive ? "PODCASTS SOBRE O TEMA" : "OUÇA SEM PRESSA"}</p><h2 id="podcasts-title">{contentSearchActive ? completedSearch : "Podcasts"}</h2></div><span>Apple Podcasts</span></div>
-            {visiblePodcasts.length ? <ContentCarousel key={`${category}-${completedSearch}`} label="Podcasts selecionados" pageClassName="podcast-grid" pages={podcastPages.map((page) => page.map((podcast) => <PodcastCard key={podcast.id} podcast={podcast} onPlay={setPlayingPodcast} />))} /> : <div className="news-empty"><strong>Nenhum podcast passou pelo filtro.</strong><p>A busca prioriza relação com o tema, atividade recente e profundidade.</p></div>}
+            {visiblePodcasts.length ? <ContentCarousel key={`${category}-${completedSearch}`} label="Podcasts selecionados" pageClassName="podcast-grid" pages={podcastPages.map((page) => page.map((podcast) => <PodcastCard key={podcast.id} podcast={podcast} pending={auditState(contentAudits[`podcast:${podcast.appleId}`]) === "pending"} onPlay={setPlayingPodcast} />))} /> : <div className="news-empty"><strong>Nenhum podcast passou pelo filtro.</strong><p>A busca prioriza relação com o tema, atividade recente e profundidade.</p></div>}
           </section>}
         </div>
 
         {ranked.length > 0 && <section className="depth-section" aria-labelledby="depth-title">
           <div className="depth-heading"><div><p className="eyebrow">APRENDA EM CAMADAS</p><h2 id="depth-title">Escolha a profundidade certa para hoje</h2></div><p>Comece pelo tronco, avance pelos mecanismos e só então mergulhe nas discussões mais exigentes.</p></div>
-          <div className="depth-lanes">{depthLanes.map((lane) => <article className={`depth-lane depth-${lane.id}`} key={lane.id}><header><p>{lane.eyebrow}</p><h3>{lane.title}</h3><span>{lane.description}</span><small>{lane.videos.length} vídeo{lane.videos.length === 1 ? "" : "s"} nesta seleção</small></header>{lane.videos.length > 0 ? <div className="depth-video-grid">{lane.videos.map((video) => <DepthVideoCard key={`${lane.id}-${video.id}`} video={video} onPlay={setPlaying} />)}</div> : <div className="depth-empty">Ainda não há vídeos deste nível para o filtro atual.</div>}</article>)}</div>
+          <div className="depth-lanes">{depthLanes.map((lane) => <article className={`depth-lane depth-${lane.id}`} key={lane.id}><header><p>{lane.eyebrow}</p><h3>{lane.title}</h3><span>{lane.description}</span><small>{lane.videos.length} vídeo{lane.videos.length === 1 ? "" : "s"} nesta seleção</small></header>{lane.videos.length > 0 ? <div className="depth-video-grid">{lane.videos.map((video) => <DepthVideoCard key={`${lane.id}-${video.id}`} video={video} pending={auditState(contentAudits[`video:${video.youtubeId}`]) === "pending"} onPlay={setPlaying} />)}</div> : <div className="depth-empty">Ainda não há vídeos deste nível para o filtro atual.</div>}</article>)}</div>
         </section>}
 
         {ranked.length ? <section className="video-grid">
-          {ranked.slice(0, Math.min(8, visibleCount)).map((video) => <VideoCard key={video.id} video={video} onPlay={setPlaying} onFeedback={feedback} />)}
+          {ranked.slice(0, Math.min(8, visibleCount)).map((video) => <VideoCard key={video.id} video={video} pending={video.category !== "Minha biblioteca" && auditState(contentAudits[`video:${video.youtubeId}`]) === "pending"} onPlay={setPlaying} onFeedback={feedback} />)}
         </section> : <div className="empty-state"><strong>Nenhum vídeo encontrado</strong><p>Tente outro filtro ou termo de busca.</p></div>}
 
         {ranked.length > 8 && visibleCount > 8 && <section className="video-grid second-grid">
-          {ranked.slice(8, visibleCount).map((video) => <VideoCard key={video.id} video={video} onPlay={setPlaying} onFeedback={feedback} />)}
+          {ranked.slice(8, visibleCount).map((video) => <VideoCard key={video.id} video={video} pending={video.category !== "Minha biblioteca" && auditState(contentAudits[`video:${video.youtubeId}`]) === "pending"} onPlay={setPlaying} onFeedback={feedback} />)}
         </section>}
 
         {visibleCount < ranked.length && <button className="load-more" onClick={() => setVisibleCount((value) => value + 12)}>Mostrar mais vídeos</button>}

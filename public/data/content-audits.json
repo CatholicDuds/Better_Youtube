@@ -1,6 +1,7 @@
 {
   "updatedAt": null,
-  "model": "gpt-5.6",
-  "promptVersion": 1,
+  "provider": "groq",
+  "model": "openai/gpt-oss-20b",
+  "promptVersion": 2,
   "audits": {}
 }
