@@ -122,7 +122,7 @@ async function fetchYouTubeTranscriptWithYtDlp(videoId) {
   try {
     const executable = process.env.YTDLP_PATH || "yt-dlp";
     await execFileAsync(executable, [
-      "--skip-download", "--write-subs", "--write-auto-subs", "--sub-langs", "pt.*,en.*",
+      "--skip-download", "--write-subs", "--write-auto-subs", "--sub-langs", "pt,en",
       "--sub-format", "json3", "--no-playlist", "-o", join(directory, "%(id)s.%(ext)s"),
       `https://www.youtube.com/watch?v=${videoId}`,
     ], { timeout: 120_000, maxBuffer: 2_000_000 });
@@ -140,4 +140,26 @@ async function fetchYouTubeTranscriptWithYtDlp(videoId) {
 
 export function htmlToText(html = "") {
   return html.replace(/<script[\s\S]*?<\/script>/gi, " ").replace(/<style[\s\S]*?<\/style>/gi, " ").replace(/<[^>]+>/g, " ").replace(/&nbsp;|&#160;/gi, " ").replace(/&amp;/gi, "&").replace(/&quot;/gi, '"').replace(/&#39;|&apos;/gi, "'").replace(/\s+/g, " ").trim();
+}
+
+export async function transcribeAudioUrl(audioUrl) {
+  if (!OPENAI_API_KEY || !audioUrl) return "";
+  const directory = await mkdtemp(join(tmpdir(), "clarity-audio-"));
+  const output = join(directory, "episode.mp3");
+  try {
+    await execFileAsync(process.env.FFMPEG_PATH || "ffmpeg", [
+      "-y", "-i", audioUrl, "-vn", "-ac", "1", "-ar", "16000", "-b:a", "16k", "-t", "10800", output,
+    ], { timeout: 900_000, maxBuffer: 2_000_000 });
+    const audio = await readFile(output);
+    if (!audio.length || audio.length > 24 * 1024 * 1024) return "";
+    const body = new FormData();
+    body.set("file", new Blob([audio], { type: "audio/mpeg" }), "episode.mp3");
+    body.set("model", process.env.OPENAI_TRANSCRIPTION_MODEL || "gpt-4o-transcribe");
+    body.set("response_format", "text");
+    const response = await fetch("https://api.openai.com/v1/audio/transcriptions", { method: "POST", headers: { authorization: `Bearer ${OPENAI_API_KEY}` }, body });
+    if (!response.ok) throw new Error(`OpenAI transcription: ${response.status} ${await response.text()}`);
+    return (await response.text()).trim();
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
 }

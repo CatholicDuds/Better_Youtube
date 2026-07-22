@@ -17,20 +17,7 @@ const searches = [
   { query: "Catholic Church Vatican (site:vaticannews.va OR site:catholicnewsagency.com OR site:cruxnow.com OR site:reuters.com)", category: "Fé", hl: "en-US", gl: "US", ceid: "US:en" },
 ];
 
-const trustedSources = [
-  [/Reuters/i, 1], [/Associated Press|AP News/i, .99], [/Nature$/i, .99], [/NASA/i, .99],
-  [/Financial Times/i, .98], [/Foreign Affairs/i, .98], [/Vatican News/i, .98],
-  [/The Economist/i, .97], [/Harvard Business Review/i, .97], [/MIT Technology Review/i, .97],
-  [/BBC/i, .96], [/Scientific American/i, .96], [/Deutsche Welle|DW Brasil|^dw\.com$/i, .94],
-  [/Agência FAPESP/i, .97], [/Catholic News Agency|ACI Digital/i, .95], [/CNBB/i, .94],
-  [/Valor Econômico/i, .94], [/Nexo Jornal/i, .94], [/Agência Brasil/i, .92], [/Crux/i, .92], [/The Guardian/i, .92],
-  [/Folha de S\.Paulo/i, .9], [/Estadão|O Estado de S\. Paulo/i, .9], [/CNN Brasil/i, .86],
-];
 const shallowHeadline = /urgente|chocante|você não vai acreditar|veja o que aconteceu|bomba|detonou|humilhou|viralizou/i;
-
-function sourceQuality(source) {
-  return trustedSources.find(([pattern]) => pattern.test(source))?.[1] || .62;
-}
 
 function sourceSpectrum(source) {
   if (/Nexo Jornal|Folha de S\.Paulo|The Guardian/i.test(source)) return "Esquerda";
@@ -61,17 +48,15 @@ async function fetchNews(search) {
     const source = valueOf(block, "source") || "Google Notícias";
     let title = valueOf(block, "title");
     if (title.endsWith(` - ${source}`)) title = title.slice(0, -source.length - 3);
-    return { id: `news-${search.category}-${search.gl}-${index}-${Date.parse(publishedAt)}`, title, source, url: valueOf(block, "link"), category: search.category, publishedAt, quality: sourceQuality(source), spectrum: sourceSpectrum(source) };
+    return { id: `news-${search.category}-${search.gl}-${index}-${Date.parse(publishedAt)}`, title, source, url: valueOf(block, "link"), category: search.category, publishedAt, spectrum: sourceSpectrum(source) };
   }).filter((item) => item.title && item.url && !shallowHeadline.test(item.title));
 }
 
 const settled = await Promise.allSettled(searches.map(fetchNews));
 const all = settled.flatMap((result) => result.status === "fulfilled" ? result.value : []);
-const news = all.filter((item, index) => all.findIndex((candidate) => candidate.title.toLowerCase() === item.title.toLowerCase()) === index).sort((a, b) => {
-  const freshnessA = Math.max(0, 1 - (Date.now() - Date.parse(a.publishedAt)) / (7 * 86_400_000));
-  const freshnessB = Math.max(0, 1 - (Date.now() - Date.parse(b.publishedAt)) / (7 * 86_400_000));
-  return (b.quality * .75 + freshnessB * .25) - (a.quality * .75 + freshnessA * .25);
-});
+const news = all
+  .filter((item, index) => all.findIndex((candidate) => candidate.title.toLowerCase() === item.title.toLowerCase()) === index)
+  .sort((a, b) => Date.parse(b.publishedAt) - Date.parse(a.publishedAt));
 if (!news.length) {
   console.warn("Clarity: nenhuma notícia nova; mantendo o arquivo publicado anteriormente.");
   process.exit(0);

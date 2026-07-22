@@ -1,114 +1,132 @@
 {
-  "updatedAt": "2026-07-21T13:52:28.800Z",
+  "updatedAt": "2026-07-22T17:00:37.207Z",
   "source": "Apple iTunes Search API",
   "podcasts": [
     {
       "appleId": "1347139874",
       "title": "Nova Acropole Podcast Filosofia",
       "artworkUrl": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/e2/ee/2d/e2ee2d2a-1b46-0608-79db-ef85fb0172fb/mza_9165812571258038762.jpg/600x600bb.jpg",
-      "appleUrl": "https://podcasts.apple.com/br/podcast/nova-acropole-podcast-filosofia/id1347139874?uo=4"
+      "appleUrl": "https://podcasts.apple.com/br/podcast/nova-acropole-podcast-filosofia/id1347139874?uo=4",
+      "feedUrl": "https://rss.libsyn.com/shows/122663/destinations/721875.xml"
     },
     {
       "appleId": "991572436",
       "title": "Filosofia Pop",
       "artworkUrl": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts115/v4/7b/d8/7d/7bd87d41-7cc1-36f6-e4c9-40b71b970c99/mza_13386460704348740924.jpg/600x600bb.jpg",
-      "appleUrl": "https://podcasts.apple.com/br/podcast/filosofia-pop/id991572436?uo=4"
+      "appleUrl": "https://podcasts.apple.com/br/podcast/filosofia-pop/id991572436?uo=4",
+      "feedUrl": "https://filosofiapop.com.br/feed/podcast/"
     },
     {
       "appleId": "1193387182",
       "title": "Petit Journal",
       "artworkUrl": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts116/v4/92/0a/bc/920abc52-a830-7d40-4c97-ca20496b13be/mza_15900765804048820826.jpg/600x600bb.jpg",
-      "appleUrl": "https://podcasts.apple.com/br/podcast/petit-journal/id1193387182?uo=4"
+      "appleUrl": "https://podcasts.apple.com/br/podcast/petit-journal/id1193387182?uo=4",
+      "feedUrl": "https://www.spreaker.com/show/5659715/episodes/feed"
     },
     {
       "appleId": "1553427360",
       "title": "Os Sócios Podcast",
       "artworkUrl": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/55/95/25/559525fe-0c69-1e3b-1225-6705a244b612/mza_2434104345682217915.jpg/600x600bb.jpg",
-      "appleUrl": "https://podcasts.apple.com/br/podcast/os-s%C3%B3cios-podcast/id1553427360?uo=4"
+      "appleUrl": "https://podcasts.apple.com/br/podcast/os-s%C3%B3cios-podcast/id1553427360?uo=4",
+      "feedUrl": "https://anchor.fm/s/4c46462c/podcast/rss"
     },
     {
       "appleId": "1455626095",
       "title": "Christo Nihil Praeponere",
       "artworkUrl": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts115/v4/24/50/a9/2450a953-8e6f-9a14-f615-90c6e9d88434/mza_1147449132379799041.jpg/600x600bb.jpg",
-      "appleUrl": "https://podcasts.apple.com/br/podcast/christo-nihil-praeponere/id1455626095?uo=4"
+      "appleUrl": "https://podcasts.apple.com/br/podcast/christo-nihil-praeponere/id1455626095?uo=4",
+      "feedUrl": "https://anchor.fm/s/e81d4a00/podcast/rss"
     },
     {
       "appleId": "191182582",
       "title": "Canal Café Brasil",
       "artworkUrl": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts126/v4/41/4f/b3/414fb358-a017-8c14-a813-025f2671b7b7/mza_1454136388890927951.jpg/600x600bb.jpg",
-      "appleUrl": "https://podcasts.apple.com/br/podcast/canal-caf%C3%A9-brasil/id191182582?uo=4"
+      "appleUrl": "https://podcasts.apple.com/br/podcast/canal-caf%C3%A9-brasil/id191182582?uo=4",
+      "feedUrl": "https://www.omnycontent.com/d/playlist/4dc4c11a-5a07-47d5-a5d5-b3b50010fd77/d4cef5c8-cee0-4ac8-a2e5-b4010135e689/676eef67-39ad-4721-a8d2-b4010135e69d/podcast.rss"
     },
     {
       "appleId": "1050462261",
       "title": "Acquired",
       "artworkUrl": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/a8/e1/de/a8e1deff-9f88-4e55-a541-b0dc793c0cdc/mza_11539673419613154037.jpg/600x600bb.jpg",
-      "appleUrl": "https://podcasts.apple.com/br/podcast/acquired/id1050462261?uo=4"
+      "appleUrl": "https://podcasts.apple.com/br/podcast/acquired/id1050462261?uo=4",
+      "feedUrl": "https://feeds.transistor.fm/acquired"
     },
     {
       "appleId": "990149481",
       "title": "The Knowledge Project",
       "artworkUrl": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/4a/9c/e2/4a9ce2fd-ddf6-0d00-8760-4e7167378ecf/mza_16600443422050351456.jpeg/600x600bb.jpg",
-      "appleUrl": "https://podcasts.apple.com/br/podcast/the-knowledge-project/id990149481?uo=4"
+      "appleUrl": "https://podcasts.apple.com/br/podcast/the-knowledge-project/id990149481?uo=4",
+      "feedUrl": "https://feeds.megaphone.fm/FSMI7575968096"
     },
     {
       "appleId": "1028908750",
       "title": "Hidden Brain",
       "artworkUrl": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/e2/18/b8/e218b838-b790-3a33-441f-c3772d9abbbf/mza_6896085647855199484.jpg/600x600bb.jpg",
-      "appleUrl": "https://podcasts.apple.com/br/podcast/hidden-brain/id1028908750?uo=4"
+      "appleUrl": "https://podcasts.apple.com/br/podcast/hidden-brain/id1028908750?uo=4",
+      "feedUrl": "https://feeds.simplecast.com/kwWc0lhf"
     },
     {
       "appleId": "325404506",
       "title": "StarTalk Radio",
       "artworkUrl": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/d7/88/9b/d7889bab-dca5-77ba-3d0c-7fae8f16ab11/mza_8810454848871508.jpg/600x600bb.jpg",
-      "appleUrl": "https://podcasts.apple.com/br/podcast/startalk-radio/id325404506?uo=4"
+      "appleUrl": "https://podcasts.apple.com/br/podcast/startalk-radio/id325404506?uo=4",
+      "feedUrl": "https://feeds.simplecast.com/4T39_jAj"
     },
     {
       "appleId": "1537788786",
       "title": "The Rest Is History",
       "artworkUrl": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/20/ed/c7/20edc799-fdb3-e608-a164-0cdaaee63c6b/mza_16701966284979673066.jpg/600x600bb.jpg",
-      "appleUrl": "https://podcasts.apple.com/br/podcast/the-rest-is-history/id1537788786?uo=4"
+      "appleUrl": "https://podcasts.apple.com/br/podcast/the-rest-is-history/id1537788786?uo=4",
+      "feedUrl": "https://feeds.megaphone.fm/GLT4787413333"
     },
     {
       "appleId": "1611374685",
       "title": "The Rest Is Politics",
       "artworkUrl": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/d0/a7/d6/d0a7d6a3-e1d3-52ba-60fd-d788ceb7d559/mza_17193364103373697567.jpg/600x600bb.jpg",
-      "appleUrl": "https://podcasts.apple.com/br/podcast/the-rest-is-politics/id1611374685?uo=4"
+      "appleUrl": "https://podcasts.apple.com/br/podcast/the-rest-is-politics/id1611374685?uo=4",
+      "feedUrl": "https://feeds.megaphone.fm/GLT9190936013"
     },
     {
       "appleId": "135066958",
       "title": "EconTalk",
       "artworkUrl": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts115/v4/a0/13/c5/a013c54f-362a-670d-a75c-1c5486dfc40f/mza_6055952261821533990.jpg/600x600bb.jpg",
-      "appleUrl": "https://podcasts.apple.com/br/podcast/econtalk/id135066958?uo=4"
+      "appleUrl": "https://podcasts.apple.com/br/podcast/econtalk/id135066958?uo=4",
+      "feedUrl": "https://feeds.simplecast.com/wgl4xEgL"
     },
     {
       "appleId": "983795625",
       "title": "Conversations with Tyler",
       "artworkUrl": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts115/v4/e9/5f/21/e95f218a-2962-8ae4-7e85-a006bb2b7d3b/mza_11200897794344120781.jpg/600x600bb.jpg",
-      "appleUrl": "https://podcasts.apple.com/br/podcast/conversations-with-tyler/id983795625?uo=4"
+      "appleUrl": "https://podcasts.apple.com/br/podcast/conversations-with-tyler/id983795625?uo=4",
+      "feedUrl": "https://rss.libsyn.com/shows/137081/destinations/850607.xml"
     },
     {
       "appleId": "1406534739",
       "title": "Sean Carroll's Mindscape: Science, Society, Philosophy, Culture, Arts, and Ideas",
       "artworkUrl": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts125/v4/d3/22/95/d32295a0-f278-1807-9fde-5698c30aac30/mza_16649100911920251614.jpeg/600x600bb.jpg",
-      "appleUrl": "https://podcasts.apple.com/br/podcast/sean-carrolls-mindscape-science-society-philosophy/id1406534739?uo=4"
+      "appleUrl": "https://podcasts.apple.com/br/podcast/sean-carrolls-mindscape-science-society-philosophy/id1406534739?uo=4",
+      "feedUrl": "https://rss.libsyn.com/shows/604590/destinations/5264190.xml"
     },
     {
       "appleId": "1097862282",
       "title": "Pints With Aquinas",
       "artworkUrl": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/54/61/f1/5461f16d-2adb-b501-c9b7-0ef5e6d72eba/mza_7503559985443598183.jpeg/600x600bb.jpg",
-      "appleUrl": "https://podcasts.apple.com/br/podcast/pints-with-aquinas/id1097862282?uo=4"
+      "appleUrl": "https://podcasts.apple.com/br/podcast/pints-with-aquinas/id1097862282?uo=4",
+      "feedUrl": "https://feeds.megaphone.fm/BVDWV3128780668"
     },
     {
       "appleId": "1539568321",
       "title": "The Bible in a Year (with Fr. Mike Schmitz)",
       "artworkUrl": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts116/v4/ca/87/e0/ca87e07d-9d97-a433-1dc9-55dcfbd54f17/mza_9875864189557480350.jpg/600x600bb.jpg",
-      "appleUrl": "https://podcasts.apple.com/br/podcast/the-bible-in-a-year-with-fr-mike-schmitz/id1539568321?uo=4"
+      "appleUrl": "https://podcasts.apple.com/br/podcast/the-bible-in-a-year-with-fr-mike-schmitz/id1539568321?uo=4",
+      "feedUrl": "https://feeds.fireside.fm/bibleinayear/rss"
     },
     {
       "appleId": "1434243584",
       "title": "Lex Fridman Podcast",
       "artworkUrl": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts115/v4/3e/e3/9c/3ee39c89-de08-47a6-7f3d-3849cef6d255/mza_16657851278549137484.png/600x600bb.jpg",
-      "appleUrl": "https://podcasts.apple.com/br/podcast/lex-fridman-podcast/id1434243584?uo=4"
+      "appleUrl": "https://podcasts.apple.com/br/podcast/lex-fridman-podcast/id1434243584?uo=4",
+      "feedUrl": "https://lexfridman.com/feed/podcast/"
     }
   ]
 }

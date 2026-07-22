@@ -1,5 +1,5 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
-import { auditContent, fetchYouTubeTranscript, htmlToText } from "./lib/content-auditor.mjs";
+import { auditContent, fetchYouTubeTranscript, htmlToText, transcribeAudioUrl } from "./lib/content-auditor.mjs";
 
 if (!process.env.OPENAI_API_KEY) {
   console.warn("Clarity: auditoria profunda ignorada; configure OPENAI_API_KEY para aprovar conteúdo.");
@@ -8,6 +8,7 @@ if (!process.env.OPENAI_API_KEY) {
 
 const outputUrl = new URL("../public/data/content-audits.json", import.meta.url);
 const perKindLimit = Math.max(1, Math.min(20, Number(process.env.CONTENT_AUDIT_BATCH_SIZE || 6)));
+const podcastLimit = Math.max(1, Math.min(3, Number(process.env.PODCAST_AUDIT_BATCH_SIZE || 1)));
 
 async function readJson(path, fallback) {
   try { return JSON.parse(await readFile(new URL(path, import.meta.url), "utf8")); } catch { return fallback; }
@@ -41,8 +42,19 @@ async function auditNews(item) {
   if (audits[key]) return false;
   let text = "";
   try {
-    const response = await fetch(item.url, { redirect: "follow", headers: { "user-agent": "ClarityLearningFeed/1.0" } });
-    if (response.ok) text = htmlToText(await response.text());
+    const searchUrl = `https://html.duckduckgo.com/html/?q=${encodeURIComponent(`"${item.title}" ${item.source || ""}`)}`;
+    const searchResponse = await fetch(searchUrl, { headers: { "user-agent": "Mozilla/5.0" } });
+    const searchHtml = searchResponse.ok ? await searchResponse.text() : "";
+    const resultUrls = [...searchHtml.matchAll(/result__a[^>]+href="([^"]+)"/g)].map((match) => {
+      const href = match[1].replaceAll("&amp;", "&");
+      try { return new URL(href.startsWith("//") ? `https:${href}` : href).searchParams.get("uddg") || href; } catch { return href; }
+    }).filter((url, index, all) => /^https?:/i.test(url) && !/google\.com|duckduckgo\.com/i.test(url) && all.indexOf(url) === index).slice(0, 5);
+    for (const url of resultUrls) {
+      const response = await fetch(url, { redirect: "follow", headers: { "user-agent": "Mozilla/5.0" } }).catch(() => null);
+      if (!response?.ok) continue;
+      const candidate = htmlToText(await response.text());
+      if (candidate.length >= 1800) { text = candidate; break; }
+    }
   } catch {}
   audits[key] = { ...(await auditContent({ kind: "news", title: item.title, content: text, context: `Categoria: ${item.category || "notícia"}; publicação: ${item.publishedAt || "não informada"}` })), auditedAt: now };
   return true;
@@ -60,10 +72,12 @@ async function podcastTranscript(feedUrl) {
   const item = xml.match(/<item>([\s\S]*?)<\/item>/i)?.[1] || "";
   const title = htmlToText(xmlValue(item, "title"));
   const transcriptUrl = item.match(/<podcast:transcript[^>]+url=["']([^"']+)/i)?.[1]?.replaceAll("&amp;", "&");
-  if (!transcriptUrl) return { title, text: "" };
-  const transcriptResponse = await fetch(transcriptUrl, { headers: { "user-agent": "ClarityLearningFeed/1.0" } });
-  if (!transcriptResponse.ok) return { title, text: "" };
-  return { title, text: htmlToText(await transcriptResponse.text()) };
+  if (transcriptUrl) {
+    const transcriptResponse = await fetch(transcriptUrl, { headers: { "user-agent": "ClarityLearningFeed/1.0" } });
+    if (transcriptResponse.ok) return { title, text: htmlToText(await transcriptResponse.text()) };
+  }
+  const audioUrl = item.match(/<enclosure[^>]+url=["']([^"']+)/i)?.[1]?.replaceAll("&amp;", "&");
+  return { title, text: await transcribeAudioUrl(audioUrl) };
 }
 
 async function auditPodcast(item) {
@@ -76,17 +90,17 @@ async function auditPodcast(item) {
   return true;
 }
 
-async function runBatch(items, audit) {
+async function runBatch(items, audit, limit = perKindLimit) {
   let processed = 0;
   for (const item of items) {
-    if (processed >= perKindLimit) break;
+    if (processed >= limit) break;
     try { if (await audit(item)) processed += 1; } catch (error) { console.warn(`Clarity audit: ${error instanceof Error ? error.message : error}`); }
   }
   return processed;
 }
 
 const [videoCount, newsCount, podcastCount] = await Promise.all([
-  runBatch(videos, auditVideo), runBatch(newsData.news || [], auditNews), runBatch(podcastData.podcasts || [], auditPodcast),
+  runBatch(videos, auditVideo), runBatch(newsData.news || [], auditNews), runBatch(podcastData.podcasts || [], auditPodcast, podcastLimit),
 ]);
 
 await mkdir(new URL("../public/data/", import.meta.url), { recursive: true });

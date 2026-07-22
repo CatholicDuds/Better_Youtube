@@ -32,7 +32,10 @@ jobs:
           node-version: 22
           cache: pnpm
       - name: Instalar extrator de legendas
-        run: python -m pip install --disable-pip-version-check yt-dlp
+        run: |
+          python -m pip install --disable-pip-version-check yt-dlp
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
       - run: pnpm install --frozen-lockfile
       - name: Atualizar vídeos dos canais selecionados
         run: node scripts/update-videos.mjs
@@ -50,7 +53,9 @@ jobs:
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_EVALUATION_MODEL: gpt-5.6
+          OPENAI_TRANSCRIPTION_MODEL: gpt-4o-transcribe
           CONTENT_AUDIT_BATCH_SIZE: 6
+          PODCAST_AUDIT_BATCH_SIZE: 1
       - name: Gerar site estático
         run: npm run build:pages
         env:
