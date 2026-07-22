@@ -407,6 +407,7 @@ export default function Home() {
   const [refreshSeed, setRefreshSeed] = useState(0);
   const [recentRecommendationIds, setRecentRecommendationIds] = useState<string[]>([]);
   const [refreshing, setRefreshing] = useState(false);
+  const [refreshStatus, setRefreshStatus] = useState("");
   const [languageLevel, setLanguageLevel] = useState<"Essencial" | "Intermediário" | "Avançado">("Intermediário");
   const [watchedBlock, setWatchedBlock] = useState<string[]>([]);
   const [articleIndex, setArticleIndex] = useState(0);
@@ -646,35 +647,89 @@ export default function Home() {
     setRefreshSeed((current) => current + 1);
     setVisibleCount(RECOMMENDATION_BATCH_SIZE);
     setRefreshing(true);
+    setRefreshStatus("");
 
     const cacheBuster = Date.now();
     const controller = new AbortController();
     const timeoutId = window.setTimeout(() => controller.abort(), 8_000);
     try {
-      const [latestResult, discoveriesResult, headlinesResult] = await Promise.allSettled([
+      const [latestResult, discoveriesResult, headlinesResult, podcastsResult, auditsResult] = await Promise.allSettled([
         fetch(`${BASE_PATH}/data/latest-videos.json?t=${cacheBuster}`, { cache: "no-store", signal: controller.signal }).then((response) => response.ok ? response.json() : Promise.reject()),
         fetch(`${BASE_PATH}/data/discovered-videos.json?t=${cacheBuster}`, { cache: "no-store", signal: controller.signal }).then((response) => response.ok ? response.json() : Promise.reject()),
         fetch(`${BASE_PATH}/data/news.json?t=${cacheBuster}`, { cache: "no-store", signal: controller.signal }).then((response) => response.ok ? response.json() : Promise.reject()),
+        fetch(`${BASE_PATH}/data/podcasts.json?t=${cacheBuster}`, { cache: "no-store", signal: controller.signal }).then((response) => response.ok ? response.json() : Promise.reject()),
+        fetch(`${BASE_PATH}/data/content-audits.json?t=${cacheBuster}`, { cache: "no-store", signal: controller.signal }).then((response) => response.ok ? response.json() : Promise.reject()),
       ]);
 
+      let changed = false;
+      let successfulRequests = 0;
+
       if (latestResult.status === "fulfilled") {
+        successfulRequests += 1;
         const data = latestResult.value;
-        if (Array.isArray(data.videos)) setLiveVideos(data.videos);
-        if (data.updatedAt) setUpdatedAt(data.updatedAt);
+        if (Array.isArray(data.videos)) {
+          changed ||= data.videos.map((video: Video) => video.youtubeId).join("|") !== liveVideos.map((video) => video.youtubeId).join("|");
+          setLiveVideos(data.videos);
+        }
+        if (data.updatedAt) {
+          changed ||= data.updatedAt !== updatedAt;
+          setUpdatedAt(data.updatedAt);
+        }
       }
       if (discoveriesResult.status === "fulfilled") {
+        successfulRequests += 1;
         const data = discoveriesResult.value;
-        if (Array.isArray(data.videos)) setDiscoveredVideos(data.videos);
+        if (Array.isArray(data.videos)) {
+          changed ||= data.videos.map((video: Video) => video.youtubeId).join("|") !== discoveredVideos.map((video) => video.youtubeId).join("|");
+          setDiscoveredVideos(data.videos);
+        }
       }
       if (headlinesResult.status === "fulfilled") {
+        successfulRequests += 1;
         const data = headlinesResult.value;
-        if (Array.isArray(data.news)) setNews(data.news);
-        if (data.updatedAt) setNewsUpdatedAt(data.updatedAt);
+        if (Array.isArray(data.news)) {
+          changed ||= data.news.map((item: NewsItem) => item.url).join("|") !== news.map((item) => item.url).join("|");
+          setNews(data.news);
+        }
+        if (data.updatedAt) {
+          changed ||= data.updatedAt !== newsUpdatedAt;
+          setNewsUpdatedAt(data.updatedAt);
+        }
       }
+      if (podcastsResult.status === "fulfilled") {
+        successfulRequests += 1;
+        const data = podcastsResult.value;
+        if (Array.isArray(data.podcasts)) {
+          const nextArtwork: Record<string, { artworkUrl: string; appleUrl: string }> = Object.fromEntries(data.podcasts.map((item: { appleId: string; artworkUrl: string; appleUrl: string }) => [item.appleId, { artworkUrl: item.artworkUrl, appleUrl: item.appleUrl }]));
+          changed ||= JSON.stringify(nextArtwork) !== JSON.stringify(podcastArtwork);
+          setPodcastArtwork(nextArtwork);
+        }
+      }
+      if (auditsResult.status === "fulfilled") {
+        successfulRequests += 1;
+        const data = auditsResult.value;
+        if (data?.audits && typeof data.audits === "object") {
+          changed ||= JSON.stringify(data.audits) !== JSON.stringify(contentAudits);
+          setContentAudits(data.audits);
+        }
+      }
+
+      setRefreshStatus(successfulRequests === 0
+        ? "Não foi possível consultar as atualizações. Verifique a conexão e tente novamente."
+        : successfulRequests < 5
+          ? `Consulta parcial: ${successfulRequests} de 5 fontes responderam. Tente novamente em instantes.`
+          : changed
+            ? "Novos dados carregados, incluindo as auditorias mais recentes da Groq."
+            : "Tudo conferido: ainda não há uma atualização nova publicada.");
     } finally {
       window.clearTimeout(timeoutId);
       setRefreshing(false);
     }
+  }
+
+  function collapseVideoFeed() {
+    setVisibleCount(RECOMMENDATION_BATCH_SIZE);
+    window.requestAnimationFrame(() => document.getElementById("video-feed")?.scrollIntoView({ behavior: "smooth", block: "start" }));
   }
 
   async function searchContent(searchOverride?: string, targetCategory?: string) {
@@ -959,6 +1014,7 @@ export default function Home() {
           <label>Duração máxima <output>{preferences.maxMinutes} min</output><input type="range" min="8" max="120" value={preferences.maxMinutes} onChange={(event) => persistPreferences({ ...preferences, maxMinutes: Number(event.target.value) })} /></label>
         </section>}
 
+        {refreshStatus && <div className="web-search-status" role="status" aria-live="polite"><span>↻</span><p>{refreshStatus}</p><button onClick={() => setRefreshStatus("")} aria-label="Fechar aviso de atualização">Fechar</button></div>}
         {webSearchStatus && <div className="web-search-status"><span>⌕</span><p>{webSearchStatus}</p></div>}
         <div className="audit-notice"><span>◷</span><p><strong>Feed aprovado pela Groq.</strong> {semanticAuditCount} conteúdo{semanticAuditCount === 1 ? " foi avaliado" : "s foram avaliados"} semanticamente e {approvedAuditCount} {approvedAuditCount === 1 ? "foi aprovado" : "foram aprovados"}. {pendingAuditCount > 0 && `${pendingAuditCount} itens visíveis neste filtro continuam apenas na fila de auditoria.`}</p></div>
 
@@ -980,7 +1036,7 @@ export default function Home() {
           <div className="depth-lanes">{depthLanes.map((lane) => <article className={`depth-lane depth-${lane.id}`} key={lane.id}><header><p>{lane.eyebrow}</p><h3>{lane.title}</h3><span>{lane.description}</span><small>{lane.videos.length} vídeo{lane.videos.length === 1 ? "" : "s"} nesta seleção</small></header>{lane.videos.length > 0 ? <div className="depth-video-grid">{lane.videos.map((video) => <DepthVideoCard key={`${lane.id}-${video.id}`} video={video} onPlay={setPlaying} />)}</div> : <div className="depth-empty">Ainda não há vídeos deste nível para o filtro atual.</div>}</article>)}</div>
         </section>}
 
-        {ranked.length ? <section className="video-grid">
+        {ranked.length ? <section className="video-grid" id="video-feed">
           {ranked.slice(0, Math.min(8, visibleCount)).map((video) => <VideoCard key={video.id} video={video} onPlay={setPlaying} onFeedback={feedback} />)}
         </section> : <div className="empty-state"><strong>A Groq ainda não aprovou nenhum vídeo</strong><p>{pendingVideos.length > 0 ? "Os candidatos aparecem abaixo somente como fila de auditoria, não como recomendações." : "Tente outro filtro ou termo de busca."}</p></div>}
 
@@ -988,7 +1044,10 @@ export default function Home() {
           {ranked.slice(8, visibleCount).map((video) => <VideoCard key={video.id} video={video} onPlay={setPlaying} onFeedback={feedback} />)}
         </section>}
 
-        {visibleCount < ranked.length && <button className="load-more" onClick={() => setVisibleCount((value) => value + 12)}>Mostrar mais vídeos</button>}
+        {ranked.length > RECOMMENDATION_BATCH_SIZE && <div className="feed-pagination-actions">
+          {visibleCount < ranked.length && <button className="load-more" onClick={() => setVisibleCount((value) => Math.min(ranked.length, value + 12))}>Mostrar mais vídeos</button>}
+          {visibleCount > RECOMMENDATION_BATCH_SIZE && <button className="load-more load-less" onClick={collapseVideoFeed}>Mostrar menos</button>}
+        </div>}
 
         {pendingVideos.length > 0 && <section className="audit-queue" aria-labelledby="audit-queue-title">
           <div className="audit-queue-heading"><div><p className="eyebrow">PRÉ-SELEÇÃO — NÃO APROVADA</p><h2 id="audit-queue-title">Fila de auditoria da Groq</h2></div><p>Estes vídeos são apenas candidatos. Eles não fazem parte das recomendações enquanto a análise do conteúdo não os aprovar.</p></div>
