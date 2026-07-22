@@ -4,9 +4,31 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { promisify } from "node:util";
 
-const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
-const MODEL = process.env.OPENAI_EVALUATION_MODEL || "gpt-5.6";
+const GROQ_API_KEY = process.env.GROQ_API_KEY;
+const GROQ_BASE_URL = (process.env.GROQ_BASE_URL || "https://api.groq.com/openai/v1").replace(/\/$/, "");
+const MODEL = process.env.GROQ_EVALUATION_MODEL || "openai/gpt-oss-20b";
 const execFileAsync = promisify(execFile);
+
+const delay = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
+
+function retryDelay(response, attempt) {
+  const retryAfter = Number(response.headers.get("retry-after"));
+  if (Number.isFinite(retryAfter) && retryAfter > 0) return Math.min(retryAfter * 1000, 70_000);
+  return Math.min(2 ** attempt * 2_000, 60_000);
+}
+
+async function fetchGroq(path, options, label) {
+  for (let attempt = 0; attempt < 5; attempt += 1) {
+    const response = await fetch(`${GROQ_BASE_URL}${path}`, options);
+    if (response.ok) return response;
+    const body = await response.text();
+    if (attempt === 4 || (response.status !== 429 && response.status < 500)) {
+      throw new Error(`${label}: ${response.status} ${body}`);
+    }
+    await delay(retryDelay(response, attempt));
+  }
+  throw new Error(`${label}: limite de tentativas excedido`);
+}
 
 export const CONTENT_AUDIT_PROMPT = `Você é o editor-chefe de uma biblioteca de formação exigente. Avalie exclusivamente o conteúdo fornecido, nunca o prestígio, tamanho, identidade ou reputação do canal, autor, podcast ou veículo.
 
@@ -53,31 +75,45 @@ export function minimumContentLength(kind) {
   return kind === "news" ? 1800 : 3500;
 }
 
+function representativeSample(content, maximumLength = 20_000) {
+  if (content.length <= maximumLength) return content;
+  const sections = 5;
+  const sectionLength = Math.floor(maximumLength / sections);
+  const lastStart = content.length - sectionLength;
+  const excerpts = Array.from({ length: sections }, (_, index) => {
+    const approximateStart = Math.floor((lastStart * index) / (sections - 1));
+    const start = index === 0 ? 0 : Math.max(0, content.lastIndexOf(" ", approximateStart));
+    const end = index === sections - 1 ? content.length : content.indexOf(" ", start + sectionLength);
+    return content.slice(start, end > start ? end : start + sectionLength).trim();
+  });
+  return excerpts.map((excerpt, index) => `[TRECHO ${index + 1} DE ${sections}] ${excerpt}`).join("\n\n");
+}
+
 export async function auditContent({ kind, title, content, context = "" }) {
   const normalized = String(content || "").replace(/\s+/g, " ").trim();
   if (normalized.length < minimumContentLength(kind)) return unavailable("Conteúdo insuficiente para uma avaliação responsável.");
-  if (!OPENAI_API_KEY) return unavailable("Configure OPENAI_API_KEY para executar a auditoria semântica.");
+  if (!GROQ_API_KEY) return unavailable("Configure GROQ_API_KEY para executar a auditoria semântica.");
 
-  const response = await fetch("https://api.openai.com/v1/responses", {
+  const response = await fetchGroq("/responses", {
     method: "POST",
-    headers: { authorization: `Bearer ${OPENAI_API_KEY}`, "content-type": "application/json" },
+    headers: { authorization: `Bearer ${GROQ_API_KEY}`, "content-type": "application/json" },
     body: JSON.stringify({
       model: MODEL,
       input: [
         { role: "system", content: CONTENT_AUDIT_PROMPT },
-        { role: "user", content: `TIPO: ${kind}\nTÍTULO: ${title}\nCONTEXTO NEUTRO: ${context}\n\nCONTEÚDO PARA AUDITORIA:\n${normalized.slice(0, 90_000)}` },
+        { role: "user", content: `TIPO: ${kind}\nTÍTULO: ${title}\nCONTEXTO NEUTRO: ${context}\n\nCONTEÚDO PARA AUDITORIA (amostra distribuída por toda a obra):\n${representativeSample(normalized)}` },
       ],
       text: { format: { type: "json_schema", name: "content_quality_audit", strict: true, schema: AUDIT_SCHEMA } },
       max_output_tokens: 1400,
+      reasoning: { effort: "low" },
     }),
-  });
-  if (!response.ok) throw new Error(`OpenAI audit: ${response.status} ${await response.text()}`);
+  }, "Groq audit");
   const data = await response.json();
   const outputText = data.output_text || data.output?.flatMap((item) => item.content || []).find((item) => item.type === "output_text")?.text;
-  if (!outputText) throw new Error("OpenAI audit: resposta sem output_text");
+  if (!outputText) throw new Error("Groq audit: resposta sem output_text");
   const audit = JSON.parse(outputText);
   const thresholdsPass = audit.overall >= 78 && audit.depth >= 72 && audit.insight >= 70 && audit.evidence >= 65 && audit.substance >= 75 && audit.deception <= 20;
-  return { ...audit, approved: Boolean(audit.approved && thresholdsPass), method: "semantic-content", model: MODEL };
+  return { ...audit, approved: Boolean(audit.approved && thresholdsPass), method: "semantic-content", provider: "groq", model: MODEL };
 }
 
 function parseJsonArrayAfter(html, marker) {
@@ -143,7 +179,7 @@ export function htmlToText(html = "") {
 }
 
 export async function transcribeAudioUrl(audioUrl) {
-  if (!OPENAI_API_KEY || !audioUrl) return "";
+  if (!GROQ_API_KEY || !audioUrl) return "";
   const directory = await mkdtemp(join(tmpdir(), "clarity-audio-"));
   const output = join(directory, "episode.mp3");
   try {
@@ -154,10 +190,9 @@ export async function transcribeAudioUrl(audioUrl) {
     if (!audio.length || audio.length > 24 * 1024 * 1024) return "";
     const body = new FormData();
     body.set("file", new Blob([audio], { type: "audio/mpeg" }), "episode.mp3");
-    body.set("model", process.env.OPENAI_TRANSCRIPTION_MODEL || "gpt-4o-transcribe");
+    body.set("model", process.env.GROQ_TRANSCRIPTION_MODEL || "whisper-large-v3-turbo");
     body.set("response_format", "text");
-    const response = await fetch("https://api.openai.com/v1/audio/transcriptions", { method: "POST", headers: { authorization: `Bearer ${OPENAI_API_KEY}` }, body });
-    if (!response.ok) throw new Error(`OpenAI transcription: ${response.status} ${await response.text()}`);
+    const response = await fetchGroq("/audio/transcriptions", { method: "POST", headers: { authorization: `Bearer ${GROQ_API_KEY}` }, body }, "Groq transcription");
     return (await response.text()).trim();
   } finally {
     await rm(directory, { recursive: true, force: true });

@@ -48,14 +48,25 @@ jobs:
         run: node scripts/update-news.mjs
       - name: Atualizar capas do Apple Podcasts
         run: node scripts/update-podcasts.mjs
+      - name: Recuperar auditorias anteriores
+        uses: actions/cache/restore@v4
+        with:
+          path: public/data/content-audits.json
+          key: content-audits-${{ github.run_id }}
+          restore-keys: content-audits-
       - name: Auditar conteúdo de vídeos, notícias e podcasts
         run: node scripts/audit-content.mjs
         env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          OPENAI_EVALUATION_MODEL: gpt-5.6
-          OPENAI_TRANSCRIPTION_MODEL: gpt-4o-transcribe
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GROQ_EVALUATION_MODEL: openai/gpt-oss-20b
+          GROQ_TRANSCRIPTION_MODEL: whisper-large-v3-turbo
           CONTENT_AUDIT_BATCH_SIZE: 6
           PODCAST_AUDIT_BATCH_SIZE: 1
+      - name: Preservar auditorias para a próxima execução
+        uses: actions/cache/save@v4
+        with:
+          path: public/data/content-audits.json
+          key: content-audits-${{ github.run_id }}
       - name: Gerar site estático
         run: npm run build:pages
         env:

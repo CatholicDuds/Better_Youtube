@@ -1,8 +1,8 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { auditContent, fetchYouTubeTranscript, htmlToText, transcribeAudioUrl } from "./lib/content-auditor.mjs";
 
-if (!process.env.OPENAI_API_KEY) {
-  console.warn("Clarity: auditoria profunda ignorada; configure OPENAI_API_KEY para aprovar conteúdo.");
+if (!process.env.GROQ_API_KEY) {
+  console.warn("Clarity: auditoria profunda ignorada; configure GROQ_API_KEY para aprovar conteúdo.");
   process.exit(0);
 }
 
@@ -31,15 +31,16 @@ const now = new Date().toISOString();
 
 async function auditVideo(video) {
   const key = `video:${video.youtubeId}`;
-  if (audits[key]) return false;
+  if (audits[key]?.method === "semantic-content") return false;
   const transcript = await fetchYouTubeTranscript(video.youtubeId);
-  audits[key] = { ...(await auditContent({ kind: "video", title: video.title, content: transcript, context: `Tema: ${video.topic || video.category || "não informado"}` })), auditedAt: now };
-  return true;
+  const result = await auditContent({ kind: "video", title: video.title, content: transcript, context: `Tema: ${video.topic || video.category || "não informado"}` });
+  audits[key] = { ...result, auditedAt: now };
+  return result.method === "semantic-content";
 }
 
 async function auditNews(item) {
   const key = `news:${item.url}`;
-  if (audits[key]) return false;
+  if (audits[key]?.method === "semantic-content") return false;
   let text = "";
   try {
     const searchUrl = `https://html.duckduckgo.com/html/?q=${encodeURIComponent(`"${item.title}" ${item.source || ""}`)}`;
@@ -56,8 +57,9 @@ async function auditNews(item) {
       if (candidate.length >= 1800) { text = candidate; break; }
     }
   } catch {}
-  audits[key] = { ...(await auditContent({ kind: "news", title: item.title, content: text, context: `Categoria: ${item.category || "notícia"}; publicação: ${item.publishedAt || "não informada"}` })), auditedAt: now };
-  return true;
+  const result = await auditContent({ kind: "news", title: item.title, content: text, context: `Categoria: ${item.category || "notícia"}; publicação: ${item.publishedAt || "não informada"}` });
+  audits[key] = { ...result, auditedAt: now };
+  return result.method === "semantic-content";
 }
 
 function xmlValue(block, tag) {
@@ -86,8 +88,9 @@ async function auditPodcast(item) {
   if (audits[key] && existingAge < 14 * 86_400_000) return false;
   let episode = { title: "", text: "" };
   try { episode = await podcastTranscript(item.feedUrl); } catch {}
-  audits[key] = { ...(await auditContent({ kind: "podcast", title: episode.title || item.title, content: episode.text, context: "Episódio mais recente com transcrição publicada." })), auditedAt: now, episodeTitle: episode.title };
-  return true;
+  const result = await auditContent({ kind: "podcast", title: episode.title || item.title, content: episode.text, context: "Episódio mais recente com transcrição publicada." });
+  audits[key] = { ...result, auditedAt: now, episodeTitle: episode.title };
+  return result.method === "semantic-content";
 }
 
 async function runBatch(items, audit, limit = perKindLimit) {
@@ -99,10 +102,11 @@ async function runBatch(items, audit, limit = perKindLimit) {
   return processed;
 }
 
-const [videoCount, newsCount, podcastCount] = await Promise.all([
-  runBatch(videos, auditVideo), runBatch(newsData.news || [], auditNews), runBatch(podcastData.podcasts || [], auditPodcast, podcastLimit),
-]);
+// Executar em série evita estourar o limite de tokens por minuto do plano gratuito.
+const videoCount = await runBatch(videos, auditVideo);
+const newsCount = await runBatch(newsData.news || [], auditNews);
+const podcastCount = await runBatch(podcastData.podcasts || [], auditPodcast, podcastLimit);
 
 await mkdir(new URL("../public/data/", import.meta.url), { recursive: true });
-await writeFile(outputUrl, `${JSON.stringify({ updatedAt: now, model: process.env.OPENAI_EVALUATION_MODEL || "gpt-5.6", promptVersion: 1, audits }, null, 2)}\n`, "utf8");
+await writeFile(outputUrl, `${JSON.stringify({ updatedAt: now, provider: "groq", model: process.env.GROQ_EVALUATION_MODEL || "openai/gpt-oss-20b", promptVersion: 2, audits }, null, 2)}\n`, "utf8");
 console.log(`Clarity: auditoria profunda processou ${videoCount} vídeos, ${newsCount} notícias e ${podcastCount} podcasts.`);
