@@ -8,8 +8,8 @@ export const metadata: Metadata = {
   title: "Clarity — vídeos que importam",
   description: "Uma alternativa ao feed infinito: recomendações locais, explicáveis e guiadas pela sua intenção.",
   icons: {
-    icon: [{ url: `${basePath}/favicon.svg`, type: "image/svg+xml" }],
-    shortcut: `${basePath}/favicon.svg`,
+    icon: [{ url: `${basePath}/favicon.svg?v=2`, type: "image/svg+xml" }],
+    shortcut: `${basePath}/favicon.svg?v=2`,
   },
 };
 

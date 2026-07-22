@@ -37,9 +37,9 @@ O radar de notícias usa RSS, separa notícias de hoje e dos últimos sete dias 
 
 A página `/estudo/` pode ser aberta a qualquer momento e também oferece uma agenda opcional salva no dispositivo. O usuário escolhe dias, horário, duração, trilha e idioma; lembretes do navegador funcionam enquanto o Clarity estiver aberto. As trilhas de Matemática, Inteligência Artificial, Ciência, Biologia, Pensamento Crítico, Neurociência e Economia avançam por fundamento, modelo e aplicação, com aulas selecionadas em português e inglês, exercícios, progresso local e sínteses em Markdown.
 
-## Usuários, administrador e trial
+## Usuários e administrador
 
-O login usa Supabase Auth com e-mail, senha, confirmação de e-mail, recuperação de senha e sessão persistente. O banco cria um perfil no momento da confirmação e inicia um trial de sete dias. A conta confirmada `eduardo.emilio.gomes@gmail.com` recebe o papel `admin` e não expira.
+O login usa Supabase Auth com e-mail, senha, confirmação de e-mail, recuperação de senha e sessão persistente. O banco cria um perfil no momento da confirmação e todas as contas confirmadas têm acesso contínuo. A conta confirmada `eduardo.emilio.gomes@gmail.com` recebe o papel `admin`.
 
 Para ativar:
 
@@ -49,7 +49,7 @@ Para ativar:
 4. No GitHub, crie a variável `NEXT_PUBLIC_SUPABASE_URL` e o segredo `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`.
 5. Nunca use a chave `service_role` no frontend.
 
-O papel e o prazo ficam protegidos por Row Level Security; usuários comuns só leem o próprio perfil. Como os vídeos e notícias ainda são arquivos públicos do GitHub Pages, o bloqueio do trial protege a experiência do aplicativo, mas não transforma esses arquivos estáticos em conteúdo privado. Conteúdo pago futuro deve ser servido por uma tabela ou função protegida pelo `current_user_has_access()` incluído no esquema.
+O papel fica protegido por Row Level Security; usuários comuns só leem o próprio perfil. A função `current_user_has_access()` confirma que a sessão pertence a um perfil autenticado antes de liberar operações protegidas, como a pesquisa na API do YouTube.
 
 ## Estudar com IA
 

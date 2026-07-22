@@ -186,7 +186,6 @@ export default function StudyPage() {
     <div className="study-page section-page">
       <header className="study-topbar section-topbar">
         <a className="brand" href={`${BASE_PATH}/`}><span className="brand-mark">C</span><strong>Clarity</strong><sup>ESTUDO</sup></a>
-        <nav aria-label="Navegação do modo estudo"><a href={`${BASE_PATH}/`}>Vídeos</a><a href={`${BASE_PATH}/leituras/`}>Leituras</a><a className="active" href={`${BASE_PATH}/estudo/`}>Estudo</a></nav>
         <button className="icon-button" onClick={() => setTheme(theme === "dark" ? "light" : "dark")} aria-label="Alternar tema">{theme === "dark" ? "☀" : "◐"}</button>
       </header>
       <SectionSidebar active="Modo Estudo" />

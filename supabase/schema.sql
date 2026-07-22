@@ -7,11 +7,13 @@ create table if not exists public.profiles (
   username text not null,
   display_name text,
   role text not null default 'user' check (role in ('user', 'admin')),
-  trial_started_at timestamptz,
-  trial_ends_at timestamptz,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
+
+-- Remove as colunas do antigo período de teste em projetos já existentes.
+alter table public.profiles drop column if exists trial_started_at;
+alter table public.profiles drop column if exists trial_ends_at;
 
 create unique index if not exists profiles_email_unique on public.profiles (lower(email));
 create unique index if not exists profiles_username_unique on public.profiles (lower(username));
@@ -32,8 +34,7 @@ declare
   );
 begin
   insert into public.profiles (
-    id, email, username, display_name, role,
-    trial_started_at, trial_ends_at, created_at, updated_at
+    id, email, username, display_name, role, created_at, updated_at
   ) values (
     new.id,
     lower(new.email),
@@ -43,8 +44,6 @@ begin
       when confirmed and lower(new.email) = 'eduardo.emilio.gomes@gmail.com' then 'admin'
       else 'user'
     end,
-    case when confirmed then now() else null end,
-    case when confirmed then now() + interval '7 days' else null end,
     coalesce(new.created_at, now()),
     now()
   )
@@ -56,8 +55,6 @@ begin
       when confirmed and lower(new.email) = 'eduardo.emilio.gomes@gmail.com' then 'admin'
       else 'user'
     end,
-    trial_started_at = coalesce(public.profiles.trial_started_at, case when confirmed then now() else null end),
-    trial_ends_at = coalesce(public.profiles.trial_ends_at, case when confirmed then now() + interval '7 days' else null end),
     updated_at = now();
   return new;
 end;
@@ -70,15 +67,13 @@ on auth.users
 for each row execute procedure public.sync_user_profile();
 
 -- Cria perfis para contas que já existiam antes da instalação deste esquema.
-insert into public.profiles (id, email, username, display_name, role, trial_started_at, trial_ends_at, created_at, updated_at)
+insert into public.profiles (id, email, username, display_name, role, created_at, updated_at)
 select
   users.id,
   lower(users.email),
   coalesce(nullif(lower(users.raw_user_meta_data ->> 'username'), ''), 'usuario_' || left(replace(users.id::text, '-', ''), 10)),
   nullif(users.raw_user_meta_data ->> 'display_name', ''),
   case when users.email_confirmed_at is not null and lower(users.email) = 'eduardo.emilio.gomes@gmail.com' then 'admin' else 'user' end,
-  case when users.email_confirmed_at is not null then now() else null end,
-  case when users.email_confirmed_at is not null then now() + interval '7 days' else null end,
   coalesce(users.created_at, now()),
   now()
 from auth.users as users
@@ -111,10 +106,6 @@ as $$
     select 1
     from public.profiles
     where id = (select auth.uid())
-      and (
-        (role = 'admin' and lower(email) = 'eduardo.emilio.gomes@gmail.com')
-        or trial_ends_at > now()
-      )
   );
 $$;
 

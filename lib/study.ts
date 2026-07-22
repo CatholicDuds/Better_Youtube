@@ -67,7 +67,7 @@ const baseStudyTracks: StudyTrack[] = [
     ],
   },
   {
-    id: "ciencia", title: "Ciência", icon: "⚗", color: "#4dc6a2",
+    id: "ciencia", title: "Ciência", icon: "⚗", color: "#ef5f7a",
     description: "Como perguntas viram hipóteses, testes, evidências e conhecimento provisório.",
     outcome: "Avaliar uma afirmação distinguindo observação, inferência e explicação.",
     lessons: [
@@ -77,7 +77,7 @@ const baseStudyTracks: StudyTrack[] = [
     ],
   },
   {
-    id: "biologia", title: "Biologia", icon: "⎔", color: "#72bd55",
+    id: "biologia", title: "Biologia", icon: "⎔", color: "#9d7bff",
     description: "Da célula à hereditariedade: organização, informação e evolução dos sistemas vivos.",
     outcome: "Explicar como estrutura celular e informação genética produzem função.",
     lessons: [

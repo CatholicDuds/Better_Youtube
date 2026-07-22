@@ -85,14 +85,14 @@ const podcasts: Podcast[] = [
   { id: "petit-journal", appleId: "1193387182", slug: "petit-journal", title: "Petit Journal", author: "Daniel Sousa e Tanguy Baghdadi", category: "Mundo", description: "Economia e política internacional explicadas por professores, com contexto histórico.", depth: .82, clarity: .94, accent: "#d64848" },
   { id: "os-socios", appleId: "1553427360", slug: "os-sócios-podcast", title: "Os Sócios Podcast", author: "Grupo Primo", category: "Negócios", description: "Negócios, dinheiro e desenvolvimento pessoal em conversas acessíveis e extensas.", depth: .78, clarity: .9, accent: "#d59d2a" },
   { id: "christo", appleId: "1455626095", slug: "christo-nihil-praeponere", title: "Christo Nihil Praeponere", author: "Padre Paulo Ricardo", category: "Fé", description: "Formação espiritual diária a partir do Evangelho e da tradição católica.", depth: .86, clarity: .94, accent: "#9f7549" },
-  { id: "cafe-brasil", appleId: "191182582", slug: "canal-café-brasil", title: "Canal Café Brasil", author: "Luciano Pires", category: "Mundo", description: "Comportamento, cidadania, política e cultura para exercitar autonomia de pensamento.", depth: .76, clarity: .9, accent: "#228b70" },
+  { id: "cafe-brasil", appleId: "191182582", slug: "canal-café-brasil", title: "Canal Café Brasil", author: "Luciano Pires", category: "Mundo", description: "Comportamento, cidadania, política e cultura para exercitar autonomia de pensamento.", depth: .76, clarity: .9, accent: "#a74463" },
   { id: "acquired", appleId: "1050462261", slug: "acquired", title: "Acquired", author: "Ben Gilbert e David Rosenthal", category: "Negócios", description: "Histórias profundamente pesquisadas sobre as empresas e estratégias que moldaram mercados inteiros.", depth: .96, clarity: .86, accent: "#5b6ff0" },
   { id: "knowledge-project", appleId: "990149481", slug: "the-knowledge-project", title: "The Knowledge Project", author: "Shane Parrish", category: "Ideias", description: "Modelos mentais, decisões e aprendizado explicados por pensadores e operadores experientes.", depth: .9, clarity: .88, accent: "#be8c52" },
   { id: "hidden-brain", appleId: "1028908750", slug: "hidden-brain", title: "Hidden Brain", author: "Shankar Vedantam", category: "Ideias", description: "Ciência do comportamento e natureza humana em narrativas claras, práticas e bem documentadas.", depth: .82, clarity: .96, accent: "#cf5368" },
   { id: "startalk", appleId: "325404506", slug: "startalk-radio", title: "StarTalk Radio", author: "Neil deGrasse Tyson", category: "Ciência", description: "Astronomia, física e exploração espacial traduzidas em conversas acessíveis sem perder rigor.", depth: .74, clarity: .95, accent: "#295c9d" },
   { id: "rest-history", appleId: "1537788786", slug: "the-rest-is-history", title: "The Rest Is History", author: "Tom Holland e Dominic Sandbrook", category: "Mundo", description: "Grandes processos históricos reconstruídos com contexto, fontes e conexões com o presente.", depth: .86, clarity: .92, accent: "#b94335" },
   { id: "rest-politics", appleId: "1611374685", slug: "the-rest-is-politics", title: "The Rest Is Politics", author: "Alastair Campbell e Rory Stewart", category: "Política", description: "Política internacional explicada por perspectivas divergentes e experiência institucional.", depth: .8, clarity: .88, accent: "#6a4ba0" },
-  { id: "econtalk", appleId: "135066958", slug: "econtalk", title: "EconTalk", author: "Russ Roberts", category: "Negócios", description: "Economia, instituições e escolhas humanas em diálogos longos que valorizam objeções e evidências.", depth: .94, clarity: .85, accent: "#446a75" },
+  { id: "econtalk", appleId: "135066958", slug: "econtalk", title: "EconTalk", author: "Russ Roberts", category: "Negócios", description: "Economia, instituições e escolhas humanas em diálogos longos que valorizam objeções e evidências.", depth: .94, clarity: .85, accent: "#744a87" },
   { id: "conversations-tyler", appleId: "983795625", slug: "conversations-with-tyler", title: "Conversations with Tyler", author: "Tyler Cowen", category: "Ideias", description: "Conversas exigentes sobre economia, cultura, tecnologia e as ideias que movem pessoas excepcionais.", depth: .96, clarity: .74, accent: "#8b6939" },
   { id: "mindscape", appleId: "1406534739", slug: "sean-carrolls-mindscape-science-society-philosophy", title: "Sean Carroll's Mindscape", author: "Sean Carroll", category: "Ciência", description: "Ciência, filosofia e sociedade tratadas do fundamento técnico às consequências intelectuais.", depth: .98, clarity: .78, accent: "#315d78" },
   { id: "pints-aquinas", appleId: "1097862282", slug: "pints-with-aquinas", title: "Pints With Aquinas", author: "Matt Fradd", category: "Fé", description: "Filosofia tomista, teologia e vida católica em debates longos com convidados diversos.", depth: .85, clarity: .86, accent: "#8b5b35" },
@@ -251,13 +251,10 @@ function ContentCarousel({ pages, pageClassName, label }: { pages: ReactNode[][]
   const [activePage, setActivePage] = useState(0);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const pageCount = pages.length;
-
-  useEffect(() => {
-    if (activePage >= pageCount) setActivePage(Math.max(0, pageCount - 1));
-  }, [activePage, pageCount]);
+  const currentPage = Math.min(activePage, Math.max(0, pageCount - 1));
 
   function move(direction: -1 | 1) {
-    setActivePage((current) => Math.max(0, Math.min(pageCount - 1, current + direction)));
+    setActivePage((current) => Math.max(0, Math.min(pageCount - 1, Math.min(current, pageCount - 1) + direction)));
   }
 
   if (!pageCount) return null;
@@ -273,16 +270,16 @@ function ContentCarousel({ pages, pageClassName, label }: { pages: ReactNode[][]
           setTouchStart(null);
         }}
       >
-        <div className="carousel-track" style={{ transform: `translateX(-${activePage * 100}%)` }}>
-          {pages.map((page, index) => <div className={`carousel-page ${pageClassName}`} key={index} aria-hidden={index !== activePage} inert={index !== activePage}>{page}</div>)}
+        <div className="carousel-track" style={{ transform: `translateX(-${currentPage * 100}%)` }}>
+          {pages.map((page, index) => <div className={`carousel-page ${pageClassName}`} key={index} aria-hidden={index !== currentPage} inert={index !== currentPage}>{page}</div>)}
         </div>
       </div>
       {pageCount > 1 && <div className="carousel-navigation">
-        <button className="carousel-arrow" onClick={() => move(-1)} disabled={activePage === 0} aria-label={`Página anterior de ${label}`}>‹</button>
-        <div className="carousel-dots" aria-label={`Página ${activePage + 1} de ${pageCount}`}>
-          {pages.map((_, index) => <button key={index} className={index === activePage ? "active" : ""} onClick={() => setActivePage(index)} aria-label={`Mostrar página ${index + 1} de ${label}`} aria-current={index === activePage ? "true" : undefined} />)}
+        <button className="carousel-arrow" onClick={() => move(-1)} disabled={currentPage === 0} aria-label={`Página anterior de ${label}`}>‹</button>
+        <div className="carousel-dots" aria-label={`Página ${currentPage + 1} de ${pageCount}`}>
+          {pages.map((_, index) => <button key={index} className={index === currentPage ? "active" : ""} onClick={() => setActivePage(index)} aria-label={`Mostrar página ${index + 1} de ${label}`} aria-current={index === currentPage ? "true" : undefined} />)}
         </div>
-        <button className="carousel-arrow" onClick={() => move(1)} disabled={activePage === pageCount - 1} aria-label={`Próxima página de ${label}`}>›</button>
+        <button className="carousel-arrow" onClick={() => move(1)} disabled={currentPage === pageCount - 1} aria-label={`Próxima página de ${label}`}>›</button>
       </div>}
     </div>
   );
