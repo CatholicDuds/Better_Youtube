@@ -93,11 +93,18 @@ async function auditPodcast(item) {
   return result.method === "semantic-content";
 }
 
+let quotaBlocked = false;
+
 async function runBatch(items, audit, limit = perKindLimit) {
   let processed = 0;
   for (const item of items) {
-    if (processed >= limit) break;
-    try { if (await audit(item)) processed += 1; } catch (error) { console.warn(`Clarity audit: ${error instanceof Error ? error.message : error}`); }
+    if (processed >= limit || quotaBlocked) break;
+    try {
+      if (await audit(item)) processed += 1;
+    } catch (error) {
+      console.warn(`Clarity audit: ${error instanceof Error ? error.message : error}`);
+      if (error?.code === "GROQ_RATE_LIMIT") quotaBlocked = true;
+    }
   }
   return processed;
 }
@@ -108,5 +115,5 @@ const newsCount = await runBatch(newsData.news || [], auditNews);
 const podcastCount = await runBatch(podcastData.podcasts || [], auditPodcast, podcastLimit);
 
 await mkdir(new URL("../public/data/", import.meta.url), { recursive: true });
-await writeFile(outputUrl, `${JSON.stringify({ updatedAt: now, provider: "groq", model: process.env.GROQ_EVALUATION_MODEL || "openai/gpt-oss-20b", promptVersion: 2, audits }, null, 2)}\n`, "utf8");
-console.log(`Clarity: auditoria profunda processou ${videoCount} vídeos, ${newsCount} notícias e ${podcastCount} podcasts.`);
+await writeFile(outputUrl, `${JSON.stringify({ updatedAt: now, provider: "groq", model: process.env.GROQ_EVALUATION_MODEL || "openai/gpt-oss-20b", promptVersion: 2, rateLimited: quotaBlocked, audits }, null, 2)}\n`, "utf8");
+console.log(`Clarity: auditoria profunda processou ${videoCount} vídeos, ${newsCount} notícias e ${podcastCount} podcasts.${quotaBlocked ? " Limite atingido; fila adiada." : ""}`);
