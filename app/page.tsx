@@ -7,6 +7,7 @@ import { DEFAULT_PREFERENCES, rankVideos, type Preferences, type RankedVideo } f
 import { readings } from "../lib/readings";
 import { studyFeedVideos } from "../lib/study";
 import { supabase } from "../lib/supabase";
+import AIStudyDock from "./components/AIStudyDock";
 
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || "";
 const defaultInterests = [
@@ -320,6 +321,20 @@ function VideoCard({ video, onPlay, onFeedback }: {
   );
 }
 
+function DepthVideoCard({ video, onPlay }: { video: RankedVideo; onPlay: (video: RankedVideo) => void }) {
+  const image = thumbnail(video);
+  return (
+    <article className="depth-video-card">
+      <button className={`depth-thumbnail visual-${video.palette}`} onClick={() => onPlay(video)} aria-label={`Assistir ${video.title}`}>
+        {image ? <img src={image} alt="" loading="lazy" /> : <span className="thumbnail-mark">{video.mark}</span>}
+        <span className="thumbnail-play">▶</span>
+        <span className="duration">{video.embedType === "playlist" ? "coleção" : durationLabel(video.durationSeconds)}</span>
+      </button>
+      <div><span>{video.category} · {video.topic}</span><button onClick={() => onPlay(video)}>{video.title}</button><small>{video.channel}</small></div>
+    </article>
+  );
+}
+
 export default function Home() {
   const [theme, setTheme] = useState<"dark" | "light">("dark");
   const [category, setCategory] = useState("Todos");
@@ -441,6 +456,30 @@ export default function Home() {
       return categoryMatch && terms.every((term) => text.includes(term));
     }).sort((a, b) => (b.score + seededNoise(b.id, refreshSeed) * 5) - (a.score + seededNoise(a.id, refreshSeed) * 5));
   }, [videos, preferences, category, query, refreshSeed]);
+
+  const depthLanes = useMemo(() => [
+    {
+      id: "basic",
+      eyebrow: "BÁSICO",
+      title: "Construa os fundamentos",
+      description: "Conceitos, vocabulário e intuição para entrar no assunto sem pressupor conhecimento anterior.",
+      videos: ranked.filter((video) => video.depth < .68).slice(0, 4),
+    },
+    {
+      id: "intermediate",
+      eyebrow: "INTERMEDIÁRIO",
+      title: "Entenda os mecanismos",
+      description: "Relações de causa e efeito, casos concretos e conexões entre as ideias centrais.",
+      videos: ranked.filter((video) => video.depth >= .68 && video.depth < .86).slice(0, 4),
+    },
+    {
+      id: "deep",
+      eyebrow: "PROFUNDO",
+      title: "Questione, compare e aplique",
+      description: "Evidências, objeções, limites e aplicações para formar uma visão própria e defensável.",
+      videos: ranked.filter((video) => video.depth >= .86).slice(0, 4),
+    },
+  ], [ranked]);
 
   const visiblePodcasts = useMemo(() => {
     const candidates = contentSearchActive ? searchedPodcasts : podcasts.map((podcast) => ({ ...podcast, ...podcastArtwork[podcast.appleId] }));
@@ -765,6 +804,7 @@ export default function Home() {
         {userInterests.map((item) => <button key={item} className={category === item ? "nav-item active" : "nav-item"} onClick={() => openCategory(item)}><span>{interestIcon(item)}</span>{item}{!defaultInterestLabels.includes(item) && <small className="interest-count">{interestFeeds[item]?.videos?.length || "⌕"}</small>}</button>)}
         <button className="nav-item manage-interests" onClick={() => { setMobileMenuOpen(false); setShowInterestManager(true); }}><span>＋</span>Editar interesses</button>
         <div className="side-separator" />
+        <AIStudyDock embedded />
         <div className="focus-card"><strong>Modo intencional</strong><p>Sem autoplay e sem feed infinito. A cada 2 vídeos, uma leitura.</p><span>{watchedBlock.length}/2 neste bloco</span></div>
       </aside>
 
@@ -804,6 +844,11 @@ export default function Home() {
             {visiblePodcasts.length ? <ContentCarousel key={`${category}-${completedSearch}`} label="Podcasts selecionados" pageClassName="podcast-grid" pages={podcastPages.map((page) => page.map((podcast) => <PodcastCard key={podcast.id} podcast={podcast} onPlay={setPlayingPodcast} />))} /> : <div className="news-empty"><strong>Nenhum podcast passou pelo filtro.</strong><p>A busca prioriza relação com o tema, atividade recente e profundidade.</p></div>}
           </section>}
         </div>
+
+        {ranked.length > 0 && <section className="depth-section" aria-labelledby="depth-title">
+          <div className="depth-heading"><div><p className="eyebrow">APRENDA EM CAMADAS</p><h2 id="depth-title">Escolha a profundidade certa para hoje</h2></div><p>Comece pelo tronco, avance pelos mecanismos e só então mergulhe nas discussões mais exigentes.</p></div>
+          <div className="depth-lanes">{depthLanes.map((lane) => <article className={`depth-lane depth-${lane.id}`} key={lane.id}><header><p>{lane.eyebrow}</p><h3>{lane.title}</h3><span>{lane.description}</span><small>{lane.videos.length} vídeo{lane.videos.length === 1 ? "" : "s"} nesta seleção</small></header>{lane.videos.length > 0 ? <div className="depth-video-grid">{lane.videos.map((video) => <DepthVideoCard key={`${lane.id}-${video.id}`} video={video} onPlay={setPlaying} />)}</div> : <div className="depth-empty">Ainda não há vídeos deste nível para o filtro atual.</div>}</article>)}</div>
+        </section>}
 
         {ranked.length ? <section className="video-grid">
           {ranked.slice(0, Math.min(8, visibleCount)).map((video) => <VideoCard key={video.id} video={video} onPlay={setPlaying} onFeedback={feedback} />)}

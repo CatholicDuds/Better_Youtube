@@ -1,3 +1,5 @@
+import AIStudyDock from "./AIStudyDock";
+
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 const sectionLinks = [
@@ -29,6 +31,7 @@ export default function SectionSidebar({ active }: { active: "Início" | "Modo E
         {exploreLinks.map((item) => <a key={item.label} className="nav-item" href={`${BASE_PATH}/?tema=${encodeURIComponent(item.label)}`}><span>{item.icon}</span>{item.label}</a>)}
       </nav>
       <div className="side-separator" />
+      <AIStudyDock embedded />
       <div className="focus-card"><strong>Aprendizado intencional</strong><p>Vídeos, leitura e síntese unidos no mesmo percurso.</p><span>Sem autoplay e sem Shorts</span></div>
     </aside>
   );

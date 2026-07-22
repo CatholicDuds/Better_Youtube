@@ -38,7 +38,7 @@ Meu contexto mais recente no Clarity:
 ${latestLearningContext()}`;
 }
 
-export default function AIStudyDock() {
+export default function AIStudyDock({ embedded = false }: { embedded?: boolean }) {
   const [open, setOpen] = useState(false);
   const [status, setStatus] = useState("");
 
@@ -49,6 +49,5 @@ export default function AIStudyDock() {
       .catch(() => setStatus("Abra seu resumo, copie-o e cole no assistente escolhido."));
   }
 
-  return <div className="ai-study-dock"><button className="ai-study-trigger" onClick={() => { setOpen(!open); setStatus(""); }} aria-expanded={open}><span>✦</span>Estudar com IA</button>{open && <section className="ai-study-menu" aria-label="Escolher assistente de inteligência artificial"><div><p className="eyebrow">CONTINUAR O APRENDIZADO</p><h3>Escolha seu professor de IA</h3><p>O último resumo será copiado. Você decide quando colá-lo.</p></div><div className="ai-provider-grid">{providers.map((provider) => <button key={provider.name} onClick={() => launch(provider)}><span style={{ background: provider.color }}>{provider.mark}</span><strong>{provider.name}</strong><small>Copiar e abrir ↗</small></button>)}</div>{status && <p className="ai-copy-status">{status}</p>}<small>Nenhum resumo é enviado automaticamente.</small></section>}</div>;
+  return <div className={embedded ? "ai-study-dock embedded" : "ai-study-dock"}><button className="ai-study-trigger" onClick={() => { setOpen(!open); setStatus(""); }} aria-expanded={open}><span>✦</span>Estudar com IA</button>{open && <section className="ai-study-menu" aria-label="Escolher assistente de inteligência artificial"><div><p className="eyebrow">CONTINUAR O APRENDIZADO</p><h3>Escolha seu professor de IA</h3><p>O último resumo será copiado. Você decide quando colá-lo.</p></div><div className="ai-provider-grid">{providers.map((provider) => <button key={provider.name} onClick={() => launch(provider)}><span style={{ background: provider.color }}>{provider.mark}</span><strong>{provider.name}</strong><small>Copiar e abrir ↗</small></button>)}</div>{status && <p className="ai-copy-status">{status}</p>}<small>Nenhum resumo é enviado automaticamente.</small></section>}</div>;
 }
-
