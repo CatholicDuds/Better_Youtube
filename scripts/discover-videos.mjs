@@ -16,6 +16,12 @@ const activeTopics = Array.from({ length: Math.min(batchSize, topics.length) }, 
 const palettes = ["blue", "coral", "ink", "moss", "violet", "sand"];
 const shallowTitle = /#shorts|\bshorts?\b|cortes?\s+(do|de|podcast)|urgente|chocante|você não vai acreditar|treta/i;
 const learningTitle = /aula|curso|explic|fundamento|document|palestra|análise|história|lecture|explained|documentary|strategy|science/i;
+const DISCOVERY_PROMPTS = [
+  { pt: "explicação completa conceitos exemplos", en: "complete explanation concepts examples" },
+  { pt: "documentário análise com fontes", en: "documentary analysis with sources" },
+  { pt: "fundamentos mecanismos demonstração", en: "fundamentals mechanisms demonstration" },
+  { pt: "estudo de caso evidências", en: "case study evidence" },
+];
 
 function clamp(value, min = 0, max = 1) {
   return Math.max(min, Math.min(max, value));
@@ -45,9 +51,12 @@ async function youtube(endpoint, params) {
 }
 
 async function discover(topic, topicIndex) {
+  const promptIndex = (Math.floor(Date.now() / 3_600_000) + topicIndex) % DISCOVERY_PROMPTS.length;
+  const prompt = DISCOVERY_PROMPTS[promptIndex];
+  const discoveryPrompt = `${topic.query} ${topic.language === "en" ? prompt.en : prompt.pt}`;
   const search = await youtube("search", {
     part: "snippet", type: "video", maxResults: 25, order: "relevance", safeSearch: "moderate",
-    videoEmbeddable: true, videoSyndicated: true, relevanceLanguage: topic.language, q: topic.query,
+    videoEmbeddable: true, videoSyndicated: true, relevanceLanguage: topic.language, q: discoveryPrompt,
   });
   const ids = search.items?.map((item) => item.id?.videoId).filter(Boolean) || [];
   if (!ids.length) return [];
@@ -59,28 +68,33 @@ async function discover(topic, topicIndex) {
     const views = Number(item.statistics?.viewCount || 0);
     const likes = Number(item.statistics?.likeCount || 0);
     const durationDepth = clamp((seconds - 240) / 3300);
-    const evidence = learningTitle.test(title) ? .09 : 0;
+    const context = `${title} ${item.snippet?.description || ""}`;
+    const evidence = learningTitle.test(context) ? .09 : 0;
     const reception = views > 0 ? clamp((likes / views) * 14, 0, .08) : 0;
     return {
       id: `discover-${item.id}`, youtubeId: item.id, thumbnailId: item.id, embedType: "video",
       publishedAt: item.snippet.publishedAt, category: topic.category, title,
       channel: item.snippet.channelTitle, topic: topic.topic, url: `https://www.youtube.com/watch?v=${item.id}`,
-      durationSeconds: seconds, depth: clamp(.62 + durationDepth * .25 + evidence), novelty: clamp(.86 - index * .035),
+      durationSeconds: seconds, depth: clamp(.62 + durationDepth * .25 + evidence), novelty: clamp(.9 - index * .025),
       quality: clamp(.72 + evidence + reception), evergreen: topic.category === "Mundo" ? .68 : .84,
       publishedLabel: ageLabel(item.snippet.publishedAt), palette: palettes[(topicIndex + index) % palettes.length],
       mark: "DESCOBERTA",
     };
-  }).filter(Boolean).slice(0, 8);
+  }).filter(Boolean)
+    .sort((a, b) => b.quality - a.quality || b.novelty - a.novelty)
+    .slice(0, 8);
 }
 
 const settled = await Promise.allSettled(activeTopics.map(({ topic, topicIndex }) => discover(topic, topicIndex)));
 const all = settled.flatMap((result) => result.status === "fulfilled" ? result.value : []);
-const videos = all.filter((video, index) => all.findIndex((item) => item.youtubeId === video.youtubeId) === index);
+const videos = all
+  .filter((video, index) => all.findIndex((item) => item.youtubeId === video.youtubeId) === index)
+  .sort((a, b) => b.quality - a.quality || b.novelty - a.novelty);
 if (!videos.length) {
   console.warn("Clarity: nenhuma descoberta aprovada; mantendo o arquivo publicado anteriormente.");
   process.exit(0);
 }
 
 await mkdir(new URL("../public/data/", import.meta.url), { recursive: true });
-await writeFile(new URL("../public/data/discovered-videos.json", import.meta.url), `${JSON.stringify({ updatedAt: new Date().toISOString(), source: "YouTube Data API", rotatingTopics: activeTopics.map(({ topic }) => topic.topic), videos }, null, 2)}\n`, "utf8");
-console.log(`Clarity: ${videos.length} descobertas aprovadas em ${activeTopics.length} pesquisas rotativas de ${topics.length} assuntos.`);
+await writeFile(new URL("../public/data/discovered-videos.json", import.meta.url), `${JSON.stringify({ updatedAt: new Date().toISOString(), source: "YouTube Data API", strategy: "prompts rotativos com avaliação individual de qualidade", rotatingTopics: activeTopics.map(({ topic }) => topic.topic), videos }, null, 2)}\n`, "utf8");
+console.log(`Clarity: ${videos.length} descobertas aprovadas por qualidade individual em ${activeTopics.length} pesquisas rotativas.`);

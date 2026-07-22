@@ -11,6 +11,11 @@ export type Preferences = {
 
 export type RankedVideo = Video & { score: number; explanation: string };
 
+export type DiversityOptions = {
+  scoreTolerance?: number;
+  recentChannelWindow?: number;
+};
+
 export const DEFAULT_PREFERENCES: Preferences = {
   topics: ["filosofia", "natureza humana", "economia", "formação católica"],
   topicWeights: {},
@@ -62,4 +67,27 @@ export function rankVideos(videos: Video[], preferences: Preferences): RankedVid
   return videos
     .map((video) => ({ ...video, score: scoreVideo(video, preferences), explanation: explain(video, preferences) }))
     .sort((a, b) => b.score - a.score || a.title.localeCompare(b.title));
+}
+
+/**
+ * Alterna canais somente entre vídeos com notas praticamente equivalentes.
+ * O canal nunca altera a nota nem elimina um vídeo da seleção.
+ */
+export function diversifyVideos(videos: RankedVideo[], options: DiversityOptions = {}) {
+  if (videos.length < 2) return videos;
+
+  const remaining = [...videos];
+  const selected: RankedVideo[] = [];
+  const scoreTolerance = options.scoreTolerance ?? 2.5;
+  const recentChannelWindow = options.recentChannelWindow ?? 5;
+
+  while (remaining.length) {
+    const recentChannels = new Set(selected.slice(-recentChannelWindow).map((video) => video.channel));
+    const minimumEquivalentScore = remaining[0].score - scoreTolerance;
+    const diverseIndex = remaining.findIndex((video) => video.score >= minimumEquivalentScore && !recentChannels.has(video.channel));
+    const [chosen] = remaining.splice(diverseIndex < 0 ? 0 : diverseIndex, 1);
+    selected.push(chosen);
+  }
+
+  return selected;
 }

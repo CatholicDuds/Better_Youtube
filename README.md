@@ -4,7 +4,7 @@ Uma biblioteca de formação guiada por intenção, não por tempo de tela. O fe
 
 ## Como funciona
 
-O algoritmo roda inteiramente no navegador e combina qualidade editorial, profundidade, relevância atemporal, duração, descoberta e feedback explícito. Preferências e vídeos adicionados ficam no `localStorage`; nenhum perfil é enviado a um servidor.
+O algoritmo roda inteiramente no navegador e avalia cada vídeo por seus próprios sinais: qualidade editorial, profundidade, relevância atemporal, duração, descoberta e feedback explícito. O nome ou a frequência do canal não altera essa nota. Apenas entre vídeos com pontuações praticamente equivalentes, a apresentação alterna canais para tornar o feed menos repetitivo, sem excluir conteúdo. Preferências e vídeos adicionados ficam no `localStorage`; nenhum perfil é enviado a um servidor.
 
 O feed público é renovado automaticamente a cada hora pelo GitHub Actions. O job lê os feeds oficiais dos canais selecionados, rejeita Shorts, gera `public/data/latest-videos.json` e publica a nova versão sem expor chaves de API. A interface oferece busca, filtros temáticos, thumbnails reais, player incorporado, podcasts selecionados com capas oficiais do catálogo Apple, atualização manual e temas claro/escuro.
 
@@ -20,7 +20,7 @@ Para ativar a descoberta autônoma no site público:
 2. No GitHub, abra **Settings → Secrets and variables → Actions**.
 3. Crie o segredo `YOUTUBE_API_KEY`.
 
-O workflow gira pelos assuntos de `config/discovery-topics.json` a cada hora, em lotes de duas pesquisas. Essa rotação mantém variedade ao longo do dia sem consumir a cota padrão do YouTube antes das pesquisas dos usuários. Sem o segredo, essa etapa é ignorada e o restante do site continua funcionando.
+O workflow gira pelos assuntos de `config/discovery-topics.json` a cada hora. Cada consulta recebe um de quatro prompts rotativos focados no conteúdo: explicação com conceitos e exemplos, análise com fontes, fundamentos com demonstração ou estudo de caso com evidências. A aprovação considera os sinais do próprio vídeo, e não a reputação ou o nome do canal. Essa rotação mantém variedade ao longo do dia sem consumir a cota padrão do YouTube antes das pesquisas dos usuários. Sem o segredo, essa etapa é ignorada e o restante do site continua funcionando.
 
 Para ativar a pesquisa em tempo real sem expor a chave:
 

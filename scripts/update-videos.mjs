@@ -96,13 +96,7 @@ try {
 const merged = [...refreshed, ...previous].filter((video) => !shallowTitle.test(video.title || ""))
   .filter((video, index, all) => all.findIndex((item) => item.youtubeId === video.youtubeId) === index)
   .sort((a, b) => new Date(b.publishedAt || 0).getTime() - new Date(a.publishedAt || 0).getTime());
-const channelCount = new Map();
-const videos = merged.filter((video) => {
-  const count = channelCount.get(video.channel) || 0;
-  if (count >= 10) return false;
-  channelCount.set(video.channel, count + 1);
-  return true;
-}).slice(0, 200);
+const videos = merged.slice(0, 200);
 
 const output = { updatedAt: new Date().toISOString(), source: "YouTube channel RSS", videos };
 await mkdir(new URL("../public/data/", import.meta.url), { recursive: true });

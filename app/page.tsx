@@ -3,7 +3,7 @@
 
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { seedVideos, type Video } from "../lib/videos";
-import { DEFAULT_PREFERENCES, rankVideos, type Preferences, type RankedVideo } from "../lib/recommender";
+import { DEFAULT_PREFERENCES, diversifyVideos, rankVideos, type Preferences, type RankedVideo } from "../lib/recommender";
 import { readings } from "../lib/readings";
 import { studyFeedVideos } from "../lib/study";
 import { supabase } from "../lib/supabase";
@@ -490,11 +490,12 @@ export default function Home() {
     const rotationRange = Math.min(1.5, Math.max(.5, scoreSpan * .04));
     const recentPenalty = Math.min(12, Math.max(6, scoreSpan * .3));
 
-    return candidates.sort((a, b) => {
+    const rotated = candidates.sort((a, b) => {
       const scoreA = a.score + seededNoise(a.youtubeId, refreshSeed + 1) * rotationRange - (recentIds.has(a.youtubeId) ? recentPenalty : 0);
       const scoreB = b.score + seededNoise(b.youtubeId, refreshSeed + 1) * rotationRange - (recentIds.has(b.youtubeId) ? recentPenalty : 0);
       return scoreB - scoreA || b.score - a.score || a.title.localeCompare(b.title);
     });
+    return diversifyVideos(rotated);
   }, [videos, preferences, category, query, refreshSeed, recentRecommendationIds]);
 
   useEffect(() => {
@@ -625,7 +626,7 @@ export default function Home() {
       setNewsPeriod("week");
       const selectedCategory = targetCategory || (category === "Todos" || category === "Minha biblioteca" ? "Ideias" : category);
       const candidates = Array.isArray(data?.items) ? data.items : [];
-      const rejected = { duracao: 0, indisponivel: 0, distracao: 0, relevancia: 0, densidade: 0, repeticao: 0, excesso: 0 };
+      const rejected = { duracao: 0, indisponivel: 0, distracao: 0, relevancia: 0, densidade: 0, excesso: 0 };
       const approved = candidates.map((item, index) => {
         const seconds = isoDurationSeconds(item.contentDetails?.duration);
         const rejectionReason = searchRejectionReason(item, searchTerm, seconds);
@@ -647,19 +648,8 @@ export default function Home() {
         return { id: `web-${item.id}`, youtubeId: item.id, thumbnailId: item.id, embedType: "video", publishedAt: item.snippet.publishedAt, category: selectedCategory, title: item.snippet.title, channel: item.snippet.channelTitle, topic: searchTerm.toLowerCase(), url: `https://www.youtube.com/watch?v=${item.id}`, durationSeconds: seconds, depth: Math.min(.96, .65 + Math.min(.22, seconds / 15_000) + learningBonus), novelty: Math.max(.58, .9 - index * .02), quality: Math.min(.96, .7 + learningBonus + relevanceBonus + reception), evergreen: .8, publishedLabel: relativeDate(item.snippet.publishedAt), palette: (["blue", "coral", "ink", "moss", "violet", "sand"] as const)[index % 6], mark: "PESQUISA" };
       }).filter(Boolean) as Video[];
 
-      const channelCount = new Map<string, number>();
-      const diverse = approved.filter((video) => {
-        const channelKey = normalizeSearchText(video.channel);
-        const count = channelCount.get(channelKey) || 0;
-        if (count >= 2) {
-          rejected.repeticao += 1;
-          return false;
-        }
-        channelCount.set(channelKey, count + 1);
-        return true;
-      });
-      rejected.excesso = Math.max(0, diverse.length - 36);
-      const found = diverse.slice(0, 36);
+      rejected.excesso = Math.max(0, approved.length - 36);
+      const found = approved.slice(0, 36);
       setWebVideos(found);
       if (targetCategory && found.length) {
         setInterestFeeds((current) => {
@@ -677,7 +667,6 @@ export default function Home() {
         rejected.densidade && `${rejected.densidade} de baixa densidade`,
         rejected.duracao && `${rejected.duracao} fora da duração`,
         rejected.indisponivel && `${rejected.indisponivel} indisponível`,
-        rejected.repeticao && `${rejected.repeticao} repetido por canal`,
         rejected.excesso && `${rejected.excesso} além do limite consciente`,
       ].filter(Boolean).join(" · ");
       const sourceWarning = data?.warnings?.length ? " Uma das fontes ficou temporariamente indisponível." : "";
