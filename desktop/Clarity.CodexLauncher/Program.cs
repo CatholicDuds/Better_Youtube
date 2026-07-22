@@ -35,6 +35,9 @@ internal static class Program
             return 0;
         }
 
+        // Mantém o botão web associado ao local atual do executável sem exigir instalação administrativa.
+        try { RegisterProtocol(); } catch { }
+
         try
         {
             var workspace = FindWorkspace();

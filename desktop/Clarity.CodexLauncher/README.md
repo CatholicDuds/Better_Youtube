@@ -9,6 +9,8 @@ Este lançador não analisa nem envia nada automaticamente. Ele:
 5. tenta abrir uma tarefa nova e colar o texto;
 6. nunca pressiona Enter.
 
+Na primeira execução ele também registra, somente para o usuário atual do Windows, o protocolo usado pelo botão **Curar no Codex**. Não são necessários privilégios de administrador.
+
 Se a automação de foco do Windows falhar, o prompt permanece no clipboard e pode ser colado com `Ctrl+V`.
 
 ## Gerar o `.exe`
@@ -24,4 +26,3 @@ Para registrar o protocolo local usado pelo botão web:
 ```powershell
 .\dist\ClarityCurator.exe --register
 ```
-
