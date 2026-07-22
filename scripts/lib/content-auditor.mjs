@@ -8,6 +8,8 @@ const GROQ_API_KEY = process.env.GROQ_API_KEY;
 const GROQ_BASE_URL = (process.env.GROQ_BASE_URL || "https://api.groq.com/openai/v1").replace(/\/$/, "");
 const MODEL = process.env.GROQ_EVALUATION_MODEL || "openai/gpt-oss-20b";
 const execFileAsync = promisify(execFile);
+const AUDIT_INTERVAL_MS = Math.max(0, Number(process.env.GROQ_AUDIT_INTERVAL_MS || 65_000));
+let lastAuditRequestAt = 0;
 
 const delay = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
 
@@ -28,6 +30,12 @@ async function fetchGroq(path, options, label) {
     await delay(retryDelay(response, attempt));
   }
   throw new Error(`${label}: limite de tentativas excedido`);
+}
+
+async function paceAuditRequests() {
+  const wait = AUDIT_INTERVAL_MS - (Date.now() - lastAuditRequestAt);
+  if (wait > 0) await delay(wait);
+  lastAuditRequestAt = Date.now();
 }
 
 export const CONTENT_AUDIT_PROMPT = `Você é o editor-chefe de uma biblioteca de formação exigente. Avalie exclusivamente o conteúdo fornecido, nunca o prestígio, tamanho, identidade ou reputação do canal, autor, podcast ou veículo.
@@ -53,15 +61,15 @@ Regras de aprovação:
 - approved só pode ser true quando overall >= 78, depth >= 72, insight >= 70, evidence >= 65, substance >= 75 e deception <= 20.
 - Responda no schema solicitado, com razões específicas ancoradas no conteúdo.`;
 
-const score = { type: "integer", minimum: 0, maximum: 100 };
+const score = { type: "integer" };
 const AUDIT_SCHEMA = {
   type: "object",
   properties: {
     approved: { type: "boolean" }, overall: score, importance: score, depth: score,
     insight: score, evidence: score, clarity: score, captivating: score, substance: score,
     deception: score, confidence: score,
-    thesis: { type: "string" }, reasons: { type: "array", items: { type: "string" }, minItems: 2, maxItems: 4 },
-    weaknesses: { type: "array", items: { type: "string" }, maxItems: 4 },
+    thesis: { type: "string" }, reasons: { type: "array", items: { type: "string" } },
+    weaknesses: { type: "array", items: { type: "string" } },
   },
   required: ["approved", "overall", "importance", "depth", "insight", "evidence", "clarity", "captivating", "substance", "deception", "confidence", "thesis", "reasons", "weaknesses"],
   additionalProperties: false,
@@ -75,7 +83,7 @@ export function minimumContentLength(kind) {
   return kind === "news" ? 1800 : 3500;
 }
 
-function representativeSample(content, maximumLength = 20_000) {
+function representativeSample(content, maximumLength = 14_000) {
   if (content.length <= maximumLength) return content;
   const sections = 5;
   const sectionLength = Math.floor(maximumLength / sections);
@@ -94,24 +102,29 @@ export async function auditContent({ kind, title, content, context = "" }) {
   if (normalized.length < minimumContentLength(kind)) return unavailable("Conteúdo insuficiente para uma avaliação responsável.");
   if (!GROQ_API_KEY) return unavailable("Configure GROQ_API_KEY para executar a auditoria semântica.");
 
-  const response = await fetchGroq("/responses", {
+  await paceAuditRequests();
+  const response = await fetchGroq("/chat/completions", {
     method: "POST",
     headers: { authorization: `Bearer ${GROQ_API_KEY}`, "content-type": "application/json" },
     body: JSON.stringify({
       model: MODEL,
-      input: [
+      messages: [
         { role: "system", content: CONTENT_AUDIT_PROMPT },
         { role: "user", content: `TIPO: ${kind}\nTÍTULO: ${title}\nCONTEXTO NEUTRO: ${context}\n\nCONTEÚDO PARA AUDITORIA (amostra distribuída por toda a obra):\n${representativeSample(normalized)}` },
       ],
-      text: { format: { type: "json_schema", name: "content_quality_audit", strict: true, schema: AUDIT_SCHEMA } },
-      max_output_tokens: 1400,
-      reasoning: { effort: "low" },
+      response_format: { type: "json_schema", json_schema: { name: "content_quality_audit", strict: true, schema: AUDIT_SCHEMA } },
+      max_completion_tokens: 1400,
+      reasoning_effort: "low",
     }),
   }, "Groq audit");
   const data = await response.json();
-  const outputText = data.output_text || data.output?.flatMap((item) => item.content || []).find((item) => item.type === "output_text")?.text;
-  if (!outputText) throw new Error("Groq audit: resposta sem output_text");
+  const outputText = data.choices?.[0]?.message?.content;
+  if (!outputText) throw new Error("Groq audit: resposta sem conteúdo");
   const audit = JSON.parse(outputText);
+  const scores = [audit.overall, audit.importance, audit.depth, audit.insight, audit.evidence, audit.clarity, audit.captivating, audit.substance, audit.deception, audit.confidence];
+  if (scores.some((value) => !Number.isInteger(value) || value < 0 || value > 100)) throw new Error("Groq audit: pontuações fora do intervalo 0–100");
+  audit.reasons = audit.reasons.slice(0, 4);
+  audit.weaknesses = audit.weaknesses.slice(0, 4);
   const thresholdsPass = audit.overall >= 78 && audit.depth >= 72 && audit.insight >= 70 && audit.evidence >= 65 && audit.substance >= 75 && audit.deception <= 20;
   return { ...audit, approved: Boolean(audit.approved && thresholdsPass), method: "semantic-content", provider: "groq", model: MODEL };
 }
@@ -181,19 +194,29 @@ export function htmlToText(html = "") {
 export async function transcribeAudioUrl(audioUrl) {
   if (!GROQ_API_KEY || !audioUrl) return "";
   const directory = await mkdtemp(join(tmpdir(), "clarity-audio-"));
-  const output = join(directory, "episode.mp3");
+  const outputPattern = join(directory, "chunk-%03d.mp3");
   try {
     await execFileAsync(process.env.FFMPEG_PATH || "ffmpeg", [
-      "-y", "-i", audioUrl, "-vn", "-ac", "1", "-ar", "16000", "-b:a", "16k", "-t", "10800", output,
+      "-y", "-i", audioUrl, "-vn", "-ac", "1", "-ar", "16000", "-b:a", "16k", "-t", "10800",
+      "-f", "segment", "-segment_time", "1500", "-reset_timestamps", "1", outputPattern,
     ], { timeout: 900_000, maxBuffer: 2_000_000 });
-    const audio = await readFile(output);
-    if (!audio.length || audio.length > 24 * 1024 * 1024) return "";
-    const body = new FormData();
-    body.set("file", new Blob([audio], { type: "audio/mpeg" }), "episode.mp3");
-    body.set("model", process.env.GROQ_TRANSCRIPTION_MODEL || "whisper-large-v3-turbo");
-    body.set("response_format", "text");
-    const response = await fetchGroq("/audio/transcriptions", { method: "POST", headers: { authorization: `Bearer ${GROQ_API_KEY}` }, body }, "Groq transcription");
-    return (await response.text()).trim();
+    const chunks = (await readdir(directory)).filter((file) => /^chunk-\d+\.mp3$/.test(file)).sort();
+    if (!chunks.length) return "";
+    const sampleCount = Math.min(4, chunks.length);
+    const selected = Array.from({ length: sampleCount }, (_, index) => chunks[Math.round(index * (chunks.length - 1) / Math.max(1, sampleCount - 1))]);
+    const transcripts = [];
+    for (const [index, filename] of [...new Set(selected)].entries()) {
+      const audio = await readFile(join(directory, filename));
+      if (!audio.length || audio.length > 8 * 1024 * 1024) continue;
+      const body = new FormData();
+      body.set("file", new Blob([audio], { type: "audio/mpeg" }), filename);
+      body.set("model", process.env.GROQ_TRANSCRIPTION_MODEL || "whisper-large-v3-turbo");
+      body.set("response_format", "text");
+      const response = await fetchGroq("/audio/transcriptions", { method: "POST", headers: { authorization: `Bearer ${GROQ_API_KEY}` }, body }, "Groq transcription");
+      const text = (await response.text()).trim();
+      if (text) transcripts.push(`[TRECHO DE ÁUDIO ${index + 1}] ${text}`);
+    }
+    return transcripts.join("\n\n");
   } finally {
     await rm(directory, { recursive: true, force: true });
   }

@@ -55,12 +55,22 @@ jobs:
           key: content-audits-${{ github.run_id }}
           restore-keys: content-audits-
       - name: Auditar conteúdo de vídeos, notícias e podcasts
-        run: node scripts/audit-content.mjs
+        run: |
+          utc_hour=$(date -u +%H)
+          if [ "$GITHUB_EVENT_NAME" = "schedule" ] && [ $((10#$utc_hour % 2)) -ne 0 ]; then
+            echo "Auditoria aguardará a próxima janela de 2 horas."
+          else
+            if [ "$GITHUB_EVENT_NAME" = "schedule" ] && [ $((10#$utc_hour % 8)) -ne 0 ]; then
+              export PODCAST_AUDIT_BATCH_SIZE=0
+            fi
+            node scripts/audit-content.mjs
+          fi
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           GROQ_EVALUATION_MODEL: openai/gpt-oss-20b
           GROQ_TRANSCRIPTION_MODEL: whisper-large-v3-turbo
-          CONTENT_AUDIT_BATCH_SIZE: 6
+          GROQ_AUDIT_INTERVAL_MS: 65000
+          CONTENT_AUDIT_BATCH_SIZE: 1
           PODCAST_AUDIT_BATCH_SIZE: 1
       - name: Preservar auditorias para a próxima execução
         uses: actions/cache/save@v4

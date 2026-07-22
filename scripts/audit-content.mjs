@@ -8,7 +8,7 @@ if (!process.env.GROQ_API_KEY) {
 
 const outputUrl = new URL("../public/data/content-audits.json", import.meta.url);
 const perKindLimit = Math.max(1, Math.min(20, Number(process.env.CONTENT_AUDIT_BATCH_SIZE || 6)));
-const podcastLimit = Math.max(1, Math.min(3, Number(process.env.PODCAST_AUDIT_BATCH_SIZE || 1)));
+const podcastLimit = Math.max(0, Math.min(3, Number(process.env.PODCAST_AUDIT_BATCH_SIZE ?? 1)));
 
 async function readJson(path, fallback) {
   try { return JSON.parse(await readFile(new URL(path, import.meta.url), "utf8")); } catch { return fallback; }
@@ -85,7 +85,7 @@ async function podcastTranscript(feedUrl) {
 async function auditPodcast(item) {
   const key = `podcast:${item.appleId}`;
   const existingAge = Date.now() - Date.parse(audits[key]?.auditedAt || 0);
-  if (audits[key] && existingAge < 14 * 86_400_000) return false;
+  if (audits[key]?.method === "semantic-content" && existingAge < 14 * 86_400_000) return false;
   let episode = { title: "", text: "" };
   try { episode = await podcastTranscript(item.feedUrl); } catch {}
   const result = await auditContent({ kind: "podcast", title: episode.title || item.title, content: episode.text, context: "Episódio mais recente com transcrição publicada." });
