@@ -38,6 +38,7 @@ jobs:
         run: node scripts/discover-videos.mjs
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          DISCOVERY_BATCH_SIZE: 4
       - name: Atualizar notícias da semana
         run: node scripts/update-news.mjs
       - name: Atualizar capas do Apple Podcasts

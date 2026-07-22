@@ -10,6 +10,11 @@ import { supabase } from "../lib/supabase";
 import AIStudyDock from "./components/AIStudyDock";
 
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || "";
+const RECOMMENDATION_HISTORY_KEY = "clarity-recommendation-history";
+const LAST_RECOMMENDATIONS_KEY = "clarity-last-recommendations";
+const RECOMMENDATION_CYCLE_KEY = "clarity-recommendation-cycle";
+const RECOMMENDATION_BATCH_SIZE = 20;
+const RECOMMENDATION_HISTORY_LIMIT = 60;
 const defaultInterests = [
   { label: "Negócios", icon: "▥" },
   { label: "Ideias", icon: "◈" },
@@ -222,6 +227,16 @@ function seededNoise(id: string, seed: number) {
   return ((hash >>> 0) % 1000) / 1000;
 }
 
+function storedRecommendationIds(value: string | null) {
+  if (!value) return [];
+  try {
+    const parsed = JSON.parse(value);
+    return Array.isArray(parsed) ? parsed.filter((item): item is string => typeof item === "string") : [];
+  } catch {
+    return [];
+  }
+}
+
 function paginate<T>(items: T[], pageSize: number, maxPages = 3) {
   return Array.from({ length: Math.min(maxPages, Math.ceil(items.length / pageSize)) }, (_, index) => items.slice(index * pageSize, (index + 1) * pageSize));
 }
@@ -363,8 +378,9 @@ export default function Home() {
   const [newsUpdatedAt, setNewsUpdatedAt] = useState<string | null>(null);
   const [newsPeriod, setNewsPeriod] = useState<"today" | "week">("today");
   const [newsSpectrum, setNewsSpectrum] = useState<"Todos" | PoliticalSpectrum>("Todos");
-  const [visibleCount, setVisibleCount] = useState(12);
+  const [visibleCount, setVisibleCount] = useState(RECOMMENDATION_BATCH_SIZE);
   const [refreshSeed, setRefreshSeed] = useState(0);
+  const [recentRecommendationIds, setRecentRecommendationIds] = useState<string[]>([]);
   const [refreshing, setRefreshing] = useState(false);
   const [languageLevel, setLanguageLevel] = useState<"Essencial" | "Intermediário" | "Avançado">("Intermediário");
   const [watchedBlock, setWatchedBlock] = useState<string[]>([]);
@@ -386,6 +402,11 @@ export default function Home() {
       const storedLevel = localStorage.getItem("clarity-language-level") as "Essencial" | "Intermediário" | "Avançado" | null;
       const storedInterests = localStorage.getItem("clarity-interests");
       const storedInterestFeeds = localStorage.getItem("clarity-interest-feeds");
+      const storedRecommendationHistory = storedRecommendationIds(localStorage.getItem(RECOMMENDATION_HISTORY_KEY));
+      const lastRecommendations = storedRecommendationIds(localStorage.getItem(LAST_RECOMMENDATIONS_KEY));
+      const storedRecommendationCycle = Number(localStorage.getItem(RECOMMENDATION_CYCLE_KEY));
+      const nextRecommendationHistory = Array.from(new Set([...storedRecommendationHistory, ...lastRecommendations])).slice(-RECOMMENDATION_HISTORY_LIMIT);
+      const nextRecommendationCycle = Number.isSafeInteger(storedRecommendationCycle) && storedRecommendationCycle >= 0 ? storedRecommendationCycle + 1 : 1;
       const requestedCategory = new URLSearchParams(window.location.search).get("tema");
       queueMicrotask(() => {
         if (storedTheme) setTheme(storedTheme);
@@ -394,6 +415,8 @@ export default function Home() {
         if (storedLevel) setLanguageLevel(storedLevel);
         if (storedInterests) setUserInterests(JSON.parse(storedInterests));
         if (storedInterestFeeds) setInterestFeeds(JSON.parse(storedInterestFeeds));
+        setRecentRecommendationIds(nextRecommendationHistory);
+        setRefreshSeed(nextRecommendationCycle);
         if (requestedCategory && defaultInterestLabels.includes(requestedCategory)) setCategory(requestedCategory);
         if (!localStorage.getItem("clarity-onboarding-complete")) setShowOnboarding(true);
       });
@@ -429,6 +452,13 @@ export default function Home() {
   }, [theme]);
 
   useEffect(() => {
+    try {
+      localStorage.setItem(RECOMMENDATION_HISTORY_KEY, JSON.stringify(recentRecommendationIds));
+      localStorage.setItem(RECOMMENDATION_CYCLE_KEY, String(refreshSeed));
+    } catch {}
+  }, [recentRecommendationIds, refreshSeed]);
+
+  useEffect(() => {
     const media = window.matchMedia("(max-width: 600px)");
     const syncLayout = () => setCompactCarousel(media.matches);
     syncLayout();
@@ -446,13 +476,33 @@ export default function Home() {
   }, [customVideos, webVideos, interestFeeds, discoveredVideos, liveVideos]);
 
   const ranked = useMemo(() => {
-    return rankVideos(videos, preferences).filter((video) => {
+    const candidates = rankVideos(videos, preferences).filter((video) => {
       const categoryMatch = category === "Todos" || video.category === category;
       const text = `${video.title} ${video.channel} ${video.topic} ${video.category}`.toLowerCase();
       const terms = query.trim().toLowerCase().split(/\s+/).filter(Boolean);
       return categoryMatch && terms.every((term) => text.includes(term));
-    }).sort((a, b) => (b.score + seededNoise(b.id, refreshSeed) * 5) - (a.score + seededNoise(a.id, refreshSeed) * 5));
-  }, [videos, preferences, category, query, refreshSeed]);
+    });
+
+    if (candidates.length < 2) return candidates;
+
+    const recentIds = new Set(recentRecommendationIds);
+    const scoreSpan = Math.max(1, candidates[0].score - candidates[candidates.length - 1].score);
+    const rotationRange = Math.min(1.5, Math.max(.5, scoreSpan * .04));
+    const recentPenalty = Math.min(12, Math.max(6, scoreSpan * .3));
+
+    return candidates.sort((a, b) => {
+      const scoreA = a.score + seededNoise(a.youtubeId, refreshSeed + 1) * rotationRange - (recentIds.has(a.youtubeId) ? recentPenalty : 0);
+      const scoreB = b.score + seededNoise(b.youtubeId, refreshSeed + 1) * rotationRange - (recentIds.has(b.youtubeId) ? recentPenalty : 0);
+      return scoreB - scoreA || b.score - a.score || a.title.localeCompare(b.title);
+    });
+  }, [videos, preferences, category, query, refreshSeed, recentRecommendationIds]);
+
+  useEffect(() => {
+    if (!ranked.length) return;
+    try {
+      localStorage.setItem(LAST_RECOMMENDATIONS_KEY, JSON.stringify(ranked.slice(0, RECOMMENDATION_BATCH_SIZE).map((video) => video.youtubeId)));
+    } catch {}
+  }, [ranked]);
 
   const depthLanes = useMemo(() => [
     {
@@ -460,21 +510,21 @@ export default function Home() {
       eyebrow: "BÁSICO",
       title: "Construa os fundamentos",
       description: "Conceitos, vocabulário e intuição para entrar no assunto sem pressupor conhecimento anterior.",
-      videos: ranked.filter((video) => video.depth < .68).slice(0, 4),
+      videos: ranked.filter((video) => video.depth < .68).slice(0, 6),
     },
     {
       id: "intermediate",
       eyebrow: "INTERMEDIÁRIO",
       title: "Entenda os mecanismos",
       description: "Relações de causa e efeito, casos concretos e conexões entre as ideias centrais.",
-      videos: ranked.filter((video) => video.depth >= .68 && video.depth < .86).slice(0, 4),
+      videos: ranked.filter((video) => video.depth >= .68 && video.depth < .86).slice(0, 6),
     },
     {
       id: "deep",
       eyebrow: "PROFUNDO",
       title: "Questione, compare e aplique",
       description: "Evidências, objeções, limites e aplicações para formar uma visão própria e defensável.",
-      videos: ranked.filter((video) => video.depth >= .86).slice(0, 4),
+      videos: ranked.filter((video) => video.depth >= .86).slice(0, 6),
     },
   ], [ranked]);
 
@@ -514,31 +564,42 @@ export default function Home() {
   const podcastPages = useMemo(() => paginate(visiblePodcasts, compactCarousel ? 2 : 6), [visiblePodcasts, compactCarousel]);
 
   async function refreshRecommendations() {
+    if (refreshing) return;
+
+    const currentlyVisible = ranked.slice(0, Math.min(RECOMMENDATION_BATCH_SIZE, visibleCount)).map((video) => video.youtubeId);
+    setRecentRecommendationIds((current) => Array.from(new Set([...current, ...currentlyVisible])).slice(-RECOMMENDATION_HISTORY_LIMIT));
+    setRefreshSeed((current) => current + 1);
+    setVisibleCount(RECOMMENDATION_BATCH_SIZE);
     setRefreshing(true);
+
+    const cacheBuster = Date.now();
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(() => controller.abort(), 8_000);
     try {
-      const [response, discoveries, headlines] = await Promise.all([
-        fetch(`${BASE_PATH}/data/latest-videos.json?t=${Date.now()}`, { cache: "no-store" }),
-        fetch(`${BASE_PATH}/data/discovered-videos.json?t=${Date.now()}`, { cache: "no-store" }),
-        fetch(`${BASE_PATH}/data/news.json?t=${Date.now()}`, { cache: "no-store" }),
+      const [latestResult, discoveriesResult, headlinesResult] = await Promise.allSettled([
+        fetch(`${BASE_PATH}/data/latest-videos.json?t=${cacheBuster}`, { cache: "no-store", signal: controller.signal }).then((response) => response.ok ? response.json() : Promise.reject()),
+        fetch(`${BASE_PATH}/data/discovered-videos.json?t=${cacheBuster}`, { cache: "no-store", signal: controller.signal }).then((response) => response.ok ? response.json() : Promise.reject()),
+        fetch(`${BASE_PATH}/data/news.json?t=${cacheBuster}`, { cache: "no-store", signal: controller.signal }).then((response) => response.ok ? response.json() : Promise.reject()),
       ]);
-      if (response.ok) {
-        const data = await response.json();
+
+      if (latestResult.status === "fulfilled") {
+        const data = latestResult.value;
         if (Array.isArray(data.videos)) setLiveVideos(data.videos);
         if (data.updatedAt) setUpdatedAt(data.updatedAt);
       }
-      if (discoveries.ok) {
-        const data = await discoveries.json();
+      if (discoveriesResult.status === "fulfilled") {
+        const data = discoveriesResult.value;
         if (Array.isArray(data.videos)) setDiscoveredVideos(data.videos);
       }
-      if (headlines.ok) {
-        const data = await headlines.json();
+      if (headlinesResult.status === "fulfilled") {
+        const data = headlinesResult.value;
         if (Array.isArray(data.news)) setNews(data.news);
         if (data.updatedAt) setNewsUpdatedAt(data.updatedAt);
       }
-    } catch {}
-    setRefreshSeed(Date.now());
-    setVisibleCount(12);
-    setRefreshing(false);
+    } finally {
+      window.clearTimeout(timeoutId);
+      setRefreshing(false);
+    }
   }
 
   async function searchContent(searchOverride?: string, targetCategory?: string) {
@@ -597,8 +658,8 @@ export default function Home() {
         channelCount.set(channelKey, count + 1);
         return true;
       });
-      rejected.excesso = Math.max(0, diverse.length - 24);
-      const found = diverse.slice(0, 24);
+      rejected.excesso = Math.max(0, diverse.length - 36);
+      const found = diverse.slice(0, 36);
       setWebVideos(found);
       if (targetCategory && found.length) {
         setInterestFeeds((current) => {
@@ -607,8 +668,8 @@ export default function Home() {
           return next;
         });
       }
-      setRefreshSeed(Date.now());
-      setVisibleCount(24);
+      setRefreshSeed((current) => current + 1);
+      setVisibleCount(36);
       const removed = candidates.length - found.length;
       const removalSummary = [
         rejected.relevancia && `${rejected.relevancia} fora do assunto`,
@@ -655,7 +716,7 @@ export default function Home() {
   function openCategory(nextCategory: string) {
     setMobileMenuOpen(false);
     setCategory(nextCategory);
-    setVisibleCount(16);
+    setVisibleCount(RECOMMENDATION_BATCH_SIZE);
     setQuery("");
     setCompletedSearch("");
     if (nextCategory === "Todos" || nextCategory === "Minha biblioteca" || defaultInterestLabels.includes(nextCategory)) return;
@@ -855,7 +916,7 @@ export default function Home() {
           {ranked.slice(8, visibleCount).map((video) => <VideoCard key={video.id} video={video} onPlay={setPlaying} onFeedback={feedback} />)}
         </section>}
 
-        {visibleCount < ranked.length && <button className="load-more" onClick={() => setVisibleCount((value) => value + 8)}>Mostrar mais vídeos</button>}
+        {visibleCount < ranked.length && <button className="load-more" onClick={() => setVisibleCount((value) => value + 12)}>Mostrar mais vídeos</button>}
 
         <section className="reading-section" id="leituras">
           <div className="reading-intro"><p className="eyebrow">LEITURAS PARA FORMAR REPERTÓRIO</p><h2>Uma estante, não outro feed</h2><p>Artigos, livros, documentos e pesquisas selecionados para construir fundamentos e ligar ideias.</p><a className="library-link" href={`${BASE_PATH}/leituras/`}>Abrir biblioteca completa →</a></div>

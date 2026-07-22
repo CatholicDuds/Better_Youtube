@@ -57,7 +57,7 @@ async function fetchSource(source, sourceIndex) {
   const response = await fetch(`https://www.youtube.com/feeds/videos.xml?channel_id=${source.channelId}`, { headers: { "user-agent": "ClarityLearningFeed/1.0" } });
   if (!response.ok) throw new Error(`Feed ${source.channelId}: ${response.status}`);
   const xml = await response.text();
-  const entries = [...xml.matchAll(/<entry>([\s\S]*?)<\/entry>/g)].slice(0, 6);
+  const entries = [...xml.matchAll(/<entry>([\s\S]*?)<\/entry>/g)].slice(0, 10);
   const videos = await Promise.all(entries.map(async (match, index) => {
     const block = match[1];
     const videoId = valueOf(block, "yt:videoId");
@@ -99,10 +99,10 @@ const merged = [...refreshed, ...previous].filter((video) => !shallowTitle.test(
 const channelCount = new Map();
 const videos = merged.filter((video) => {
   const count = channelCount.get(video.channel) || 0;
-  if (count >= 8) return false;
+  if (count >= 10) return false;
   channelCount.set(video.channel, count + 1);
   return true;
-}).slice(0, 160);
+}).slice(0, 200);
 
 const output = { updatedAt: new Date().toISOString(), source: "YouTube channel RSS", videos };
 await mkdir(new URL("../public/data/", import.meta.url), { recursive: true });

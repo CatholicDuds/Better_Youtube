@@ -7,7 +7,7 @@ if (!apiKey) {
 }
 
 const topics = JSON.parse(await readFile(new URL("../config/discovery-topics.json", import.meta.url), "utf8"));
-const batchSize = Math.max(1, Math.min(4, Number(process.env.DISCOVERY_BATCH_SIZE || 2)));
+const batchSize = Math.max(1, Math.min(4, Number(process.env.DISCOVERY_BATCH_SIZE || 4)));
 const startIndex = (new Date().getUTCHours() * batchSize) % topics.length;
 const activeTopics = Array.from({ length: Math.min(batchSize, topics.length) }, (_, offset) => {
   const topicIndex = (startIndex + offset) % topics.length;
