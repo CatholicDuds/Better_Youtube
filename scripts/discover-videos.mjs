@@ -14,8 +14,9 @@ const activeTopics = Array.from({ length: Math.min(batchSize, topics.length) }, 
   return { topic: topics[topicIndex], topicIndex };
 });
 const palettes = ["blue", "coral", "ink", "moss", "violet", "sand"];
-const shallowTitle = /#shorts|\bshorts?\b|cortes?\s+(do|de|podcast)|urgente|chocante|você não vai acreditar|treta/i;
+const shallowTitle = /#shorts|\bshorts?\b|cortes?\s+(do|de|podcast)|urgente|chocante|você não vai acreditar|ninguém te conta|segredo que|treta|destruiu|humilhou|lacrou|mitou|exposed|fique rico|ganhe dinheiro (fácil|rápido)|melhor(es)? que \d+%|\d+% dos/i;
 const learningTitle = /aula|curso|explic|fundamento|document|palestra|análise|história|lecture|explained|documentary|strategy|science/i;
+const evidenceSignal = /evidência|evidence|fontes|sources|referências|references|bibliografia|pesquisa|research|estudo de caso|case study|demonstração|demonstration|dados|data\b/i;
 const DISCOVERY_PROMPTS = [
   { pt: "explicação completa conceitos exemplos", en: "complete explanation concepts examples" },
   { pt: "documentário análise com fontes", en: "documentary analysis with sources" },
@@ -68,15 +69,20 @@ async function discover(topic, topicIndex) {
     const views = Number(item.statistics?.viewCount || 0);
     const likes = Number(item.statistics?.likeCount || 0);
     const durationDepth = clamp((seconds - 240) / 3300);
-    const context = `${title} ${item.snippet?.description || ""}`;
-    const evidence = learningTitle.test(context) ? .09 : 0;
-    const reception = views > 0 ? clamp((likes / views) * 14, 0, .08) : 0;
+    const description = item.snippet?.description || "";
+    const context = `${title} ${description}`;
+    const learning = learningTitle.test(context) ? .06 : 0;
+    const evidence = evidenceSignal.test(context) ? .09 : 0;
+    const descriptionDepth = description.trim().length >= 280 ? .06 : description.trim().length >= 120 ? .03 : 0;
+    const reception = views > 0 ? clamp((likes / views) * 10, 0, .06) : 0;
+    const quality = clamp(.62 + learning + evidence + descriptionDepth + reception + durationDepth * .08);
+    if (quality < .84) return null;
     return {
       id: `discover-${item.id}`, youtubeId: item.id, thumbnailId: item.id, embedType: "video",
       publishedAt: item.snippet.publishedAt, category: topic.category, title,
       channel: item.snippet.channelTitle, topic: topic.topic, url: `https://www.youtube.com/watch?v=${item.id}`,
-      durationSeconds: seconds, depth: clamp(.62 + durationDepth * .25 + evidence), novelty: clamp(.9 - index * .025),
-      quality: clamp(.72 + evidence + reception), evergreen: topic.category === "Mundo" ? .68 : .84,
+      durationSeconds: seconds, depth: clamp(.6 + durationDepth * .25 + evidence), novelty: clamp(.9 - index * .025),
+      quality, evergreen: topic.category === "Mundo" ? .68 : .84,
       publishedLabel: ageLabel(item.snippet.publishedAt), palette: palettes[(topicIndex + index) % palettes.length],
       mark: "DESCOBERTA",
     };

@@ -3,7 +3,7 @@
 
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { seedVideos, type Video } from "../lib/videos";
-import { DEFAULT_PREFERENCES, diversifyVideos, rankVideos, type Preferences, type RankedVideo } from "../lib/recommender";
+import { DEFAULT_PREFERENCES, diversifyVideos, rankVideos, videoRejectionReason, type Preferences, type RankedVideo } from "../lib/recommender";
 import { readings } from "../lib/readings";
 import { studyFeedVideos } from "../lib/study";
 import { supabase } from "../lib/supabase";
@@ -26,6 +26,18 @@ const defaultInterests = [
 ];
 const defaultInterestLabels = defaultInterests.map((item) => item.label);
 type PoliticalSpectrum = "Esquerda" | "Centro" | "Direita";
+
+type ContentAudit = {
+  approved: boolean;
+  overall: number;
+  depth: number;
+  insight: number;
+  evidence: number;
+  captivating: number;
+  thesis: string;
+  reasons: string[];
+  auditedAt: string;
+};
 
 type NewsItem = {
   id: string;
@@ -150,6 +162,7 @@ function isoDurationSeconds(value = "PT0S") {
 const SEARCH_STOP_WORDS = new Set(["a", "o", "as", "os", "de", "da", "do", "das", "dos", "e", "em", "no", "na", "nos", "nas", "para", "por", "com", "como", "que", "um", "uma", "sobre", "ao", "aos"]);
 const ATTENTION_TRAP = /\b(shorts?|cortes? (do|de) podcast|treta|fofoca|pegadinha|prank|tente nao rir|reacao|reaction|compilacao|melhores momentos|urgente|chocante|voce nao vai acreditar|ninguem te conta|humilhou|destruiu|lacrou|mitou|exposed|ganhe dinheiro (facil|rapido)|fique rico rapido)\b/i;
 const LEARNING_SIGNAL = /\b(aula|curso|explica|explicacao|fundamentos?|documentario|palestra|analise|historia|guia|tutorial|estrategia|ciencia|estudo|entrevista|debate|como|por que|porque|o que e|introducao|lecture|explained|documentary|strategy|science|history|guide)\b/i;
+const EVIDENCE_SIGNAL = /\b(evidencia|evidence|fontes|sources|referencias|references|bibliografia|pesquisa|research|estudo de caso|case study|demonstracao|demonstration|dados|data)\b/i;
 
 function normalizeSearchText(value: string) {
   return value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
@@ -365,6 +378,7 @@ export default function Home() {
   const [playing, setPlaying] = useState<RankedVideo | null>(null);
   const [playingPodcast, setPlayingPodcast] = useState<Podcast | null>(null);
   const [podcastArtwork, setPodcastArtwork] = useState<Record<string, { artworkUrl: string; appleUrl: string }>>({});
+  const [contentAudits, setContentAudits] = useState<Record<string, ContentAudit>>({});
   const [showControls, setShowControls] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [compactCarousel, setCompactCarousel] = useState(false);
@@ -444,6 +458,10 @@ export default function Home() {
         setPodcastArtwork(Object.fromEntries(data.podcasts.map((item: { appleId: string; artworkUrl: string; appleUrl: string }) => [item.appleId, { artworkUrl: item.artworkUrl, appleUrl: item.appleUrl }])));
       })
       .catch(() => {});
+    fetch(`${BASE_PATH}/data/content-audits.json`)
+      .then((response) => response.ok ? response.json() : Promise.reject())
+      .then((data) => { if (data?.audits && typeof data.audits === "object") setContentAudits(data.audits); })
+      .catch(() => {});
   }, []);
 
   useEffect(() => {
@@ -472,8 +490,12 @@ export default function Home() {
   const videos = useMemo(() => {
     const personalized = Object.values(interestFeeds).flatMap((feed) => Array.isArray(feed?.videos) ? feed.videos : []);
     const all = [...customVideos, ...webVideos, ...personalized, ...discoveredVideos, ...liveVideos, ...studyFeedVideos, ...seedVideos];
-    return all.filter((video, index) => all.findIndex((item) => item.youtubeId === video.youtubeId) === index);
-  }, [customVideos, webVideos, interestFeeds, discoveredVideos, liveVideos]);
+    return all.filter((video, index) => {
+      if (all.findIndex((item) => item.youtubeId === video.youtubeId) !== index) return false;
+      if (video.category === "Minha biblioteca") return true;
+      return contentAudits[`video:${video.youtubeId}`]?.approved === true && !videoRejectionReason(video);
+    });
+  }, [customVideos, webVideos, interestFeeds, discoveredVideos, liveVideos, contentAudits]);
 
   const ranked = useMemo(() => {
     const candidates = rankVideos(videos, preferences).filter((video) => {
@@ -532,9 +554,10 @@ export default function Home() {
   const visiblePodcasts = useMemo(() => {
     const candidates = contentSearchActive ? searchedPodcasts : podcasts.map((podcast) => ({ ...podcast, ...podcastArtwork[podcast.appleId] }));
     return candidates
+      .filter((podcast) => contentAudits[`podcast:${podcast.appleId}`]?.approved === true)
       .filter((podcast) => contentSearchActive || category === "Todos" || podcast.category === category)
       .sort((a, b) => Math.abs(a.depth - preferences.depth / 100) - Math.abs(b.depth - preferences.depth / 100));
-  }, [category, preferences.depth, podcastArtwork, contentSearchActive, searchedPodcasts]);
+  }, [category, preferences.depth, podcastArtwork, contentSearchActive, searchedPodcasts, contentAudits]);
 
   const homeReadings = useMemo(() => {
     const levelOrder = { Essencial: 0, Intermediário: 1, Avançado: 2 };
@@ -547,19 +570,18 @@ export default function Home() {
   const visibleNews = useMemo(() => {
     const cutoff = currentTime - (newsPeriod === "today" ? 30 : 7 * 24) * 3_600_000;
     const sourceNews = contentSearchActive ? searchedNews : news;
-    const candidates = sourceNews.filter((item) => Date.parse(item.publishedAt) >= cutoff)
+    const candidates = sourceNews.filter((item) => contentAudits[`news:${item.url}`]?.approved === true)
+      .filter((item) => Date.parse(item.publishedAt) >= cutoff)
       .filter((item) => newsSpectrum === "Todos" || (item.spectrum || "Centro") === newsSpectrum)
       .filter((item) => contentSearchActive || (category === "Todos" ? userInterests.includes(item.category) : item.category === category));
     const categoryCount: Record<string, number> = {};
-    const sourceCount: Record<string, number> = {};
     return candidates.filter((item) => {
       const categoryLimit = contentSearchActive ? 12 : category === "Todos" ? 2 : 8;
-      if ((categoryCount[item.category] || 0) >= categoryLimit || (sourceCount[item.source] || 0) >= 2) return false;
+      if ((categoryCount[item.category] || 0) >= categoryLimit) return false;
       categoryCount[item.category] = (categoryCount[item.category] || 0) + 1;
-      sourceCount[item.source] = (sourceCount[item.source] || 0) + 1;
       return true;
     }).slice(0, 12);
-  }, [news, searchedNews, contentSearchActive, newsPeriod, newsSpectrum, category, userInterests, currentTime]);
+  }, [news, searchedNews, contentSearchActive, newsPeriod, newsSpectrum, category, userInterests, currentTime, contentAudits]);
 
   const newsPages = useMemo(() => paginate(visibleNews, compactCarousel ? 2 : 4), [visibleNews, compactCarousel]);
   const podcastPages = useMemo(() => paginate(visiblePodcasts, compactCarousel ? 2 : 6), [visiblePodcasts, compactCarousel]);
@@ -626,7 +648,7 @@ export default function Home() {
       setNewsPeriod("week");
       const selectedCategory = targetCategory || (category === "Todos" || category === "Minha biblioteca" ? "Ideias" : category);
       const candidates = Array.isArray(data?.items) ? data.items : [];
-      const rejected = { duracao: 0, indisponivel: 0, distracao: 0, relevancia: 0, densidade: 0, excesso: 0 };
+      const rejected = { duracao: 0, indisponivel: 0, distracao: 0, relevancia: 0, densidade: 0, qualidade: 0, excesso: 0 };
       const approved = candidates.map((item, index) => {
         const seconds = isoDurationSeconds(item.contentDetails?.duration);
         const rejectionReason = searchRejectionReason(item, searchTerm, seconds);
@@ -643,9 +665,16 @@ export default function Home() {
         const titleCoverage = terms.filter((term) => searchTermAppears(normalizedTitle, term)).length / Math.max(1, terms.length);
         const normalizedContext = `${normalizedTitle} ${normalizedDescription}`;
         const contextCoverage = terms.filter((term) => searchTermAppears(normalizedContext, term)).length / Math.max(1, terms.length);
-        const learningBonus = LEARNING_SIGNAL.test(`${normalizedTitle} ${normalizedDescription}`) ? .09 : 0;
-        const relevanceBonus = Math.min(.12, titleCoverage * .08 + contextCoverage * .04);
-        return { id: `web-${item.id}`, youtubeId: item.id, thumbnailId: item.id, embedType: "video", publishedAt: item.snippet.publishedAt, category: selectedCategory, title: item.snippet.title, channel: item.snippet.channelTitle, topic: searchTerm.toLowerCase(), url: `https://www.youtube.com/watch?v=${item.id}`, durationSeconds: seconds, depth: Math.min(.96, .65 + Math.min(.22, seconds / 15_000) + learningBonus), novelty: Math.max(.58, .9 - index * .02), quality: Math.min(.96, .7 + learningBonus + relevanceBonus + reception), evergreen: .8, publishedLabel: relativeDate(item.snippet.publishedAt), palette: (["blue", "coral", "ink", "moss", "violet", "sand"] as const)[index % 6], mark: "PESQUISA" };
+        const learningBonus = LEARNING_SIGNAL.test(`${normalizedTitle} ${normalizedDescription}`) ? .06 : 0;
+        const evidenceBonus = EVIDENCE_SIGNAL.test(normalizedContext) ? .09 : 0;
+        const descriptionBonus = normalizedDescription.length >= 280 ? .06 : normalizedDescription.length >= 120 ? .03 : 0;
+        const relevanceBonus = Math.min(.08, titleCoverage * .05 + contextCoverage * .03);
+        const video: Video = { id: `web-${item.id}`, youtubeId: item.id, thumbnailId: item.id, embedType: "video", publishedAt: item.snippet.publishedAt, category: selectedCategory, title: item.snippet.title, channel: item.snippet.channelTitle, topic: searchTerm.toLowerCase(), url: `https://www.youtube.com/watch?v=${item.id}`, durationSeconds: seconds, depth: Math.min(.96, .62 + Math.min(.22, seconds / 15_000) + evidenceBonus), novelty: Math.max(.58, .9 - index * .02), quality: Math.min(.96, .62 + learningBonus + evidenceBonus + descriptionBonus + relevanceBonus + Math.min(.06, reception)), evergreen: .8, publishedLabel: relativeDate(item.snippet.publishedAt), palette: (["blue", "coral", "ink", "moss", "violet", "sand"] as const)[index % 6], mark: "PESQUISA" };
+        if (videoRejectionReason(video)) {
+          rejected.qualidade += 1;
+          return null;
+        }
+        return video;
       }).filter(Boolean) as Video[];
 
       rejected.excesso = Math.max(0, approved.length - 36);
@@ -665,6 +694,7 @@ export default function Home() {
         rejected.relevancia && `${rejected.relevancia} fora do assunto`,
         rejected.distracao && `${rejected.distracao} isca de atenção`,
         rejected.densidade && `${rejected.densidade} de baixa densidade`,
+        rejected.qualidade && `${rejected.qualidade} sem sinais suficientes de qualidade`,
         rejected.duracao && `${rejected.duracao} fora da duração`,
         rejected.indisponivel && `${rejected.indisponivel} indisponível`,
         rejected.excesso && `${rejected.excesso} além do limite consciente`,

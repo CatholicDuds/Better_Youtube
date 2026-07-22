@@ -16,6 +16,7 @@ const podcasts = (data.results || []).filter((item) => item.collectionId && item
   title: item.collectionName,
   artworkUrl: item.artworkUrl600,
   appleUrl: item.collectionViewUrl,
+  feedUrl: item.feedUrl,
 }));
 if (!podcasts.length) {
   console.warn("Clarity: nenhuma capa de podcast encontrada; mantendo o arquivo anterior.");

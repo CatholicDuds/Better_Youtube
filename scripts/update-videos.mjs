@@ -23,7 +23,9 @@ const sources = [
 ];
 
 const palettes = ["sand", "moss", "coral", "blue", "violet", "ink"];
-const shallowTitle = /#shorts|\bshorts?\b|cortes?\s+(do|de|podcast)|treta|fofoca|pegadinha/i;
+const shallowTitle = /#shorts|\bshorts?\b|cortes?\s+(do|de|podcast)|treta|fofoca|pegadinha|urgente|chocante|você não vai acreditar|ninguém te conta|segredo que|destruiu|humilhou|lacrou|mitou|exposed|fique rico|ganhe dinheiro (fácil|rápido)|melhor(es)? que \d+%|\d+% dos/i;
+const learningSignal = /aula|curso|explic|fundamento|document|palestra|análise|história|lecture|explained|documentary|strategy|science/i;
+const evidenceSignal = /evidência|evidence|fontes|sources|referências|references|bibliografia|pesquisa|research|estudo de caso|case study|demonstração|demonstration|dados|data\b/i;
 const watchQueue = [];
 let activeWatchRequests = 0;
 
@@ -40,6 +42,10 @@ async function fetchWatchPage(url) {
 
 function decodeXml(value = "") {
   return value.replaceAll("&amp;", "&").replaceAll("&quot;", '"').replaceAll("&#39;", "'").replaceAll("&lt;", "<").replaceAll("&gt;", ">");
+}
+
+function clamp(value, min = 0, max = 1) {
+  return Math.max(min, Math.min(max, value));
 }
 
 function valueOf(block, tag) {
@@ -64,6 +70,7 @@ async function fetchSource(source, sourceIndex) {
     const title = valueOf(block, "title");
     const channel = valueOf(block, "name");
     const publishedAt = valueOf(block, "published");
+    const description = valueOf(block, "media:description");
     if (shallowTitle.test(title)) return null;
     const page = await fetchWatchPage(`https://www.youtube.com/watch?v=${videoId}`);
     if (!page.ok) return null;
@@ -71,10 +78,18 @@ async function fetchSource(source, sourceIndex) {
     const isShort = html.includes('"canonicalUrl":"https://www.youtube.com/shorts/');
     if (isShort) return null;
     const durationSeconds = Number(html.match(/"lengthSeconds":"(\d+)"/)?.[1] || 900);
+    if (durationSeconds < 241) return null;
+    const context = `${title} ${description}`;
+    const durationDepth = clamp((durationSeconds - 240) / 3300);
+    const learning = learningSignal.test(context) ? .07 : 0;
+    const evidence = evidenceSignal.test(context) ? .09 : 0;
+    const descriptionDepth = description.trim().length >= 280 ? .07 : description.trim().length >= 120 ? .035 : 0;
+    const quality = clamp(.68 + learning + evidence + descriptionDepth + durationDepth * .09);
+    if (quality < .84) return null;
     return {
       id: `latest-${videoId}`, youtubeId: videoId, thumbnailId: videoId, embedType: "video", publishedAt,
       category: source.category, title, channel, topic: source.topic, url: `https://www.youtube.com/watch?v=${videoId}`,
-      durationSeconds, depth: source.depth, novelty: Math.max(.65, .95 - index * .06), quality: source.quality,
+      durationSeconds, depth: clamp(.58 + durationDepth * .3 + evidence), novelty: Math.max(.65, .95 - index * .06), quality,
       evergreen: source.category === "Mundo" ? .7 : .88, publishedLabel: publishedLabel(publishedAt),
       palette: palettes[(sourceIndex + index) % palettes.length], mark: source.category.toUpperCase(),
     };
@@ -93,7 +108,8 @@ try {
   const data = JSON.parse(await readFile(new URL("../public/data/latest-videos.json", import.meta.url), "utf8"));
   previous = Array.isArray(data.videos) ? data.videos : [];
 } catch {}
-const merged = [...refreshed, ...previous].filter((video) => !shallowTitle.test(video.title || ""))
+const merged = [...refreshed, ...previous]
+  .filter((video) => video.durationSeconds >= 241 && video.quality >= .84 && video.depth >= .58 && !shallowTitle.test(video.title || ""))
   .filter((video, index, all) => all.findIndex((item) => item.youtubeId === video.youtubeId) === index)
   .sort((a, b) => new Date(b.publishedAt || 0).getTime() - new Date(a.publishedAt || 0).getTime());
 const videos = merged.slice(0, 200);

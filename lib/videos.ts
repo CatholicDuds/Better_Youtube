@@ -19,7 +19,7 @@ export type Video = {
   mark: string;
 };
 
-export const seedVideos: Video[] = [
+const seedVideosRaw: Video[] = [
   { id: "neural-net", youtubeId: "aircAruvnKk", category: "Ciência", title: "Mas o que é, de fato, uma rede neural?", channel: "3Blue1Brown", topic: "matemática", url: "https://www.youtube.com/watch?v=aircAruvnKk", durationSeconds: 1156, depth: .93, novelty: .62, quality: .98, evergreen: .97, publishedLabel: "aula visual", palette: "blue", mark: "∑ → ?" },
   { id: "collatz", youtubeId: "094y1Z2wpJg", category: "Ciência", title: "O problema de matemática mais simples que ninguém resolve", channel: "Veritasium", topic: "curiosidades", url: "https://www.youtube.com/watch?v=094y1Z2wpJg", durationSeconds: 1326, depth: .87, novelty: .8, quality: .95, evergreen: .96, publishedLabel: "ensaio científico", palette: "coral", mark: "3n+1" },
   { id: "egg", youtubeId: "h6fcK_fRYaI", category: "Ideias", title: "O Ovo — uma história sobre humanidade e sentido", channel: "Kurzgesagt", topic: "filosofia", url: "https://www.youtube.com/watch?v=h6fcK_fRYaI", durationSeconds: 474, depth: .7, novelty: .83, quality: .97, evergreen: .99, publishedLabel: "ensaio", palette: "violet", mark: "∞" },
@@ -56,3 +56,22 @@ export const seedVideos: Video[] = [
   { id: "fim-guerra-fria", youtubeId: "0_6CekBxM80", category: "Mundo", title: "O colapso da União Soviética e o fim da Guerra Fria", channel: "Professor HOC", topic: "história", url: "https://www.youtube.com/watch?v=0_6CekBxM80", durationSeconds: 0, depth: .84, novelty: .68, quality: .93, evergreen: .96, publishedLabel: "história geopolítica", palette: "coral", mark: "1991" },
   { id: "historia-passaportes", youtubeId: "JhxuP0AuRPA", category: "Mundo", title: "When Did We Start Using Passports?", channel: "TED-Ed", topic: "história e fronteiras", url: "https://www.youtube.com/watch?v=JhxuP0AuRPA", durationSeconds: 0, depth: .65, novelty: .77, quality: .92, evergreen: .97, publishedLabel: "história global", palette: "sand", mark: "FRONTEIRAS" },
 ];
+
+// Durações verificadas nas páginas dos vídeos. Zero nunca é aceito como
+// duração presumida, pois esconderia Shorts e vídeos incompletos no feed.
+const VERIFIED_DURATIONS: Record<string, number> = {
+  aircAruvnKk: 1120, "094y1Z2wpJg": 1329, h6fcK_fRYaI: 486, "R9OCA6UFE-0": 329,
+  Dxcc6ycZ73M: 224, yeikqw0kyqI: 124, nqQdtaijxKw: 5706, "30-pRrIyALs": 1563,
+  okVO_zv_9I0: 131, "36GT2zI8lVA": 453, a5438jzwVnQ: 3625, "8XSssH3B_Dk": 2273,
+  "sVx2Ux_J-fQ": 121, "6YlPc_B1IZs": 471, GKhmaU9Simk: 334, "28Jh_94EjwM": 2023,
+  knQzUq8QNLc: 793, u1pFwOFX_Oc: 3334, CBYhVcO4WgI: 2633, o7Ik1OB4TaE: 572,
+  iuYlGRnC7J8: 571, LBC16jhiwak: 1740, mUAOaAkAWNU: 312, zSVYfQsHUxU: 956,
+  dhYIb72L1hU: 1265, "7MWNGqmukmE": 2795, J1t34uTT0iA: 344, zZECwWYtmKg: 648,
+  WeM3QSgMbV0: 2934, brj8wamlS30: 2642, MZA4Ud7ArEM: 3286, "2ZjigeDVrDE": 2859,
+  "4eLPmkhSMrk": 1108, "0_6CekBxM80": 1545, JhxuP0AuRPA: 369,
+};
+
+export const seedVideos: Video[] = seedVideosRaw.map((video) => ({
+  ...video,
+  durationSeconds: VERIFIED_DURATIONS[video.youtubeId] || 0,
+}));

@@ -9,6 +9,7 @@
     "dev": "next dev",
     "build": "next build",
     "build:pages": "next build",
+    "audit:content": "node scripts/audit-content.mjs",
     "start": "next dev",
     "test": "next build",
     "lint": "eslint . --ignore-pattern out --ignore-pattern .next"
