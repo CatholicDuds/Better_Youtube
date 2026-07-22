@@ -20,10 +20,16 @@ export type DiversityOptions = {
 
 const LOW_VALUE_TITLE = /\b(shorts?|cortes? (do|de) podcast|urgente|chocante|você não vai acreditar|voce nao vai acreditar|ninguém te conta|ninguem te conta|segredo que|destruiu|humilhou|lacrou|mitou|exposed|fique rico|ganhe dinheiro (fácil|facil|rápido|rapido)|melhor(es)? que \d+%|\d+% dos)\b/i;
 
-export function videoRejectionReason(video: Video) {
+export function videoStructuralRejectionReason(video: Video) {
   if (/youtube\.com\/shorts\//i.test(video.url)) return "Short do YouTube";
   if (!Number.isFinite(video.durationSeconds) || video.durationSeconds <= 0) return "duração não verificada";
   if (video.durationSeconds < 241) return "menos de quatro minutos";
+  return null;
+}
+
+export function videoRejectionReason(video: Video) {
+  const structuralReason = videoStructuralRejectionReason(video);
+  if (structuralReason) return structuralReason;
   if (LOW_VALUE_TITLE.test(video.title)) return "título manipulativo ou superficial";
   if (video.quality < .84) return "qualidade insuficiente";
   if (video.depth < .58) return "profundidade insuficiente";

@@ -3,7 +3,7 @@
 
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { seedVideos, type Video } from "../lib/videos";
-import { DEFAULT_PREFERENCES, diversifyVideos, feedbackTraits, rankVideos, videoRejectionReason, type Preferences, type RankedVideo } from "../lib/recommender";
+import { DEFAULT_PREFERENCES, diversifyVideos, feedbackTraits, rankVideos, videoRejectionReason, videoStructuralRejectionReason, type Preferences, type RankedVideo } from "../lib/recommender";
 import { readings } from "../lib/readings";
 import { studyFeedVideos } from "../lib/study";
 import { supabase } from "../lib/supabase";
@@ -14,6 +14,7 @@ const RECOMMENDATION_HISTORY_KEY = "clarity-recommendation-history";
 const LAST_RECOMMENDATIONS_KEY = "clarity-last-recommendations";
 const RECOMMENDATION_CYCLE_KEY = "clarity-recommendation-cycle";
 const RECOMMENDATION_BATCH_SIZE = 20;
+const PENDING_BATCH_SIZE = 8;
 const RECOMMENDATION_HISTORY_LIMIT = 60;
 const defaultInterests = [
   { label: "Negócios", icon: "▥" },
@@ -405,6 +406,7 @@ export default function Home() {
   const [newsPeriod, setNewsPeriod] = useState<"today" | "week">("today");
   const [newsSpectrum, setNewsSpectrum] = useState<"Todos" | PoliticalSpectrum>("Todos");
   const [visibleCount, setVisibleCount] = useState(RECOMMENDATION_BATCH_SIZE);
+  const [pendingVisibleCount, setPendingVisibleCount] = useState(PENDING_BATCH_SIZE);
   const [refreshSeed, setRefreshSeed] = useState(0);
   const [recentRecommendationIds, setRecentRecommendationIds] = useState<string[]>([]);
   const [refreshing, setRefreshing] = useState(false);
@@ -507,7 +509,7 @@ export default function Home() {
     return all.filter((video, index) => {
       if (all.findIndex((item) => item.youtubeId === video.youtubeId) !== index) return false;
       if (video.category === "Minha biblioteca") return true;
-      return auditState(contentAudits[`video:${video.youtubeId}`]) !== "rejected" && !videoRejectionReason(video);
+      return auditState(contentAudits[`video:${video.youtubeId}`]) !== "rejected" && !videoStructuralRejectionReason(video);
     });
   }, [customVideos, webVideos, interestFeeds, discoveredVideos, liveVideos, contentAudits]);
 
@@ -527,7 +529,7 @@ export default function Home() {
       const terms = query.trim().toLowerCase().split(/\s+/).filter(Boolean);
       return categoryMatch && terms.every((term) => text.includes(term));
     });
-    return diversifyVideos(candidates).slice(0, 8);
+    return diversifyVideos(candidates);
   }, [videoCandidates, contentAudits, preferences, category, query]);
 
   const ranked = useMemo(() => {
@@ -649,6 +651,7 @@ export default function Home() {
     setRecentRecommendationIds((current) => Array.from(new Set([...current, ...currentlyVisible])).slice(-RECOMMENDATION_HISTORY_LIMIT));
     setRefreshSeed((current) => current + 1);
     setVisibleCount(RECOMMENDATION_BATCH_SIZE);
+    setPendingVisibleCount(PENDING_BATCH_SIZE);
     setRefreshing(true);
     setRefreshStatus("");
 
@@ -841,6 +844,7 @@ export default function Home() {
     setMobileMenuOpen(false);
     setCategory(nextCategory);
     setVisibleCount(RECOMMENDATION_BATCH_SIZE);
+    setPendingVisibleCount(PENDING_BATCH_SIZE);
     setQuery("");
     setCompletedSearch("");
     if (nextCategory === "Todos" || nextCategory === "Minha biblioteca" || defaultInterestLabels.includes(nextCategory)) return;
@@ -1064,7 +1068,8 @@ export default function Home() {
 
         {pendingVideos.length > 0 && <section className="audit-queue" aria-labelledby="audit-queue-title">
           <div className="audit-queue-heading"><div><p className="eyebrow">PRÉ-SELEÇÃO — NÃO APROVADA</p><h2 id="audit-queue-title">Fila de auditoria da Groq</h2></div><p>Estes vídeos são apenas candidatos. Eles não fazem parte das recomendações enquanto a análise do conteúdo não os aprovar.</p></div>
-          <div className="video-grid audit-queue-grid">{pendingVideos.map((video) => <VideoCard key={`pending-${video.id}`} video={video} feedback={preferences.videoFeedback?.[video.youtubeId] ?? 0} pending onPlay={setPlaying} onFeedback={feedback} />)}</div>
+          <div className="video-grid audit-queue-grid">{pendingVideos.slice(0, pendingVisibleCount).map((video) => <VideoCard key={`pending-${video.id}`} video={video} feedback={preferences.videoFeedback?.[video.youtubeId] ?? 0} pending onPlay={setPlaying} onFeedback={feedback} />)}</div>
+          {pendingVisibleCount < pendingVideos.length && <button className="load-more" onClick={() => setPendingVisibleCount((value) => Math.min(pendingVideos.length, value + PENDING_BATCH_SIZE))}>Mostrar mais vídeos</button>}
         </section>}
 
         <section className="reading-section" id="leituras">
