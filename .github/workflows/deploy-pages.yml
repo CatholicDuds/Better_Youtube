@@ -55,7 +55,7 @@ jobs:
           key: content-audits-${{ github.run_id }}
           restore-keys: content-audits-
       - name: Auditar conteúdo de vídeos, notícias e podcasts
-        if: github.event_name != 'push'
+        if: github.event_name == 'workflow_dispatch'
         run: |
           utc_hour=$(date -u +%H)
           if [ "$GITHUB_EVENT_NAME" = "schedule" ] && [ $((10#$utc_hour % 2)) -ne 0 ]; then

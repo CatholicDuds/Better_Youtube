@@ -27,6 +27,9 @@ const seedVideos = [...seedSource.matchAll(/youtubeId: "([^"]+)"[^\n]*?title: "(
 const videos = [...(latest.videos || []), ...(discovered.videos || []), ...seedVideos]
   .filter((item, index, all) => item.youtubeId && all.findIndex((candidate) => candidate.youtubeId === item.youtubeId) === index);
 const audits = { ...(previous.audits || {}) };
+for (const [key, audit] of Object.entries(audits)) {
+  if (audit?.method !== "semantic-content") delete audits[key];
+}
 const now = new Date().toISOString();
 
 async function auditVideo(video) {
@@ -34,7 +37,8 @@ async function auditVideo(video) {
   if (audits[key]?.method === "semantic-content") return false;
   const transcript = await fetchYouTubeTranscript(video.youtubeId);
   const result = await auditContent({ kind: "video", title: video.title, content: transcript, context: `Tema: ${video.topic || video.category || "não informado"}` });
-  audits[key] = { ...result, auditedAt: now };
+  if (result.method === "semantic-content") audits[key] = { ...result, auditedAt: now };
+  else delete audits[key];
   return result.method === "semantic-content";
 }
 
@@ -58,7 +62,8 @@ async function auditNews(item) {
     }
   } catch {}
   const result = await auditContent({ kind: "news", title: item.title, content: text, context: `Categoria: ${item.category || "notícia"}; publicação: ${item.publishedAt || "não informada"}` });
-  audits[key] = { ...result, auditedAt: now };
+  if (result.method === "semantic-content") audits[key] = { ...result, auditedAt: now };
+  else delete audits[key];
   return result.method === "semantic-content";
 }
 
@@ -89,7 +94,8 @@ async function auditPodcast(item) {
   let episode = { title: "", text: "" };
   try { episode = await podcastTranscript(item.feedUrl); } catch {}
   const result = await auditContent({ kind: "podcast", title: episode.title || item.title, content: episode.text, context: "Episódio mais recente com transcrição publicada." });
-  audits[key] = { ...result, auditedAt: now, episodeTitle: episode.title };
+  if (result.method === "semantic-content") audits[key] = { ...result, auditedAt: now, episodeTitle: episode.title };
+  else delete audits[key];
   return result.method === "semantic-content";
 }
 

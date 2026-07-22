@@ -1,5 +1,18 @@
 # Clarity — Better YouTube
 
+## Curadoria manual no Codex
+
+O feed público exibe apenas conteúdos cuja análise semântica foi concluída. Candidatos provisórios não aparecem na interface nem são persistidos como pendências.
+
+O lançador Windows está em `dist/ClarityCurator.exe`. Ao executá-lo, ele copia o prompt editorial, abre o aplicativo ChatGPT/Codex, tenta iniciar uma tarefa nova e cola o texto sem enviá-lo. O prompt combina materiais atuais com clássicos evergreen e exige avaliação do conteúdo real.
+
+Para recompilar ou registrar o protocolo usado pelo botão **Curar no Codex**:
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\build-codex-launcher.ps1
+.\dist\ClarityCurator.exe --register
+```
+
 Uma biblioteca de formação guiada por intenção, não por tempo de tela. O feed é finito, não tem autoplay e explica por que cada aula, ensaio ou conversa foi recomendado. A curadoria reúne negócios, economia, filosofia, natureza humana, geopolítica, política, administração, gestão, formação católica, curiosidades, astronomia, foguetes, empresas e criação de vídeos. Depois de cada dois vídeos, uma pausa de leitura ajuda a consolidar o aprendizado.
 
 ## Como funciona

@@ -37,7 +37,10 @@ yarn-error.log*
 
 # typescript
 next-env.d.ts
+*.tsbuildinfo
 /dist/
+/desktop/**/bin/
+/desktop/**/obj/
 /.wrangler/
 /outputs/
 /work/
