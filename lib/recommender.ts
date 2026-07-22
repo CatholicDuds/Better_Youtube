@@ -3,6 +3,8 @@ import type { Video } from "./videos";
 export type Preferences = {
   topics: string[];
   topicWeights: Record<string, number>;
+  videoFeedback: Record<string, -1 | 1>;
+  traitWeights: Record<string, number>;
   depth: number;
   discovery: number;
   evergreen: number;
@@ -31,6 +33,8 @@ export function videoRejectionReason(video: Video) {
 export const DEFAULT_PREFERENCES: Preferences = {
   topics: ["filosofia", "natureza humana", "economia", "formação católica"],
   topicWeights: {},
+  videoFeedback: {},
+  traitWeights: {},
   depth: 86,
   discovery: 52,
   evergreen: 90,
@@ -39,6 +43,13 @@ export const DEFAULT_PREFERENCES: Preferences = {
 
 function closeness(value: number, target: number) {
   return 1 - Math.abs(value - target);
+}
+
+export function feedbackTraits(video: Video) {
+  const depth = video.depth < .68 ? "fundamentos" : video.depth < .86 ? "intermediário" : "profundo";
+  const minutes = video.durationSeconds / 60;
+  const duration = minutes <= 15 ? "curto" : minutes <= 45 ? "médio" : "longo";
+  return [`category:${video.category}`, `depth:${depth}`, `duration:${duration}`];
 }
 
 export function scoreVideo(video: Video, preferences: Preferences) {
@@ -50,6 +61,8 @@ export function scoreVideo(video: Video, preferences: Preferences) {
   const durationMinutes = video.durationSeconds / 60;
   const durationFit = durationMinutes <= preferences.maxMinutes ? 1 : Math.max(0, 1 - (durationMinutes - preferences.maxMinutes) / 60);
   const feedback = preferences.topicWeights[video.topic] ?? 0;
+  const directFeedback = preferences.videoFeedback?.[video.youtubeId] ?? 0;
+  const traitFeedback = feedbackTraits(video).reduce((total, trait) => total + (preferences.traitWeights?.[trait] ?? 0), 0);
   const ageDays = video.publishedAt ? Math.max(0, (Date.now() - new Date(video.publishedAt).getTime()) / 86_400_000) : 365;
   const freshness = Math.max(0, 1 - ageDays / 45);
 
@@ -61,6 +74,8 @@ export function scoreVideo(video: Video, preferences: Preferences) {
     durationFit * 10 +
     video.novelty * discoveryFactor * 8 +
     feedback * 4 +
+    directFeedback * 14 +
+    traitFeedback * 2 +
     freshness * (preferences.discovery / 100) * 8
   );
 }

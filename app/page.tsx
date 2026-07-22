@@ -3,7 +3,7 @@
 
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { seedVideos, type Video } from "../lib/videos";
-import { DEFAULT_PREFERENCES, diversifyVideos, rankVideos, videoRejectionReason, type Preferences, type RankedVideo } from "../lib/recommender";
+import { DEFAULT_PREFERENCES, diversifyVideos, feedbackTraits, rankVideos, videoRejectionReason, type Preferences, type RankedVideo } from "../lib/recommender";
 import { readings } from "../lib/readings";
 import { studyFeedVideos } from "../lib/study";
 import { supabase } from "../lib/supabase";
@@ -321,10 +321,11 @@ function ContentCarousel({ pages, pageClassName, label }: { pages: ReactNode[][]
   );
 }
 
-function VideoCard({ video, onPlay, onFeedback, pending = false }: {
+function VideoCard({ video, onPlay, onFeedback, feedback = 0, pending = false }: {
   video: RankedVideo;
   onPlay: (video: RankedVideo) => void;
-  onFeedback: (id: string, value: 1 | -1) => void;
+  onFeedback: (youtubeId: string, value: 1 | -1) => void;
+  feedback?: -1 | 0 | 1;
   pending?: boolean;
 }) {
   const image = thumbnail(video);
@@ -347,8 +348,8 @@ function VideoCard({ video, onPlay, onFeedback, pending = false }: {
             <span>{video.explanation}</span>
           </details>
           <div className="feedback-row">
-            <button onClick={() => onFeedback(video.id, 1)}>＋ mais assim</button>
-            <button onClick={() => onFeedback(video.id, -1)}>− menos assim</button>
+            <button className={feedback === 1 ? "active" : ""} aria-pressed={feedback === 1} onClick={() => onFeedback(video.youtubeId, 1)}>＋ mais assim</button>
+            <button className={feedback === -1 ? "active negative" : ""} aria-pressed={feedback === -1} onClick={() => onFeedback(video.youtubeId, -1)}>− menos assim</button>
           </div>
         </div>
       </div>
@@ -408,6 +409,7 @@ export default function Home() {
   const [recentRecommendationIds, setRecentRecommendationIds] = useState<string[]>([]);
   const [refreshing, setRefreshing] = useState(false);
   const [refreshStatus, setRefreshStatus] = useState("");
+  const [feedbackNotice, setFeedbackNotice] = useState<{ message: string; previous: Preferences } | null>(null);
   const [languageLevel, setLanguageLevel] = useState<"Essencial" | "Intermediário" | "Avançado">("Intermediário");
   const [watchedBlock, setWatchedBlock] = useState<string[]>([]);
   const [articleIndex, setArticleIndex] = useState(0);
@@ -510,14 +512,15 @@ export default function Home() {
   }, [customVideos, webVideos, interestFeeds, discoveredVideos, liveVideos, contentAudits]);
 
   const videos = useMemo(() => videoCandidates.filter((video) => (
-    video.category === "Minha biblioteca"
-    || auditState(contentAudits[`video:${video.youtubeId}`]) === "approved"
-  )), [videoCandidates, contentAudits]);
+    preferences.videoFeedback?.[video.youtubeId] !== -1
+    && (video.category === "Minha biblioteca" || auditState(contentAudits[`video:${video.youtubeId}`]) === "approved")
+  )), [videoCandidates, contentAudits, preferences.videoFeedback]);
 
   const pendingVideos = useMemo(() => {
     const candidates = rankVideos(videoCandidates.filter((video) => (
       video.category !== "Minha biblioteca"
       && auditState(contentAudits[`video:${video.youtubeId}`]) === "pending"
+      && preferences.videoFeedback?.[video.youtubeId] !== -1
     )), preferences).filter((video) => {
       const categoryMatch = category === "Todos" || video.category === category;
       const text = `${video.title} ${video.channel} ${video.topic} ${video.category}`.toLowerCase();
@@ -727,11 +730,6 @@ export default function Home() {
     }
   }
 
-  function collapseVideoFeed() {
-    setVisibleCount(RECOMMENDATION_BATCH_SIZE);
-    window.requestAnimationFrame(() => document.getElementById("video-feed")?.scrollIntoView({ behavior: "smooth", block: "start" }));
-  }
-
   async function searchContent(searchOverride?: string, targetCategory?: string) {
     const searchTerm = (searchOverride ?? query).trim();
     if (!searchTerm) { setWebSearchStatus("Digite um assunto antes de pesquisar."); return; }
@@ -874,12 +872,29 @@ export default function Home() {
     try { localStorage.setItem("clarity-preferences", JSON.stringify(next)); } catch {}
   }
 
-  function feedback(id: string, value: 1 | -1) {
-    const video = videos.find((item) => item.id === id);
+  function feedback(youtubeId: string, value: 1 | -1) {
+    const video = videoCandidates.find((item) => item.youtubeId === youtubeId);
     if (!video) return;
+    const previous = preferences;
+    const currentValue = preferences.videoFeedback?.[youtubeId] ?? 0;
+    const nextValue = currentValue === value ? 0 : value;
+    const delta = nextValue - currentValue;
     const topicWeights = { ...preferences.topicWeights };
-    topicWeights[video.topic] = Math.max(-3, Math.min(3, (topicWeights[video.topic] || 0) + value));
-    persistPreferences({ ...preferences, topicWeights });
+    topicWeights[video.topic] = Math.max(-3, Math.min(3, (topicWeights[video.topic] || 0) + delta));
+    const traitWeights = { ...(preferences.traitWeights || {}) };
+    for (const trait of feedbackTraits(video)) traitWeights[trait] = Math.max(-3, Math.min(3, (traitWeights[trait] || 0) + delta));
+    const videoFeedback = { ...(preferences.videoFeedback || {}) };
+    if (nextValue === 0) delete videoFeedback[youtubeId];
+    else videoFeedback[youtubeId] = nextValue;
+    persistPreferences({ ...preferences, topicWeights, traitWeights, videoFeedback });
+    setFeedbackNotice({
+      previous,
+      message: nextValue === -1
+        ? `“${video.title}” foi removido. Tema, categoria, profundidade e duração terão menos peso — o canal não foi penalizado.`
+        : nextValue === 1
+          ? `Entendido: conteúdos semelhantes a “${video.title}” terão mais peso, sem favorecer automaticamente o canal.`
+          : `O feedback sobre “${video.title}” foi removido.`,
+    });
   }
 
   function finishVideo() {
@@ -1015,6 +1030,7 @@ export default function Home() {
         </section>}
 
         {refreshStatus && <div className="web-search-status" role="status" aria-live="polite"><span>↻</span><p>{refreshStatus}</p><button onClick={() => setRefreshStatus("")} aria-label="Fechar aviso de atualização">Fechar</button></div>}
+        {feedbackNotice && <div className="web-search-status feedback-notice" role="status" aria-live="polite"><span>✓</span><p>{feedbackNotice.message}</p><button onClick={() => { persistPreferences(feedbackNotice.previous); setFeedbackNotice(null); }}>Desfazer</button></div>}
         {webSearchStatus && <div className="web-search-status"><span>⌕</span><p>{webSearchStatus}</p></div>}
         <div className="audit-notice"><span>◷</span><p><strong>Feed aprovado pela Groq.</strong> {semanticAuditCount} conteúdo{semanticAuditCount === 1 ? " foi avaliado" : "s foram avaliados"} semanticamente e {approvedAuditCount} {approvedAuditCount === 1 ? "foi aprovado" : "foram aprovados"}. {pendingAuditCount > 0 && `${pendingAuditCount} itens visíveis neste filtro continuam apenas na fila de auditoria.`}</p></div>
 
@@ -1036,22 +1052,19 @@ export default function Home() {
           <div className="depth-lanes">{depthLanes.map((lane) => <article className={`depth-lane depth-${lane.id}`} key={lane.id}><header><p>{lane.eyebrow}</p><h3>{lane.title}</h3><span>{lane.description}</span><small>{lane.videos.length} vídeo{lane.videos.length === 1 ? "" : "s"} nesta seleção</small></header>{lane.videos.length > 0 ? <div className="depth-video-grid">{lane.videos.map((video) => <DepthVideoCard key={`${lane.id}-${video.id}`} video={video} onPlay={setPlaying} />)}</div> : <div className="depth-empty">Ainda não há vídeos deste nível para o filtro atual.</div>}</article>)}</div>
         </section>}
 
-        {ranked.length ? <section className="video-grid" id="video-feed">
-          {ranked.slice(0, Math.min(8, visibleCount)).map((video) => <VideoCard key={video.id} video={video} onPlay={setPlaying} onFeedback={feedback} />)}
+        {ranked.length ? <section className="video-grid">
+          {ranked.slice(0, Math.min(8, visibleCount)).map((video) => <VideoCard key={video.id} video={video} feedback={preferences.videoFeedback?.[video.youtubeId] ?? 0} onPlay={setPlaying} onFeedback={feedback} />)}
         </section> : <div className="empty-state"><strong>A Groq ainda não aprovou nenhum vídeo</strong><p>{pendingVideos.length > 0 ? "Os candidatos aparecem abaixo somente como fila de auditoria, não como recomendações." : "Tente outro filtro ou termo de busca."}</p></div>}
 
         {ranked.length > 8 && visibleCount > 8 && <section className="video-grid second-grid">
-          {ranked.slice(8, visibleCount).map((video) => <VideoCard key={video.id} video={video} onPlay={setPlaying} onFeedback={feedback} />)}
+          {ranked.slice(8, visibleCount).map((video) => <VideoCard key={video.id} video={video} feedback={preferences.videoFeedback?.[video.youtubeId] ?? 0} onPlay={setPlaying} onFeedback={feedback} />)}
         </section>}
 
-        {ranked.length > RECOMMENDATION_BATCH_SIZE && <div className="feed-pagination-actions">
-          {visibleCount < ranked.length && <button className="load-more" onClick={() => setVisibleCount((value) => Math.min(ranked.length, value + 12))}>Mostrar mais vídeos</button>}
-          {visibleCount > RECOMMENDATION_BATCH_SIZE && <button className="load-more load-less" onClick={collapseVideoFeed}>Mostrar menos</button>}
-        </div>}
+        {visibleCount < ranked.length && <button className="load-more" onClick={() => setVisibleCount((value) => Math.min(ranked.length, value + 12))}>Mostrar mais vídeos</button>}
 
         {pendingVideos.length > 0 && <section className="audit-queue" aria-labelledby="audit-queue-title">
           <div className="audit-queue-heading"><div><p className="eyebrow">PRÉ-SELEÇÃO — NÃO APROVADA</p><h2 id="audit-queue-title">Fila de auditoria da Groq</h2></div><p>Estes vídeos são apenas candidatos. Eles não fazem parte das recomendações enquanto a análise do conteúdo não os aprovar.</p></div>
-          <div className="video-grid audit-queue-grid">{pendingVideos.map((video) => <VideoCard key={`pending-${video.id}`} video={video} pending onPlay={setPlaying} onFeedback={feedback} />)}</div>
+          <div className="video-grid audit-queue-grid">{pendingVideos.map((video) => <VideoCard key={`pending-${video.id}`} video={video} feedback={preferences.videoFeedback?.[video.youtubeId] ?? 0} pending onPlay={setPlaying} onFeedback={feedback} />)}</div>
         </section>}
 
         <section className="reading-section" id="leituras">
