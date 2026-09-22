@@ -1,20 +1,164 @@
 [
-  { "query": "economia e negócios aula análise profunda", "category": "Negócios", "topic": "economia", "language": "pt" },
-  { "query": "filosofia natureza humana curso palestra", "category": "Ideias", "topic": "filosofia", "language": "pt" },
-  { "query": "geopolítica política internacional análise professores", "category": "Mundo", "topic": "geopolítica", "language": "pt" },
-  { "query": "política brasileira instituições democracia aula análise", "category": "Política", "topic": "política", "language": "pt" },
-  { "query": "administração gestão empresarial estudo de caso", "category": "Negócios", "topic": "gestão", "language": "pt" },
-  { "query": "formação católica fé e razão aula", "category": "Fé", "topic": "formação católica", "language": "pt" },
-  { "query": "astronomia foguetes exploração espacial documentário", "category": "Ciência", "topic": "astronomia", "language": "pt" },
-  { "query": "estratégia youtube roteiro planejamento de vídeos", "category": "Criação", "topic": "criação de vídeos", "language": "pt" },
-  { "query": "science curiosity explained lecture documentary", "category": "Ciência", "topic": "curiosidades", "language": "en" },
-  { "query": "matemática fundamentos álgebra cálculo aula visual", "category": "Ciência", "topic": "matemática", "language": "pt" },
-  { "query": "inteligência artificial machine learning fundamentos aula universidade", "category": "Ciência", "topic": "inteligência artificial", "language": "pt" },
-  { "query": "biologia genética evolução neurociência aula", "category": "Ciência", "topic": "biologia", "language": "pt" },
-  { "query": "pensamento crítico lógica argumentos curso aula", "category": "Ideias", "topic": "pensamento crítico", "language": "pt" },
-  { "query": "neurociência cérebro aprendizagem memória palestra", "category": "Ciência", "topic": "neurociência", "language": "pt" },
-  { "query": "artificial intelligence science university lecture explained", "category": "Ciência", "topic": "inteligência artificial", "language": "en" },
-  { "query": "business economics management case study lecture", "category": "Negócios", "topic": "negócios", "language": "en" },
-  { "query": "philosophy human nature critical thinking lecture", "category": "Ideias", "topic": "filosofia", "language": "en" },
-  { "query": "geopolitics international relations history analysis lecture", "category": "Mundo", "topic": "geopolítica", "language": "en" }
+  {
+    "topic": "economia",
+    "category": "Negócios",
+    "searches": [
+      {
+        "query": "economia e negócios aula análise profunda",
+        "language": "pt"
+      }
+    ]
+  },
+  {
+    "topic": "filosofia",
+    "category": "Ideias",
+    "searches": [
+      {
+        "query": "filosofia natureza humana curso palestra",
+        "language": "pt"
+      },
+      {
+        "query": "philosophy human nature critical thinking lecture",
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "topic": "geopolitica",
+    "category": "Mundo",
+    "searches": [
+      {
+        "query": "geopolítica política internacional análise professores",
+        "language": "pt"
+      },
+      {
+        "query": "geopolitics international relations history analysis lecture",
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "topic": "politica",
+    "category": "Política",
+    "searches": [
+      {
+        "query": "política brasileira instituições democracia aula análise",
+        "language": "pt"
+      }
+    ]
+  },
+  {
+    "topic": "gestao",
+    "category": "Negócios",
+    "searches": [
+      {
+        "query": "administração gestão empresarial estudo de caso",
+        "language": "pt"
+      }
+    ]
+  },
+  {
+    "topic": "formacao-catolica",
+    "category": "Fé",
+    "searches": [
+      {
+        "query": "formação católica fé e razão aula",
+        "language": "pt"
+      }
+    ]
+  },
+  {
+    "topic": "astronomia",
+    "category": "Ciência",
+    "searches": [
+      {
+        "query": "astronomia foguetes exploração espacial documentário",
+        "language": "pt"
+      }
+    ]
+  },
+  {
+    "topic": "criacao-de-videos",
+    "category": "Criação",
+    "searches": [
+      {
+        "query": "estratégia youtube roteiro planejamento de vídeos",
+        "language": "pt"
+      }
+    ]
+  },
+  {
+    "topic": "ciencia",
+    "category": "Ciência",
+    "searches": [
+      {
+        "query": "science curiosity explained lecture documentary",
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "topic": "matematica",
+    "category": "Ciência",
+    "searches": [
+      {
+        "query": "matemática fundamentos álgebra cálculo aula visual",
+        "language": "pt"
+      }
+    ]
+  },
+  {
+    "topic": "inteligencia-artificial",
+    "category": "Ciência",
+    "searches": [
+      {
+        "query": "inteligência artificial machine learning fundamentos aula universidade",
+        "language": "pt"
+      },
+      {
+        "query": "artificial intelligence science university lecture explained",
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "topic": "biologia",
+    "category": "Ciência",
+    "searches": [
+      {
+        "query": "biologia genética evolução neurociência aula",
+        "language": "pt"
+      }
+    ]
+  },
+  {
+    "topic": "pensamento-critico",
+    "category": "Ideias",
+    "searches": [
+      {
+        "query": "pensamento crítico lógica argumentos curso aula",
+        "language": "pt"
+      }
+    ]
+  },
+  {
+    "topic": "neurociencia",
+    "category": "Ciência",
+    "searches": [
+      {
+        "query": "neurociência cérebro aprendizagem memória palestra",
+        "language": "pt"
+      }
+    ]
+  },
+  {
+    "topic": "negocios",
+    "category": "Negócios",
+    "searches": [
+      {
+        "query": "business economics management case study lecture",
+        "language": "en"
+      }
+    ]
+  }
 ]

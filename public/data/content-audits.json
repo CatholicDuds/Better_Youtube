@@ -6,7 +6,7 @@
   "rateLimited": false,
   "audits": {
     "video:l6DKRf-fAAM": {
-      "approved": true,
+      "approved": false,
       "overall": 94,
       "importance": 94,
       "depth": 97,
@@ -30,10 +30,17 @@
       "method": "semantic-content",
       "provider": "codex-manual",
       "model": "editorial-review",
-      "auditedAt": "2026-07-22T18:30:00.000Z"
+      "auditedAt": "2026-07-22T18:30:00.000Z",
+      "transcriptSource": "none",
+      "evidenceQuotes": [],
+      "goalRelevance": {
+        "goalIds": [],
+        "reason": "Relação com objetivos não documentada na análise legada.",
+        "discovery": false
+      }
     },
     "video:PqtggjVAi8M": {
-      "approved": true,
+      "approved": false,
       "overall": 86,
       "importance": 88,
       "depth": 84,
@@ -57,10 +64,17 @@
       "method": "semantic-content",
       "provider": "codex-manual",
       "model": "editorial-review",
-      "auditedAt": "2026-07-22T18:30:00.000Z"
+      "auditedAt": "2026-07-22T18:30:00.000Z",
+      "transcriptSource": "none",
+      "evidenceQuotes": [],
+      "goalRelevance": {
+        "goalIds": [],
+        "reason": "Relação com objetivos não documentada na análise legada.",
+        "discovery": false
+      }
     },
     "news:https://news.google.com/rss/articles/CBMiwwFBVV95cUxOWXpJZ2szS2VuRHdPNjNmOF9WVmNXY1EySWZtOFFvdnRzUER5OFFvVHd1dDZrd3FKdW45UG9lOGRYdDkzcW9WV0FuR203VVhmeTJKXzYzMlFiUkdEV2VYdlJsTHQ3YWRmeXJjcFdhUGJBQUZiLUk1QUY2cjhrS2hiTldhZWNiN0gzNjM5eEJUR3dVVllkajNTRUc2Ri1Hd3hqUHZlMkRiRXFLcVNDSmxvZFlUcTlzUjNQT2QyZUFtcVl5QWs?oc=5": {
-      "approved": true,
+      "approved": false,
       "overall": 89,
       "importance": 87,
       "depth": 87,
@@ -84,10 +98,17 @@
       "method": "semantic-content",
       "provider": "codex-manual",
       "model": "editorial-review",
-      "auditedAt": "2026-07-22T18:30:00.000Z"
+      "auditedAt": "2026-07-22T18:30:00.000Z",
+      "transcriptSource": "none",
+      "evidenceQuotes": [],
+      "goalRelevance": {
+        "goalIds": [],
+        "reason": "Relação com objetivos não documentada na análise legada.",
+        "discovery": false
+      }
     },
     "news:https://news.google.com/rss/articles/CBMiX0FVX3lxTE0zUk1KSS1XX3p0bHp0aWJDWVlqMG41Y3dNUnV4cGF2RGVPOHIybFZyeHRsVG44b3E2d29ZMl90dWZ5T1pnU2syek9rdEZuQkxaUWNsTGdjQ1NZUF9BekVF?oc=5": {
-      "approved": true,
+      "approved": false,
       "overall": 88,
       "importance": 90,
       "depth": 86,
@@ -111,10 +132,17 @@
       "method": "semantic-content",
       "provider": "codex-manual",
       "model": "editorial-review",
-      "auditedAt": "2026-07-22T18:30:00.000Z"
+      "auditedAt": "2026-07-22T18:30:00.000Z",
+      "transcriptSource": "none",
+      "evidenceQuotes": [],
+      "goalRelevance": {
+        "goalIds": [],
+        "reason": "Relação com objetivos não documentada na análise legada.",
+        "discovery": false
+      }
     },
     "news:https://news.google.com/rss/articles/CBMi0gFBVV95cUxPS3k0VFhMXzdjcHd4SUczVkNmWVNQU1U5OHY3dHFVdjNzVklhYS01c0FnaW9vbUVrVnpaNFNvd3JGZ2FQUXAybzdXekU4Y1ptT1JVN0p0WEVJQUdEaS1HSDFvN29lbllLbmlQZThVaWphaUUxdVNSLURqSDlSZF9zTzBpRzIxSFJyMlhlUVZQZEZZTWg2N0o2d1Y1bG81RXVacXBCZHZrSEpxNjkxZWZnU3VxbE8xVFhJa2N3OVFqd053WUliQzFKd1BtUm9jVE02UHc?oc=5": {
-      "approved": true,
+      "approved": false,
       "overall": 88,
       "importance": 89,
       "depth": 86,
@@ -138,10 +166,17 @@
       "method": "semantic-content",
       "provider": "codex-manual",
       "model": "editorial-review",
-      "auditedAt": "2026-07-22T18:30:00.000Z"
+      "auditedAt": "2026-07-22T18:30:00.000Z",
+      "transcriptSource": "none",
+      "evidenceQuotes": [],
+      "goalRelevance": {
+        "goalIds": [],
+        "reason": "Relação com objetivos não documentada na análise legada.",
+        "discovery": false
+      }
     },
     "news:https://news.google.com/rss/articles/CBMixgFBVV95cUxQcWw5d3A4RnRkMTZiYnZLRnNVMDQySzVtWUhzMlRhQjhGR3FyMkExRXh3dEZSVzgwck04UXFCZzdRWU1kcVcxTjlsd0piOFU4RG1qNVlpc2ZrVFYzMXp5aHRoX3pXZEM1Q2NCWVdzS0M4NzU1YlA5WWNaSjBha0FObHNKbjdkbFFBd3haZHBZNGc0ZUNJc3NVRl92ZExhNzY0Y2xZYTZLc21WaVFNeVRhbGZ3MlhmWGVCZnZYU01mb1lPTnpQZ3fSAcYBQVVfeXFMTjJhMzROYVRFTFlTdVcyS2Y2UGYwakpWYnBDSUhkbDlILW9wSU9KQ3ZTcklFZG83R3MxOFQ5ejBySlp3MDhFNGJDRzRkcWdqT0o0RVo5NVplVHFHQ1BEUnJNbTN6WkdXZzFRZ2xzaGV6NzNuRWNRYTlWcWhteW4tbWFqUWh1bG5IcF9qTjdEb1N0ZDJpblBiTXhOZlVaQXFUUks5S3lWWXZwSmcxdE90a0RQRGVlVmNld1d6WXZ0WW1tVHBUcnl3?oc=5": {
-      "approved": true,
+      "approved": false,
       "overall": 87,
       "importance": 90,
       "depth": 85,
@@ -165,10 +200,17 @@
       "method": "semantic-content",
       "provider": "codex-manual",
       "model": "editorial-review",
-      "auditedAt": "2026-07-22T18:30:00.000Z"
+      "auditedAt": "2026-07-22T18:30:00.000Z",
+      "transcriptSource": "none",
+      "evidenceQuotes": [],
+      "goalRelevance": {
+        "goalIds": [],
+        "reason": "Relação com objetivos não documentada na análise legada.",
+        "discovery": false
+      }
     },
     "news:https://news.google.com/rss/articles/CBMi1AFBVV95cUxPdVcwaHJoTmZUWC1ieDdzSWQya0JYYmc3VElOVVp5OGRPbnFkLUtYcTRkYTNDaFhEcUVjc05CS2Z0Rl8tbENTbXVfcFhhUjJQckJYajNxRTRUaTNLd1NVNkZsbzVZY0VoYU5EUElmZlpuc1hxUVNyaUJSREIyQlJ6eHkzSVhoWDZkMmxoaXRnOXE1V0lWcGI2bW04SE9WNmlUbUZLTjVtajktdHFsOUNRRjNZTm5tb2NqWks5M2x4OXZOVDZ6R2FtRmI3eUtWcEtrTVptRA?oc=5": {
-      "approved": true,
+      "approved": false,
       "overall": 80,
       "importance": 87,
       "depth": 76,
@@ -192,10 +234,17 @@
       "method": "semantic-content",
       "provider": "codex-manual",
       "model": "editorial-review",
-      "auditedAt": "2026-07-22T18:30:00.000Z"
+      "auditedAt": "2026-07-22T18:30:00.000Z",
+      "transcriptSource": "none",
+      "evidenceQuotes": [],
+      "goalRelevance": {
+        "goalIds": [],
+        "reason": "Relação com objetivos não documentada na análise legada.",
+        "discovery": false
+      }
     },
     "news:https://news.google.com/rss/articles/CBMifkFVX3lxTE9zUGxURlc5cnBuWDNmdktnNDBHQ0FTZEZHYWc0dktTMmNGT0hyZ05ybERES2NvNkRYWGpJbnlSUjNLOHdXZ3AxY0pjb09ycWJjbkhXbS1Saks4NmJBZVliWS1lMTBIR1JYOGtqN0c3cWZSQXNsdlFYbkFWbEUtdw?oc=5": {
-      "approved": true,
+      "approved": false,
       "overall": 84,
       "importance": 91,
       "depth": 83,
@@ -219,7 +268,14 @@
       "method": "semantic-content",
       "provider": "codex-manual",
       "model": "editorial-review",
-      "auditedAt": "2026-07-22T18:30:00.000Z"
+      "auditedAt": "2026-07-22T18:30:00.000Z",
+      "transcriptSource": "none",
+      "evidenceQuotes": [],
+      "goalRelevance": {
+        "goalIds": [],
+        "reason": "Relação com objetivos não documentada na análise legada.",
+        "discovery": false
+      }
     },
     "news:https://news.google.com/rss/articles/CBMiuAFBVV95cUxNR0tnZ2RNTklmZnFJUDdYbVd4NWZjbzctRUhuRG9xOVcxUWNhNTlyakYxZUMydlNWZkx0ZzhXVjFHNFNWdTlZcDFoaWlUX083WW1tT3k1ZmpKVkdMeUVXNmRUcjRtQm56bkVlaE5IWlEzQ09qWHE2ZlNnR2xYNGhqejRaN1hIRGRhSEk2X0ZUT3JFOTQ3bW1IVFRtUjlzQ0NmcTctUzhyc2owd243OHRwd0gtdm5yamNi?oc=5": {
       "approved": false,
@@ -246,10 +302,17 @@
       "method": "semantic-content",
       "provider": "codex-manual",
       "model": "editorial-review",
-      "auditedAt": "2026-07-22T18:30:00.000Z"
+      "auditedAt": "2026-07-22T18:30:00.000Z",
+      "transcriptSource": "none",
+      "evidenceQuotes": [],
+      "goalRelevance": {
+        "goalIds": [],
+        "reason": "Relação com objetivos não documentada na análise legada.",
+        "discovery": false
+      }
     },
     "podcast:135066958": {
-      "approved": true,
+      "approved": false,
       "overall": 88,
       "importance": 88,
       "depth": 88,
@@ -274,10 +337,17 @@
       "provider": "codex-manual",
       "model": "editorial-review",
       "auditedAt": "2026-07-22T18:30:00.000Z",
-      "episodeTitle": "Dwayne Betts on the Iliad"
+      "episodeTitle": "Dwayne Betts on the Iliad",
+      "transcriptSource": "none",
+      "evidenceQuotes": [],
+      "goalRelevance": {
+        "goalIds": [],
+        "reason": "Relação com objetivos não documentada na análise legada.",
+        "discovery": false
+      }
     },
     "podcast:1434243584": {
-      "approved": true,
+      "approved": false,
       "overall": 90,
       "importance": 91,
       "depth": 93,
@@ -302,10 +372,17 @@
       "provider": "codex-manual",
       "model": "editorial-review",
       "auditedAt": "2026-07-22T18:30:00.000Z",
-      "episodeTitle": "#498 – Anthony Kaldellis: Roman Empire, Byzantine Empire, Rise & Fall of Empires"
+      "episodeTitle": "#498 – Anthony Kaldellis: Roman Empire, Byzantine Empire, Rise & Fall of Empires",
+      "transcriptSource": "none",
+      "evidenceQuotes": [],
+      "goalRelevance": {
+        "goalIds": [],
+        "reason": "Relação com objetivos não documentada na análise legada.",
+        "discovery": false
+      }
     },
     "video:GlYgs6v2YfU": {
-      "approved": true,
+      "approved": false,
       "overall": 95,
       "importance": 95,
       "depth": 97,
@@ -329,10 +406,17 @@
       "method": "semantic-content",
       "provider": "codex-manual",
       "model": "editorial-review",
-      "auditedAt": "2026-07-22T20:15:00.000Z"
+      "auditedAt": "2026-07-22T20:15:00.000Z",
+      "transcriptSource": "none",
+      "evidenceQuotes": [],
+      "goalRelevance": {
+        "goalIds": [],
+        "reason": "Relação com objetivos não documentada na análise legada.",
+        "discovery": false
+      }
     },
     "video:GK2pZ_oVU1o": {
-      "approved": true,
+      "approved": false,
       "overall": 88,
       "importance": 84,
       "depth": 91,
@@ -357,10 +441,17 @@
       "method": "semantic-content",
       "provider": "codex-manual",
       "model": "editorial-review",
-      "auditedAt": "2026-07-22T20:15:00.000Z"
+      "auditedAt": "2026-07-22T20:15:00.000Z",
+      "transcriptSource": "none",
+      "evidenceQuotes": [],
+      "goalRelevance": {
+        "goalIds": [],
+        "reason": "Relação com objetivos não documentada na análise legada.",
+        "discovery": false
+      }
     },
     "video:mvcesPWvUIc": {
-      "approved": true,
+      "approved": false,
       "overall": 87,
       "importance": 92,
       "depth": 86,
@@ -385,10 +476,17 @@
       "method": "semantic-content",
       "provider": "codex-manual",
       "model": "editorial-review",
-      "auditedAt": "2026-07-22T20:15:00.000Z"
+      "auditedAt": "2026-07-22T20:15:00.000Z",
+      "transcriptSource": "none",
+      "evidenceQuotes": [],
+      "goalRelevance": {
+        "goalIds": [],
+        "reason": "Relação com objetivos não documentada na análise legada.",
+        "discovery": false
+      }
     },
     "video:W01vL80hfoY": {
-      "approved": true,
+      "approved": false,
       "overall": 89,
       "importance": 93,
       "depth": 88,
@@ -413,7 +511,14 @@
       "method": "semantic-content",
       "provider": "codex-manual",
       "model": "editorial-review",
-      "auditedAt": "2026-07-22T20:15:00.000Z"
+      "auditedAt": "2026-07-22T20:15:00.000Z",
+      "transcriptSource": "none",
+      "evidenceQuotes": [],
+      "goalRelevance": {
+        "goalIds": [],
+        "reason": "Relação com objetivos não documentada na análise legada.",
+        "discovery": false
+      }
     },
     "video:2gJvplli2do": {
       "approved": false,
@@ -440,10 +545,17 @@
       "method": "semantic-content",
       "provider": "codex-manual",
       "model": "editorial-review",
-      "auditedAt": "2026-07-22T20:15:00.000Z"
+      "auditedAt": "2026-07-22T20:15:00.000Z",
+      "transcriptSource": "none",
+      "evidenceQuotes": [],
+      "goalRelevance": {
+        "goalIds": [],
+        "reason": "Relação com objetivos não documentada na análise legada.",
+        "discovery": false
+      }
     },
     "video:rRxCPEqEPDE": {
-      "approved": true,
+      "approved": false,
       "overall": 83,
       "importance": 84,
       "depth": 88,
@@ -468,10 +580,17 @@
       "method": "semantic-content",
       "provider": "codex-manual",
       "model": "editorial-review",
-      "auditedAt": "2026-07-22T20:15:00.000Z"
+      "auditedAt": "2026-07-22T20:15:00.000Z",
+      "transcriptSource": "none",
+      "evidenceQuotes": [],
+      "goalRelevance": {
+        "goalIds": [],
+        "reason": "Relação com objetivos não documentada na análise legada.",
+        "discovery": false
+      }
     },
     "video:aircAruvnKk": {
-      "approved": true,
+      "approved": false,
       "overall": 93,
       "importance": 94,
       "depth": 95,
@@ -495,10 +614,17 @@
       "method": "semantic-content",
       "provider": "codex-manual",
       "model": "editorial-review",
-      "auditedAt": "2026-07-22T20:15:00.000Z"
+      "auditedAt": "2026-07-22T20:15:00.000Z",
+      "transcriptSource": "none",
+      "evidenceQuotes": [],
+      "goalRelevance": {
+        "goalIds": [],
+        "reason": "Relação com objetivos não documentada na análise legada.",
+        "discovery": false
+      }
     },
     "video:36GT2zI8lVA": {
-      "approved": true,
+      "approved": false,
       "overall": 90,
       "importance": 90,
       "depth": 94,
@@ -522,7 +648,14 @@
       "method": "semantic-content",
       "provider": "codex-manual",
       "model": "editorial-review",
-      "auditedAt": "2026-07-22T20:15:00.000Z"
+      "auditedAt": "2026-07-22T20:15:00.000Z",
+      "transcriptSource": "none",
+      "evidenceQuotes": [],
+      "goalRelevance": {
+        "goalIds": [],
+        "reason": "Relação com objetivos não documentada na análise legada.",
+        "discovery": false
+      }
     },
     "video:R9OCA6UFE-0": {
       "approved": false,
@@ -549,10 +682,17 @@
       "method": "semantic-content",
       "provider": "codex-manual",
       "model": "editorial-review",
-      "auditedAt": "2026-07-22T20:15:00.000Z"
+      "auditedAt": "2026-07-22T20:15:00.000Z",
+      "transcriptSource": "none",
+      "evidenceQuotes": [],
+      "goalRelevance": {
+        "goalIds": [],
+        "reason": "Relação com objetivos não documentada na análise legada.",
+        "discovery": false
+      }
     },
     "video:iuYlGRnC7J8": {
-      "approved": true,
+      "approved": false,
       "overall": 87,
       "importance": 91,
       "depth": 86,
@@ -576,7 +716,14 @@
       "method": "semantic-content",
       "provider": "codex-manual",
       "model": "editorial-review",
-      "auditedAt": "2026-07-22T20:15:00.000Z"
+      "auditedAt": "2026-07-22T20:15:00.000Z",
+      "transcriptSource": "none",
+      "evidenceQuotes": [],
+      "goalRelevance": {
+        "goalIds": [],
+        "reason": "Relação com objetivos não documentada na análise legada.",
+        "discovery": false
+      }
     },
     "video:GKhmaU9Simk": {
       "approved": false,
@@ -603,10 +750,17 @@
       "method": "semantic-content",
       "provider": "codex-manual",
       "model": "editorial-review",
-      "auditedAt": "2026-07-22T20:15:00.000Z"
+      "auditedAt": "2026-07-22T20:15:00.000Z",
+      "transcriptSource": "none",
+      "evidenceQuotes": [],
+      "goalRelevance": {
+        "goalIds": [],
+        "reason": "Relação com objetivos não documentada na análise legada.",
+        "discovery": false
+      }
     },
     "video:rStL7niR7gs": {
-      "approved": true,
+      "approved": false,
       "overall": 88,
       "importance": 94,
       "depth": 91,
@@ -631,10 +785,17 @@
       "method": "semantic-content",
       "provider": "codex-manual",
       "model": "editorial-review",
-      "auditedAt": "2026-07-22T20:15:00.000Z"
+      "auditedAt": "2026-07-22T20:15:00.000Z",
+      "transcriptSource": "none",
+      "evidenceQuotes": [],
+      "goalRelevance": {
+        "goalIds": [],
+        "reason": "Relação com objetivos não documentada na análise legada.",
+        "discovery": false
+      }
     },
     "news:https://news.google.com/rss/articles/CBMiYkFVX3lxTE9vM2RpQXAzMlNsbmkwY2VqUmVZd1N6TTJYTVJld3NOczdtMk13b3BvWHpTZGNDalI5cEY3c3diVDhCOUxyaC1fOG5fN29lT3dKSldYZ1Foc2hTQUMxbk04M0F30gFnQVVfeXFMTU14T3hVYjlGR1VSaVdPNEYzb19seU9sOV9mU2RBSnJuN051TFVGM0VGSmJ3TnozcnlDTTl5bVRaNWM3cUdkckFoWnpaWEZSbzVhZzVjSGg5RjlWVlFlZ1BUektkZzlmcw?oc=5": {
-      "approved": true,
+      "approved": false,
       "overall": 86,
       "importance": 94,
       "depth": 82,
@@ -658,10 +819,17 @@
       "method": "semantic-content",
       "provider": "codex-manual",
       "model": "editorial-review",
-      "auditedAt": "2026-07-22T20:15:00.000Z"
+      "auditedAt": "2026-07-22T20:15:00.000Z",
+      "transcriptSource": "none",
+      "evidenceQuotes": [],
+      "goalRelevance": {
+        "goalIds": [],
+        "reason": "Relação com objetivos não documentada na análise legada.",
+        "discovery": false
+      }
     },
     "news:https://news.google.com/rss/articles/CBMitAFBVV95cUxOdEw2Z0NPSTc2ZDJZQmpmcUFfTWhyOEdzSmNZNXVxdUZvc2Rjc2NoT1FiM0hQcDBpb19TZVo3bWJ6WGxPdFo2TE5qRG9yNl9XYTNGMnFPLWMwM1JjbTI1d21sQlRabFI5bjhBVnplNU01OVFhUXlrTW5Wa2N5dzV2LVU4MnBqZWRKVVgtcVhVQ0ZBQ1RlazJtNWtuNG0wNUhQdzFuQnVEdjRlRUpCV2tnb1FvUGc?oc=5": {
-      "approved": true,
+      "approved": false,
       "overall": 88,
       "importance": 92,
       "depth": 87,
@@ -686,7 +854,21 @@
       "method": "semantic-content",
       "provider": "codex-manual",
       "model": "editorial-review",
-      "auditedAt": "2026-07-22T20:15:00.000Z"
+      "auditedAt": "2026-07-22T20:15:00.000Z",
+      "transcriptSource": "none",
+      "evidenceQuotes": [],
+      "goalRelevance": {
+        "goalIds": [],
+        "reason": "Relação com objetivos não documentada na análise legada.",
+        "discovery": false
+      }
     }
+  },
+  "schemaVersion": 3,
+  "migration": {
+    "date": "2026-09-22",
+    "previousApproved": 21,
+    "total": 25,
+    "reason": "Origem de transcrição, citações localizadas e objetivos não registrados nas análises legadas. Notas históricas preservadas sem nova avaliação."
   }
 }

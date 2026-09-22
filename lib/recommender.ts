@@ -1,4 +1,6 @@
 import type { Video } from "./videos";
+import { hasSemanticScores, type ContentAudit, type AuditMap } from "./content-audits";
+import { activeGoals, normalizeTopicWeights, topicId, topicLabel } from "./topics";
 
 export type Preferences = {
   topics: string[];
@@ -37,7 +39,7 @@ export function videoRejectionReason(video: Video) {
 }
 
 export const DEFAULT_PREFERENCES: Preferences = {
-  topics: ["filosofia", "natureza humana", "economia", "formação católica"],
+  topics: ["filosofia", "natureza-humana", "economia", "formacao-catolica"],
   topicWeights: {},
   videoFeedback: {},
   traitWeights: {},
@@ -48,57 +50,63 @@ export const DEFAULT_PREFERENCES: Preferences = {
 };
 
 function closeness(value: number, target: number) {
-  return 1 - Math.abs(value - target);
+  return Math.max(0, 1 - Math.abs(value - target));
+}
+
+const clamp = (value: number, min = 0, max = 1) => Math.max(min, Math.min(max, Number.isFinite(value) ? value : 0));
+
+export function auditedVideo(video: Video, audit?: ContentAudit): Video {
+  return { ...video, topic: topicId(video.topic), quality: hasSemanticScores(audit) ? audit!.overall / 100 : 0, depth: hasSemanticScores(audit) ? audit!.depth / 100 : 0 };
 }
 
 export function feedbackTraits(video: Video) {
   const depth = video.depth < .68 ? "fundamentos" : video.depth < .86 ? "intermediário" : "profundo";
   const minutes = video.durationSeconds / 60;
-  const duration = minutes <= 15 ? "curto" : minutes <= 45 ? "médio" : "longo";
+  const duration = minutes <= 0 ? "desconhecido" : minutes <= 15 ? "curto" : minutes <= 45 ? "médio" : "longo";
   return [`category:${video.category}`, `depth:${depth}`, `duration:${duration}`];
 }
 
-export function scoreVideo(video: Video, preferences: Preferences) {
-  const depthFit = closeness(video.depth, preferences.depth / 100);
-  const evergreenFit = video.evergreen * (preferences.evergreen / 100);
-  const isPreferredTopic = preferences.topics.includes(video.topic);
-  const discoveryFactor = preferences.discovery / 100;
-  const topicFit = isPreferredTopic ? 1 - discoveryFactor * .25 : discoveryFactor * .9;
+export function scoreVideo(video: Video, preferences: Preferences, audit?: ContentAudit) {
+  // No heuristic fallback: unaudited library items have no editorial score.
+  if (!hasSemanticScores(audit)) return 0;
+  const evaluated = auditedVideo(video, audit);
+  const depthFit = closeness(evaluated.depth, preferences.depth / 100);
+  const evergreenFit = clamp(video.evergreen) * clamp(preferences.evergreen / 100);
+  const isPreferredTopic = preferences.topics.some((topic) => topicId(topic) === evaluated.topic);
+  const goalWeight = Math.max(0, ...activeGoals.filter((goal) => audit!.goalRelevance?.goalIds?.includes(goal.id)).map((goal) => clamp(goal.weight)));
   const durationMinutes = video.durationSeconds / 60;
-  const durationFit = durationMinutes <= preferences.maxMinutes ? 1 : Math.max(0, 1 - (durationMinutes - preferences.maxMinutes) / 60);
-  const feedback = preferences.topicWeights[video.topic] ?? 0;
+  const durationFit = durationMinutes <= 0 ? 0 : durationMinutes <= preferences.maxMinutes ? 1 : Math.max(0, 1 - (durationMinutes - preferences.maxMinutes) / 60);
+  const feedback = normalizeTopicWeights(preferences.topicWeights)[evaluated.topic] ?? 0;
   const directFeedback = preferences.videoFeedback?.[video.youtubeId] ?? 0;
-  const traitFeedback = feedbackTraits(video).reduce((total, trait) => total + (preferences.traitWeights?.[trait] ?? 0), 0);
-  const ageDays = video.publishedAt ? Math.max(0, (Date.now() - new Date(video.publishedAt).getTime()) / 86_400_000) : 365;
-  const freshness = Math.max(0, 1 - ageDays / 45);
+  const traitFeedback = feedbackTraits(evaluated).reduce((total, trait) => total + clamp(preferences.traitWeights?.[trait] ?? 0, -3, 3), 0);
+  const publishedTime = Date.parse(video.publishedAt || "");
+  const ageDays = Number.isFinite(publishedTime) ? Math.max(0, (Date.now() - publishedTime) / 86_400_000) : 365;
+  const freshness = clamp(1 - ageDays / 90);
 
   return (
-    video.quality * 32 +
-    depthFit * 20 +
-    evergreenFit * 18 +
-    topicFit * 16 +
-    durationFit * 10 +
-    video.novelty * discoveryFactor * 8 +
-    feedback * 4 +
-    directFeedback * 14 +
-    traitFeedback * 2 +
-    freshness * (preferences.discovery / 100) * 8
+    evaluated.quality * 50 + evaluated.depth * 10 + audit!.insight / 100 * 10 + audit!.evidence / 100 * 10 +
+    goalWeight * 10 + Number(isPreferredTopic) * 2 + depthFit * 3 + evergreenFit * 2 + durationFit * 2 +
+    freshness * clamp(preferences.discovery / 100) +
+    clamp(directFeedback, -1, 1) * 2 + clamp(feedback, -3, 3) / 3 + clamp(traitFeedback, -9, 9) / 9
   );
 }
 
-function explain(video: Video, preferences: Preferences) {
+export function explain(video: Video, preferences: Preferences, audit?: ContentAudit) {
+  if (!hasSemanticScores(audit)) return "Item salvo por você; ainda sem nota editorial auditada.";
   const reasons: string[] = [];
-  if (preferences.topics.includes(video.topic)) reasons.push(`combina com seu interesse em ${video.topic}`);
-  if (video.depth > .8) reasons.push("vai além do básico");
-  if (video.evergreen > .95) reasons.push("continua relevante com o tempo");
-  if (!preferences.topics.includes(video.topic)) reasons.push("traz uma perspectiva fora da sua bolha");
-  if (video.durationSeconds / 60 <= preferences.maxMinutes) reasons.push("cabe no tempo que você definiu");
-  return reasons.slice(0, 2).join(" e ") + ".";
+  reasons.push(`Qualidade auditada: ${audit!.overall}/100`);
+  if (audit!.goalRelevance?.reason) reasons.push(audit!.goalRelevance.reason);
+  else if (preferences.topics.some((topic) => topicId(topic) === topicId(video.topic))) reasons.push(`relacionado a ${topicLabel(video.topic)}`);
+  else reasons.push("conteúdo avaliado individualmente");
+  return reasons.join(". ").replace(/[.!?]+$/, "") + ".";
 }
 
-export function rankVideos(videos: Video[], preferences: Preferences): RankedVideo[] {
+export function rankVideos(videos: Video[], preferences: Preferences, audits: AuditMap = {}): RankedVideo[] {
   return videos
-    .map((video) => ({ ...video, score: scoreVideo(video, preferences), explanation: explain(video, preferences) }))
+    .map((video) => {
+      const audit = audits[`video:${video.youtubeId}`];
+      return { ...auditedVideo(video, audit), score: scoreVideo(video, preferences, audit), explanation: explain(video, preferences, audit) };
+    })
     .sort((a, b) => b.score - a.score || a.title.localeCompare(b.title));
 }
 

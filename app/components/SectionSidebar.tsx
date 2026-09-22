@@ -6,6 +6,7 @@ const sectionLinks = [
   { label: "Início", icon: "⌂", href: `${BASE_PATH}/` },
   { label: "Modo Estudo", icon: "⌘", href: `${BASE_PATH}/estudo/` },
   { label: "Leituras", icon: "▤", href: `${BASE_PATH}/leituras/` },
+  { label: "Hábitos", icon: "◷", href: `${BASE_PATH}/habitos/` },
   { label: "Notícias", icon: "◫", href: `${BASE_PATH}/#noticias` },
 ];
 

@@ -405,6 +405,11 @@ button,a,input,select,textarea { touch-action:manipulation; }
   #main-sidebar .ai-study-trigger { font-size:10px; }
 }
 
+/* Navegação com acesso ao diário local */
+@media (max-width:900px) {
+  .mobile-nav { grid-template-columns:repeat(6,1fr); }
+}
+
 /* Currículos completos do modo Estudo */
 .track-tabs { grid-template-columns:repeat(auto-fit,minmax(138px,1fr)); }
 .track-curriculum-meta { display:block; width:max-content; max-width:100%; margin-top:13px; padding:7px 9px; border-radius:7px; background:color-mix(in srgb,var(--track-color) 10%,var(--bg)); color:var(--track-color); font-size:8px; font-weight:900; text-transform:uppercase; }

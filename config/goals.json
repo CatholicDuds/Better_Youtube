@@ -1,0 +1,10 @@
+{
+  "_comment": "Edite título, descrição, peso (0 a 1) e enabled. Estes são exemplos iniciais ativos, não objetivos inferidos do seu histórico. Peso 0 ou enabled false desativa um objetivo. Use topicIds de config/topics.json.",
+  "goals": [
+    { "id": "tcc-embarcados", "title": "Eletrônica e sistemas embarcados para o TCC", "description": "Preencher: problema do TCC, hardware e competências necessárias.", "weight": 1, "enabled": true, "topicIds": ["eletronica", "sistemas-embarcados", "programacao", "matematica"] },
+    { "id": "empresa-software", "title": "Web design e software com IA para uma empresa", "description": "Preencher: público, produto e próximo projeto prático.", "weight": 0.9, "enabled": true, "topicIds": ["web-design", "programacao", "inteligencia-artificial", "gestao", "negocios"] },
+    { "id": "financas-disciplina", "title": "Finanças pessoais e disciplina", "description": "Preencher: orçamento, reserva e hábito prioritário.", "weight": 0.8, "enabled": true, "topicIds": ["financas-pessoais", "disciplina", "economia"] },
+    { "id": "formacao-catolica", "title": "Formação católica", "description": "Preencher: etapa de formação, perguntas e práticas.", "weight": 0.8, "enabled": true, "topicIds": ["formacao-catolica"] },
+    { "id": "filosofia", "title": "Filosofia", "description": "Preencher: autores, questões e competências de argumentação.", "weight": 0.7, "enabled": true, "topicIds": ["filosofia", "pensamento-critico", "natureza-humana"] }
+  ]
+}

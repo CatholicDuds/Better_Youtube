@@ -52,12 +52,19 @@ export default function AuthGate({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (!supabase) return;
     let active = true;
-    supabase.auth.getSession().then(({ data }) => {
-      if (!active) return;
-      setSession(data.session);
-      if (data.session) void loadProfile(data.session.user.id);
-      setLoading(false);
-    });
+    supabase.auth.getSession()
+      .then(({ data, error }) => {
+        if (!active) return;
+        if (error) throw error;
+        setSession(data.session);
+        if (data.session) void loadProfile(data.session.user.id);
+      })
+      .catch(() => {
+        if (active) setMessage("Não foi possível verificar sua sessão. Recarregue a página para tentar novamente.");
+      })
+      .finally(() => {
+        if (active) setLoading(false);
+      });
     const { data: listener } = supabase.auth.onAuthStateChange((event, nextSession) => {
       if (!active) return;
       setSession(nextSession);
@@ -140,5 +147,5 @@ export default function AuthGate({ children }: { children: ReactNode }) {
   if (!profile) return <div className="auth-loading"><span className="brand-mark">C</span><p>{profileError || "Carregando seu perfil…"}</p>{profileError && <button onClick={() => void loadProfile(session.user.id)}>Tentar novamente</button>}</div>;
 
   const isAdmin = profile.role === "admin";
-  return <><div className="account-dock"><button className="account-trigger" onClick={() => setAccountOpen(!accountOpen)} aria-expanded={accountOpen}><span>{(profile.display_name || profile.username).slice(0, 1).toUpperCase()}</span><div><strong>{profile.display_name || profile.username}</strong><small>{isAdmin ? "Administrador" : "Conta ativa"}</small></div></button>{accountOpen && <div className="account-menu"><p>{profile.email}</p><span className={isAdmin ? "role-badge admin" : "role-badge"}>{isAdmin ? "Acesso administrativo" : "Acesso contínuo"}</span><button onClick={() => void signOut()}>Sair da conta</button></div>}</div>{children}<nav className="mobile-nav" aria-label="Navegação principal"><a href={`${BASE_PATH}/`}><span>⌂</span><small>Início</small></a><a href={`${BASE_PATH}/estudo/`}><span>⌘</span><small>Estudo</small></a><a href={`${BASE_PATH}/#noticias`}><span>◫</span><small>Notícias</small></a><a href={`${BASE_PATH}/leituras/`}><span>▤</span><small>Leituras</small></a><AIStudyDock embedded /></nav></>;
+  return <><div className="account-dock"><button className="account-trigger" onClick={() => setAccountOpen(!accountOpen)} aria-expanded={accountOpen}><span>{(profile.display_name || profile.username).slice(0, 1).toUpperCase()}</span><div><strong>{profile.display_name || profile.username}</strong><small>{isAdmin ? "Administrador" : "Conta ativa"}</small></div></button>{accountOpen && <div className="account-menu"><p>{profile.email}</p><span className={isAdmin ? "role-badge admin" : "role-badge"}>{isAdmin ? "Acesso administrativo" : "Acesso contínuo"}</span><button onClick={() => void signOut()}>Sair da conta</button></div>}</div>{children}<nav className="mobile-nav" aria-label="Navegação principal"><a href={`${BASE_PATH}/`}><span>⌂</span><small>Início</small></a><a href={`${BASE_PATH}/estudo/`}><span>⌘</span><small>Estudo</small></a><a href={`${BASE_PATH}/#noticias`}><span>◫</span><small>Notícias</small></a><a href={`${BASE_PATH}/leituras/`}><span>▤</span><small>Leituras</small></a><a href={`${BASE_PATH}/habitos/`}><span>◷</span><small>Hábitos</small></a><AIStudyDock embedded /></nav></>;
 }

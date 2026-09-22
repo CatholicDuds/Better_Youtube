@@ -8,6 +8,8 @@ import { readings } from "../lib/readings";
 import { studyFeedVideos } from "../lib/study";
 import { supabase } from "../lib/supabase";
 import AIStudyDock from "./components/AIStudyDock";
+import { isContentApproved, limitDiscoveries, type ContentAudit } from "../lib/content-audits";
+import { knownTopicId, normalizeTopicWeights, topicId, topicLabel } from "../lib/topics";
 
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || "";
 const RECOMMENDATION_HISTORY_KEY = "clarity-recommendation-history";
@@ -26,23 +28,6 @@ const defaultInterests = [
 ];
 const defaultInterestLabels = defaultInterests.map((item) => item.label);
 type PoliticalSpectrum = "Esquerda" | "Centro" | "Direita";
-
-type ContentAudit = {
-  approved: boolean;
-  method?: "semantic-content" | "unavailable";
-  overall: number;
-  depth: number;
-  insight: number;
-  evidence: number;
-  captivating: number;
-  thesis: string;
-  reasons: string[];
-  auditedAt: string;
-};
-
-function isContentApproved(audit?: ContentAudit) {
-  return audit?.method === "semantic-content" && audit.approved;
-}
 
 type NewsItem = {
   id: string;
@@ -153,7 +138,7 @@ const articles: Article[] = [
 ];
 
 function durationLabel(seconds: number) {
-  if (!seconds) return "aula";
+  if (!seconds) return "duração desconhecida";
   const minutes = Math.floor(seconds / 60);
   return minutes >= 60 ? `${Math.floor(minutes / 60)}h ${minutes % 60}m` : `${minutes} min`;
 }
@@ -255,6 +240,20 @@ function storedRecommendationIds(value: string | null) {
   }
 }
 
+function storedJson<T>(value: string | null, isValid: (parsed: unknown) => parsed is T) {
+  if (!value) return undefined;
+  try {
+    const parsed: unknown = JSON.parse(value);
+    return isValid(parsed) ? parsed : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
 function paginate<T>(items: T[], pageSize: number, maxPages = 3) {
   return Array.from({ length: Math.min(maxPages, Math.ceil(items.length / pageSize)) }, (_, index) => items.slice(index * pageSize, (index + 1) * pageSize));
 }
@@ -337,7 +336,7 @@ function VideoCard({ video, onPlay, onFeedback, feedback = 0 }: {
         <div className="video-copy">
           <button className="video-title" onClick={() => onPlay(video)}>{video.title}</button>
           <p>{video.channel}</p>
-          <p>{video.topic} · {video.publishedLabel} · <span className="level-tag">{levelLabel(video.depth)}</span></p>
+          <p>{topicLabel(video.topic)} · {video.publishedLabel} · <span className="level-tag">{levelLabel(video.depth)}</span></p>
           <details>
             <summary>Por que foi recomendado?</summary>
             <span>{video.explanation}</span>
@@ -361,7 +360,7 @@ function DepthVideoCard({ video, onPlay }: { video: RankedVideo; onPlay: (video:
         <span className="thumbnail-play">▶</span>
         <span className="duration">{video.embedType === "playlist" ? "coleção" : durationLabel(video.durationSeconds)}</span>
       </button>
-      <div><span>{video.category} · {video.topic}</span><button onClick={() => onPlay(video)}>{video.title}</button><small>{video.channel}</small></div>
+      <div><span>{video.category} · {topicLabel(video.topic)}</span><button onClick={() => onPlay(video)}>{video.title}</button><small>{video.channel}</small></div>
     </article>
   );
 }
@@ -418,12 +417,12 @@ export default function Home() {
 
   useEffect(() => {
     try {
-      const storedTheme = localStorage.getItem("clarity-theme") as "dark" | "light" | null;
-      const storedPrefs = localStorage.getItem("clarity-preferences");
-      const storedVideos = localStorage.getItem("clarity-videos");
-      const storedLevel = localStorage.getItem("clarity-language-level") as "Essencial" | "Intermediário" | "Avançado" | null;
-      const storedInterests = localStorage.getItem("clarity-interests");
-      const storedInterestFeeds = localStorage.getItem("clarity-interest-feeds");
+      const storedTheme = localStorage.getItem("clarity-theme");
+      const storedPrefs = storedJson(localStorage.getItem("clarity-preferences"), isRecord);
+      const storedVideos = storedJson(localStorage.getItem("clarity-videos"), Array.isArray) as Video[] | undefined;
+      const storedLevel = localStorage.getItem("clarity-language-level");
+      const storedInterests = storedJson(localStorage.getItem("clarity-interests"), (value): value is string[] => Array.isArray(value) && value.every((item) => typeof item === "string"));
+      const storedInterestFeeds = storedJson(localStorage.getItem("clarity-interest-feeds"), isRecord) as Record<string, InterestFeed> | undefined;
       const storedRecommendationHistory = storedRecommendationIds(localStorage.getItem(RECOMMENDATION_HISTORY_KEY));
       const lastRecommendations = storedRecommendationIds(localStorage.getItem(LAST_RECOMMENDATIONS_KEY));
       const storedRecommendationCycle = Number(localStorage.getItem(RECOMMENDATION_CYCLE_KEY));
@@ -431,12 +430,16 @@ export default function Home() {
       const nextRecommendationCycle = Number.isSafeInteger(storedRecommendationCycle) && storedRecommendationCycle >= 0 ? storedRecommendationCycle + 1 : 1;
       const requestedCategory = new URLSearchParams(window.location.search).get("tema");
       queueMicrotask(() => {
-        if (storedTheme) setTheme(storedTheme);
-        if (storedPrefs) setPreferences({ ...DEFAULT_PREFERENCES, ...JSON.parse(storedPrefs) });
-        if (storedVideos) setCustomVideos(JSON.parse(storedVideos));
-        if (storedLevel) setLanguageLevel(storedLevel);
-        if (storedInterests) setUserInterests(JSON.parse(storedInterests));
-        if (storedInterestFeeds) setInterestFeeds(JSON.parse(storedInterestFeeds));
+        if (storedTheme === "dark" || storedTheme === "light") setTheme(storedTheme);
+        if (storedPrefs) {
+          const topics = Array.isArray(storedPrefs.topics) ? storedPrefs.topics.filter((topic): topic is string => typeof topic === "string").map(topicId) : DEFAULT_PREFERENCES.topics;
+          const weights = isRecord(storedPrefs.topicWeights) ? storedPrefs.topicWeights as Record<string, number> : {};
+          setPreferences({ ...DEFAULT_PREFERENCES, ...storedPrefs, topics, topicWeights: normalizeTopicWeights(weights) });
+        }
+        if (storedVideos) setCustomVideos(storedVideos.map((video) => ({ ...video, topic: topicId(video.topic), durationSeconds: video.id.startsWith("custom-") && video.durationSeconds === 900 ? 0 : video.durationSeconds })));
+        if (storedLevel === "Essencial" || storedLevel === "Intermediário" || storedLevel === "Avançado") setLanguageLevel(storedLevel);
+        if (storedInterests) setUserInterests(storedInterests);
+        if (storedInterestFeeds) setInterestFeeds(storedInterestFeeds);
         setRecentRecommendationIds(nextRecommendationHistory);
         setRefreshSeed(nextRecommendationCycle);
         if (requestedCategory && defaultInterestLabels.includes(requestedCategory)) setCategory(requestedCategory);
@@ -502,8 +505,8 @@ export default function Home() {
       if (all.findIndex((item) => item.youtubeId === video.youtubeId) !== index) return false;
       if (video.category === "Minha biblioteca") return true;
       return !videoStructuralRejectionReason(video);
-    });
-  }, [customVideos, webVideos, interestFeeds, discoveredVideos, liveVideos, contentAudits]);
+    }).map((video) => ({ ...video, topic: topicId(video.topic) }));
+  }, [customVideos, webVideos, interestFeeds, discoveredVideos, liveVideos]);
 
   const videos = useMemo(() => videoCandidates.filter((video) => (
     preferences.videoFeedback?.[video.youtubeId] !== -1
@@ -511,27 +514,27 @@ export default function Home() {
   )), [videoCandidates, contentAudits, preferences.videoFeedback]);
 
   const ranked = useMemo(() => {
-    const candidates = rankVideos(videos, preferences).filter((video) => {
+    const candidates = rankVideos(videos, preferences, contentAudits).filter((video) => {
       const categoryMatch = category === "Todos" || video.category === category;
-      const text = `${video.title} ${video.channel} ${video.topic} ${video.category}`.toLowerCase();
+      const text = `${video.title} ${video.channel} ${topicLabel(video.topic)} ${video.category}`.toLowerCase();
       const terms = query.trim().toLowerCase().split(/\s+/).filter(Boolean);
       return categoryMatch && terms.every((term) => text.includes(term));
     });
 
-    if (candidates.length < 2) return candidates;
+    if (candidates.length < 2) return limitDiscoveries(candidates, (video) => contentAudits[`video:${video.youtubeId}`]);
 
     const recentIds = new Set(recentRecommendationIds);
     const scoreSpan = Math.max(1, candidates[0].score - candidates[candidates.length - 1].score);
     const rotationRange = Math.min(1.5, Math.max(.5, scoreSpan * .04));
-    const recentPenalty = Math.min(12, Math.max(6, scoreSpan * .3));
+    const recentPenalty = Math.min(2, Math.max(.5, scoreSpan * .03));
 
     const rotated = candidates.sort((a, b) => {
       const scoreA = a.score + seededNoise(a.youtubeId, refreshSeed + 1) * rotationRange - (recentIds.has(a.youtubeId) ? recentPenalty : 0);
       const scoreB = b.score + seededNoise(b.youtubeId, refreshSeed + 1) * rotationRange - (recentIds.has(b.youtubeId) ? recentPenalty : 0);
       return scoreB - scoreA || b.score - a.score || a.title.localeCompare(b.title);
     });
-    return diversifyVideos(rotated);
-  }, [videos, preferences, category, query, refreshSeed, recentRecommendationIds]);
+    return limitDiscoveries(diversifyVideos(rotated), (video) => contentAudits[`video:${video.youtubeId}`]);
+  }, [videos, preferences, contentAudits, category, query, refreshSeed, recentRecommendationIds]);
 
   useEffect(() => {
     if (!ranked.length) return;
@@ -546,31 +549,31 @@ export default function Home() {
       eyebrow: "BÁSICO",
       title: "Construa os fundamentos",
       description: "Conceitos, vocabulário e intuição para entrar no assunto sem pressupor conhecimento anterior.",
-      videos: ranked.filter((video) => video.depth < .68).slice(0, 6),
+      videos: limitDiscoveries(ranked.filter((video) => video.depth < .68), (video) => contentAudits[`video:${video.youtubeId}`]).slice(0, 6),
     },
     {
       id: "intermediate",
       eyebrow: "INTERMEDIÁRIO",
       title: "Entenda os mecanismos",
       description: "Relações de causa e efeito, casos concretos e conexões entre as ideias centrais.",
-      videos: ranked.filter((video) => video.depth >= .68 && video.depth < .86).slice(0, 6),
+      videos: limitDiscoveries(ranked.filter((video) => video.depth >= .68 && video.depth < .86), (video) => contentAudits[`video:${video.youtubeId}`]).slice(0, 6),
     },
     {
       id: "deep",
       eyebrow: "PROFUNDO",
       title: "Questione, compare e aplique",
       description: "Evidências, objeções, limites e aplicações para formar uma visão própria e defensável.",
-      videos: ranked.filter((video) => video.depth >= .86).slice(0, 6),
+      videos: limitDiscoveries(ranked.filter((video) => video.depth >= .86), (video) => contentAudits[`video:${video.youtubeId}`]).slice(0, 6),
     },
-  ], [ranked]);
+  ], [ranked, contentAudits]);
 
   const visiblePodcasts = useMemo(() => {
     const candidates = contentSearchActive ? searchedPodcasts : podcasts.map((podcast) => ({ ...podcast, ...podcastArtwork[podcast.appleId] }));
-    return candidates
+    return limitDiscoveries(candidates
       .filter((podcast) => isContentApproved(contentAudits[`podcast:${podcast.appleId}`]))
       .filter((podcast) => contentSearchActive || category === "Todos" || podcast.category === category)
-      .sort((a, b) => Math.abs(a.depth - preferences.depth / 100) - Math.abs(b.depth - preferences.depth / 100));
-  }, [category, preferences.depth, podcastArtwork, contentSearchActive, searchedPodcasts, contentAudits]);
+      .sort((a, b) => contentAudits[`podcast:${b.appleId}`].overall - contentAudits[`podcast:${a.appleId}`].overall), (podcast) => contentAudits[`podcast:${podcast.appleId}`]);
+  }, [category, podcastArtwork, contentSearchActive, searchedPodcasts, contentAudits]);
 
   const homeReadings = useMemo(() => {
     const levelOrder = { Essencial: 0, Intermediário: 1, Avançado: 2 };
@@ -588,16 +591,16 @@ export default function Home() {
       .filter((item) => newsSpectrum === "Todos" || (item.spectrum || "Centro") === newsSpectrum)
       .filter((item) => contentSearchActive || (category === "Todos" ? userInterests.includes(item.category) : item.category === category));
     const categoryCount: Record<string, number> = {};
-    return candidates.filter((item) => {
+    return limitDiscoveries(candidates.sort((a, b) => contentAudits[`news:${b.url}`].overall - contentAudits[`news:${a.url}`].overall).filter((item) => {
       const categoryLimit = contentSearchActive ? 12 : category === "Todos" ? 2 : 8;
       if ((categoryCount[item.category] || 0) >= categoryLimit) return false;
       categoryCount[item.category] = (categoryCount[item.category] || 0) + 1;
       return true;
-    }).slice(0, 12);
+    }), (item) => contentAudits[`news:${item.url}`]).slice(0, 12);
   }, [news, searchedNews, contentSearchActive, newsPeriod, newsSpectrum, category, userInterests, currentTime, contentAudits]);
 
   const semanticAuditCount = Object.values(contentAudits).filter((audit) => audit.method === "semantic-content").length;
-  const approvedAuditCount = Object.values(contentAudits).filter((audit) => audit.method === "semantic-content" && audit.approved).length;
+  const approvedAuditCount = Object.values(contentAudits).filter(isContentApproved).length;
 
   const newsPages = useMemo(() => paginate(visibleNews, compactCarousel ? 2 : 4), [visibleNews, compactCarousel]);
   const podcastPages = useMemo(() => paginate(visiblePodcasts, compactCarousel ? 2 : 6), [visiblePodcasts, compactCarousel]);
@@ -734,7 +737,7 @@ export default function Home() {
         const evidenceBonus = EVIDENCE_SIGNAL.test(normalizedContext) ? .09 : 0;
         const descriptionBonus = normalizedDescription.length >= 280 ? .06 : normalizedDescription.length >= 120 ? .03 : 0;
         const relevanceBonus = Math.min(.08, titleCoverage * .05 + contextCoverage * .03);
-        const video: Video = { id: `web-${item.id}`, youtubeId: item.id, thumbnailId: item.id, embedType: "video", publishedAt: item.snippet.publishedAt, category: selectedCategory, title: item.snippet.title, channel: item.snippet.channelTitle, topic: searchTerm.toLowerCase(), url: `https://www.youtube.com/watch?v=${item.id}`, durationSeconds: seconds, depth: Math.min(.96, .62 + Math.min(.22, seconds / 15_000) + evidenceBonus), novelty: Math.max(.58, .9 - index * .02), quality: Math.min(.96, .62 + learningBonus + evidenceBonus + descriptionBonus + relevanceBonus + Math.min(.06, reception)), evergreen: .8, publishedLabel: relativeDate(item.snippet.publishedAt), palette: (["blue", "coral", "ink", "moss", "violet", "sand"] as const)[index % 6], mark: "PESQUISA" };
+        const video: Video = { id: `web-${item.id}`, youtubeId: item.id, thumbnailId: item.id, embedType: "video", publishedAt: item.snippet.publishedAt, category: selectedCategory, title: item.snippet.title, channel: item.snippet.channelTitle, topic: knownTopicId(searchTerm), url: `https://www.youtube.com/watch?v=${item.id}`, durationSeconds: seconds, depth: Math.min(.96, .62 + Math.min(.22, seconds / 15_000) + evidenceBonus), novelty: Math.max(.58, .9 - index * .02), quality: Math.min(.96, .62 + learningBonus + evidenceBonus + descriptionBonus + relevanceBonus + Math.min(.06, reception)), evergreen: .8, publishedLabel: relativeDate(item.snippet.publishedAt), palette: (["blue", "coral", "ink", "moss", "violet", "sand"] as const)[index % 6], mark: "PESQUISA" };
         if (videoRejectionReason(video)) {
           rejected.qualidade += 1;
           return null;
@@ -766,7 +769,7 @@ export default function Home() {
       ].filter(Boolean).join(" · ");
       const sourceWarning = data?.warnings?.length ? " Uma das fontes ficou temporariamente indisponível." : "";
       setWebSearchStatus(
-        `Filtro de atenção: ${found.length} vídeos, ${resultNews.length} notícias e ${resultPodcasts.length} podcasts aprovados.${removalSummary ? ` Vídeos removidos: ${removalSummary}.` : removed ? ` ${removed} vídeos removidos.` : ""}${sourceWarning}`,
+        `Pré-triagem: ${found.length} vídeos, ${resultNews.length} notícias e ${resultPodcasts.length} podcasts encontrados. Só itens com auditoria completa aparecem no feed.${removalSummary ? ` Vídeos removidos: ${removalSummary}.` : removed ? ` ${removed} vídeos removidos.` : ""}${sourceWarning}`,
       );
     } catch (error) {
       const code = error instanceof Error ? error.message : "";
@@ -833,7 +836,7 @@ export default function Home() {
   }
 
   function feedback(youtubeId: string, value: 1 | -1) {
-    const video = videoCandidates.find((item) => item.youtubeId === youtubeId);
+    const video = rankVideos(videoCandidates.filter((item) => item.youtubeId === youtubeId), preferences, contentAudits)[0];
     if (!video) return;
     const previous = preferences;
     const currentValue = preferences.videoFeedback?.[youtubeId] ?? 0;
@@ -888,9 +891,9 @@ export default function Home() {
       category: "Minha biblioteca",
       title: String(formData.get("title") || "Vídeo da minha biblioteca"),
       channel: "Minha biblioteca",
-      topic: String(formData.get("topic") || "estudo").toLowerCase(),
+      topic: topicId(String(formData.get("topic") || "estudo")),
       url,
-      durationSeconds: 900,
+      durationSeconds: 0,
       depth: .75,
       novelty: .6,
       quality: .8,
@@ -955,6 +958,7 @@ export default function Home() {
           <button className={category === "Todos" ? "nav-item active" : "nav-item"} onClick={() => openCategory("Todos")}><span>⌂</span>Início</button>
           <a className="nav-item" href={`${BASE_PATH}/estudo/`}><span>⌘</span>Modo Estudo</a>
           <a className="nav-item" href={`${BASE_PATH}/leituras/`}><span>▤</span>Leituras</a>
+          <a className="nav-item" href={`${BASE_PATH}/habitos/`}><span>◷</span>Hábitos</a>
           <button className="nav-item" onClick={() => { setMobileMenuOpen(false); document.getElementById("noticias")?.scrollIntoView(); }}><span>◫</span>Notícias</button>
           <button className="nav-item" onClick={() => openCategory("Minha biblioteca")}><span>▱</span>Minha biblioteca</button>
         </nav>

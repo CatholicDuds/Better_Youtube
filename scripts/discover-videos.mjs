@@ -6,7 +6,8 @@ if (!apiKey) {
   process.exit(0);
 }
 
-const topics = JSON.parse(await readFile(new URL("../config/discovery-topics.json", import.meta.url), "utf8"));
+const configuredTopics = JSON.parse(await readFile(new URL("../config/discovery-topics.json", import.meta.url), "utf8"));
+const topics = configuredTopics.flatMap(({ searches, ...topic }) => searches.map((search) => ({ ...topic, ...search })));
 const batchSize = Math.max(1, Math.min(4, Number(process.env.DISCOVERY_BATCH_SIZE || 4)));
 const startIndex = (new Date().getUTCHours() * batchSize) % topics.length;
 const activeTopics = Array.from({ length: Math.min(batchSize, topics.length) }, (_, offset) => {
@@ -97,10 +98,10 @@ const videos = all
   .filter((video, index) => all.findIndex((item) => item.youtubeId === video.youtubeId) === index)
   .sort((a, b) => b.quality - a.quality || b.novelty - a.novelty);
 if (!videos.length) {
-  console.warn("Clarity: nenhuma descoberta aprovada; mantendo o arquivo publicado anteriormente.");
+  console.warn("Clarity: nenhum candidato passou pela pré-triagem; mantendo o arquivo anterior.");
   process.exit(0);
 }
 
 await mkdir(new URL("../public/data/", import.meta.url), { recursive: true });
 await writeFile(new URL("../public/data/discovered-videos.json", import.meta.url), `${JSON.stringify({ updatedAt: new Date().toISOString(), source: "YouTube Data API", strategy: "prompts rotativos com avaliação individual de qualidade", rotatingTopics: activeTopics.map(({ topic }) => topic.topic), videos }, null, 2)}\n`, "utf8");
-console.log(`Clarity: ${videos.length} descobertas aprovadas por qualidade individual em ${activeTopics.length} pesquisas rotativas.`);
+console.log(`Clarity: ${videos.length} candidatos pré-triados em ${activeTopics.length} pesquisas rotativas. Publicação exige auditoria semântica.`);

@@ -16,6 +16,35 @@ type StudySchedule = { enabled: boolean; days: number[]; time: string; duration:
 
 const defaultSchedule: StudySchedule = { enabled: false, days: [1, 3, 5], time: "19:00", duration: 45, trackId: "pensamento-critico", language: "both" };
 
+function readStoredProgress(value: string | null) {
+  if (!value) return [];
+  try {
+    const parsed: unknown = JSON.parse(value);
+    return Array.isArray(parsed) ? parsed.filter((item): item is string => typeof item === "string") : [];
+  } catch {
+    return [];
+  }
+}
+
+function readStoredSchedule(value: string | null): StudySchedule | null {
+  if (!value) return null;
+  try {
+    const parsed: unknown = JSON.parse(value);
+    if (typeof parsed !== "object" || parsed === null || Array.isArray(parsed)) return null;
+    const candidate = parsed as Partial<StudySchedule>;
+    return {
+      enabled: typeof candidate.enabled === "boolean" ? candidate.enabled : defaultSchedule.enabled,
+      days: Array.isArray(candidate.days) ? candidate.days.filter((day) => Number.isInteger(day) && day >= 0 && day <= 6) : defaultSchedule.days,
+      time: typeof candidate.time === "string" && /^(?:[01]\d|2[0-3]):[0-5]\d$/.test(candidate.time) ? candidate.time : defaultSchedule.time,
+      duration: [25, 45, 60, 90].includes(Number(candidate.duration)) ? Number(candidate.duration) : defaultSchedule.duration,
+      trackId: typeof candidate.trackId === "string" && studyTracks.some((track) => track.id === candidate.trackId) ? candidate.trackId : defaultSchedule.trackId,
+      language: candidate.language === "pt" || candidate.language === "en" || candidate.language === "both" ? candidate.language : defaultSchedule.language,
+    };
+  } catch {
+    return null;
+  }
+}
+
 function getScheduleStart(schedule: StudySchedule, now: number) {
   if (!schedule.enabled || !schedule.days.length || !now) return null;
   const [hours, minutes] = schedule.time.split(":").map(Number);
@@ -59,15 +88,14 @@ export default function StudyPage() {
   useEffect(() => {
     const hydrate = window.setTimeout(() => {
       try {
-        const storedTheme = localStorage.getItem("clarity-theme") as "dark" | "light" | null;
-        const storedLanguage = localStorage.getItem("clarity-study-language") as LanguageMode | null;
-        const storedSchedule = localStorage.getItem("clarity-study-schedule");
-        const storedProgress = localStorage.getItem("clarity-study-progress");
-        if (storedTheme) setTheme(storedTheme);
-        if (storedLanguage) setLanguage(storedLanguage);
-        if (storedProgress) setProgress(JSON.parse(storedProgress));
-        if (storedSchedule) {
-          const parsed = { ...defaultSchedule, ...JSON.parse(storedSchedule) } as StudySchedule;
+        const storedTheme = localStorage.getItem("clarity-theme");
+        const storedLanguage = localStorage.getItem("clarity-study-language");
+        const parsedSchedule = readStoredSchedule(localStorage.getItem("clarity-study-schedule"));
+        setProgress(readStoredProgress(localStorage.getItem("clarity-study-progress")));
+        if (storedTheme === "dark" || storedTheme === "light") setTheme(storedTheme);
+        if (storedLanguage === "pt" || storedLanguage === "en" || storedLanguage === "both") setLanguage(storedLanguage);
+        if (parsedSchedule) {
+          const parsed = parsedSchedule;
           setSchedule(parsed);
           setTrackId(parsed.trackId);
           setTimerSeconds(parsed.duration * 60);

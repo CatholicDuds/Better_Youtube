@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Text.Json;
 using Microsoft.Web.WebView2.Core;
 using Microsoft.Web.WebView2.WinForms;
 using Microsoft.Win32;
@@ -19,7 +20,7 @@ internal static class Program
             var workspace = WorkspaceLocator.Find();
             var webRoot = Path.Combine(AppContext.BaseDirectory, "wwwroot");
             return PromptLoader.Read().Contains("Curadoria manual do Clarity", StringComparison.Ordinal)
-                && File.Exists(Path.Combine(workspace, "package.json"))
+                && WorkspaceLocator.IsWorkspace(workspace)
                 && File.Exists(Path.Combine(webRoot, "index.html")) ? 0 : 3;
         }
 
@@ -59,11 +60,25 @@ internal sealed class ClarityWindow : Form
         MinimumSize = new Size(980, 680);
         StartPosition = FormStartPosition.CenterScreen;
         BackColor = Color.FromArgb(15, 15, 15);
-        Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
+        try { Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath); }
+        catch { }
         HandleCreated += (_, _) => WindowTheme.ApplyDark(Handle);
 
         Controls.Add(_webView);
-        Shown += async (_, _) => await InitializeWebView();
+        Shown += InitializeWebViewOnShown;
+    }
+
+    private async void InitializeWebViewOnShown(object? sender, EventArgs args)
+    {
+        try
+        {
+            await InitializeWebView();
+        }
+        catch (Exception error)
+        {
+            MessageBox.Show($"Não foi possível abrir a interface do Clarity: {error.Message}", "Clarity", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            Close();
+        }
     }
 
     private async Task InitializeWebView()
@@ -106,7 +121,7 @@ internal sealed class ClarityWindow : Form
                 "Content-Type: application/json; charset=utf-8\r\nCache-Control: no-store");
             return;
         }
-        var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+        var stream = new MemoryStream(File.ReadAllBytes(path), writable: false);
         args.Response = _webView.CoreWebView2.Environment.CreateWebResourceResponse(
             stream,
             200,
@@ -198,6 +213,21 @@ internal static class PromptLoader
 internal static class WorkspaceLocator
 {
     private const string RegistryPath = @"Software\Clarity";
+    private const string PackageName = "clarity-better-youtube";
+
+    internal static bool IsWorkspace(string? path)
+    {
+        if (string.IsNullOrWhiteSpace(path) || !Directory.Exists(Path.Combine(path, "public", "data"))) return false;
+        try
+        {
+            using var package = JsonDocument.Parse(File.ReadAllText(Path.Combine(path, "package.json")));
+            return package.RootElement.TryGetProperty("name", out var name) && name.GetString() == PackageName;
+        }
+        catch (Exception error) when (error is IOException or UnauthorizedAccessException or JsonException)
+        {
+            return false;
+        }
+    }
 
     internal static string Find()
     {
@@ -210,7 +240,7 @@ internal static class WorkspaceLocator
             var current = new DirectoryInfo(origin!);
             while (current is not null)
             {
-                if (File.Exists(Path.Combine(current.FullName, "package.json")) && Directory.Exists(Path.Combine(current.FullName, "public", "data")))
+                if (IsWorkspace(current.FullName))
                     return current.FullName;
                 current = current.Parent;
             }
@@ -224,8 +254,10 @@ internal static class WorkspaceLocator
         if (!string.IsNullOrEmpty(workspace)) return workspace;
 
         using var picker = new FolderBrowserDialog { Description = "Selecione a pasta Better_Youtube que contém package.json", UseDescriptionForTitle = true };
-        if (picker.ShowDialog() != DialogResult.OK || !File.Exists(Path.Combine(picker.SelectedPath, "package.json")))
+        if (picker.ShowDialog() != DialogResult.OK)
             throw new InvalidOperationException("A pasta do projeto não foi selecionada.");
+        if (!IsWorkspace(picker.SelectedPath))
+            throw new InvalidOperationException($"A pasta selecionada não pertence ao projeto {PackageName}.");
 
         using var key = Registry.CurrentUser.CreateSubKey(RegistryPath);
         key.SetValue("Workspace", picker.SelectedPath);
@@ -240,6 +272,9 @@ internal static class CodexBridge
 
     [DllImport("user32.dll")]
     private static extern bool ShowWindow(nint hWnd, int nCmdShow);
+
+    [DllImport("user32.dll")]
+    private static extern nint GetForegroundWindow();
 
     internal static Process? FindChatGptWindow() => Process.GetProcessesByName("ChatGPT")
         .FirstOrDefault(process => process.MainWindowHandle != nint.Zero);
@@ -258,30 +293,52 @@ internal static class CodexBridge
 
     internal static void Launch(string workspace)
     {
+        Exception? codexError = null;
         try
         {
-            Process.Start(new ProcessStartInfo("codex", $"app \"{workspace}\"") { UseShellExecute = true });
-            return;
+            if (Process.Start(new ProcessStartInfo("codex", $"app \"{workspace}\"") { UseShellExecute = true }) is not null) return;
         }
-        catch { }
-        Process.Start(new ProcessStartInfo("chatgpt:") { UseShellExecute = true });
+        catch (Exception error) { codexError = error; }
+
+        try
+        {
+            if (Process.Start(new ProcessStartInfo("chatgpt:") { UseShellExecute = true }) is not null) return;
+        }
+        catch (Exception error)
+        {
+            throw new InvalidOperationException("Não foi possível abrir o Codex. Instale ou abra o aplicativo ChatGPT/Codex e tente novamente.", new AggregateException(codexError ?? error, error));
+        }
+
+        throw new InvalidOperationException("Não foi possível abrir o Codex. Instale ou abra o aplicativo ChatGPT/Codex e tente novamente.", codexError);
+    }
+
+    private static bool Activate(Process process, TimeSpan timeout)
+    {
+        var deadline = DateTime.UtcNow + timeout;
+        while (DateTime.UtcNow < deadline)
+        {
+            process.Refresh();
+            var handle = process.MainWindowHandle;
+            if (handle != nint.Zero)
+            {
+                ShowWindow(handle, 9);
+                SetForegroundWindow(handle);
+                if (GetForegroundWindow() == handle) return true;
+            }
+            Thread.Sleep(200);
+        }
+        return false;
     }
 
     internal static bool FocusAndPaste(Process process)
     {
-        process.Refresh();
-        if (process.MainWindowHandle == nint.Zero) return false;
-        ShowWindow(process.MainWindowHandle, 9);
-        if (!SetForegroundWindow(process.MainWindowHandle)) return false;
-        Thread.Sleep(700);
+        if (!Activate(process, TimeSpan.FromSeconds(3))) return false;
         SendKeys.SendWait("^n");
         Thread.Sleep(1_200);
         var current = FindChatGptWindow() ?? process;
-        current.Refresh();
-        ShowWindow(current.MainWindowHandle, 9);
-        SetForegroundWindow(current.MainWindowHandle);
-        Thread.Sleep(400);
+        if (!Activate(current, TimeSpan.FromSeconds(8))) return false;
         SendKeys.SendWait("^v");
-        return true;
+        current.Refresh();
+        return GetForegroundWindow() == current.MainWindowHandle;
     }
 }

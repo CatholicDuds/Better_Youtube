@@ -10,13 +10,17 @@ const providers = [
 ];
 
 function latestLearningContext() {
-  try {
-    const entries = [
-      ...JSON.parse(localStorage.getItem("clarity-journal") || "[]"),
-      ...JSON.parse(localStorage.getItem("clarity-reading-journal") || "[]"),
-    ].sort((a, b) => Date.parse(b.date || "") - Date.parse(a.date || ""));
-    if (entries[0]) return JSON.stringify(entries[0], null, 2);
-  } catch {}
+  const readEntries = (key: string): Array<Record<string, unknown>> => {
+    try {
+      const parsed: unknown = JSON.parse(localStorage.getItem(key) || "[]");
+      return Array.isArray(parsed) ? parsed.filter((item): item is Record<string, unknown> => typeof item === "object" && item !== null) : [];
+    } catch {
+      return [];
+    }
+  };
+  const entries = [...readEntries("clarity-journal"), ...readEntries("clarity-reading-journal")]
+    .sort((a, b) => Date.parse(String(b.date || "")) - Date.parse(String(a.date || "")));
+  if (entries[0]) return JSON.stringify(entries[0], null, 2);
   const selection = window.getSelection()?.toString().trim();
   return selection ? selection.slice(0, 5000) : "Ainda não há um resumo salvo. Comece perguntando qual assunto quero dominar e o que já sei sobre ele.";
 }
